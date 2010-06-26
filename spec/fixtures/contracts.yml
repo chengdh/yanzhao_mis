@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  org: 
+  date_from: 2010-06-20
+  date_to: 2010-06-20
+  radio_start: 9.99
+  radio_back: 9.99
+  note: MyString
+
+two:
+  org: 
+  date_from: 2010-06-20
+  date_to: 2010-06-20
+  radio_start: 9.99
+  radio_back: 9.99
+  note: MyString

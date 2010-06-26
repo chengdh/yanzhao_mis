@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  body: MyString
+  type: MyString
+  is_secure: false
+  state: MyString
+  org: 
+  is_active: false
+  user: 
+  publish_date: 2010-06-25 17:39:45
+  publisher: 
+
+two:
+  title: MyString
+  body: MyString
+  type: MyString
+  is_secure: false
+  state: MyString
+  org: 
+  is_active: false
+  user: 
+  publish_date: 2010-06-25 17:39:45
+  publisher: 

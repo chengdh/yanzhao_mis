@@ -1,0 +1,2 @@
+class SubCompaniesController < BaseController
+end

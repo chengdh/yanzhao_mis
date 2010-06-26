@@ -1,0 +1,18 @@
+<h1>Listing sub_companies</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% @sub_companies.each do |sub_company| %>
+  <tr>
+    <td><%= link_to 'Show', sub_company %></td>
+    <td><%= link_to 'Edit', edit_sub_company_path(sub_company) %></td>
+    <td><%= link_to 'Destroy', sub_company, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New sub_company', new_sub_company_path %>

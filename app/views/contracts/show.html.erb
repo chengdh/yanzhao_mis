@@ -1,0 +1,49 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", contracts_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_contract_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", contract_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.contract.org_id", :default => t("activerecord.labels.org_id", :default => "Org")) %>:</b>
+          <%= @contract.org_id %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.contract.date_from", :default => t("activerecord.labels.date_from", :default => "Date from")) %>:</b>
+          <%= @contract.date_from %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.contract.date_to", :default => t("activerecord.labels.date_to", :default => "Date to")) %>:</b>
+          <%= @contract.date_to %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.contract.radio_start", :default => t("activerecord.labels.radio_start", :default => "Radio start")) %>:</b>
+          <%= @contract.radio_start %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.contract.radio_back", :default => t("activerecord.labels.radio_back", :default => "Radio back")) %>:</b>
+          <%= @contract.radio_back %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.contract.note", :default => t("activerecord.labels.note", :default => "Note")) %>:</b>
+          <%= @contract.note %>
+        </p>
+      <div class="wat-cf">
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_contract_path(@contract), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", contract_path(@contract), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

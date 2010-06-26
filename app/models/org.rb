@@ -1,0 +1,3 @@
+class Org < ActiveRecord::Base
+  belongs_to :user
+end
