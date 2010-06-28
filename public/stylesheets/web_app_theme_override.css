@@ -1,1 +1,93 @@
 /* Override here any style definide by web-app-theme */
+/* 重写block容器 */
+#select_user_wrap .block{
+  -moz-border-radius : 4px;
+  backgroundd : none repeat scroll 0 0 #FFFFFF;
+  margin-bottom :20px;
+  padding-bottom : 10px;
+}
+#select_user_wrap .block h3{
+  -moz-border-radius-topleft : 4px;
+  -moz-border-radius-topright :4px;
+  background : none repeat scroll 0 0 #2F427A;
+  border-bottom : 10px solid #262626;
+  color : #FFFFFF;
+  font-size : 15px;
+  margin : 0;
+  padding : 10px 15px;
+}
+#select_user_wrap .block h3 a{
+  color : #FFFFFF;
+}
+
+/* 导航ul */
+ul.navigation{
+  list-style-type : none;
+  margin : 0;
+  padding : 0;
+}
+ul.navigation li a:link,ul.navigation li a:visited {
+  background : none repeat scroll 0 0 #FFFFFF;
+  border-bottom : 1px solid #F0F0EE;
+  text-decoration : none;
+  display : block;
+  padding : 10px 15px;
+}
+/* 底部边框 */
+.border-bottom{
+  border-bottom : 1px solid gray;
+}
+/* 圆角框*/
+.radius-box{
+  border : 1px solid gray;
+  -moz-border-radius : 4px;
+  padding : 5px;
+}
+.margin-left {margin-left : 10px;}
+.float-left{float : left;}
+.float-right{float : right;}
+/* 文字靠右显示*/
+.text-right { text-align : right;}
+.text-center { text-align : center;}
+/* 红色文字 */
+.red-text {color : red;}
+/* 删除按钮 */
+.delete {
+  color : red;
+  text-decoration : underline;
+  cursor : pointer;
+  font-size : 0.8em;
+
+}
+/*文字的省略号表示*/
+.ellipsis {
+  display:block;
+  overflow: hidden; 
+  text-overflow:ellipsis;
+  white-space:nowrap; 
+  width:180px;
+}
+
+
+
+/*用户选择窗体*/
+#select_user_wrap #org_list{ width : 30%;}
+#select_user_wrap #user_list{ width : 68%;}
+.user_wrap{
+  float : left;
+  margin : 5px;
+  font-size : 1.2em;
+}
+/*增大uniForm textarea默认的高度*/
+.uniForm .blockLabels textarea { height : 25em;width : 90%;}
+/* uniForm 中的formHint的位置上偏,进行调整*/
+.uniForm .blockLabels .formHint { top : 0;}
+
+/* 文档查看界面中的文档信息样式样 */
+.doc-info{
+  background : #DEEBF7;
+  border : 1px solid #D3D3D3;
+}
+.doc-info li{
+  margin : 1.5em;
+}

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  base_public_message_id: 1
+  user: 
+  visited_at: 2010-06-26 16:55:45
+  note: MyString
+  state: MyString
+
+two:
+  base_public_message_id: 1
+  user: 
+  visited_at: 2010-06-26 16:55:45
+  note: MyString
+  state: MyString

@@ -1,9 +1,31 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  username: MyString
-  is_active: false
-
-two:
-  username: MyString
-  is_active: false
+<%(1..10).each do |index|%>
+user_<%=index%>:
+ username: user_<%=index%>
+ is_active: true
+ org: org_1
+<%end%>
+<%(11..20).each do |index|%>
+user_<%=index%>:
+ username: user_<%=index%>
+ is_active: true
+ org: org_11
+<%end%>
+<%(20..40).each do |index|%>
+user_<%=index%>:
+ username: user_<%=index%>
+ is_active: true
+ org: org_2
+<%end%>
+<%(41..60).each do |index|%>
+user_<%=index%>:
+ username: user_<%=index%>
+ is_active: true
+ org: org_3
+<%end%>
+<%(61..80).each do |index|%>
+user_<%=index%>:
+ username: user_<%=index%>
+ is_active: true
+ org: org_4
+<%end%>

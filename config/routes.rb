@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :notices,:member => {:publish => :put}
+
+  map.resources :users,:collection => {:show_org_users => :get}
+
   map.resources :sub_companies
 
   map.resources :departments

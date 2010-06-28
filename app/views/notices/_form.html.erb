@@ -1,0 +1,59 @@
+<fieldset class='blockLabels'>
+  <legend>所有项目都为必填项目</legend>
+  <div class="ctrlHolder">
+    <%= f.label :org_id, "所属部门/分公司" %>
+    <%= f.select :org_id, orgs_for_select %>
+    <p class="formHint">该通知公告所属的部门或分公司</p>
+  </div>
+
+  <div class="ctrlHolder">
+    <%= f.label :title, "标题" %>
+    <%= f.text_field :title, :size => "60",:maxlength => "60",:class => 'textInput' %>
+    <p class="formHint">通知公告标题,最长30个汉字</p>
+  </div>
+
+  <div class="ctrlHolder">
+    <%= f.label :body, "正文(最长300个汉字)" %>
+    <%= f.tinymce :body %>
+  </div>
+
+  <div class="ctrlHolder">
+    <%= f.label :publisher_id, "审核人" %>
+    <%=f.select :publisher_id,option_groups_departments_users_for_select,:multiple => true%>
+    <p class="formHint">选择审核此信息的人员</p>
+  </div>
+  <div class='ctrlHolder'>
+    <label for="notice_is_secure">
+      <%= f.check_box :is_secure,:id =>'cbx_secure' ,:onclick => "toggle_users_display(this);" %>
+      非公开(<span class='red-text'>若通告只允许部分人员查看,请选择该项</span>)
+    </label>
+  </div>
+  <div id='users_display_wrap' class='ctrlHolder' style='display : none;'>
+    <div id='users_display' class='wat-cf float-left radius-box' style='width : 85%;' >&nbsp;</div>
+    <%=link_to "添加人员",show_org_users_users_path,:class => 'sexybutton sexysimple sexyblue',:onclick => "Modalbox.show(this.href,{title : false,width : 600});return false;"%>
+  </div>
+  <div class="ctrlHolder">
+    <span class='radius-box'><%=state_display(BasePublicMessage,f.object.state)%></span>
+  </div>
+
+  <div class="actions-bar">
+    <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexyblue'%>
+    <%if !@notice.new_record?%>
+      <%=link_to_function '保存并发布信息',"$('notice_form').action='#{publish_notice_path(@notice)}';$('notice_form').submit();return false;", :class => 'sexybutton sexysimple sexyblue'%>
+    <%end%>
+    <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>
+  </div>
+</fieldset>
+<script type='text/javascript'>
+  var toggle_users_display = function(el_check)
+{
+  if(el_check.checked)
+    $('users_display_wrap').show();
+  else
+    $('users_display_wrap').hide();
+
+};
+toggle_users_display.call(window,$('cbx_secure'));
+var users = <%=@notice.visitors.to_json %>;
+user_selector.update_select_display(users);
+</script>

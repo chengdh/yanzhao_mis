@@ -1,0 +1,37 @@
+<div id='select_user_wrap' class='wat-cf border-bottom'>
+  <div id='org_list' class='block float-left'>
+    <h3>部门/分理处</h3>
+    <ul class='navigation'>
+      <%@org_users.each do |org,users|%>
+        <li><%=link_to_function org,"user_selector.select_org('#{org}');"%></li>
+      <%end%>
+    </ul>
+  </div>
+  <div id='user_list' class='margin-left float-left'>
+    <%@org_users.each do |org,users|%>
+      <div class='block' id='<%=org%>' style='display : none;'>
+        <h3>
+          <%=link_to_function '全选',"user_selector.select_all('#{org}',true);"%>
+          |
+          <%=link_to_function '不选',"user_selector.select_all('#{org}',false);"%>
+        </h3>
+        <div class='wat-cf'>
+          <%users.each do |user|%>
+            <div class='user_wrap radius-box'>
+              <%=check_box_tag user.id,user.username %>
+              <%=label_tag user.id,user.username%>
+            </div>
+          <%end%>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+<div class="actions-bar text-right">
+  <%=link_to_function '我已选择完毕',"user_selector.update_select_display(user_selector.selected_users());Modalbox.hide();return false;", :class => 'sexybutton sexysimple sexygreen'%>
+  <%=link_to_function '取消',"Modalbox.hide();return false;",:class => 'sexybutton sexysimple sexyred' %>
+</div>
+<script type='text/javascript'>
+  user_selector.set_param(<%=@org_users.keys.to_json%>,'user_list','users_display');
+  user_selector.show_first_org();
+</script>

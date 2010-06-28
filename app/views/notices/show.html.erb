@@ -1,0 +1,43 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "通知公告列表", notices_path  %></li>
+      <li><%= link_to "新建通知公告", new_notice_path %></li>
+      <li class="active"><%= link_to "查看", notice_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      <h2 class='text-center'><%=@notice.title%></h2>
+      <p><%=@notice.org.name%> | <%=@notice.user.try(:username)%></p>
+      <p><%=@notice.created_at.to_date%> </p>
+      <hr />
+      <p>
+      <%= @notice.body %>
+      </p>
+      <div class='radius-box doc-info'>
+        <h3 class='border-bottom'>文档信息</h3>
+        <ul>
+          <li>最后修改于<%=@notice.updated_at%></li>
+          <li>文档类型:<%=@notice.is_secure ? "保密" : "公开"%></li>
+        </ul>
+      </div>
+      <hr />
+      <h3>查看记录(<%=@notice.message_visitors.size%>条)</h3>
+      <hr />
+      <table class='table'>
+        <%@notice.message_visitors.each do |visit_info|%>
+          <tr>
+            <td>
+              <%=visit_info.user.try(:username)%>
+              &nbsp;&nbsp;
+              <%=visit_info.visited_at.blank? ? "<span class='red-text'>还未查看</span>" : visit_info.visited_at%>
+            </td>
+          </tr>
+        <%end%>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

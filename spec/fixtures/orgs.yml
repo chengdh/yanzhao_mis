@@ -1,15 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  name: MyString
-  user: 
-  is_active: false
-  address: MyString
-  phone: MyString
-
-two:
-  name: MyString
-  user: 
-  is_active: false
-  address: MyString
-  phone: MyString
+<% (1..10).each do |index| %>
+org_<%=index%>:
+ name: org_<%=index%>
+ is_active: true
+ address: address_<%=index%>
+ phone: phone_<%=index%>
+ type: SubCompany
+<%end%>
+<% (11..20).each do |index| %>
+org_<%=index%>:
+ name: org_<%=index%>
+ is_active: true
+ address: address_<%=index%>
+ phone: phone_<%=index%>
+ type: Department
+<%end%>

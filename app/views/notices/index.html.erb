@@ -1,0 +1,52 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "通知公告列表", notices_path  %></li>
+      <li><%= link_to "新建通知公告", new_notice_path %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title">通知公告列表</h2>
+    <div class="inner">
+
+      <table class="table">
+        <% @notices_group.each do |org_name,notices| -%>
+          <tr><td colspan='100'><h3><%=org_name%></h3></td></tr>
+          <% notices.each do |notice| -%>
+            <tr class="<%= cycle("odd", "even") %>">
+              <td>
+                <%= notice.created_at %>
+              </td>
+              <td>
+                <%= link_to notice.title, notice_path(notice) %>
+              </td>
+              <td>
+                <%= notice.is_secure ? "保密" : "公开" %>
+              </td>
+
+              <td>
+                <%= notice.user.try(:username) %>
+              </td>
+              <td>
+                <%= state_display(Notice,notice.state) %>
+              </td>
+
+              <td>
+                <%= link_to "查看", notice_path(notice) %> |
+                <%= link_to "修改", edit_notice_path(notice) %> |
+                <%= link_to "删除", notice_path(notice), :method => :delete, :confirm => "确定删除吗?" %>
+              </td>
+            </tr>          
+          <% end -%>
+        <% end -%>
+
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+          <%=will_paginate @notices_group %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
