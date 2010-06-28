@@ -35,7 +35,7 @@ ul.navigation li a:link,ul.navigation li a:visited {
 }
 /* 底部边框 */
 .border-bottom{
-  border-bottom : 1px solid gray;
+  border-bottom : 1px solid #D3D3D3;
 }
 /* 圆角框*/
 .radius-box{
@@ -83,6 +83,7 @@ ul.navigation li a:link,ul.navigation li a:visited {
 /* uniForm 中的formHint的位置上偏,进行调整*/
 .uniForm .blockLabels .formHint { top : 0;}
 
+.light-blue{ background : #DEEBF7;}
 /* 文档查看界面中的文档信息样式样 */
 .doc-info{
   background : #DEEBF7;

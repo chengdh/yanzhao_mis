@@ -1,0 +1,2 @@
+class RulesController < MessagesController
+end

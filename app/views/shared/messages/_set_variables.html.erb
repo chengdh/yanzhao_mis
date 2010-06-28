@@ -1,0 +1,13 @@
+<%
+  #设置一些通用的变量
+@messages = instance_variable_get("@#{@param_name.tableize}")
+@messages_group = instance_variable_get("@#{@param_name.tableize}_group")
+@message = instance_variable_get("@#{@param_name}") 
+@list_path = controller.controller_path == 'rules' ? rules_path :  notices_path
+@new_path = controller.controller_path == 'rules' ? new_rule_path :  new_notice_path
+if !@message.blank? && !@message.new_record?
+  @edit_path = controller.controller_path == 'rules' ? edit_rule_path(@message) :  edit_notice_path(@message)
+  @publish_path = controller.controller_path == 'rules' ? publish_rule_path(@message) :  publish_notice_path(@message)
+end
+@title = controller.controller_path == 'rules' ? "规章制度" : "通知公告"
+%>

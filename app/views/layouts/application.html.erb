@@ -18,10 +18,27 @@
               <li><a href="#"><%= t("web-app-theme.profile", :default => "Profile") %></a></li>
               <li><a href="#"><%= t("web-app-theme.settings", :default => "Settings") %></a></li>
               <li><a href="/logout" class="logout"><%= t("web-app-theme.logout", :default => "Logout") %></a></li>
+              <li class="<%= controller.controller_path == 'user' ? 'active' : '' %>">
+              <%=link_to "用户管理",users_path%>
+              </li>
             </ul>
           </div>      
           <div id="main-navigation">
-            <ul class="wat-cf"> <li class="<%= controller.controller_path == 'contracts' ? 'active' : '' %>"><a href="<%= contracts_path %>">Contracts</a></li> <li class="<%= controller.controller_path == 'notices' ? 'active' : '' %>"><a href="<%= notices_path %>">Notices</a></li> <li class="<%= controller.controller_path == 'user' ? 'active' : '' %>"><a href="<%= users_path %>">Users</a></li></ul>
+            <ul class="wat-cf"> 
+              <li class="<%= controller.controller_path == 'notices' ? 'active' : '' %>">
+              <%=link_to "通知公告",notices_path%>
+              </li>
+
+              <li class="<%= controller.controller_path == 'rules' ? 'active' : '' %>">
+              <%=link_to "规章制度",rules_path%>
+              </li>
+              <li class="<%= controller.controller_path == 'posts' ? 'active' : '' %>">
+              <%=link_to "在线交流",posts_path%>
+              </li> 
+              <li class="<%= controller.controller_path == 'contracts' ? 'active' : '' %>">
+              <%=link_to "合同模板",contracts_path%>
+              </li> 
+            </ul>
           </div>
         </div>    
         <div id="wrapper" class="wat-cf">

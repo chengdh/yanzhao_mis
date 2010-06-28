@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100626103539) do
+ActiveRecord::Schema.define(:version => 20100628104950) do
 
   create_table "base_public_messages", :force => true do |t|
     t.string   "title",        :limit => 200,                    :null => false
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20100626103539) do
     t.integer  "publisher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "doc_no",       :limit => 20
   end
 
   create_table "base_public_messages_orgs", :id => false, :force => true do |t|
