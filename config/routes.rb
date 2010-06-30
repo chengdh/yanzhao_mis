@@ -1,5 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :posts,:member => {:publish => :put}
+  map.resources :address_books
+
+
+  map.resources :comments,:except => [:index,:destroy,:new]
+
+  map.resources :posts,:member => {:publish => :put},:has_many => :comments
 
   map.resources :rules,:member => {:publish => :put}
 

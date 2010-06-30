@@ -1,0 +1,40 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", address_books_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_address_book_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", address_book_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      <h3 class='text-center'><%= @address_book.name %></h3>
+      <p>所属部门:<%= @address_book.org.name %></p>
+      <table class='table'>
+        <tr>
+          <th>姓名</th>
+          <th>固定电话</th>
+          <th>手机</th>
+          <th>住址</th>
+        </tr>
+        <% @address_book.address_book_lines.each do |line| %>
+          <tr class='fields'>
+            <td>
+              <%=line.name%>
+            </td>
+            <td>
+              <%=line.phone%>
+            </td>
+            <td>
+              <%=line.mobile%>
+            </td>
+            <td>
+              <%=line.location%>
+            </td>
+          </tr>
+        <%end%>
+      </table>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

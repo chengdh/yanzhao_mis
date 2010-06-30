@@ -1,1 +1,58 @@
-<%= render :file => 'shared/messages/show' %>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "收信箱",posts_path  %></li>
+      <li><%= link_to "发信箱",posts_path  %></li>
+      <li><%= link_to "写信", new_post_path %>
+      <li class="active"><%= link_to "查看", @post %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      <h2 class='text-center'><%=@post.title%></h2>
+      <p><%=@post.org.name%> | <%=@post.user.try(:username)%></p>
+      <p><%=status_time_ago_in_words(@post.created_at)%> </p>
+      <hr />
+      <p>
+      <%= @post.body %>
+      </p>
+      <%if !@post.comments.blank?%>
+        <div class='radius-box doc-info'>
+          <h3 class='border-bottom'>留言(<%=@post.comments.size%>条)</h3>
+          <ul>
+            <%@post.comments(:order => "created_at DESC").each do |comment|%>
+              <li class='border-bottom'>
+              <p class='bold-font big-font'><%=comment.user.try(:username)%> &nbsp;&nbsp;说:<span class='small-font float-right'><%=status_time_ago_in_words(comment.created_at)%></span></p>
+              <p><%=comment.body%></span></p>
+            </li>
+          <%end%>
+        </ul>
+      </div>
+    <%end%>
+    <hr />
+    <div class='radius-box'>
+      <h3 class='border-bottom'>我要回复</h3>
+      <%form_for [@post,Comment.new] do |f|%>
+        <%=f.tinymce :body, :class => "small-textarea"%>
+        <div class="actions-bar">
+          <%=f.submit '发表', :class => 'sexybutton sexysimple sexyblue'%>
+        </div>
+      <%end%>
+    </div>
+    <hr />
+    <div class='radius-box doc-info'>
+      <h3 class='border-bottom'>文档信息(<%=@post.message_visitors.size%>条)</h3>
+      <ul>
+        <li>最后修改于<%=status_time_ago_in_words(@post.updated_at)%></li>
+        <%@post.message_visitors.each do |visit_info|%>
+          <li>
+          <%=visit_info.user.try(:username)%> |
+          <%=visit_info.visited_at.blank? ? "<span class='red-text'>还未查看</span>" : status_time_ago_in_words(visit_info.visited_at)%>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

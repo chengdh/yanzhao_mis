@@ -92,7 +92,7 @@ class MessagesController < BaseController
     save_visit_info
     respond_to do |format|
       if message.save
-        format.html { render "shared/messages/show" }
+        format.html
         format.xml  { head :ok }
       else
         format.html { redirect_to :index }

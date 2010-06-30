@@ -49,7 +49,7 @@ selected_users :function(){
                 //更新选择显示
 update_select_display :function(users){
                          users.each(function(the_user){
-                        //    disp +="<div class='radius-box float-left user_wrap'>"+the_user.user_name + "</div>"; 
+                             //    disp +="<div class='radius-box float-left user_wrap'>"+the_user.user_name + "</div>"; 
                              var user_div = this.create_user_display(the_user); 
                              //判断用户是否已存在
                              if($('selected_' + the_user.id))
@@ -76,3 +76,20 @@ create_user_display : function(user_obj){
                       }
 
 };
+
+/*nested form helper*/
+com.yanzhao.nestedFormHelper = {};
+/*删除方法*/
+com.yanzhao.nestedFormHelper.remove_fields = function(link){
+  $(link).previous("input[type=hidden]").value = "1";  
+  $(link).up().up(".fields").hide();   
+}
+/* 添加方法*/
+com.yanzhao.nestedFormHelper.add_fields = function(link, association, content,content_wrap){
+  var new_id = new Date().getTime();  
+  var regexp = new RegExp("new_" + association, "g");  
+  if(content_wrap.blank())
+    $(link).up().insert({ before: content.replace(regexp, new_id)});  
+  else
+    $(content_wrap).insert({ before: content.replace(regexp, new_id)});  
+}  

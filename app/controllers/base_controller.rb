@@ -4,7 +4,7 @@ class BaseController < ApplicationController
   # GET /the_models
   # GET /the_models.xml
   def index
-    the_models = @model_klazz.all
+    the_models = @search.paginate :page => params[:page],:order => "created_at DESC"
 
     instance_variable_set("@#{@param_name.tableize}",the_models)
     respond_to do |format|

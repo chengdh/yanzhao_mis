@@ -1,0 +1,39 @@
+
+<fieldset class='inlineLabels'>
+  <div class="ctrlHolder">
+    <%= f.label :org_id, "所属部门" %>
+    <%= f.select :org_id, orgs_for_select %>
+  </div>
+
+  <div class="ctrlHolder">
+    <%= f.label :name, "通讯录名称"%>
+    <%= f.text_field :name, :class => 'textInput' %>
+  </div>
+
+  <div class="ctrlHolder">
+    <%= f.check_box :is_active, :class => 'check_box' %>
+    <%= f.label :is_active, "有效"%>
+  </div>
+</fieldset>
+<table class='table'>
+  <tr>
+    <th class='first'>姓名</th>
+    <th>固定电话</th>
+    <th>手机</th>
+    <th>住址</th>
+    <th></th>
+  </tr>
+  <tbody id='fields_wrap'>
+    <%f.fields_for :address_book_lines do |item|%>
+      <%= render 'address_book_line_fields',:f => item %>
+    <%end%>
+  </tbody>
+</table>
+
+<div class="actions-bar text-right">
+  <%=link_to_add_fields "添加联系人",f,:address_book_lines,"fields_wrap" %>
+</div>
+<div class="actions-bar">
+  <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexyblue'%>
+  <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>
+</div>

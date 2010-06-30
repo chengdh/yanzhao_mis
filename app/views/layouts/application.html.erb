@@ -26,17 +26,21 @@
           <div id="main-navigation">
             <ul class="wat-cf"> 
               <li class="<%= controller.controller_path == 'notices' ? 'active' : '' %>">
-              <%=link_to "通知公告",notices_path%>
+              <%=link_to "公共信息",notices_path%>
               </li>
 
-              <li class="<%= controller.controller_path == 'rules' ? 'active' : '' %>">
-              <%=link_to "规章制度",rules_path%>
-              </li>
               <li class="<%= controller.controller_path == 'posts' ? 'active' : '' %>">
               <%=link_to "在线交流",posts_path%>
               </li> 
+              <li class="<%= controller.controller_path == 'posts' ? 'active' : '' %>">
+              <%=link_to "贵宾系统",posts_path%>
+              </li> 
+
               <li class="<%= controller.controller_path == 'contracts' ? 'active' : '' %>">
-              <%=link_to "合同模板",contracts_path%>
+              <%=link_to "分成结算",contracts_path%>
+              </li> 
+               <li class="<%= controller.controller_path == 'contracts' ? 'active' : '' %>">
+              <%=link_to "物品库存管理",contracts_path%>
               </li> 
             </ul>
           </div>

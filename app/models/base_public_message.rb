@@ -16,5 +16,13 @@ class BasePublicMessage < ActiveRecord::Base
   aasm_event :publish do
     transitions :to => :published,:from => :waitting
   end
+  #得到收信人列表字符串
+  def visitors_list
+    ret = ""
+    self.visitors.each do |visitor|
+      ret +="#{visitor.username},"
+    end
+    ret
+  end
 
 end

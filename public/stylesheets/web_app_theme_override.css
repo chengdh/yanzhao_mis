@@ -42,6 +42,7 @@ ul.navigation li a:link,ul.navigation li a:visited {
   border : 1px solid gray;
   -moz-border-radius : 4px;
   padding : 5px;
+  margin : 0 5px 10px 5px;
 }
 .margin-left {margin-left : 10px;}
 .float-left{float : left;}
@@ -49,6 +50,11 @@ ul.navigation li a:link,ul.navigation li a:visited {
 /* 文字靠右显示*/
 .text-right { text-align : right;}
 .text-center { text-align : center;}
+
+/*小字体*/
+.small-font{ font-size : 0.6em;}
+.big-font{ font-size : 1.4em;}
+.bold-font{ font-weight : bold;}
 /* 红色文字 */
 .red-text {color : red;}
 /* 删除按钮 */
@@ -68,7 +74,8 @@ ul.navigation li a:link,ul.navigation li a:visited {
   width:180px;
 }
 
-
+/* 表单录入界面中的title */
+.title {font-size : 1.2em;}
 
 /*用户选择窗体*/
 #select_user_wrap #org_list{ width : 30%;}
@@ -82,6 +89,10 @@ ul.navigation li a:link,ul.navigation li a:visited {
 .uniForm .blockLabels textarea { height : 25em;width : 90%;}
 /* uniForm 中的formHint的位置上偏,进行调整*/
 .uniForm .blockLabels .formHint { top : 0;}
+/*短文本*/
+.uniForm .shortText {width : 35%;}
+/*较小一些的textarea*/
+.small-textarea{ width : 90%;height : 15em;}
 
 .light-blue{ background : #DEEBF7;}
 /* 文档查看界面中的文档信息样式样 */

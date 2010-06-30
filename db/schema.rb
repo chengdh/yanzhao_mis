@@ -9,7 +9,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100628104950) do
+ActiveRecord::Schema.define(:version => 20100630002707) do
+
+  create_table "address_book_lines", :force => true do |t|
+    t.string   "name",            :limit => 60,                    :null => false
+    t.string   "phone",           :limit => 30
+    t.string   "mobile",          :limit => 30
+    t.boolean  "is_active",                      :default => true, :null => false
+    t.integer  "address_book_id",                                  :null => false
+    t.string   "location",        :limit => 60
+    t.string   "note",            :limit => 200
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "address_books", :force => true do |t|
+    t.string   "name",       :limit => 60,                   :null => false
+    t.integer  "org_id",                                     :null => false
+    t.integer  "user_id"
+    t.boolean  "is_active",                :default => true, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "base_public_messages", :force => true do |t|
     t.string   "title",        :limit => 200,                    :null => false
@@ -30,6 +51,15 @@ ActiveRecord::Schema.define(:version => 20100628104950) do
   create_table "base_public_messages_orgs", :id => false, :force => true do |t|
     t.integer "base_public_message_id"
     t.integer "org_id"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "post_id"
+    t.string   "body",       :limit => 600,                   :null => false
+    t.integer  "user_id",                                     :null => false
+    t.boolean  "is_active",                 :default => true, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "contracts", :force => true do |t|

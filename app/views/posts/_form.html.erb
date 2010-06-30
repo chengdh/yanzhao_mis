@@ -1,0 +1,35 @@
+<fieldset class='blockLabels'>
+  <legend>所有项目都为必填项目</legend>
+  <div class="ctrlHolder">
+    <%= f.label :org_id, "所属部门/分公司" %>
+    <%= f.select :org_id, orgs_for_select %>
+    <p class="formHint">该信息所属的部门或分公司</p>
+  </div>
+  <div id='users_display_wrap' class='ctrlHolder wat-cf'>
+    <label>收信人</label>
+    <div id='users_display' class='float-left radius-box' style='width : 85%;' >&nbsp;</div>
+    <%=link_to "添加人员",show_org_users_users_path,:id => 'btn_add_user',:class => 'sexybutton sexysimple sexyblue',:onclick => "Modalbox.show(this.href,{title : false,width : 600});return false;"%>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :title, "标题" %>
+    <%= f.text_field :title, :size => "30",:maxlength => "30",:class => 'textInput title' %>
+    <p class="formHint">信息标题,最长30个汉字</p>
+  </div>
+
+  <div class="ctrlHolder">
+    <%= f.label :body, "正文(最长300个汉字)" %>
+    <%= f.tinymce :body %>
+  </div>
+  <div class="ctrlHolder">
+    <span class='radius-box'><%=f.object.state.blank? ? "草稿" :state_display(BasePublicMessage,f.object.state)%></span>
+  </div>
+
+  <div class="actions-bar">
+    <%=f.submit '发送信息', :class => 'sexybutton sexysimple sexyblue'%>
+    <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>
+  </div>
+</fieldset>
+<script type='text/javascript'>
+  var users = <%=@post.visitors.to_json %>;
+  user_selector.update_select_display(users);
+</script>

@@ -1,26 +1,18 @@
 <%= render 'shared/messages/set_variables' %>
 <div class="block">
   <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li class="first active">
-      <%= link_to "#{@title}列表", @list_path  %>
-      </li> 
-      <li>
-      <%= link_to "新建#{@title}", @new_path %>
-      </li>
-    </ul>
+    <%= render :partial => 'shared/messages/caption' %>
   </div>          
   <div class="content">          
     <h2 class="title"><%="#{@title}列表"%></h2>
     <div class="inner">
-
       <table class="table">
         <%@messages_group.each do |org_name,messages| -%>
           <tr><td colspan='100'><h3><%=org_name%></h3></td></tr>
           <% messages.each do |message| -%>
             <tr class="<%= cycle("odd", "even") %>">
               <td>
-                <%= message.created_at %>
+                <%= status_time_ago_in_words(message.created_at) %>
               </td>
               <td>
                 <%= link_to message.title, message,:class => "ellipsis'" %>
