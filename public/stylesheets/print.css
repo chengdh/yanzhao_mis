@@ -1,0 +1,20 @@
+/* 分部返款结算表打印样式 */
+#print_buttons{ display : none;}
+#settlement_show{ width : 260mm; margin : 5mm,10mm;}
+#title,#sub_title { text-align : center;}
+#settlement_show,#settlement_show table {
+  border-collapse : collapse;
+  width : 100%;
+}
+#settlement_show tr{ height : 1.5em;}
+#settlement_show  td{
+  border : 1px solid #D3D3D3;
+  padding : 0;
+  margin : 0;
+}
+#settlement_show .col_60 { width : 60%;}
+#settlement_show .col_40 { width : 40%;}
+#settlement_show .col_15 { width : 15%;}
+#settlement_show .col_10 { width : 10%;}
+#settlement_show td.number { text-align : center;}
+#base_fee,#subsidy_fee,#deductions_fee,#others_fee { border : none;}

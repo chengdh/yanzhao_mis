@@ -1,0 +1,22 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "结算信息列表", settlements_path  %></li>
+      <li class="active"><%= link_to "新建结算表", new_settlement_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title">新建分部返款结算表</h2>
+    <div class="inner">
+      <% form_for @settlement, :html => {:id=>"settlement_form", :class => :uniForm } do |f| -%>
+        <%= render "form", :f => f %>
+      <% end -%>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
+<script type='text/javascript'>
+  //计算各种合计费用
+  new Form.Observer($('settlement_form'), 0.3, com.yanzhao.settlement_form_observer);
+  com.yanzhao.settlement_form_observer.apply();
+</script>

@@ -1,0 +1,13 @@
+<tr class='fields'>
+  <td width='50' class='text-right'>名称:</td>
+  <td>
+    <%=f.text_field :name,:style => "width : 100px;"%>
+  </td>
+  <td width='50' class='text-right'>金额:</td>
+  <td>
+    <%=f.text_field :value %>
+  </td>
+  <td>
+    <%=link_to_remove_fields "删除",f %>
+  </td>
+</tr>

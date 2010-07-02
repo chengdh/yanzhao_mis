@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  settlement: 
+  type: MyString
+  name: MyString
+  value: 9.99
+
+two:
+  settlement: 
+  type: MyString
+  name: MyString
+  value: 9.99

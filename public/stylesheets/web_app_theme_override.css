@@ -90,7 +90,7 @@ ul.navigation li a:link,ul.navigation li a:visited {
 /* uniForm 中的formHint的位置上偏,进行调整*/
 .uniForm .blockLabels .formHint { top : 0;}
 /*短文本*/
-.uniForm .shortText {width : 35%;}
+.uniForm .shortText {width : 25%;}
 /*较小一些的textarea*/
 .small-textarea{ width : 90%;height : 15em;}
 
@@ -103,3 +103,21 @@ ul.navigation li a:link,ul.navigation li a:visited {
 .doc-info li{
   margin : 1.5em;
 }
+
+/* 分部返款结算表 */
+#settlement_show,#settlement_show table {
+  border-collapse : collapse;
+  width : 100%;
+}
+#settlement_show tr{ height : 1.5em;}
+#settlement_show  td{
+  border : 1px solid #D3D3D3;
+  padding : 0;
+  margin : 0;
+}
+#settlement_show .col_60 { width : 60%;}
+#settlement_show .col_40 { width : 40%;}
+#settlement_show .col_15 { width : 15%;}
+#settlement_show .col_10 { width : 10%;}
+#settlement_show td.number { text-align : center;}
+#base_fee,#subsidy_fee,#deductions_fee,#others_fee { border : none;}

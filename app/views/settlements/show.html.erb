@@ -1,0 +1,201 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>分部返款明细表</title>
+    <%= javascript_include_tag :defaults %>
+    <%= stylesheet_link_tag "web_app_theme","/sexybuttons/sexybuttons","web_app_theme_override", :cache => true %>
+    <%= stylesheet_link_tag "print", :media => "print" %>
+    </head>
+    <body>
+      <%
+        #计算最多行数,用于填补空行
+      max_rows = [8,@settlement.fixed_settlement_line_subsidies.size+@settlement.unfixed_settlement_line_subsidies.size,
+        @settlement.fixed_settlement_line_deductions.size+@settlement.unfixed_settlement_line_deductions.size,
+        @settlement.other_settlement_line_deductions.size
+      ].max
+    %>
+    <table id='settlement_show'>
+      <colgroup>
+        <col class='col_15' />
+        <col class='col_10' />
+        <col class='col_15' />
+        <col class='col_10' />
+        <col class='col_15' />
+        <col class='col_10' />
+        <col class='col_15' />
+        <col class='col_10' />
+      </colgroup>
+      <tr>
+        <td colspan='8'><h2 id='title' class='text-center'>郑州市燕赵货运服务有限公司</h2></td>
+      </tr>
+      <tr>
+      <td colspan='8'><h3 id='sub_title' class='text-center'>分部管理返款明细表<span id='bill_type'></span></h3></td>
+      </tr>
+      <tr>
+        <td class='text-center'>分部:</td>
+        <td colspan='3'><%=@settlement.org.name%></td>
+        <td class='text-center'>单位:元</td>
+        <td></td>
+        <td></td>
+        <td class='text-center'><%=@settlement.mth%></td>
+      </tr>
+      <tr>
+        <td class='text-center'>提成结算</td>
+        <td class='text-center'>金额</td>
+        <td class='text-center'>应补项目结算</td>
+        <td class='text-center'>金额</td>
+        <td class='text-center'>应扣项目结算</td>
+        <td class='text-center'>金额</td>
+        <td class='text-center'>其他应扣结算</td>
+        <td class='text-center'>金额</td>
+      </tr>
+
+      <tr>
+        <td colspan='2' style='vertical-align : top;'>
+          <table id='base_fee'>
+            <colgroup>
+              <col class='col_60' />
+              <col class='col_40' />
+            </colgroup>
+            <tr>
+              <td>营业收入</td>
+              <td class='number'><%=@settlement.start_fee%></td>
+            </tr>
+            <tr>
+              <td>扣短途运费</td>
+              <td class='number'><%=@settlement.start_carrying_fee%></td>
+            </tr>
+            <tr>
+              <td>净收入</td>
+              <td class='number'><%=@settlement.start_net_income%></td>
+            </tr>
+            <tr>
+              <td>提成额</td>
+              <td class='number'><%=@settlement.start_push_money%></td>
+            </tr>
+            <tr>
+              <td>返程收入</td>
+              <td class='number'><%=@settlement.back_fee%></td>
+            </tr>
+            <tr>
+              <td>扣短途运费</td>
+              <td class='number'><%=@settlement.back_carrying_fee%></td>
+            </tr>
+            <tr>
+              <td>净收入</td>
+              <td class='number'><%=@settlement.back_net_income%></td>
+            </tr>
+            <tr>
+              <td>提成额</td>
+              <td class='number'><%=@settlement.back_push_money%></td>
+            </tr>
+            <%(max_rows - 8).times do %>
+              <tr><td>&nbsp;</td><td>&nbsp;</td></td>
+            <%end%>
+          </table>
+
+        </td>
+        <td colspan='2' style='vertical-align : top;'>
+          <table id='subsidy_fee'>
+            <colgroup>
+              <col class='col_60' />
+              <col class='col_40' />
+            </colgroup>
+            <%@settlement.fixed_settlement_line_subsidies.each do |item|%>
+              <tr>
+                <td><%=item.name %></td>
+                <td class='number'><%=item.value %></td>
+              </tr>
+            <%end%>
+            <%@settlement.unfixed_settlement_line_subsidies.each do |item|%>
+              <tr>
+                <td><%=item.name %></td>
+                <td class='number'><%=item.value %></td>
+              </tr>
+            <%end%>
+            <%(max_rows - @settlement.fixed_settlement_line_subsidies.size - @settlement.unfixed_settlement_line_subsidies.size).times do %>
+              <tr><td>&nbsp;</td><td>&nbsp;</td></td>
+            <%end%>
+
+          </table>
+        </td>
+        <td colspan='2' style='vertical-align : top;'>
+          <table id='deductions_fee'>
+            <colgroup>
+              <col class='col_60' />
+              <col class='col_40' />
+            </colgroup>
+
+            <%@settlement.fixed_settlement_line_deductions.each do |item|%>
+              <tr>
+                <td><%=item.name %></td>
+                <td class='number'><%=item.value %></td>
+              </tr>
+            <%end%>
+            <%@settlement.unfixed_settlement_line_deductions.each do |item|%>
+              <tr>
+                <td><%=item.name %></td>
+                <td class='number'><%=item.value %></td>
+              </tr>
+            <%end%>
+            <%(max_rows - @settlement.fixed_settlement_line_deductions.size - @settlement.unfixed_settlement_line_deductions.size).times do %>
+              <tr><td>&nbsp;</td><td>&nbsp;</td></td>
+            <%end%>
+          </table>
+        </td>
+        <td colspan='2'>
+          <table id='others_fee'>
+            <colgroup>
+              <col class='col_60' />
+              <col class='col_40' />
+            </colgroup>
+
+            <%@settlement.other_settlement_line_deductions.each do |item|%>
+              <tr>
+                <td><%=item.name %></td>
+                <td class='number'><%=item.value %></td>
+              </tr>
+            <%end%>
+            <%(max_rows - @settlement.other_settlement_line_deductions.size).times do %>
+              <tr><td>&nbsp;</td><td>&nbsp;</td></td>
+            <%end%>
+
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>合计:</td>
+        <td class='text-center'><%=@settlement.start_push_money + @settlement.back_push_money%></td>
+        <td></td>
+        <td class='text-center'><%=@settlement.fixed_settlement_line_subsidies.sum(:value) + @settlement.unfixed_settlement_line_subsidies.sum(:value)%></td>
+        <td></td>
+        <td class='text-center'><%=@settlement.fixed_settlement_line_deductions.sum(:value) + @settlement.unfixed_settlement_line_deductions.sum(:value)%></td>
+        <td></td>
+        <td class='text-center'><%=@settlement.other_settlement_line_deductions.sum(:value) %></td>
+      </tr>
+      <tr>
+        <%sum_fee = @settlement.start_push_money + @settlement.back_push_money + 
+          @settlement.fixed_settlement_line_subsidies.sum(:value) + @settlement.unfixed_settlement_line_subsidies.sum(:value) -
+        @settlement.fixed_settlement_line_deductions.sum(:value) - @settlement.unfixed_settlement_line_deductions.sum(:value) -
+        @settlement.other_settlement_line_deductions.sum(:value)
+      %>
+        <td colspan='6'>分部实提金额人民币(大写):<%=ConvertNumToChinese(sum_fee)%></td>
+        <td colspan='2'>&yen;:<%=sum_fee%></td>
+      </tr>
+      <tr>
+        <td colspan='2'>核准:</td>
+        <td colspan='2'>审核:</td>
+        <td colspan='2'>核算:</td>
+        <td colspan='2'><span id='tk_label' style='display : none;'>提款:</span></td>
+      </tr>
+      <tr>
+        <td colspan='8'></td>
+      </tr>
+    </table>
+    <div id='print_buttons' class='actions-bar text-center'>
+      <%=link_to_function '打印记帐联',"$('bill_type').update('(记帐联)');window.print();", :class => 'sexybutton sexylarge sexysimple sexyblue'%>
+      <%=link_to_function '打印提款联',"$('bill_type').update('(提款联)');$('tk_label').show();window.print();", :class => 'sexybutton sexylarge sexysimple sexyblue'%>
+      <%=link_to_function  '关闭',"window.close();",:class => 'sexybutton sexylarge sexysimple sexyred' %>
+    </div>
+  </body>
+</html>

@@ -8,42 +8,85 @@
   </div>          
   <div class="content">
     <div class="inner">
-      
-        <p>
-          <b><%= t("activerecord.attributes.contract.org_id", :default => t("activerecord.labels.org_id", :default => "Org")) %>:</b>
-          <%= @contract.org_id %>
-        </p>
-
-        <p>
-          <b><%= t("activerecord.attributes.contract.date_from", :default => t("activerecord.labels.date_from", :default => "Date from")) %>:</b>
-          <%= @contract.date_from %>
-        </p>
-
-        <p>
-          <b><%= t("activerecord.attributes.contract.date_to", :default => t("activerecord.labels.date_to", :default => "Date to")) %>:</b>
-          <%= @contract.date_to %>
-        </p>
-
-        <p>
-          <b><%= t("activerecord.attributes.contract.radio_start", :default => t("activerecord.labels.radio_start", :default => "Radio start")) %>:</b>
-          <%= @contract.radio_start %>
-        </p>
-
-        <p>
-          <b><%= t("activerecord.attributes.contract.radio_back", :default => t("activerecord.labels.radio_back", :default => "Radio back")) %>:</b>
-          <%= @contract.radio_back %>
-        </p>
-
-        <p>
-          <b><%= t("activerecord.attributes.contract.note", :default => t("activerecord.labels.note", :default => "Note")) %>:</b>
-          <%= @contract.note %>
-        </p>
-      <div class="wat-cf">
-        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_contract_path(@contract), :class => "button" %> 
-        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", contract_path(@contract), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
-      </div>      
+      <table class='table'>
+        <tr>
+          <td>结算单位:</td>
+          <td><%=@contract.org.name%></td>
+        </tr>
+        <tr>
+          <td>合同日期:</td>
+          <td><%=@contract.date_from%> ~ <%=@contract.date_to%></td>
+        </tr>
+        <tr>
+          <td>始发货结算比例:</td>
+          <td><%=@contract.radio_start%> %</td>
+        </tr>
+        <tr>
+          <td>返程货结算比例:</td>
+          <td><%=@contract.radio_back %> %</td>
+        </tr>
+        <tr>
+          <td>备注:</td>
+          <td><%=@contract.note%></td>
+        </tr>
+        <tr>
+          <td>状态:</td>
+          <td><%=@contract.is_active ? "有效" : "无效"%></td>
+        </tr>
+      </table>
+      <div class='radius-box doc-info'>
+        <h3 class='border-bottom'>固定应补项目</h3>
+        <table class='table'>
+          <%@contract.fixed_subsidies.each do |item|%>
+            <tr>
+              <td><%=item.name%></td>
+              <td><%=item.value%></td>
+            </tr>
+          <%end%>
+        </table>
+      </div>
+      <div class='radius-box doc-info'>
+        <h3 class='border-bottom'>固定应扣项目</h3>
+        <table class='table'>
+          <%@contract.fixed_deductions.each do |item|%>
+            <tr>
+              <td><%=item.name%></td>
+              <td><%=item.value%></td>
+            </tr>
+          <%end%>
+        </table>
+      </div>
+      <div class='radius-box doc-info'>
+        <h3 class='border-bottom'>非固定应补项目</h3>
+        <table class='table'>
+          <%@contract.unfixed_subsidies.each do |item|%>
+            <tr>
+              <td><%=item.name%></td>
+            </tr>
+          <%end%>
+        </table>
+      </div>
+      <div class='radius-box doc-info'>
+        <h3 class='border-bottom'>非固定应扣项目</h3>
+        <table class='table'>
+          <%@contract.unfixed_deductions.each do |item|%>
+            <tr>
+              <td><%=item.name%></td>
+            </tr>
+          <%end%>
+        </table>
+      </div>
+      <div class='radius-box doc-info'>
+        <h3 class='border-bottom'>其他应扣项目</h3>
+        <table class='table'>
+          <%@contract.other_deductions.each do |item|%>
+            <tr>
+              <td><%=item.name%></td>
+            </tr>
+          <%end%>
+        </table>
+      </div>
     </div>
   </div>
 </div>
-
 <% content_for :sidebar, render(:partial => 'sidebar') -%>

@@ -1,43 +1,102 @@
-
-  <div class="group">
-    <%= f.label :org_id, t("activerecord.attributes.contract.org_id", :default => "Org"), :class => :label %>
-    <%= f.text_field :org_id, :class => 'text_field' %>
-    <span class="description">Ex: a simple text</span>
+<fieldset class='inlineLabels'>
+  <div class="ctrlHolder">
+    <%= f.label :org_id, "分理处/分公司" %>
+    <%= f.select :org_id,  sub_companies_for_select%>
+    <p class='formHint'>结算对象,分理处或分公司</p>
   </div>
-
-  <div class="group">
-    <%= f.label :date_from, t("activerecord.attributes.contract.date_from", :default => "Date from"), :class => :label %>
-    <%= f.date_select :date_from, :class => 'date_select' %>
-    <span class="description">Ex: a simple text</span>
+  <div class="ctrlHolder">
+    <%= f.label :date_from, "合同起始日期" %>
+    <%= f.calendar_date_select :date_from,:popup => :force,:class => "shortText"%>
   </div>
-
-  <div class="group">
-    <%= f.label :date_to, t("activerecord.attributes.contract.date_to", :default => "Date to"), :class => :label %>
-    <%= f.date_select :date_to, :class => 'date_select' %>
-    <span class="description">Ex: a simple text</span>
+  <div class="ctrlHolder">
+    <%= f.label :date_to, "合同终止日期" %>
+    <%= f.calendar_date_select :date_to,:popup => :force,:class => "shortText"%>
   </div>
-
-  <div class="group">
-    <%= f.label :radio_start, t("activerecord.attributes.contract.radio_start", :default => "Radio start"), :class => :label %>
-    <%= f.text_field :radio_start, :class => 'text_field' %>
-    <span class="description">Ex: a simple text</span>
+  <div class="ctrlHolder">
+    <%= f.label :radio_start, "始发货结算比例" %>
+    <%= f.text_field :radio_start,:class => "shortText"%>
   </div>
-
-  <div class="group">
-    <%= f.label :radio_back, t("activerecord.attributes.contract.radio_back", :default => "Radio back"), :class => :label %>
-    <%= f.text_field :radio_back, :class => 'text_field' %>
-    <span class="description">Ex: a simple text</span>
+  <div class="ctrlHolder">
+    <%= f.label :radio_back, "返程货结算比例" %>
+    <%= f.text_field :radio_back,:class => "shortText"%>
   </div>
-
-  <div class="group">
-    <%= f.label :note, t("activerecord.attributes.contract.note", :default => "Note"), :class => :label %>
-    <%= f.text_field :note, :class => 'text_field' %>
-    <span class="description">Ex: a simple text</span>
+  <div class="ctrlHolder">
+    <%= f.label :note, "备注" %>
+    <%= f.text_field :note %>
   </div>
-        
-<div class="group navform wat-cf">
-  <button class="button" type="submit">
-    <%= image_tag("web-app-theme/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>
-  </button>  
-  <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.cancel", :default => "Cancel")}")} #{t("web-app-theme.cancel", :default => "Cancel")}", contracts_path, :class => "button" %> 
+  <div class="ctrlHolder">
+    <%= f.check_box :is_active, :class => 'check_box' %>
+    <%= f.label :is_active, "有效"%>
+  </div>
+</fieldset>
+<hr />
+<div class='radius-box doc-info'>
+  <h3 class='border-bottom'>固定应补项目</h3>
+  <table class='table'>
+    <tbody id='fixed_subsidy_fields_wrap'>
+      <%f.fields_for :fixed_subsidies do |item|%>
+        <%= render 'fixed_subsidy_fields',:f => item %>
+      <%end%>
+    </tbody>
+  </table>
+  <div class="actions-bar text-right">
+    <%=link_to_add_fields "添加固定应补项目",f,:fixed_subsidies,"fixed_subsidy_fields_wrap" %>
+  </div>
+</div>
+<div class='radius-box doc-info'>
+  <h3 class='border-bottom'>固定应扣项目</h3>
+  <table class='table'>
+    <tbody id='fixed_deduction_fields_wrap'>
+      <%f.fields_for :fixed_deductions do |item|%>
+        <%= render 'fixed_deduction_fields',:f => item %>
+      <%end%>
+    </tbody>
+  </table>
+  <div class="actions-bar text-right">
+    <%=link_to_add_fields "添加固定应扣项目",f,:fixed_deductions,"fixed_deduction_fields_wrap" %>
+  </div>
+</div>
+<div class='radius-box doc-info'>
+  <h3 class='border-bottom'>非固定应补项目</h3>
+  <table class='table'>
+    <tbody id='unfixed_subsidy_fields_wrap'>
+      <%f.fields_for :unfixed_subsidies do |item|%>
+        <%= render 'unfixed_subsidy_fields',:f => item %>
+      <%end%>
+    </tbody>
+  </table>
+  <div class="actions-bar text-right">
+    <%=link_to_add_fields "添加非固定应补项目",f,:unfixed_subsidies,"unfixed_subsidy_fields_wrap" %>
+  </div>
+</div>
+<div class='radius-box doc-info'>
+  <h3 class='border-bottom'>非固定应扣项目</h3>
+  <table class='table'>
+    <tbody id='unfixed_deduction_fields_wrap'>
+      <%f.fields_for :unfixed_deductions do |item|%>
+        <%= render 'unfixed_deduction_fields',:f => item %>
+      <%end%>
+    </tbody>
+  </table>
+  <div class="actions-bar text-right">
+    <%=link_to_add_fields "添加非固定应扣项目",f,:unfixed_deductions,"unfixed_deduction_fields_wrap" %>
+  </div>
+</div>
+<div class='radius-box doc-info'>
+  <h3 class='border-bottom'>其他应扣项目</h3>
+  <table class='table'>
+    <tbody id='other_deduction_fields_wrap'>
+      <%f.fields_for :other_deductions do |item|%>
+        <%= render 'other_deduction_fields',:f => item %>
+      <%end%>
+    </tbody>
+  </table>
+  <div class="actions-bar text-right">
+    <%=link_to_add_fields "添加其他应扣项目",f,:other_deductions,"other_deduction_fields_wrap" %>
+  </div>
+</div>
+
+<div class="actions-bar">
+  <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexyblue'%>
+  <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>
 </div>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100630002707) do
+ActiveRecord::Schema.define(:version => 20100702021737) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -62,6 +62,16 @@ ActiveRecord::Schema.define(:version => 20100630002707) do
     t.datetime "updated_at"
   end
 
+  create_table "contract_items", :force => true do |t|
+    t.string   "name",        :limit => 60,                                                  :null => false
+    t.boolean  "is_active",                                                :default => true, :null => false
+    t.string   "type",        :limit => 20,                                                  :null => false
+    t.decimal  "value",                     :precision => 10, :scale => 2, :default => 0.0
+    t.integer  "contract_id",                                                                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "contracts", :force => true do |t|
     t.integer  "org_id"
     t.date     "date_from"
@@ -71,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20100630002707) do
     t.string   "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_active",                                                :default => true, :null => false
   end
 
   create_table "message_visitors", :force => true do |t|
@@ -92,6 +103,38 @@ ActiveRecord::Schema.define(:version => 20100630002707) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type",       :limit => 20
+  end
+
+  create_table "settlement_lines", :force => true do |t|
+    t.integer  "settlement_id",                                                               :null => false
+    t.string   "type",          :limit => 50,                                                 :null => false
+    t.string   "name",          :limit => 60,                                                 :null => false
+    t.decimal  "value",                       :precision => 15, :scale => 2, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "settlements", :force => true do |t|
+    t.integer  "org_id",                                                                           :null => false
+    t.integer  "user_id"
+    t.string   "mth",                :limit => 6,                                                  :null => false
+    t.boolean  "is_active",                                                      :default => true, :null => false
+    t.decimal  "start_fee",                       :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "start_carrying_fee",              :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "start_net_income",                :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "start_radio",                     :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "start_push_money",                :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "back_fee",                        :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "back_carrying_fee",               :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "back_net_income",                 :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "back_radio",                      :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "back_push_money",                 :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "total_push_money",                :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "total_subsidy",                   :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "total_deduction",                 :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "act_push_money",                  :precision => 15, :scale => 2, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

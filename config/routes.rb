@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :settlements,:new => {:show_select_org_mth => :get}
+
   map.resources :address_books
 
 

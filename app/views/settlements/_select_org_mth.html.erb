@@ -1,0 +1,13 @@
+<fieldset class='inlineLabels'>
+  <div class="ctrlHolder">
+    <%= f.label :org_id_is,"结算单位" %>
+    <%= f.select :org_id_is, sub_companies_for_select %>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :mth_is,"结算月份" %>
+    <%= f.select :mth_is, months_for_select,:selected => 1.months.ago.strftime("%Y%m") %>
+  </div>
+</fieldset>
+<div class="actions-bar">
+  <%=f.submit '生成返款结算表', :class => 'sexybutton sexysimple sexyblue'%>
+</div>

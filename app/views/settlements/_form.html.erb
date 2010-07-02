@@ -1,0 +1,156 @@
+<fieldset class='inlineLabels'>
+  <div class="ctrlHolder">
+    <%= f.label :org_id,"结算单位" %>
+    <%= f.select :org_id, sub_companies_for_select %>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :mth,"结算月份" %>
+    <%= f.select :mth, months_for_select %>
+  </div>
+</fieldset>
+<fieldset class='blockLabels'>
+  <div class='radius-box doc-info'>
+    <h3 class='border-bottom'>始发货费用</h3>
+    <div class="ctrlHolder">
+      <%= f.label :start_fee,"营业收入" %>
+      <%= f.text_field :start_fee, :class => "shortText" %>
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label :start_carrying_fee,"短途运费" %>
+      <%= f.text_field :start_carrying_fee, :class => "shortText" %>
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label :start_net_income,"净收入" %>
+      <%= f.text_field :start_net_income, :readonly => true,:class => "shortText" %>
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label :start_radio,"结算比例" %>
+      <%= f.text_field :start_radio, :readonly => true,:class => "shortText" %>%
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label :start_push_money,"结算金额" %>
+      <%= f.text_field :start_push_money, :readonly => true,:class => "shortText" %>
+    </div>
+  </div>
+  <div class='radius-box doc-info'>
+    <h3 class='border-bottom'>返程货费用</h3>
+    <div class="ctrlHolder">
+      <%= f.label :back_fee,"营业收入" %>
+      <%= f.text_field :back_fee, :class => "shortText" %>
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label :back_carrying_fee,"短途运费" %>
+      <%= f.text_field :back_carrying_fee, :class => "shortText" %>
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label :back_net_income,"净收入" %>
+      <%= f.text_field :back_net_income, :readonly => true,:class => "shortText" %>
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label :back_radio,"结算比例" %>
+      <%= f.text_field :back_radio, :readonly => true,:class => "shortText" %>%
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label :back_push_money,"结算金额" %>
+      <%= f.text_field :back_push_money, :readonly => true,:class => "shortText" %>
+    </div>
+  </div>
+  <div class="ctrlHolder">
+      <%= f.label :total_push_money,"合计" %>
+      <%= f.text_field :total_push_money, :readonly => true,:class => "shortText" %>
+    </div>
+
+  <div class='radius-box doc-info'>
+    <h3 class='border-bottom'>固定应补项目</h3>
+    <table class='table'>
+      <tbody id='fixed_settlement_line_subsidy_fields_wrap'>
+        <%f.fields_for :fixed_settlement_line_subsidies do |item|%>
+          <%= render 'fixed_settlement_line_subsidy_fields',:f => item %>
+        <%end%>
+      </tbody>
+    </table>
+    <!--
+    <div class="actions-bar text-right">
+      <%=link_to_add_fields "添加固定应补项目",f,:fixed_settlement_line_subsidies,"fixed_settlement_line_subsidy_fields_wrap" %>
+    </div>
+    -->
+  </div>
+  <div class='radius-box doc-info'>
+    <h3 class='border-bottom'>固定应扣项目</h3>
+    <table class='table'>
+      <tbody id='fixed_settlement_line_deduction_fields_wrap'>
+        <%f.fields_for :fixed_settlement_line_deductions do |item|%>
+          <%= render 'fixed_settlement_line_deduction_fields',:f => item %>
+        <%end%>
+      </tbody>
+    </table>
+    <!--
+    <div class="actions-bar text-right">
+      <%=link_to_add_fields "添加固定应扣项目",f,:fixed_settlement_line_deductions,"fixed_settlement_line_deduction_fields_wrap" %>
+    </div>
+    -->
+  </div>
+  <div class='radius-box doc-info'>
+    <h3 class='border-bottom'>非固定应补项目</h3>
+    <table class='table'>
+      <tbody id='unfixed_settlement_line_subsidy_fields_wrap'>
+        <%f.fields_for :unfixed_settlement_line_subsidies do |item|%>
+          <%= render 'unfixed_settlement_line_subsidy_fields',:f => item %>
+        <%end%>
+      </tbody>
+    </table>
+    <!--
+    <div class="actions-bar text-right">
+      <%=link_to_add_fields "添加非固定应补项目",f,:unfixed_settlement_line_subsidies,"unfixed_settlement_line_subsidy_fields_wrap" %>
+    </div>
+    -->
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :total_subsidy,"应补合计" %>
+    <%= f.text_field :total_subsidy, :readonly => true,:class => "shortText" %>
+  </div>
+
+  <div class='radius-box doc-info'>
+    <h3 class='border-bottom'>非固定应扣项目</h3>
+    <table class='table'>
+      <tbody id='unfixed_settlement_line_deduction_fields_wrap'>
+        <%f.fields_for :unfixed_settlement_line_deductions do |item|%>
+          <%= render 'unfixed_settlement_line_deduction_fields',:f => item %>
+        <%end%>
+      </tbody>
+    </table>
+    <!--
+    <div class="actions-bar text-right">
+      <%=link_to_add_fields "添加非固定应扣项目",f,:unfixed_settlement_line_deductions,"unfixed_settlement_line_deduction_fields_wrap" %>
+    </div>
+    -->
+  </div>
+  <div class='radius-box doc-info'>
+    <h3 class='border-bottom'>其他应扣项目</h3>
+    <table class='table'>
+      <tbody id='other_settlement_line_deduction_fields_wrap'>
+        <%f.fields_for :other_settlement_line_deductions do |item|%>
+          <%= render 'other_settlement_line_deduction_fields',:f => item %>
+        <%end%>
+      </tbody>
+    </table>
+    <!--
+    <div class="actions-bar text-right">
+      <%=link_to_add_fields "添加其他应扣项目",f,:other_settlement_line_deductions,"other_settlement_line_deduction_fields_wrap" %>
+    </div>
+    -->
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :total_deduction,"应扣合计" %>
+    <%= f.text_field :total_deduction, :readonly => true,:class => "shortText" %>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :act_push_money,"分部实提金额" %>
+    <%= f.text_field :act_push_money, :readonly => true,:class => "shortText" %>
+  </div>
+
+</fieldset>
+<div class="actions-bar">
+  <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexyblue'%>
+  <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>
+</div>

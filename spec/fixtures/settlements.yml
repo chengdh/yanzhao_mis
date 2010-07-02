@@ -1,0 +1,37 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  org: 
+  user: 
+  mth: MyString
+  is_active: false
+  start_fee: 9.99
+  start_carrying_fee: 9.99
+  start_net_income: 9.99
+  start_push_money: 9.99
+  back_fee: 9.99
+  back_carrying_fee: 9.99
+  back_net_income: 9.99
+  back_push_money: 9.99
+  total_push_money: 9.99
+  total_subsidy: 9.99
+  total_deduction: 9.99
+  act_push_money: 9.99
+
+two:
+  org: 
+  user: 
+  mth: MyString
+  is_active: false
+  start_fee: 9.99
+  start_carrying_fee: 9.99
+  start_net_income: 9.99
+  start_push_money: 9.99
+  back_fee: 9.99
+  back_carrying_fee: 9.99
+  back_net_income: 9.99
+  back_push_money: 9.99
+  total_push_money: 9.99
+  total_subsidy: 9.99
+  total_deduction: 9.99
+  act_push_money: 9.99

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  is_active: false
+  type: MyString
+  value: 9.99
+  contract: 
+
+two:
+  name: MyString
+  is_active: false
+  type: MyString
+  value: 9.99
+  contract: 

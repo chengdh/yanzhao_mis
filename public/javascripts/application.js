@@ -89,7 +89,48 @@ com.yanzhao.nestedFormHelper.add_fields = function(link, association, content,co
   var new_id = new Date().getTime();  
   var regexp = new RegExp("new_" + association, "g");  
   if(content_wrap.blank())
-    $(link).up().insert({ before: content.replace(regexp, new_id)});  
+    $(link).up().insert({ after: content.replace(regexp, new_id)});  
   else
-    $(content_wrap).insert({ before: content.replace(regexp, new_id)});  
-}  
+    $(content_wrap).insert({ after: content.replace(regexp, new_id)});  
+};  
+/*结算表的Form监听器,用于自动计算*/
+com.yanzhao.settlement_form_observer  =  function(){
+  var form = $('setttlement_form');
+  //得到相关的费用
+  var start_fee = parseFloat($F('settlement_start_fee'));
+  var start_carrying_fee =  parseFloat($F('settlement_start_carrying_fee'));
+  var start_net_income =  start_fee - start_carrying_fee;
+  $('settlement_start_net_income').value = start_net_income;
+  var start_radio =  parseFloat($F('settlement_start_radio'));
+  var start_push_money = Math.round(start_net_income*start_radio/100);
+  $('settlement_start_push_money').value = start_push_money;
+  //计算返程费用
+  var back_fee = parseFloat($F('settlement_back_fee'));
+  var back_carrying_fee =  parseFloat($F('settlement_back_carrying_fee'));
+  var back_net_income =  back_fee - back_carrying_fee;
+  $('settlement_back_net_income').value = back_net_income;
+  var back_radio =  parseFloat($F('settlement_back_radio'));
+  var back_push_money = Math.round(back_net_income*back_radio/100);
+  $('settlement_back_push_money').value = back_push_money;
+  $('settlement_total_push_money').value = start_push_money + back_push_money;
+  //计算应补合计
+  var subsidies = $$("input[name*='subsidies']");
+  var sum_subsidy = 0.0;
+  subsidies.each(function(el){ 
+      if(el.id.include('value'))
+      sum_subsidy += parseFloat(el.value);
+      });
+
+  $('settlement_total_subsidy').value = sum_subsidy;
+  //计算应扣合计
+  var deductions = $$("input[name*='deductions']");
+  var sum_deduction = 0;
+  deductions.each(function(el){ 
+      if(el.id.include('value'))
+      sum_deduction += parseFloat(el.value);
+      });
+
+  $('settlement_total_deduction').value = sum_deduction;
+  var act_push_money = start_push_money + back_push_money + sum_subsidy - sum_deduction;
+  $('settlement_act_push_money').value = act_push_money;
+};
