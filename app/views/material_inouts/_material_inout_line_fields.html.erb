@@ -1,0 +1,20 @@
+<tr class='fields'>
+  <%=f.hidden_field :material_id%>
+  <td>
+    <%=text_field_tag :material_name %>
+    <%=link_to "选择物品",show_search_materials_path,:onclick => "Modalbox.show(this.href,{title : false,width : 600});return false;"%>
+  </td>
+  <td>
+    <%=f.text_field :qty,:style => "width : 50px;"%>
+  </td>
+  <td width='50'>
+    <%=f.text_field :price,:style => "width : 50px;" %>
+  </td>
+  <td>
+    合计
+  </td>
+
+  <td>
+    <%=link_to_remove_fields "删除",f %>
+  </td>
+</tr>

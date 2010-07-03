@@ -1,0 +1,18 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", material_inouts_path  %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_material_inout_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%= t("web-app-theme.new", :default => "New")%>  MaterialInout</h2>
+    <div class="inner">
+      <% form_for @material_inout,:html => { :class => :uniForm } do |f| -%>
+        <%= render "form", :f => f %>
+      <% end -%>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

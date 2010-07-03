@@ -1,0 +1,2 @@
+class MaterialInoutsController < BaseController
+end

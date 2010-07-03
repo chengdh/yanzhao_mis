@@ -41,10 +41,6 @@ class SettlementsController < BaseController
       end
     end
   end
-  #显示选择机构和月份界面
-  # GET /settlements/new/show_select_org_mth
-  def show_select_org_mth
-  end
 
   #GET /settlements/1
   def show

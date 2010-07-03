@@ -1,9 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :material_inouts
+
   map.resources :warehouses
 
-  map.resources :materials
+  map.resources :materials,:collection => {:show_search => :get}
 
-  map.resources :settlements,:new => {:show_select_org_mth => :get}
+  map.resources :settlements
 
   map.resources :address_books
 

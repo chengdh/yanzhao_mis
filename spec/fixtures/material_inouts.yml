@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  inout_date: 2010-07-03
+  org: 
+  warehouse: 
+  person_name: MyString
+  note: MyString
+
+two:
+  inout_date: 2010-07-03
+  org: 
+  warehouse: 
+  person_name: MyString
+  note: MyString

@@ -1,0 +1,25 @@
+<%remote_form_for @search,:url => {:action => :index} do |f|%>
+  <div class="radius-box">
+    <%= f.text_field :name, :class => 'textInput' %>
+    <%=f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%>
+  </div>
+<%end%>
+<div class='radius-box' style='height : 400px'>
+  <table class='table'>
+    <tr>
+      <th>物品名称</th>
+      <th>规格</th>
+      <th>单位</th>
+      <th>当前均价</th>
+      <th>库存数量</th>
+    </tr>
+    <%@materials.each do |m|%>
+      <td><%=m.name%></td>
+      <td><%=m.description%></td>
+      <td><%=m.unit%></td>
+      <td></td>
+      <td><%=m.min_count%></td>
+    <%end%>
+    <%=will_paginate @materials%>
+  </table>
+</div>

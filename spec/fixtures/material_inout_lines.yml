@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  material_inout: 
+  material: 
+  type: MyString
+  qty: 1
+  price: 9.99
+  line_amt: 
+
+two:
+  material_inout: 
+  material: 
+  type: MyString
+  qty: 1
+  price: 9.99
+  line_amt: 

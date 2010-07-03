@@ -1,0 +1,53 @@
+<fieldset class='inlineLabels'>
+  <div class="ctrlHolder">
+    <%= f.label :inout_date, "出(入)库日期" %>
+    <%= f.calendar_date_select :inout_date, :popup => :force,:class => "shortText" %>
+  </div>
+
+  <div class="ctrlHolder">
+    <%= f.label :org_id, "部门"%>
+    <%= f.select :org_id, orgs_for_select  %>
+  </div>
+
+  <div class="ctrlHolder">
+    <%= f.label :warehouse_id, "仓库"%>
+    <%= f.select :warehouse_id, warehouses_for_select %>
+    <p class="formHint">选择出入物品的仓库</p>
+  </div>
+
+  <div class="ctrlHolder">
+    <%= f.label :person_name, "经办人" %>
+    <%= f.text_field :person_name, :class => 'shortText' %>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :note, "备注" %>
+    <%= f.text_field :note, :class => 'textInput' %>
+  </div>
+</fieldset>
+<div class='radius-box doc-info'>
+  <h3 class='border-bottom'>单据明细</h3>
+  <table class='table'>
+    <tr>
+      <td>物品名称</td>
+      <td>价格</td>
+      <td>数量</td>
+      <td>金额</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tbody id='line_fields_wrap'>
+      <%f.fields_for :material_inout_lines do |line|%>
+        <%= render 'material_inout_line_fields',:f => line %>
+      <%end%>
+    </tbody>
+    <tfoot>
+      <%#FIXME 计算合计信息%>
+    </tfoot>
+  </table>
+  <div class="actions-bar text-right">
+    <%=link_to_add_fields "添加明细",f,:material_inout_lines,"line_fields_wrap" %>
+  </div>
+</div>
+<div class="actions-bar">
+  <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexyblue'%>
+  <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>
+</div>
