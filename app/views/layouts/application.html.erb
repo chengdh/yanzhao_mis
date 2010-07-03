@@ -42,7 +42,9 @@
               <li class="<%= controller.controller_path == 'contracts' ? 'active' : '' %>">
               <%=link_to "物品库存管理",contracts_path%>
               </li> 
-              <li class="<%= controller.controller_path == 'settlements' ? 'active' : '' %>"><a href="<%= settlements_path %>">Settlements</a></li></ul>
+              <li class="<%= controller.controller_path == 'settlements' ? 'active' : '' %>"><a href="<%= settlements_path %>">Settlements</a></li> 
+              <li class="<%= controller.controller_path == 'materials' ? 'active' : '' %>"><a href="<%= materials_path %>">Materials</a></li>
+             <li class="<%= controller.controller_path == 'warehouses' ? 'active' : '' %>"><a href="<%= warehouses_path %>">Warehouses</a></li></ul>
           </div>
         </div>    
         <div id="wrapper" class="wat-cf">

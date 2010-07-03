@@ -1,0 +1,39 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", warehouses_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_warehouse_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", warehouse_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.warehouse.name", :default => t("activerecord.labels.name", :default => "Name")) %>:</b>
+          <%= @warehouse.name %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.warehouse.is_active", :default => t("activerecord.labels.is_active", :default => "Is active")) %>:</b>
+          <%= @warehouse.is_active %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.warehouse.note", :default => t("activerecord.labels.note", :default => "Note")) %>:</b>
+          <%= @warehouse.note %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.warehouse.manager", :default => t("activerecord.labels.manager", :default => "Manager")) %>:</b>
+          <%= @warehouse.manager %>
+        </p>
+      <div class="wat-cf">
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_warehouse_path(@warehouse), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", warehouse_path(@warehouse), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

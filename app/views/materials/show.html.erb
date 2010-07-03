@@ -1,0 +1,49 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", materials_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_material_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", material_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.material.name", :default => t("activerecord.labels.name", :default => "Name")) %>:</b>
+          <%= @material.name %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.material.is_active", :default => t("activerecord.labels.is_active", :default => "Is active")) %>:</b>
+          <%= @material.is_active %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.material.description", :default => t("activerecord.labels.description", :default => "Description")) %>:</b>
+          <%= @material.description %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.material.type", :default => t("activerecord.labels.type", :default => "Type")) %>:</b>
+          <%= @material.type %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.material.min_count", :default => t("activerecord.labels.min_count", :default => "Min count")) %>:</b>
+          <%= @material.min_count %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.material.unit", :default => t("activerecord.labels.unit", :default => "Unit")) %>:</b>
+          <%= @material.unit %>
+        </p>
+      <div class="wat-cf">
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_material_path(@material), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", material_path(@material), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

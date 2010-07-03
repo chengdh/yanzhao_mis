@@ -1,0 +1,2 @@
+class WarehousesController < BaseController
+end

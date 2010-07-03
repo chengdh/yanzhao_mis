@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  is_active: false
+  description: MyString
+  type: MyString
+  min_count: 1
+  unit: MyString
+
+two:
+  name: MyString
+  is_active: false
+  description: MyString
+  type: MyString
+  min_count: 1
+  unit: MyString

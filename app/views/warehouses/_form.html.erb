@@ -1,0 +1,19 @@
+<fieldset class='blockLabels'>
+  <div class="ctrlHolder">
+    <%= f.label :name, "仓库名称" %>
+    <%= f.text_field :name, :class => 'textInput' %>
+    <p class="formHint">最长30个汉字</p>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :manager, "管理员" %>
+    <%= f.text_field :manager, :class => 'shortText' %>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :is_active, "有效标志" %>
+    <%= f.check_box :is_active %>
+  </div>
+</fieldset>
+<div class="actions-bar">
+  <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexyblue'%>
+  <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>
+</div>       

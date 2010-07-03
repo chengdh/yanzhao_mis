@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100702021737) do
+ActiveRecord::Schema.define(:version => 20100703024428) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -84,6 +84,17 @@ ActiveRecord::Schema.define(:version => 20100702021737) do
     t.boolean  "is_active",                                                :default => true, :null => false
   end
 
+  create_table "materials", :force => true do |t|
+    t.string   "name",        :limit => 60,                         :null => false
+    t.boolean  "is_active",                 :default => true,       :null => false
+    t.string   "description", :limit => 60
+    t.string   "type",        :limit => 30, :default => "Material", :null => false
+    t.integer  "min_count",                 :default => 0
+    t.string   "unit",        :limit => 10, :default => "个",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "message_visitors", :force => true do |t|
     t.integer  "base_public_message_id",                :null => false
     t.integer  "user_id",                               :null => false
@@ -143,6 +154,15 @@ ActiveRecord::Schema.define(:version => 20100702021737) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "org_id"
+  end
+
+  create_table "warehouses", :force => true do |t|
+    t.string   "name",       :limit => 60,                    :null => false
+    t.boolean  "is_active",                 :default => true, :null => false
+    t.string   "note",       :limit => 200
+    t.string   "manager",    :limit => 30
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

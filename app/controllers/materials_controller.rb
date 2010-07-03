@@ -1,0 +1,2 @@
+class MaterialsController < BaseController
+end

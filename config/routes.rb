@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :warehouses
+
+  map.resources :materials
+
   map.resources :settlements,:new => {:show_select_org_mth => :get}
 
   map.resources :address_books
