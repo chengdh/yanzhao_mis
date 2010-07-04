@@ -1,0 +1,28 @@
+<script type='text/javascript'>
+  material_selector.set_material_array(<%=@m_storages.to_json(:include => :material)%>);
+  material_selector.selected_material = null;
+</script>
+<table class='table'>
+  <tr>
+    <th>&nbsp;</th>
+    <th>物品名称</th>
+    <th>规格</th>
+    <th>单位</th>
+    <th>当前均价</th>
+    <th>库存数量</th>
+  </tr>
+  <%@m_storages.each do |m|%>
+    <tr>
+      <%=%>
+      <td><%=radio_button_tag('select_product',m.material.id,false,:onclick =>"if(this.checked) material_selector.select_material(this.value)" )%></span></td>
+      <td><%=m.material.name%></td>
+      <td><%=m.material.description%></td>
+      <td><%=m.material.unit%></td>
+      <td><%=m.avg_price%></td>
+      <td><%=m.qty%></td>
+    </tr>
+  <%end%>
+</table>
+<div class="actions-bar wat-cf">
+  <%=will_paginate @m_storages,:renderer => 'RemoteLinkRenderer' ,:params => {:action => :search}, :remote => {:update =>"storages_list"}%>
+</div>

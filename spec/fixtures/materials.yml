@@ -1,17 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  is_active: false
-  description: MyString
-  type: MyString
-  min_count: 1
-  unit: MyString
-
-two:
-  name: MyString
-  is_active: false
-  description: MyString
-  type: MyString
-  min_count: 1
-  unit: MyString
+<%(1..100).each do |index| %>
+material_<%=index%>:
+  name: material_<%=index%>
+  is_active: true
+  description: material_description_<%=index%>
+  type: Material
+  min_count: 100
+  unit: 个
+<%end%>

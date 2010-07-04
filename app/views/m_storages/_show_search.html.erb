@@ -1,0 +1,18 @@
+<%remote_form_for :search,:method => :get,:url => {:action => :search},:update => "storages_list" do |f|%>
+  <div class="radius-box">
+    <%= f.label :warehouse_id_is,"仓库:" %>
+    <%= f.select :warehouse_id_is, warehouses_for_select%>
+
+    <%= f.label :material_name_like,"名称:" %>
+    <%= f.text_field :material_name_like, :class => 'textInput' %>
+    <%= f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%>
+  </div>
+<%end%>
+<div class='block' id='storages_list'>
+  <%= render :partial => 'list' %>
+</div>
+<div class="text-right actions-bar">
+  <span class='red-text' id='err_span'></span>
+  <%=link_to_function '完成物品选择',"if(material_selector.perform_select('err_span')) Modalbox.hide();", :class => 'sexybutton sexysimple sexyblue'%>
+  <%=link_to_function '取消',"Modalbox.hide()",:class => 'sexybutton sexysimple sexyred' %>
+</div>

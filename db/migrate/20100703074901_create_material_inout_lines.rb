@@ -6,7 +6,7 @@ class CreateMaterialInoutLines < ActiveRecord::Migration
       t.string :type,:null => false,:limit => 30
       t.integer :qty,:default => 1
       t.decimal :price,:default => 0,:precision => 10,:scale => 2
-      t.decial :line_amt,:default => 0,:precision => 10,:scale => 2
+      t.decimal :line_amt,:default => 0,:precision => 10,:scale => 2
 
       t.timestamps
     end

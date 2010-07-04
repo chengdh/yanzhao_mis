@@ -134,3 +134,55 @@ com.yanzhao.settlement_form_observer  =  function(){
   var act_push_money = start_push_money + back_push_money + sum_subsidy - sum_deduction;
   $('settlement_act_push_money').value = act_push_money;
 };
+
+/*选择物品的处理*/
+com.yanzhao.MaterialSelector = Class.create();
+com.yanzhao.MaterialSelector.prototype = {
+initialize : function(){},
+  //target_el 选择物品后用于更新物品信息的容器
+  //结构如下: <tr><td><input class='material_name' /></td></tr>
+set_target_el : function(target_el){
+               this.target_el = target_el;
+             },
+             //设置当前可选择的物品数组
+set_material_array : function(materials){
+                       this.storage_materials = materials;
+                     },
+             //在界面中选择物品
+select_material : function(material_id){
+                    this.storage_materials.each(function(s_m){
+                        if(s_m.material.id == material_id)
+                          this.selected_material = s_m;
+                        }
+                        ,this);
+                    return this.selected_material;
+                  },
+                  //确认选择,在物品选择窗口上按确定按钮
+                  //error_span 未选择任何商品时显示错误信息
+perform_select : function(err_span){
+                   if(typeof(this.selected_material) == 'undefined' || !this.selected_material)
+                     $(err_span).update('当前未选择任何物品.');
+                   else
+                   {
+                     this.update_target_el();
+                     this.storage_materials = null;
+                     this.selected_material = null;
+                     return true;
+                   }
+                   return  false;
+                 },
+                 //根据选择物品更新出入库单据上的明细列表
+update_target_el : function() {
+                     el_id = this.target_el.select('.material_id').first();
+                     el_name = this.target_el.select('.material_name').first();
+                     el_unit = this.target_el.select('.material_unit').first();
+                     el_price = this.target_el.select('.material_price').first();
+                     el_qty = this.target_el.select('.material_qty').first();
+                     el_total = this.target_el.select('.material_total').first();
+                     el_id.value = this.selected_material.material.id;
+                     el_name.value = this.selected_material.material.name;
+                     el_unit.value = this.selected_material.material.unit;
+                     el_price.value = this.selected_material.avg_price;
+                   }
+
+};

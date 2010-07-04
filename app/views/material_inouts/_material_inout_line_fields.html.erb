@@ -1,19 +1,22 @@
 <tr class='fields'>
-  <%=f.hidden_field :material_id%>
+  <%=f.hidden_field :material_id,:class => "material_id"%>
   <td>
-    <%=text_field_tag :material_name %>
-    <%=link_to "选择物品",show_search_materials_path,:onclick => "Modalbox.show(this.href,{title : false,width : 600});return false;"%>
-  </td>
-  <td>
-    <%=f.text_field :qty,:style => "width : 50px;"%>
-  </td>
-  <td width='50'>
-    <%=f.text_field :price,:style => "width : 50px;" %>
+    <%=text_field_tag "","", :class => 'material_name',:style => "width : 150px;",:readonly => true %>
+    <%=link_to "选择物品",show_search_m_storages_path,
+      :onclick => "material_selector.set_target_el(this.up().up());Modalbox.show(this.href,{title : false,width : 600});return false;"%>
   </td>
   <td>
-    合计
+    <%=text_field_tag "","", :class => 'material_unit',:style => "width : 50px;",:readonly => true %>
   </td>
-
+  <td>
+    <%=f.text_field :price,:style => "width : 50px;",:class => "material_price" %>
+  </td>
+  <td>
+    <%=f.text_field :qty,:style => "width : 50px;",:class => "material_qty"%>
+  </td>
+  <td>
+    <%=text_field_tag "","",:class => 'matrial_total',:style => "width : 50px;",:readonly => true %>
+  </td>
   <td>
     <%=link_to_remove_fields "删除",f %>
   </td>

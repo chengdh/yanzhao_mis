@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  is_active: false
+  name: warehouse_1
+  is_active: true
   note: MyString
   manager: MyString
 
 two:
-  name: MyString
-  is_active: false
+  name: warehouse_2
+  is_active: true
   note: MyString
   manager: MyString

@@ -1,14 +1,15 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :m_storages,:collection => {:show_search => :get,:search => :get}
+
   map.resources :material_inouts
 
   map.resources :warehouses
 
-  map.resources :materials,:collection => {:show_search => :get}
-
+  map.resources :materials
+  
   map.resources :settlements
 
   map.resources :address_books
-
 
   map.resources :comments,:except => [:index,:destroy,:new]
 
