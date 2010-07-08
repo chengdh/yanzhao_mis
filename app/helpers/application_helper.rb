@@ -158,4 +158,15 @@ module ApplicationHelper
     end 
     strChinese 
   end
+  #根据起始和结束日期得到日期月份列表
+  def months_range(start_dt,end_dt)
+    ret = ActiveSupport::OrderedHash.new
+    0.upto(40) do |n|
+      tmp = start_dt.months_since(n).to_date
+      if tmp <= end_dt
+        ret[tmp.strftime("%Y%m")] = tmp.strftime("%Y年%m月")
+      end
+    end
+    ret
+  end
 end

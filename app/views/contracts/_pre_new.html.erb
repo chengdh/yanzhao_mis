@@ -1,0 +1,25 @@
+<!--新建合同之前的页面-->
+<% 
+  @search.date_from = Date.today 
+  @search.date_to = Date.today.months_since(12) 
+%>
+<%form_for @search,:url => {:action => :new},:method => :get, :html => { :class => :uniForm } do |f| -%>
+  
+  <fieldset class='blockLabels'>
+    <div class="ctrlHolder">
+      <%= f.label :org_id_is,"分公司" %>
+      <%= f.select :org_id, sub_companies_for_select %>
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label :date_from,"合同期限" %>
+      <%= f.calendar_date_select :date_from,:class => 'textInput' %>
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label "","" %>
+      <%= f.calendar_date_select :date_to,:class => 'textInput' %>
+    </div>
+  </fieldset>
+  <div class="actions-bar">
+    <%=f.submit '新建合同模板', :class => 'sexybutton sexysimple sexyblue'%>
+  </div>
+<%end%>

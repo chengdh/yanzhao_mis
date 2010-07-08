@@ -37,7 +37,7 @@ class SettlementsController < BaseController
         flash[:error] = "未找到符合条件的合同模板."
         redirect_to :back 
       else
-        @settlement.build_lines(contracts.first)
+        @settlement.build_lines(contracts.first,params[:search][:mth_is])
       end
     end
   end

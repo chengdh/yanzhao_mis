@@ -6,20 +6,22 @@
   </div>
   <div class="ctrlHolder">
     <%= f.label :date_from, "合同起始日期" %>
-    <%= f.calendar_date_select :date_from,:popup => :force,:class => "shortText"%>
+    <%= f.text_field :date_from,:readonly => true,:class => "shortText"%>
   </div>
   <div class="ctrlHolder">
     <%= f.label :date_to, "合同终止日期" %>
-    <%= f.calendar_date_select :date_to,:popup => :force,:class => "shortText"%>
+    <%= f.text_field :date_to,:readonly => true,:class => "shortText"%>
   </div>
+  <!--
   <div class="ctrlHolder">
     <%= f.label :radio_start, "始发货结算比例" %>
-    <%= f.text_field :radio_start,:class => "shortText"%>
+    <%= f.text_field :radio_start,:class => "shortText"%>%
   </div>
   <div class="ctrlHolder">
     <%= f.label :radio_back, "返程货结算比例" %>
-    <%= f.text_field :radio_back,:class => "shortText"%>
+    <%= f.text_field :radio_back,:class => "shortText"%>%
   </div>
+  -->
   <div class="ctrlHolder">
     <%= f.label :note, "备注" %>
     <%= f.text_field :note %>
@@ -31,31 +33,45 @@
 </fieldset>
 <hr />
 <div class='radius-box doc-info'>
-  <h3 class='border-bottom'>固定应补项目</h3>
+  <h3 class='border-bottom'>各月份结算比例</h3>
   <table class='table'>
-    <tbody id='fixed_subsidy_fields_wrap'>
-      <%f.fields_for :fixed_subsidies do |item|%>
-        <%= render 'fixed_subsidy_fields',:f => item %>
-      <%end%>
-    </tbody>
+    <%f.fields_for :contract_radios do |radio|%>
+      <%= render 'contract_radio_fields',:f => radio %>
+    <%end%>
   </table>
-  <div class="actions-bar text-right">
-    <%=link_to_add_fields "添加固定应补项目",f,:fixed_subsidies,"fixed_subsidy_fields_wrap" %>
-  </div>
 </div>
-<div class='radius-box doc-info'>
-  <h3 class='border-bottom'>固定应扣项目</h3>
-  <table class='table'>
-    <tbody id='fixed_deduction_fields_wrap'>
-      <%f.fields_for :fixed_deductions do |item|%>
-        <%= render 'fixed_deduction_fields',:f => item %>
-      <%end%>
-    </tbody>
-  </table>
-  <div class="actions-bar text-right">
-    <%=link_to_add_fields "添加固定应扣项目",f,:fixed_deductions,"fixed_deduction_fields_wrap" %>
+
+<%@group_fixed_subsidies.each do |mth,susidies|%>
+  <div class='radius-box doc-info'>
+    <h3 class='border-bottom'><span class='red-text'><%=mth%></span>-固定应补项目</h3>
+    <table class='table'>
+      <tbody id='fixed_subsidy_fields_wrap_<%=mth%>'>
+        <%f.fields_for :fixed_subsidies,susidies do |item|%>
+          <%= render 'fixed_subsidy_fields',:f => item %>
+        <%end%>
+      </tbody>
+    </table>
+    <div class="actions-bar text-right">
+      <%=link_to_add_fields "添加固定应补项目",f,:fixed_subsidies,"fixed_subsidy_fields_wrap_#{mth}" %>
+    </div>
   </div>
-</div>
+<%end%>
+
+<%@group_fixed_deductions.each do |mth,deductions|%>
+  <div class='radius-box doc-info'>
+    <h3 class='border-bottom'><%=mth%>-固定应扣项目</h3>
+    <table class='table'>
+      <tbody id='fixed_deduction_fields_wrap_<%=mth%>'>
+        <%f.fields_for :fixed_deductions,deductions do |item|%>
+          <%= render 'fixed_deduction_fields',:f => item %>
+        <%end%>
+      </tbody>
+    </table>
+    <div class="actions-bar text-right">
+      <%=link_to_add_fields "添加固定应扣项目",f,:fixed_deductions,"fixed_deduction_fields_wrap_#{mth}" %>
+    </div>
+  </div>
+<%end%>
 <div class='radius-box doc-info'>
   <h3 class='border-bottom'>非固定应补项目</h3>
   <table class='table'>

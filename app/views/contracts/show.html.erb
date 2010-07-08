@@ -18,14 +18,6 @@
           <td><%=@contract.date_from%> ~ <%=@contract.date_to%></td>
         </tr>
         <tr>
-          <td>始发货结算比例:</td>
-          <td><%=@contract.radio_start%> %</td>
-        </tr>
-        <tr>
-          <td>返程货结算比例:</td>
-          <td><%=@contract.radio_back %> %</td>
-        </tr>
-        <tr>
           <td>备注:</td>
           <td><%=@contract.note%></td>
         </tr>
@@ -35,27 +27,45 @@
         </tr>
       </table>
       <div class='radius-box doc-info'>
-        <h3 class='border-bottom'>固定应补项目</h3>
+        <h3 class='border-bottom'>结算比例</h3>
         <table class='table'>
-          <%@contract.fixed_subsidies.each do |item|%>
+
+          <%@contract.contract_radios.each do |r|%>
             <tr>
-              <td><%=item.name%></td>
-              <td><%=item.value%></td>
+              <td>月份:<%=r.mth%></td>
+              <td>始发货:<%=r.start_radio%>%</td>
+              <td>返程货:<%=r.back_radio%>%</td>
             </tr>
           <%end%>
         </table>
       </div>
-      <div class='radius-box doc-info'>
-        <h3 class='border-bottom'>固定应扣项目</h3>
-        <table class='table'>
-          <%@contract.fixed_deductions.each do |item|%>
-            <tr>
-              <td><%=item.name%></td>
-              <td><%=item.value%></td>
-            </tr>
-          <%end%>
-        </table>
-      </div>
+
+      <%@group_fixed_subsidies.each do |mth,subsidies|%>
+        <div class='radius-box doc-info'>
+          <h3 class='border-bottom'><%=mth%>-固定应补项目</h3>
+          <table class='table'>
+            <%subsidies.each do |item|%>
+              <tr>
+                <td><%=item.name%></td>
+                <td><%=item.value%></td>
+              </tr>
+            <%end%>
+          </table>
+        </div>
+      <%end%>
+      <%@group_fixed_deductions.each do |mth,deductions|%>
+        <div class='radius-box doc-info'>
+          <h3 class='border-bottom'><%=mth%>-固定应扣项目</h3>
+          <table class='table'>
+            <%deductions.each do |item|%>
+              <tr>
+                <td><%=item.name%></td>
+                <td><%=item.value%></td>
+              </tr>
+            <%end%>
+          </table>
+        </div>
+      <%end%>
       <div class='radius-box doc-info'>
         <h3 class='border-bottom'>非固定应补项目</h3>
         <table class='table'>

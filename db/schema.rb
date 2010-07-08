@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100704014753) do
+ActiveRecord::Schema.define(:version => 20100708071316) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -68,6 +68,16 @@ ActiveRecord::Schema.define(:version => 20100704014753) do
     t.string   "type",        :limit => 20,                                                  :null => false
     t.decimal  "value",                     :precision => 10, :scale => 2, :default => 0.0
     t.integer  "contract_id",                                                                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "mth",         :limit => 6
+  end
+
+  create_table "contract_radios", :force => true do |t|
+    t.integer  "contract_id",                                                  :null => false
+    t.string   "mth",                                                          :null => false
+    t.decimal  "start_radio", :precision => 10, :scale => 2, :default => 50.0
+    t.decimal  "back_radio",  :precision => 10, :scale => 2, :default => 50.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

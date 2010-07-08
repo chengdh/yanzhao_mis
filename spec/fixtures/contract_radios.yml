@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  contract: 
+  mth: MyString
+  start_radio: 9.99
+  back_radio: 9.99
+
+two:
+  contract: 
+  mth: MyString
+  start_radio: 9.99
+  back_radio: 9.99
