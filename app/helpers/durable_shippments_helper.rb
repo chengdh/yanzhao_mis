@@ -1,0 +1,2 @@
+module DurableShippmentsHelper
+end

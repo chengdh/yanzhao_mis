@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100708071316) do
+ActiveRecord::Schema.define(:version => 20100709104120) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -104,12 +104,11 @@ ActiveRecord::Schema.define(:version => 20100708071316) do
   end
 
   create_table "material_inout_lines", :force => true do |t|
-    t.integer  "material_inout_id",                                                               :null => false
-    t.integer  "material_id",                                                                     :null => false
-    t.string   "type",              :limit => 30,                                                 :null => false
-    t.integer  "qty",                                                            :default => 1
-    t.decimal  "price",                           :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "line_amt",                        :precision => 10, :scale => 2, :default => 0.0
+    t.integer  "material_inout_id",                                                 :null => false
+    t.integer  "material_id",                                                       :null => false
+    t.integer  "qty",                                              :default => 1
+    t.decimal  "price",             :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "line_amt",          :precision => 10, :scale => 2, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,2 @@
+module ConsumerShippmentsHelper
+end

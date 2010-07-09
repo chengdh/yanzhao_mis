@@ -43,8 +43,12 @@
               <%=link_to "物品库存管理",contracts_path%>
               </li> 
               <li class="<%= controller.controller_path == 'settlements' ? 'active' : '' %>"><a href="<%= settlements_path %>">Settlements</a></li> 
-              <li class="<%= controller.controller_path == 'materials' ? 'active' : '' %>"><a href="<%= materials_path %>">Materials</a></li>
-             <li class="<%= controller.controller_path == 'warehouses' ? 'active' : '' %>"><a href="<%= warehouses_path %>">Warehouses</a></li> <li class="<%= controller.controller_path == 'material_inouts' ? 'active' : '' %>"><a href="<%= material_inouts_path %>">MaterialInouts</a></li></ul>
+              <li class="<%= controller.controller_path == 'warehouses' ? 'active' : '' %>"><a href="<%= warehouses_path %>">Warehouses</a></li> 
+              <li class="<%= controller.controller_path == 'durable_receipts' ? 'active' : '' %>"><a href="<%= durable_receipts_path %>">耐用品管理</a></li>
+              <li class="<%= controller.controller_path == 'consumer_receipts' ? 'active' : '' %>"><a href="<%= consumer_receipts_path %>">日用消费品管理</a></li>
+              <li class="<%= controller.controller_path == 'durable_materials' ? 'active' : '' %>"><a href="<%= durable_materials_path %>">耐用品</a></li>
+              <li class="<%= controller.controller_path == 'consumer_materials' ? 'active' : '' %>"><a href="<%= consumer_materials_path %>">消费品</a></li>
+            </ul>
           </div>
         </div>    
         <div id="wrapper" class="wat-cf">

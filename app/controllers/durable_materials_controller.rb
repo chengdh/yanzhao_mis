@@ -1,0 +1,2 @@
+class DurableMaterialsController < MaterialsController
+end

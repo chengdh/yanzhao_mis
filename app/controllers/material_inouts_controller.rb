@@ -1,6 +1,7 @@
 class MaterialInoutsController < BaseController
   def new
-    @material_inout = MaterialInout.new(:inout_date => Date.today)
-    2.times {@material_inout.material_inout_lines.build }
+    bill = @model_klazz.new(:inout_date => Date.today)
+    2.times {bill.material_inout_lines.build }
+    instance_variable_set("@#{@param_name}",bill)
   end
 end

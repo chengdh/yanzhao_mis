@@ -1,8 +1,8 @@
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
-	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", contracts_path  %></li>
-  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_contract_path %></li>
+      <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", contracts_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_contract_path %></li>
     </ul>
   </div>          
   <div class="content">          
@@ -11,35 +11,35 @@
       <table class="table">
         <tr>             
           <th class="first">ID</th>
-										<th>
-					<%= t("activerecord.attributes.contract.org_id", :default => t("activerecord.labels.org_id", :default => "Org_id")) %>
-</th>
-					          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th>
+            <%= t("activerecord.attributes.contract.org_id", :default => t("activerecord.labels.org_id", :default => "Org_id")) %>
+          </th>
+          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
           <th class="last">&nbsp;</th>
         </tr>
         <% @contracts.each do |contract| -%>
-        <tr class="<%= cycle("odd", "even") %>">
-          <td>
-            <%= contract.id %>
-          </td>
-										<td>
-						<%= link_to contract.org_id, contract_path(contract) %>
-					</td>
-										<td>
-            <%= contract.created_at %>
-          </td>
-          <td class="last">
-            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", contract_path(contract) %> |
-            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contract_path(contract) %> |
-            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", contract_path(contract), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
-          </td>
-        </tr>          
+          <tr class="<%= cycle("odd", "even") %>">
+            <td>
+              <%= contract.id %>
+            </td>
+            <td>
+              <%= link_to contract.org_id, contract_path(contract) %>
+            </td>
+            <td>
+              <%= contract.created_at %>
+            </td>
+            <td class="last">
+              <%= link_to "#{t("web-app-theme.show", :default => "Show")}", contract_path(contract) %> |
+              <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contract_path(contract) %> |
+              <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", contract_path(contract), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+            </td>
+          </tr>          
         <% end -%>
       </table>
       <div class="actions-bar wat-cf">
         <div class="actions">
         </div>
-        
+
       </div>
     </div>
   </div>

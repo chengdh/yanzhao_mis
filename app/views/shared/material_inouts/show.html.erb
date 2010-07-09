@@ -1,0 +1,55 @@
+<% bill = instance_variable_get("@#{@param_name}")%>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "单据列表", self.send("#{@param_name.tableize}_path") %></li>
+      <li><%= link_to "新单据", self.send("new_#{@param_name}_path") %></li>
+      <li class="active"><%= link_to "查看", bill %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      <table class='table'>
+        <tr>
+          <td>票据日期:</td>
+          <td><%=bill.inout_date%></td>
+          <td>仓库:</td>
+          <td><%=bill.warehouse.try(:name)%></td>
+        </tr>
+        <tr>
+          <td>领用部门:</td>
+          <td><%=bill.org.try(:name)%></td>
+          <td>经办人:</td>
+          <td><%=bill.person_name%></td>
+        </tr>
+        <tr>
+          <td>备注:</td>
+          <td colspan='3'><%=bill.note%></td>
+        </tr>
+      </table>
+      <table class='table'>
+        <tr>
+          <th>物品名称</th>
+          <th>单位</th>
+          <th>价格</th>
+          <th>数量</th>
+          <th>金额</th>
+        </tr>
+        <%bill.material_inout_lines.each do |line|%>
+          <tr>
+            <td><%=line.material.name%></td>
+            <td><%=line.material.unit%></td>
+            <td><%=line.price%></td>
+            <td><%=line.qty%></td>
+            <td><%=line.line_amt%></td>
+          </tr>
+        <%end%>
+        <tfoot>
+          <%#FIXME 计算合计信息%>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

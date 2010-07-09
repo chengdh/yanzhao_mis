@@ -9,6 +9,7 @@ class Material < ActiveRecord::Base
   end
 
   private 
+  #更新库存记录
   def update_storage
     Warehouse.all.each do |w|
       #查找是否存在对应物品的库存记录

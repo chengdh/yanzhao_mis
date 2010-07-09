@@ -1,12 +1,23 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resource :upload_vip_file
+  map.resources :consumer_shippments
+
+  map.resources :durable_shippments
+
+  map.resources :consumer_receipts
+
+  map.resources :durable_receipts
+
+  map.resources :consumer_materials
+
+  map.resources :durable_materials
+
   map.resources :m_storages,:collection => {:show_search => :get,:search => :get}
 
   map.resources :material_inouts
 
   map.resources :warehouses
 
-  map.resources :materials
-  
   map.resources :settlements
 
   map.resources :address_books

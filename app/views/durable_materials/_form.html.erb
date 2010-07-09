@@ -1,0 +1,29 @@
+<fieldset class='blockLabels'>
+  <div class="ctrlHolder">
+    <%= f.label :name, "物品名称" %>
+    <%= f.text_field :name, :class => 'textInput' %>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :description, "规格型号" %>
+    <%= f.text_field :description, :class => 'textInput' %>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :unit, "计量单位" %>
+    <%= f.text_field :unit, :class => 'shortText' %>
+    <p class='formHint'>例如:个、件、套、张等</p>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :min_count, "库存报警下限" %>
+    <%= f.text_field :min_count, :class => 'shortText' %>
+    <p class='formHint'>当物品库存低于此下限时,系统将自动提示报警</p>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :is_active, "有效标志" %>
+    <%= f.check_box :is_active %>
+    <p class='formHint'>不再使用该物品时,可将其标志设置为无效</p>
+  </div>
+</fieldset>
+<div class="actions-bar">
+  <%=f.submit '保存物品信息', :class => 'sexybutton sexysimple sexyblue'%>
+  <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>
+</div>       

@@ -1,0 +1,18 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "物品信息列表", self.send("#{@param_name.tableize}_path")  %></li>
+      <li class="active"><%= link_to "新建物品信息", self.send("new_#{@param_name}_path") %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title">新建物品信息</h2>
+    <div class="inner">
+      <% form_for instance_variable_get("@#{@param_name}"),  :html => { :class => :uniForm } do |f| -%>
+        <%= render "shared/materials/form", :f => f %>
+      <% end -%>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

@@ -1,0 +1,12 @@
+<h1>Editing consumer_shippment</h1>
+
+<% form_for(@consumer_shippment) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @consumer_shippment %> |
+<%= link_to 'Back', consumer_shippments_path %>

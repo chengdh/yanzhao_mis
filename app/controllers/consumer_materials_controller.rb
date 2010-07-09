@@ -1,0 +1,2 @@
+class ConsumerMaterialsController < MaterialsController 
+end

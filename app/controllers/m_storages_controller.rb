@@ -15,5 +15,4 @@ class MStoragesController < BaseController
       format.js { render :partial => "list"}
     end
   end
-
 end

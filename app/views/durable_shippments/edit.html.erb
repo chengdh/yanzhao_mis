@@ -1,0 +1,12 @@
+<h1>Editing durable_shippment</h1>
+
+<% form_for(@durable_shippment) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @durable_shippment %> |
+<%= link_to 'Back', durable_shippments_path %>

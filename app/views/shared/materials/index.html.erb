@@ -1,0 +1,52 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "物品信息列表", self.send("#{@param_name.tableize}_path") %></li>
+      <li><%= link_to "新建物品信息", self.send("new_#{@param_name}_path") %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title">物品信息列表</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th>物品名称</th>
+          <th>规格型号</th>
+          <th>计量单位</th>
+          <th>库存下限</th>
+          <th>当前状态</th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <%materials = instance_variable_get("@#{@param_name.tableize}") %>
+        <% materials.each do |material| -%>
+          <tr class="<%= cycle("odd", "even") %>">
+            <td>
+              <%= material.name %>
+            </td>
+            <td>
+              <%= material.description %>
+            </td>
+            <td>
+              <%= material.unit %>
+            </td>
+            <td>
+              <%= material.min_count %>
+            </td>
+            <td>
+              <%= material.is_active ? "有效" : "无效" %>
+            </td>
+
+            <td class="last">
+              <%= link_to "修改", self.send("edit_#{@param_name}_path",material) %> |
+              <%= link_to "删除", material, :method => :delete, :confirm => "您确定要删除该物品吗？" %>
+            </td>
+          </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <%= will_paginate materials  %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
