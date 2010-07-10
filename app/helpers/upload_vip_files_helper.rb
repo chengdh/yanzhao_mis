@@ -1,0 +1,2 @@
+module UploadVipFilesHelper
+end

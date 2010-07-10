@@ -1,0 +1,28 @@
+<h1>Editing vip_config</h1>
+
+<% form_for(@vip_config) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :org %><br />
+    <%= f.text_field :org %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :fee_from %><br />
+    <%= f.text_field :fee_from %>
+  </p>
+  <p>
+    <%= f.label :fee_to %><br />
+    <%= f.text_field :fee_to %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @vip_config %> |
+<%= link_to 'Back', vip_configs_path %>

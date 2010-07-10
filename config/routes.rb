@@ -1,5 +1,13 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resource :upload_vip_file
+  map.resources :vip_configs
+
+  map.resources :vip_infos
+
+  map.resources :vip_fee_infos
+
+
+  map.resources :upload_vip_files,:only => [:new],:collection => {:import => :post}
+
   map.resources :consumer_shippments
 
   map.resources :durable_shippments

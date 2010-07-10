@@ -1,0 +1,28 @@
+<h1>Listing vip_fee_infos</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Phone</th>
+    <th>Mth</th>
+    <th>Fee</th>
+  </tr>
+
+<% @vip_fee_infos.each do |vip_fee_info| %>
+  <tr>
+    <td><%=h vip_fee_info.name %></td>
+    <td><%=h vip_fee_info.phone %></td>
+    <td><%=h vip_fee_info.phone %></td>
+    <td><%=h vip_fee_info.mth %></td>
+    <td><%=h vip_fee_info.fee %></td>
+    <td><%= link_to 'Show', vip_fee_info %></td>
+    <td><%= link_to 'Edit', edit_vip_fee_info_path(vip_fee_info) %></td>
+    <td><%= link_to 'Destroy', vip_fee_info, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New vip_fee_info', new_vip_fee_info_path %>

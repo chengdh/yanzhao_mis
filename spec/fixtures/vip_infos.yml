@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  org: 
+  name: MyString
+  phone: MyString
+  cur_fee: 9.99
+  level: MyString
+  state: MyString
+
+two:
+  org: 
+  name: MyString
+  phone: MyString
+  cur_fee: 9.99
+  level: MyString
+  state: MyString

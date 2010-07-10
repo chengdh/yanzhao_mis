@@ -1,0 +1,23 @@
+<p>
+  <b>Org:</b>
+  <%=h @vip_config.org %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @vip_config.name %>
+</p>
+
+<p>
+  <b>Fee from:</b>
+  <%=h @vip_config.fee_from %>
+</p>
+
+<p>
+  <b>Fee to:</b>
+  <%=h @vip_config.fee_to %>
+</p>
+
+
+<%= link_to 'Edit', edit_vip_config_path(@vip_config) %> |
+<%= link_to 'Back', vip_configs_path %>

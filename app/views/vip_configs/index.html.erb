@@ -1,0 +1,26 @@
+<h1>Listing vip_configs</h1>
+
+<table>
+  <tr>
+    <th>Org</th>
+    <th>Name</th>
+    <th>Fee from</th>
+    <th>Fee to</th>
+  </tr>
+
+<% @vip_configs.each do |vip_config| %>
+  <tr>
+    <td><%=h vip_config.org %></td>
+    <td><%=h vip_config.name %></td>
+    <td><%=h vip_config.fee_from %></td>
+    <td><%=h vip_config.fee_to %></td>
+    <td><%= link_to 'Show', vip_config %></td>
+    <td><%= link_to 'Edit', edit_vip_config_path(vip_config) %></td>
+    <td><%= link_to 'Destroy', vip_config, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New vip_config', new_vip_config_path %>

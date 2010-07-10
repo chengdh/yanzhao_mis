@@ -1,0 +1,12 @@
+<div class="block">
+  <div class="content">          
+    <h2 class="title">更新贵宾客户信息</h2>
+    <div class="inner">
+      <%form_tag new_upload_vip_file_path,:class => "uniForm" do %>
+        <label for="file">File to Upload</label> 
+        <%= file_field_tag "file" %>
+        <%= submit_tag %>
+      <%end%>
+    </div>
+  </div>
+</div>

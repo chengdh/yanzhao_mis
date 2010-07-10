@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  phone: MyString
+  phone: MyString
+  mth: MyString
+  fee: 9.99
+
+two:
+  name: MyString
+  phone: MyString
+  phone: MyString
+  mth: MyString
+  fee: 9.99

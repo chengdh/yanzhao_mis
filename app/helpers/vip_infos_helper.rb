@@ -1,0 +1,2 @@
+module VipInfosHelper
+end

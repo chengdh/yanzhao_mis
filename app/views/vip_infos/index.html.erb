@@ -1,0 +1,30 @@
+<h1>Listing vip_infos</h1>
+
+<table>
+  <tr>
+    <th>Org</th>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Cur fee</th>
+    <th>Level</th>
+    <th>State</th>
+  </tr>
+
+<% @vip_infos.each do |vip_info| %>
+  <tr>
+    <td><%=h vip_info.org %></td>
+    <td><%=h vip_info.name %></td>
+    <td><%=h vip_info.phone %></td>
+    <td><%=h vip_info.cur_fee %></td>
+    <td><%=h vip_info.level %></td>
+    <td><%=h vip_info.state %></td>
+    <td><%= link_to 'Show', vip_info %></td>
+    <td><%= link_to 'Edit', edit_vip_info_path(vip_info) %></td>
+    <td><%= link_to 'Destroy', vip_info, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New vip_info', new_vip_info_path %>

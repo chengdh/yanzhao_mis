@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100709104120) do
+ActiveRecord::Schema.define(:version => 20100710131344) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -194,6 +194,37 @@ ActiveRecord::Schema.define(:version => 20100709104120) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "org_id"
+  end
+
+  create_table "vip_configs", :force => true do |t|
+    t.integer  "org_id",                                                                   :null => false
+    t.string   "name",       :limit => 60,                                                 :null => false
+    t.decimal  "fee_from",                 :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "fee_to",                   :precision => 15, :scale => 2, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vip_fee_infos", :force => true do |t|
+    t.integer  "org_id",                                                  :null => false
+    t.string   "name",       :limit => 60,                                :null => false
+    t.string   "phone",      :limit => 30
+    t.string   "mth",        :limit => 6,                                 :null => false
+    t.decimal  "fee",                      :precision => 15, :scale => 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vip_infos", :force => true do |t|
+    t.integer  "org_id",                                                                             :null => false
+    t.string   "name",            :limit => 60,                                                      :null => false
+    t.string   "phone",           :limit => 30
+    t.decimal  "cur_fee",                       :precision => 15, :scale => 2, :default => 0.0
+    t.string   "level",           :limit => 20,                                :default => "normal", :null => false
+    t.string   "state",           :limit => 20,                                :default => "normal", :null => false
+    t.string   "last_import_mth", :limit => 6,                                                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "warehouses", :force => true do |t|

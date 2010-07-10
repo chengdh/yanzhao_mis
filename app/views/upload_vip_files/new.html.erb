@@ -1,0 +1,36 @@
+<div class="block">
+  <div class="content">          
+    <h2 class="title">更新贵宾客户信息</h2>
+    <div class="inner">
+      <%form_tag import_upload_vip_files_path,:multipart => true,:class => "uniForm" do %>
+        <fieldset class='inlineLabels'>
+          <div class='ctrlHolder'>
+            <%=label_tag :mth,"月份"%>
+            <%= select_tag :mth, options_for_select(months_for_select,1.months.ago.strftime("%Y%m")) %>
+          </div>
+          <div class='ctrlHolder'>
+            <%=label_tag :del_if_exist,"覆盖已有数据"%>
+            <%= check_box_tag :del_if_exist %>
+            <p class='formHint'>
+            若当月已存在客户数据,则删除该数据,并重新导入
+            </p>
+          </div>
+        </fieldset>
+        <fieldset class='inlineLabels'>
+          <legend>请选择各个分理处/分公司的导入文件</legend>
+
+          <%Org.all(:conditions => {:is_active => true},:order => "name ASC").each do |org|%>
+            <div class='ctrlHolder'>
+              <%=hidden_field_tag 'org_ids[]',org.id%>
+              <%=label_tag "file_#{org.id}",org.name%>
+              <%= file_field_tag "file_#{org.id}" %>
+            </div>
+          <%end%>
+        </fieldset>
+        <div class="actions-bar">
+          <%=submit_tag '开始导入', :class => 'sexybutton sexysimple sexyblue'%>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
