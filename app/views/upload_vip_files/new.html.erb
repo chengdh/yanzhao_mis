@@ -6,7 +6,7 @@
         <fieldset class='inlineLabels'>
           <div class='ctrlHolder'>
             <%=label_tag :mth,"月份"%>
-            <%= select_tag :mth, options_for_select(months_for_select,1.months.ago.strftime("%Y%m")) %>
+            <%= select_tag :mth, options_for_select(months_ago_for_select,1.months.ago.strftime("%Y%m")) %>
           </div>
           <div class='ctrlHolder'>
             <%=label_tag :del_if_exist,"覆盖已有数据"%>
@@ -28,7 +28,7 @@
           <%end%>
         </fieldset>
         <div class="actions-bar">
-          <%=submit_tag '开始导入', :class => 'sexybutton sexysimple sexyblue'%>
+          <%=submit_tag '开始导入',:onclick =>"Modalbox.show('<h2 class=text-center>正在导入...</h2>',{title : false});", :class => 'sexybutton sexysimple sexyblue'%>
         </div>
       <%end%>
     </div>

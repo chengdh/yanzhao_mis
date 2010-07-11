@@ -93,6 +93,16 @@ module ApplicationHelper
     end
     ret.collect {|item| [item[1],item[0]]}
   end
+  #月份选择,提供自上月开始的月份选择
+  def months_ago_for_select
+    ret = [] 
+    (-12..-1).collect do |mth|
+      time = mth.month.from_now
+      ret = ret + [ [time.strftime("%Y%m"),time.strftime("%Y年%m月")]]
+    end
+    ret.collect {|item| [item[1],item[0]]}
+  end
+
   #金额转中文大写
   def ConvertNumToChinese(num)
     chineseNumArr=['零','壹','贰','叁','肆','伍','陆','柒','捌','玖']
@@ -168,5 +178,17 @@ module ApplicationHelper
       end
     end
     ret
+  end
+  #根据VIP当前状态得到显示颜色
+  def vip_color(level)
+    if level == VipInfo::STATE_NORMAL
+      "blue"
+    elsif level == VipInfo::STATE_1_MTH_DOWN
+      "yellow"
+    elsif level == VipInfo::STATE_2_MTH_DOWN
+      "red"
+    elsif level == VipInfo::STATE_3_MTH_DOWN
+      "black"
+    end
   end
 end

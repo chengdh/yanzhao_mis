@@ -1,30 +1,64 @@
-<h1>Listing vip_infos</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "VIP客户列表", vip_infos_path  %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title">VIP客户列表</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <td style='background : blue'>正常</td>
+          <td style='background : yellow'>下降</td>
+          <td style='background : red'>2个月-下降</td>
+          <td style='background : black'>3个月-下降</td>
+          <td>&nbsp;</td>
+        </tr>
 
-<table>
-  <tr>
-    <th>Org</th>
-    <th>Name</th>
-    <th>Phone</th>
-    <th>Cur fee</th>
-    <th>Level</th>
-    <th>State</th>
-  </tr>
+        <tr>             
+          <th>姓名</th>
+          <th>联系电话</th>
+          <th>最近运费合计</th>
+          <th>最近更新月份</th>
+          <th>&nbsp;</th>
+        </tr>
 
-<% @vip_infos.each do |vip_info| %>
-  <tr>
-    <td><%=h vip_info.org %></td>
-    <td><%=h vip_info.name %></td>
-    <td><%=h vip_info.phone %></td>
-    <td><%=h vip_info.cur_fee %></td>
-    <td><%=h vip_info.level %></td>
-    <td><%=h vip_info.state %></td>
-    <td><%= link_to 'Show', vip_info %></td>
-    <td><%= link_to 'Edit', edit_vip_info_path(vip_info) %></td>
-    <td><%= link_to 'Destroy', vip_info, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+        <% @group_vip_infos.each do |title,vip_infos| -%>
+          <tr><td colspan='4'><h3><%=title%></h3></td></tr>
+          <%vip_infos.each do |info|%>
+            <tr class="<%= cycle("odd", "even") %>">
+              <td><%= info.name %></td>
+              <td><%= info.phone %></td>
+              <td><%= info.cur_fee %></td>
+              <td><%= info.last_import_mth %></td>
+              <td style='width : 2px;background : <%=vip_color(info.state)%>;'>&nbsp;</td>
+            </tr>          
+          <%end%>
+          <tr>
+            <td>&nbsp;</td>
+            <td>小计:</td>
+            <td><%= vip_infos.sum(&:cur_fee) %></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        <% end %>
+        <tr>
+          <td colspan='5'>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>总计:</td>
+          <td><%= @sum_info[:sum_fee]%></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <div class="actions-bar wat-cf">
+        <%= will_paginate @group_vip_infos  %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<br />
-
-<%= link_to 'New vip_info', new_vip_info_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

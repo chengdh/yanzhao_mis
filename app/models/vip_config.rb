@@ -5,6 +5,15 @@ class VipConfig < ActiveRecord::Base
   VIP_GOLD = 'level_88'   #黄金
   VIP_SLIVER = 'level_66'  #白银
   VIP_NORMAL = 'level_11'  #普通
+  #设置level描述
+ def self.levels
+   ordered_hash = ActiveSupport::OrderedHash.new
+   ordered_hash[VIP_DIAMOND] = "钻石"
+   ordered_hash[VIP_GOLD] = "金卡"
+   ordered_hash[VIP_SLIVER] = "银卡"
+   ordered_hash[VIP_NORMAL] = "普通卡"
+   ordered_hash
+ end
   #设置系统默认的分级金额范围
   def self.system_level_range(level)
     if level == VIP_NORMAL

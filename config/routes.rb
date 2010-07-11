@@ -1,9 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :vip_configs
 
-  map.resources :vip_infos
+  map.resources :vip_infos,:only => [:index]
 
-  map.resources :vip_fee_infos
+  map.resources :vip_fee_infos,:only => [:index]
 
 
   map.resources :upload_vip_files,:only => [:new],:collection => {:import => :post}

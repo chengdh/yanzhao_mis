@@ -12,7 +12,9 @@ class VipFeeInfoObserver < ActiveRecord::Observer
       vip_info = VipInfo.create(:org_id => record.org_id,:name => record.name,:phone => record.phone,:cur_fee => record.fee,:last_import_mth => record.mth,:level => VipConfig::VIP_NORMAL)
     else
       vip_info = vips.first
-      vip_info.update_attributes(:phone => record.phone,:cur_fee => record.fee,:last_import_mth => record.mth)
+      if vip_info.last_import_mth <= record.mth
+        vip_info.update_attributes(:phone => record.phone,:cur_fee => record.fee,:last_import_mth => record.mth)
+      end
     end
   end
 end

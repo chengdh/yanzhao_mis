@@ -1,28 +1,52 @@
-<h1>Listing vip_fee_infos</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "VIP导入信息列表", vip_fee_infos_path  %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title">VIP导入信息列表</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th>姓名</th>
+          <th>联系电话</th>
+          <th>运费合计</th>
+          <th>月份</th>
+        </tr>
+        <% @group_vip_fee_infos.each do |org_name,vip_fee_infos| -%>
+          <tr><td colspan='4'><h3><%=org_name%></h3></td></tr>
+          <%vip_fee_infos.each do |info|%>
+            <tr class="<%= cycle("odd", "even") %>">
+              <td><%= info.name %></td>
+              <td><%= info.phone %></td>
+              <td><%= info.fee %></td>
+              <td><%= info.mth %></td>
+            </tr>          
+          <%end%>
+          <tr>
+            <td>&nbsp;</td>
+            <td>小计:</td>
+            <td><%= vip_fee_infos.sum(&:fee) %></td>
+            <td>&nbsp;</td>
+          </tr>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Phone</th>
-    <th>Phone</th>
-    <th>Mth</th>
-    <th>Fee</th>
-  </tr>
+        <% end %>
+        <tr>
+          <td colspan='4'>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>总计:</td>
+          <td><%= @sum_info[:sum_fee]%></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <div class="actions-bar wat-cf">
+        <%= will_paginate @group_vip_fee_infos  %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<% @vip_fee_infos.each do |vip_fee_info| %>
-  <tr>
-    <td><%=h vip_fee_info.name %></td>
-    <td><%=h vip_fee_info.phone %></td>
-    <td><%=h vip_fee_info.phone %></td>
-    <td><%=h vip_fee_info.mth %></td>
-    <td><%=h vip_fee_info.fee %></td>
-    <td><%= link_to 'Show', vip_fee_info %></td>
-    <td><%= link_to 'Edit', edit_vip_fee_info_path(vip_fee_info) %></td>
-    <td><%= link_to 'Destroy', vip_fee_info, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New vip_fee_info', new_vip_fee_info_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
