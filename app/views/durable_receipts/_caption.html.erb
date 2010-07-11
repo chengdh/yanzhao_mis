@@ -1,0 +1,20 @@
+<ul class="wat-cf">
+  <li class="first <%=check_sub_active_tab(1) %>"><%= link_to "入库单", durable_receipts_path(:active_sub_tab => 1) %></li>
+  <li class="<%=check_sub_active_tab(2) %>"><%= link_to "领用单", durable_shippments_path(:active_sub_tab => 2) %></li>
+  <li class="<%=check_sub_active_tab(3) %>"><%= link_to "物品定义", durable_materials_path(:active_sub_tab => 3) %></li>
+  <li class="<%=check_sub_active_tab(4) %>"><%= link_to "仓库设置", warehouses_path(:active_sub_tab => 4) %></li>
+  <%if defined?(@durable_receipt)%>
+    <li class="<%=check_sub_active_tab(5) %>"><%= link_to "查看入库单", durable_receipt_path(@durable_receipt,:active_sub_tab => 5) %></li>
+  <%end%>
+  <%if defined?(@durable_shippment)%>
+    <li class="<%=check_sub_active_tab(6) %>"><%= link_to "查看领用单", durable_shippment_path(@durable_shippment,:active_sub_tab => 6) %></li>
+  <%end%>
+  <%if defined?(@warehouse)%>
+    <li class="<%=check_sub_active_tab(7) %>"><%= link_to "修改仓库信息", edit_warehouse_path(@warehouse,:active_sub_tab => 7) %></li>
+  <%end%>
+  <%if defined?(@durable_material)%>
+    <li class="<%=check_sub_active_tab(8) %>"><%= link_to "修改物品资料", edit_durable_material_path(@durable_material,:active_sub_tab => 8) %></li>
+  <%end%>
+
+
+</ul>

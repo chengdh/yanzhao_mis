@@ -1,0 +1,12 @@
+<ul class="wat-cf">
+  <li class="first <%=check_sub_active_tab(1)%>"><%= link_to "结算表", settlements_path(:active_sub_tab => 1)   %></li>
+  <li class="<%=check_sub_active_tab(2)%>"><%= link_to "合同模板", contracts_path(:active_sub_tab => 2)   %></li>
+  <%if defined?(@settlement)%>
+    <li class="<%=check_sub_active_tab(3) %>"><%= link_to "修改结算表", edit_settlement_path(@settlement,:active_sub_tab => 3) %></li>
+  <%end%>
+
+  <%if defined?(@contract)%>
+    <li class="<%=check_sub_active_tab(4)%>"><%= link_to "修改合同模板", edit_contract_path(@contract,:active_sub_tab => 4)  %></li>
+    <li class="<%=check_sub_active_tab(5)%>"><%= link_to "查看合同模板", contract_path(@contract,:active_sub_tab => 5)  %></li>
+  <%end%>
+</ul>

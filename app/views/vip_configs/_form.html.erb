@@ -1,0 +1,15 @@
+<h3><%="#{f.object.org.name}-#{VipConfig.levels[f.object.name]}"%></h3>
+<fieldset class='blockLabels'>
+  <div class="ctrlHolder">
+    <%= f.label :fee_from, "起始金额" %>
+    <%= f.text_field :fee_from, :class => 'shortText' %>
+  </div>
+  <div class="ctrlHolder">
+    <%= f.label :fee_to, "终止金额" %>
+    <%= f.text_field :fee_to, :class => 'shortText' %>
+  </div>
+</fieldset>
+<div class="actions-bar">
+  <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexyblue'%>
+  <%=link_to_function '取消',"Modalbox.hide();return false;",:class => 'sexybutton sexysimple sexyred' %>
+</div>  

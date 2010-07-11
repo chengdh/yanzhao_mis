@@ -191,4 +191,13 @@ module ApplicationHelper
       "black"
     end
   end
+  def check_sub_active_tab(index)
+    active_sub_tab = params[:active_sub_tab]
+    active_sub_tab = 1 if active_sub_tab.blank?
+    if active_sub_tab.to_i == index
+      "active"
+    else
+      ""
+    end
+  end
 end

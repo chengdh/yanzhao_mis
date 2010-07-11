@@ -1,0 +1,18 @@
+<ul class="wat-cf">
+  <li class="first <%=check_sub_active_tab(1) %>"><%= link_to "入库单", consumer_receipts_path(:active_sub_tab => 1) %></li>
+  <li class="<%=check_sub_active_tab(2) %>"><%= link_to "领用单", consumer_shippments_path(:active_sub_tab => 2) %></li>
+  <li class="<%=check_sub_active_tab(3) %>"><%= link_to "物品定义", consumer_materials_path(:active_sub_tab => 3) %></li>
+  <li class="<%=check_sub_active_tab(4) %>"><%= link_to "仓库设置", warehouses_path(:active_sub_tab => 4) %></li>
+  <%if defined?(@consumer_receipt)%>
+    <li class="<%=check_sub_active_tab(5) %>"><%= link_to "查看入库单", consumer_receipt_path(@consumer_receipt,:active_sub_tab => 5) %></li>
+  <%end%>
+  <%if defined?(@consumer_shippment)%>
+    <li class="<%=check_sub_active_tab(6) %>"><%= link_to "查看领用单", consumer_shippment_path(@consumer_shippment,:active_sub_tab => 6) %></li>
+  <%end%>
+  <%if defined?(@warehouse)%>
+    <li class="<%=check_sub_active_tab(7) %>"><%= link_to "修改仓库信息", edit_warehouse_path(@warehouse,:active_sub_tab => 7) %></li>
+  <%end%>
+  <%if defined?(@consumer_material)%>
+    <li class="<%=check_sub_active_tab(8) %>"><%= link_to "修改物品资料", edit_consumer_material_path(@consumer_material,:active_sub_tab => 8) %></li>
+  <%end%>
+</ul>

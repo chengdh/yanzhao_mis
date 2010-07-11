@@ -1,9 +1,6 @@
 <div class="block">
   <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li class="first"><%= link_to "结算信息列表", settlements_path  %></li>
-      <li class="active"><%= link_to "修改", edit_settlement_path(@settlement) %></li>
-    </ul>
+    <%= render :partial => 'caption' %>
   </div>          
   <div class="content">            
     <h2 class="title">修改结算表</h2>

@@ -1,9 +1,6 @@
 <div class="block">
   <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li class="first"><%= link_to "仓库信息列表", warehouses_path  %></li>
-      <li class="active"><%= link_to "新建仓库信息", new_warehouse_path %></li>
-    </ul>
+    <%= render :partial => "durable_receipts/caption" %>
   </div>          
   <div class="content">            
     <h2 class="title">新建仓库信息</h2>

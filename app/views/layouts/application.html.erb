@@ -32,22 +32,19 @@
               <li class="<%= controller.controller_path == 'posts' ? 'active' : '' %>">
               <%=link_to "在线交流",posts_path%>
               </li> 
-              <li class="<%= controller.controller_path == 'posts' ? 'active' : '' %>">
-              <%=link_to "贵宾系统",posts_path%>
+              <li class="<%= controller.controller_path == 'vip_infos' ? 'active' : '' %>">
+              <%=link_to "贵宾系统",vip_infos_path%>
               </li> 
 
-              <li class="<%= controller.controller_path == 'contracts' ? 'active' : '' %>">
-              <%=link_to "分成结算",contracts_path%>
+              <li class="<%= controller.controller_path == 'settlements' ? 'active' : '' %>">
+              <%=link_to "分成结算",settlements_path%>
               </li> 
-              <li class="<%= controller.controller_path == 'contracts' ? 'active' : '' %>">
-              <%=link_to "物品库存管理",contracts_path%>
-              </li> 
-              <li class="<%= controller.controller_path == 'settlements' ? 'active' : '' %>"><a href="<%= settlements_path %>">Settlements</a></li> 
-              <li class="<%= controller.controller_path == 'warehouses' ? 'active' : '' %>"><a href="<%= warehouses_path %>">Warehouses</a></li> 
-              <li class="<%= controller.controller_path == 'durable_receipts' ? 'active' : '' %>"><a href="<%= durable_receipts_path %>">耐用品管理</a></li>
-              <li class="<%= controller.controller_path == 'consumer_receipts' ? 'active' : '' %>"><a href="<%= consumer_receipts_path %>">日用消费品管理</a></li>
-              <li class="<%= controller.controller_path == 'durable_materials' ? 'active' : '' %>"><a href="<%= durable_materials_path %>">耐用品</a></li>
-              <li class="<%= controller.controller_path == 'consumer_materials' ? 'active' : '' %>"><a href="<%= consumer_materials_path %>">消费品</a></li>
+              <li class="<%= controller.controller_path == 'durable_receipts' ? 'active' : '' %>">
+              <a href="<%= durable_receipts_path %>">耐用品管理</a>
+              </li>
+              <li class="<%= controller.controller_path == 'consumer_receipts' ? 'active' : '' %>">
+              <a href="<%= consumer_receipts_path %>">日用消费品管理</a>
+              </li>
             </ul>
           </div>
         </div>    

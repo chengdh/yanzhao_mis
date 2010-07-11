@@ -1,10 +1,6 @@
 <div class="block">
   <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li class="first"><%= link_to "物品信息列表", self.send("#{@param_name.tableize}_path") %></li>
-      <li><%= link_to "新建物品信息",  self.send("new_#{@param_name}_path") %></li>
-      <li class="active"><%= link_to "编辑",  self.send("edit_#{@param_name}_path",instance_variable_get("@#{@param_name}")) %></li>
-    </ul>
+    <%= render :partial => "caption" %>
   </div>          
   <div class="content">            
     <h2 class="title">编辑物品信息</h2>

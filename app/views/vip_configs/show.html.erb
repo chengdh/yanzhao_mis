@@ -1,23 +1,39 @@
-<p>
-  <b>Org:</b>
-  <%=h @vip_config.org %>
-</p>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", vip_configs_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_vip_config_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", vip_config_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.vip_config.org_id", :default => t("activerecord.labels.org_id", :default => "Org")) %>:</b>
+          <%= @vip_config.org_id %>
+        </p>
 
-<p>
-  <b>Name:</b>
-  <%=h @vip_config.name %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.vip_config.name", :default => t("activerecord.labels.name", :default => "Name")) %>:</b>
+          <%= @vip_config.name %>
+        </p>
 
-<p>
-  <b>Fee from:</b>
-  <%=h @vip_config.fee_from %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.vip_config.fee_from", :default => t("activerecord.labels.fee_from", :default => "Fee from")) %>:</b>
+          <%= @vip_config.fee_from %>
+        </p>
 
-<p>
-  <b>Fee to:</b>
-  <%=h @vip_config.fee_to %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.vip_config.fee_to", :default => t("activerecord.labels.fee_to", :default => "Fee to")) %>:</b>
+          <%= @vip_config.fee_to %>
+        </p>
+      <div class="wat-cf">
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_vip_config_path(@vip_config), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", vip_config_path(@vip_config), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
 
-
-<%= link_to 'Edit', edit_vip_config_path(@vip_config) %> |
-<%= link_to 'Back', vip_configs_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

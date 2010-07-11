@@ -1,19 +1,19 @@
 <ul class="wat-cf">
-  <li class="first active">
-  <%= link_to "通知公告", notices_path  %>
+  <li class="first <%=check_sub_active_tab(1)%>">
+  <%= link_to "通知公告", notices_path(:active_sub_tab => 1)  %>
   </li> 
-  <li>
-  <%= link_to "规章制度", rules_path  %>
+  <li class="<%=check_sub_active_tab(2)%>">
+  <%= link_to "规章制度", rules_path(:active_sub_tab => 2)   %>
   </li> 
-  <li class="first active">
-  <%= link_to "通知公告-待审批", notices_path  %>
-  </li> 
-
-  <li>
-  <%= link_to "规章制度-待审批", rules_path  %>
+  <li class="<%=check_sub_active_tab(3)%>">
+  <%= link_to "通知公告-待审批", notices_path(:active_sub_tab => 3)   %>
   </li> 
 
-  <li>
-  <%= link_to "通讯录", address_books_path  %>
+  <li class="<%=check_sub_active_tab(4)%>">
+  <%= link_to "规章制度-待审批", rules_path(:active_sub_tab => 4)   %>
+  </li> 
+
+  <li class="<%=check_sub_active_tab(5)%>">
+  <%= link_to "通讯录", address_books_path(:active_sub_tab => 5)   %>
   </li> 
 </ul>

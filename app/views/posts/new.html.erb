@@ -5,11 +5,7 @@
 <%=render "shared/messages/set_variables"%>
 <div class="block">
   <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li class="first"><%= link_to "收信箱", posts_path  %></li>
-      <li class="first"><%= link_to "发信箱", posts_path  %></li>
-      <li class="active"><%= link_to "写信", new_post_path %></li>
-    </ul>
+    <%= render :partial => "caption" %>
   </div>          
   <div class="content">            
     <h2 class="title">写信</h2>

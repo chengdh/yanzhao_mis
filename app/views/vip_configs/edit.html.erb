@@ -1,28 +1,17 @@
-<h1>Editing vip_config</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", vip_configs_path  %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title">VIP</h2>
+    <div class="inner">
+      <% form_for @vip_config, :html => { :class => :uniForm } do |f| -%>
+        <%= render "form", :f => f %>
+      <% end -%>
+    </div>
+  </div>
+</div>
 
-<% form_for(@vip_config) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :org %><br />
-    <%= f.text_field :org %>
-  </p>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :fee_from %><br />
-    <%= f.text_field :fee_from %>
-  </p>
-  <p>
-    <%= f.label :fee_to %><br />
-    <%= f.text_field :fee_to %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @vip_config %> |
-<%= link_to 'Back', vip_configs_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

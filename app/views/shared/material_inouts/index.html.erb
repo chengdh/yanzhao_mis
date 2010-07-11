@@ -1,9 +1,6 @@
 <div class="block">
   <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li class="first active"><%= link_to "单据列表", self.send("#{@param_name.tableize}_path") %></li>
-      <li><%= link_to "新单据", self.send("new_#{@param_name}_path") %></li>
-    </ul>
+    <%= render :partial => 'caption' %>
   </div>          
   <div class="content">          
     <h2 class="title">单据列表</h2>

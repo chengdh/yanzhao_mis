@@ -1,26 +1,24 @@
-<h1>Listing vip_configs</h1>
-
-<table>
-  <tr>
-    <th>Org</th>
-    <th>Name</th>
-    <th>Fee from</th>
-    <th>Fee to</th>
-  </tr>
-
-<% @vip_configs.each do |vip_config| %>
-  <tr>
-    <td><%=h vip_config.org %></td>
-    <td><%=h vip_config.name %></td>
-    <td><%=h vip_config.fee_from %></td>
-    <td><%=h vip_config.fee_to %></td>
-    <td><%= link_to 'Show', vip_config %></td>
-    <td><%= link_to 'Edit', edit_vip_config_path(vip_config) %></td>
-    <td><%= link_to 'Destroy', vip_config, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New vip_config', new_vip_config_path %>
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render :partial => "vip_fee_infos/caption" %>
+  </div>          
+  <div class="content">          
+    <h2 class="title">VIP级别设置列表</h2>
+    <div class="inner">
+      <% @group_vip_configs.each do |org,configs| -%>
+        <h3><%=org.name%></h3>
+        <table class="table">
+          <%configs.each do |config|%>
+            <tr class="<%= cycle("odd", "even") %>">
+              <td><%= VipConfig.levels[config.name] %></td>
+              <td><%= config.fee_from %></td>
+              <td><%= config.fee_to %></td>
+              <td><%=link_to "修改",edit_vip_config_path(config),:onclick => "Modalbox.show(this.href,{title : '修改VIP标准'});return false;"%></td>
+            </tr>          
+          <%end%>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
