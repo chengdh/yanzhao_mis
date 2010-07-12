@@ -13,7 +13,7 @@
       <div id="container">
         <div id="header">
           <h1>
-            <%if Client.count > 0%>
+            <%if Client.count > 0 && !Client.first.logo_file_name.blank?%>
               <%=image_tag Client.first.logo.url(:thumb)%>
             <%end%>
             <%=link_to Client.first.name, :root %>
