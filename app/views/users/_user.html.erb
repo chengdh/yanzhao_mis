@@ -1,0 +1,11 @@
+<tr>
+  <td><%=user.org.try(:name)%></td>
+  <td><%=user.username%></td>
+  <td><%=check_box_tag "is_admin",user.is_admin,user.is_admin,:disabled => true %>帐号管理员</td>
+  <td></td>
+  <td>
+    <%=link_to "修改",edit_user_path(user) %>
+    |
+    <%=link_to "删除",user,:method => :delete,:confirm => "确认删除?" %>
+  </td>
+</tr>

@@ -8,23 +8,23 @@
       <table class="table">
         <%@posts.each do |post| -%>
           <tr class="<%= cycle("odd", "even") %>">
-            <td width='180'>
+            <td>
               <span class='ellipsis'> 收件人:<%= post.visitors_list%></span>
             </td>
             <td width='530'>
-              <span class='ellipsis' style='width : 530px'><%= link_to post.title, post %></span>
+              <span class='ellipsis' style='width : 500px'><%= link_to post.title, post %></span>
             </td>
 
-            <td width='50'>
+            <td width='100'>
               <%= status_time_ago_in_words(post.created_at) %>
             </td>
           </tr>          
-        <% end -%>
+        <%end%>
       </table>
-      <div class="actions-bar wat-cf">
-        <div class="actions">
-          <%=will_paginate @posts %>
-        </div>
+    </div>
+    <div class="actions-bar wat-cf">
+      <div class="actions">
+        <%=will_paginate @posts %>
       </div>
     </div>
   </div>

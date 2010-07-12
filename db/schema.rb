@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100710131344) do
+ActiveRecord::Schema.define(:version => 20100712025450) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20100710131344) do
     t.boolean  "is_secure",                   :default => false, :null => false
     t.string   "state",        :limit => 20,                     :null => false
     t.integer  "org_id"
-    t.boolean  "is_active"
+    t.boolean  "is_active",                   :default => true
     t.integer  "user_id"
     t.datetime "publish_date"
     t.integer  "publisher_id"
@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(:version => 20100710131344) do
   create_table "base_public_messages_orgs", :id => false, :force => true do |t|
     t.integer "base_public_message_id"
     t.integer "org_id"
+  end
+
+  create_table "clients", :force => true do |t|
+    t.string   "name",              :limit => 60, :null => false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "comments", :force => true do |t|
@@ -189,11 +199,17 @@ ActiveRecord::Schema.define(:version => 20100710131344) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",   :limit => 20,                   :null => false
-    t.boolean  "is_active",                :default => true, :null => false
+    t.string   "email",                              :default => "",    :null => false
+    t.string   "encrypted_password",  :limit => 128, :default => "",    :null => false
+    t.string   "password_salt",                      :default => "",    :null => false
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
+    t.boolean  "is_active",                          :default => true,  :null => false
+    t.string   "username",            :limit => 30,                     :null => false
+    t.integer  "org_id"
+    t.boolean  "is_admin",                           :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "org_id"
   end
 
   create_table "vip_configs", :force => true do |t|

@@ -38,7 +38,7 @@
 
   <div class="actions-bar">
     <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexyblue'%>
-    <%if !@message.new_record?%>
+    <%if !@message.new_record? && @message.publisher == current_user%>
       <%=link_to_function '保存并发布信息',"$('message_form').action='#{@publish_path}';$('message_form').submit();return false;", :class => 'sexybutton sexysimple sexyblue'%>
     <%end%>
     <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>

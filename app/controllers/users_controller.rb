@@ -9,4 +9,35 @@ class UsersController < BaseController
       format.js { render :partial => "org_user"}
     end
   end
+  # POST /users
+  # POST /users.xml
+  def create_ex
+    @user = User.new(params[:user])
+
+    respond_to do |format|
+      if @user.save
+        flash[:notice] = 'User was successfully created.'
+        format.html { redirect_to users_url }
+        format.xml  { render :xml => @user, :status => :created, :location => @user }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+ 
+  def update_ex
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      if @user.update_with_password(params[:user])
+        flash[:notice] = '用户信息修改成功.'
+        format.html { redirect_to users_url }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
 end

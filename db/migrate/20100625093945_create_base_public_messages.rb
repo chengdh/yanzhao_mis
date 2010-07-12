@@ -8,7 +8,7 @@ class CreateBasePublicMessages < ActiveRecord::Migration
       t.boolean :is_secure,:null => false,:default => false
       t.string :state,:null => false,:limit => 20
       t.references :org
-      t.boolean :is_active.:default => true
+      t.boolean :is_active,:default => true
       t.references :user
       t.datetime :publish_date
       t.integer :publisher_id

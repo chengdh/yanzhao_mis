@@ -1,0 +1,34 @@
+<div class="block"> 
+  <div class="content">            
+    <div id="register" class="inner">
+      <%form_for @client ,:html => {:class=>'uniForm',:multipart => true} do |client| %>
+        <%=client.error_messages%>
+        <fieldset class='inlineLabels'>
+          <legend>公司信息维护</legend>
+          <div class='ctrlHolder'>
+            <%=client.label :name,'公司名称' %>
+            <%=client.text_field :name, :size => "30",:maxlength => "30",:class=>"textInput"%>
+            <p class='formHint'>最长30个汉字</p>
+          </div>
+        </fieldset>
+        <fieldset class='inlineLabels'>
+          <legend>公司Logo</legend>
+
+          <div class='ctrlHolder'>
+            <label>
+              <%if !@client.logo_file_name.blank?%>
+                <%=image_tag @client.logo.url(:thumb)%>
+              <%end%>
+            </label>
+            <%=client.file_field :logo%>
+            <p class='formHint'>公司图标将显示在登录后的界面左上方区域</p>
+          </div>
+        </fieldset>
+        <div class='actions-bar wat-cf'>
+          <%=client.submit '更新注册信息', :class => 'sexybutton sexysimple sexygreen'%>
+          <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

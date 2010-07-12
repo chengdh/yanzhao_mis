@@ -12,12 +12,22 @@
     <body>
       <div id="container">
         <div id="header">
-          <h1><a href="/">Web App</a></h1>
+          <h1>
+            <%if Client.count > 0%>
+              <%=image_tag Client.first.logo.url(:thumb)%>
+            <%end%>
+            <%=link_to Client.first.name, :root %>
+          </h1>
+          <div id="util-navigation">
+            <ul class="wat-cf">
+              <li><%=link_to current_user.try(:username),edit_user_path(current_user)%></li>
+              <li><%=link_to "退出系统",destroy_user_session_path,:class => "logout" %></li>
+            </ul>
+          </div>      
           <div id="user-navigation">
             <ul class="wat-cf">
-              <li><a href="#"><%= t("web-app-theme.profile", :default => "Profile") %></a></li>
-              <li><a href="#"><%= t("web-app-theme.settings", :default => "Settings") %></a></li>
-              <li><a href="/logout" class="logout"><%= t("web-app-theme.logout", :default => "Logout") %></a></li>
+              <li><%=link_to "公司信息",edit_client_path(Client.first) %></li>
+              <li><%=link_to "基础资料",departments_path %></li>
               <li class="<%= controller.controller_path == 'user' ? 'active' : '' %>">
               <%=link_to "用户管理",users_path%>
               </li>
@@ -28,14 +38,12 @@
               <li class="<%= controller.controller_path == 'notices' ? 'active' : '' %>">
               <%=link_to "公共信息",notices_path%>
               </li>
-
               <li class="<%= controller.controller_path == 'posts' ? 'active' : '' %>">
               <%=link_to "在线交流",posts_path%>
               </li> 
               <li class="<%= controller.controller_path == 'vip_infos' ? 'active' : '' %>">
               <%=link_to "贵宾系统",vip_infos_path%>
               </li> 
-
               <li class="<%= controller.controller_path == 'settlements' ? 'active' : '' %>">
               <%=link_to "分成结算",settlements_path%>
               </li> 
@@ -60,9 +68,7 @@
 
             <%= yield %>
             <div id="footer">
-              <div class="block">
-                <p>Copyright &copy; <%= Time.now.year %> Your Site.</p>
-              </div>      
+              <%= render :partial => 'shared/footer' %>
             </div>
           </div>
           <div id="sidebar">

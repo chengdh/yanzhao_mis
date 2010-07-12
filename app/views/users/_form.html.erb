@@ -1,25 +1,63 @@
+<%form_for @user,:url => {:action => @user.new_record? ? :create_ex : :update_ex},:html =>{:id => "user_form",:method => @user.new_record? ? :post : :put,:multipart => true} do |f|  %>
+  <div class='uniForm'>
+    <%=f.error_messages%>
+    <div class='ctrlHolder'>
+      <%=f.label :org_id,'所属机构/部门' %>
+      <%=f.select :org_id, orgs_for_select %>
+      <p class='formHint'>
+      用户所属的部门或分理处
+      </p>
+    </div>
 
-  <div class="group">
-    <%= f.label :username, t("activerecord.attributes.user.username", :default => "Username"), :class => :label %>
-    <%= f.text_field :username, :class => 'text_field' %>
-    <span class="description">Ex: a simple text</span>
-  </div>
+    <fieldset class='blockLabels'>
+      <div class='ctrlHolder'>
+        <%=f.label :username,'用户名' %>
+        <%=f.text_field :username, :size => "20",:maxlength => "20",:class=>"shortTextInput",:readonly => !@user.new_record? %>
+        <p class='formHint'>
+        20个数字或字母,中文最长10个汉字
+        </p>
+      </div>
 
-  <div class="group">
-    <%= f.label :is_active, t("activerecord.attributes.user.is_active", :default => "Is active"), :class => :label %>
-    <%= f.check_box :is_active, :class => 'check_box' %>
-    <span class="description">Ex: a simple text</span>
-  </div>
+      <%if !@user.new_record? %> 
+        <div class='ctrlHolder'>
+          <%=f.label :current_password,'当前密码' %>
+          <%=f.password_field :current_password, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
+          <p class='formHint highlight'>
+          <i>录入当前密码,以确认修改</i>
+          </p>
+        </div>
+      <%end%>
 
-  <div class="group">
-    <%= f.label :org_id, t("activerecord.attributes.user.org_id", :default => "Org"), :class => :label %>
-    <%= f.text_field :org_id, :class => 'text_field' %>
-    <span class="description">Ex: a simple text</span>
+      <div class='ctrlHolder'>
+        <%=f.label :password_confirmation,'密码' %>
+        <%=f.password_field :password_confirmation, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
+        <p class='formHint highlight'>
+        <%=!@user.new_record? ? "<i>不修改原密码请留空</i>" : "密码最长20位,建议数字与字母混合" %>
+        </p>
+      </div>
+      <div class='ctrlHolder'>
+        <%=f.label :password,'验证密码' %>
+        <%=f.password_field :password, :size => "30",:maxlength => "30",:class=>"shortTextInput",:live => false%>
+        <p class='formHint highlight'>
+        <%=!@user.new_record? ? "<i>不修改原密码请留空</i>" : "再次输入密码,验证其正确性" %>
+        </p>
+      </div>
+      <div class='ctrlHolder'>
+        <%=f.label :is_admin,"管理员"%>
+        <%=f.check_box :is_admin %>
+        <p class='formHint highlight'>
+        <i>系统管理员可操作所有数据</i>
+        </p>
+      </div>
+
+      <div class='ctrlHolder'>
+        <%=f.label :is_active,"有效标记"%>
+        <%=f.check_box :is_active %>
+      </div>
+    </fieldset>
   </div>
-        
-<div class="group navform wat-cf">
-  <button class="button" type="submit">
-    <%= image_tag("web-app-theme/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>
-  </button>  
-  <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.cancel", :default => "Cancel")}")} #{t("web-app-theme.cancel", :default => "Cancel")}", users_path, :class => "button" %> 
-</div>
+  <div class='actions-bar wat-cf'>
+    <%=f.submit '保存用户信息', :class => 'sexybutton sexysimple sexygreen'%>
+    <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>
+  </div>
+<%end%>

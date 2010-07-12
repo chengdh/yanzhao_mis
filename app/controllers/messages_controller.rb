@@ -27,6 +27,7 @@ class MessagesController < BaseController
   # POST /the_models.xml
   def create
     message = @model_klazz.new(params[@param_name])
+    message.user = current_user
 
     instance_variable_set("@#{@param_name}",message)
     set_message_visitor
@@ -89,7 +90,8 @@ class MessagesController < BaseController
     message = @model_klazz.find(params[:id])
 
     instance_variable_set("@#{@param_name}",message)
-    save_visit_info
+    message.save_visit_info(current_user) if message.state == 'published'
+    
     respond_to do |format|
       if message.save
         format.html
@@ -111,17 +113,10 @@ class MessagesController < BaseController
       message.message_visitors<< mv
     end
   end
-  #保存查看信息
-  def save_visit_info
-    message = instance_variable_get("@#{@param_name}")
-    #FIXME 需要修改成按照当前用户的信息来查询查看记录 
-    #先判断查看记录中是否已存在记录
-    visit_infos = message.message_visitors.all(:conditions => {:user_id => 0})
-    if visit_infos.blank?
-      mv = MessageVisitor.new(:user_id => 1)
-      mv.base_public_message = message
-      mv.visit
-      message.message_visitors<< mv
-    end
+  protected
+  #生成@search对象
+  def create_search
+    @search = @model_klazz.my_messages(current_user).search(params[:search])
   end
+
 end

@@ -1,0 +1,64 @@
+<div class="block">
+  <div class="content">            
+    <div id="register" class="inner">
+      <%form_for @client ,:html => {:class=>'uniForm',:method => :post ,:multipart => true} do |client| %>
+        <%=client.error_messages%>
+        <fieldset class='inlineLabels'>
+          <legend>1.公司信息</legend>
+          <div class='ctrlHolder'>
+            <%=client.label :name,'公司名称' %>
+            <%=client.text_field :name, :size => "30",:maxlength => "30",:class=>"textInput"%>
+            <p class='formHint'>最长30个汉字</p>
+          </div>
+        </fieldset>
+        <fieldset class='inlineLabels'>
+          <legend>公司Logo</legend>
+          <div class='ctrlHolder'>
+            <label>
+              <%if !@client.logo_file_name.blank?%>
+                <%=image_tag @client.logo.url(:thumb)%>
+              <%end%>
+            </label>
+            <%=client.file_field :logo%>
+            <p class='formHint'>公司图标将显示在登录后的界面左上方区域</p>
+          </div>
+        </fieldset>
+
+        <fieldset class='inlineLabels'>
+          <legend>2.管理员信息</legend>
+          <%client.fields_for :admin do |user|%>
+            <%=user.hidden_field :is_admin%>
+            <div class='ctrlHolder'>
+              <%=user.label :username,'用户名称' %>
+              <%=user.text_field :username, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
+            </div>
+            <div class='ctrlHolder'>
+              <%=user.label :password_confirmation,'密码' %>
+              <%=user.password_field :password_confirmation, :size => "30",:maxlength => "30",:class=>"textInput"%>
+            </div>
+            <div class='ctrlHolder'>
+              <%=user.label :password,'确认密码' %>
+              <%=user.password_field :password, :size => "30",:maxlength => "30",:class=>"textInput"%>
+              <p class='formHint'>请再次录入密码,以便验证</p>
+            </div>
+          <%end%>
+        </fieldset>
+        <fieldset class='inlineLabels'>
+          <legend>3.设置分理处信息</legend>
+          <p class='formHint'>请至少填写两个分理处信息</p>
+          <p class='formHint'>分理处信息在录入票据,处理业务时都会使用到</p>
+          <p class='formHint'>注册成功后,在基础信息管理中可修改或添加分理处信息</p>
+          <%client.fields_for :orgs do |org|%>
+            <div class='ctrlHolder'>
+              <%=org.label :name,'分理处名称' %>
+              <%=org.text_field :name, :size => "30",:maxlength => "30",:class=>"textInput"%>
+            </div>
+          <%end%>
+        </fieldset>
+        <div class='actions-bar wat-cf'>
+          <%=client.submit '完成系统初始化工作,并登录系统', :class => 'sexybutton sexysimple sexygreen'%>
+        </div>   
+      <%end%>
+    </div>
+  </div>
+</div>

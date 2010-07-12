@@ -121,3 +121,24 @@ ul.navigation li a:link,ul.navigation li a:visited {
 #settlement_show .col_10 { width : 10%;}
 #settlement_show td.number { text-align : center;}
 #base_fee,#subsidy_fee,#deductions_fee,#others_fee { border : none;}
+/*主页面工具导航容器*/
+#util-navigation {
+    position : absolute;
+    right : 20px;
+    top : 0;
+}
+#util-navigation ul li {
+  float : left;
+  padding : 5px 10px;
+  list-style-type : none;
+}
+
+#util-navigation ul li a:link,#util-navigation ul li a:visited,#util-navigation ul li a:hover,#util-navigation ul li a:active {
+  color : #FFFFFF;  
+  text-decoration : none;
+}
+#util-navigation a.logout {
+  -moz-border-radius:4px 4px 4px 4px;
+  background:none repeat scroll 0 0 #CC0000;
+  padding:2px 6px;
+}
