@@ -1,0 +1,14 @@
+<% remote_form_for :search,@search,:url => {:controller =>:address_book_lines,:action => :index},
+  :method => :get,
+  :before => "Modalbox.show('',{title : '查询联系人',height : 300});",
+  :update => "MB_content",:html => {:class => :uniForm } do |f| -%>
+  <fieldset class='inlineLabels'>
+    <div class='ctrlHolder'>
+      <%=f.label :name_like,"姓名/地址"%>
+      <%=f.text_field :name_like,:class => "textInput" %>
+    </div>
+  </fieldset>
+  <div class="actions-bar">
+    <%=f.submit '查询',:class => 'sexybutton sexysimple sexyblue'%>
+  </div>
+<% end -%>

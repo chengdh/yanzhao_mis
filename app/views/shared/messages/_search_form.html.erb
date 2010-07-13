@@ -1,0 +1,35 @@
+<% form_for @search,:url => {:action => :index},:html => {:class => :uniForm } do |f| -%>
+  <fieldset class='inlineLabels'>
+    <p class='formHint'>
+    查询结果取决与你被授予的权限
+    </p>
+    <div class='ctrlHolder'>
+      <%=f.label :title_like,"标题"%>
+      <%=f.text_field :title_like,:class => "textInput"%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :doc_no_like,"文件号"%>
+      <%=f.text_field :doc_no_like,:class => "textInput" %>
+    </div>
+
+    <div class='ctrlHolder'>
+      <%=f.label :org_id_is,"发布机构"%>
+      <%=f.select :org_id_is,orgs_for_select %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :user_id_is,"发布人"%>
+      <%=f.select :user_id_is,option_groups_departments_users_for_select %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :publish_date_gte,"发布日期"%>
+      <%=f.calendar_date_select :publish_date_gte,:class => "shortText" %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label "",""%>
+      <%=f.calendar_date_select :publish_date_lte,:class => "shortText"  %>
+    </div>
+  </fieldset>
+  <div class="actions-bar">
+    <%=f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%>
+  </div>
+<% end -%>

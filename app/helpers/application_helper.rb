@@ -42,6 +42,14 @@ module ApplicationHelper
     the_state = const_class.aasm_states.detect {|state| state.name.to_s == state_code}
     the_state.options[:desc] if !the_state.blank?
   end  
+  #vip 级别选择
+  def vip_levels_for_select
+    VipConfig.levels.collect {|key,value| [value,key]}
+  end
+  #vip 状态选择
+  def vip_states_for_select
+    VipInfo.states.collect {|key,value| [value,key]}
+  end
 
   #当前event描述
   def event_display(const_class,event_name)

@@ -36,6 +36,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :address_books
 
+  map.resources :address_book_lines
+
   map.resources :comments,:except => [:index,:destroy,:new]
 
   map.resources :posts,:member => {:publish => :put},:has_many => :comments

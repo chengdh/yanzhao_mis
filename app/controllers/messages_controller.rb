@@ -116,7 +116,11 @@ class MessagesController < BaseController
   protected
   #生成@search对象
   def create_search
-    @search = @model_klazz.my_messages(current_user).search(params[:search])
+    if current_user.is_admin
+      @search = @model_klazz.search(params[:search])
+    else
+      @search = @model_klazz.my_messages(current_user).search(params[:search])
+    end
   end
 
 end

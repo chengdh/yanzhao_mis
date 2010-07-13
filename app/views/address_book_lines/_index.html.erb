@@ -1,0 +1,18 @@
+<%if !@address_book_lines.blank?%>
+  <table class='table'>
+    <tr>
+      <th>姓名</th>
+      <th>手机</th>
+      <th>固定电话</th>
+      <th>住址</th>
+    </tr>
+    <%@address_book_lines.each do |line|%>
+      <td><%=line.name%></td>
+      <td><%=line.mobile%></td>
+      <td><%=line.phone%></td>
+      <td><%=line.location%></td>
+    <%end%>
+  </table>
+<%else%>
+  <h2 class='text-center'>未找到记录.</h2>
+<%end%>

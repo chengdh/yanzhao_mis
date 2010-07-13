@@ -1,0 +1,33 @@
+<% form_for @search,:url => {:action => :index},:html => {:class => :uniForm } do |f| -%>
+  <fieldset class='inlineLabels'>
+    <p class='formHint'>
+    查询结果取决与你被授予的权限
+    </p>
+
+    <div class='ctrlHolder'>
+      <%=f.label :org_id_is,"分理处/分公司"%>
+      <%=f.select :org_id_is,orgs_for_select,:include_blank => true %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :name_like,"姓名"%>
+      <%=f.text_field :name_like,:class => "textInput"%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :phone_like,"电话"%>
+      <%=f.text_field :phone_like,:class => "textInput"%>
+    </div>
+
+    <div class='ctrlHolder'>
+      <%=f.label :level_is,"级别"%>
+      <%=f.select :level_is,vip_levels_for_select,:include_blank => true %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :state_is,"状态"%>
+      <%=f.select :state_is,vip_states_for_select,:include_blank => true %>
+    </div>
+
+  </fieldset>
+  <div class="actions-bar">
+    <%=f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%>
+  </div>
+<% end -%>
