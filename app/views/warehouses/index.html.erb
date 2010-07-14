@@ -1,34 +1,33 @@
 <div class="block">
   <div class="secondary-navigation">
-    <%= render :partial => "durable_receipts/caption" %>
+    <%= render :partial => "shared/orgs/caption" %>
   </div>          
   <div class="content">          
-    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Warehouses</h2>
+    <h2 class="title">仓库信息列表</h2>
     <div class="inner">
       <table class="table">
         <tr>             
-          <th class="first">ID</th>
-          <th>
-            <%= t("activerecord.attributes.warehouse.name", :default => t("activerecord.labels.name", :default => "Name")) %>
-          </th>
-          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th class="first"></th>
+          <th>仓库名称</th>
+          <th>管理员</th>
+          <th>有效</th>
           <th class="last">&nbsp;</th>
         </tr>
         <% @warehouses.each do |warehouse| -%>
           <tr class="<%= cycle("odd", "even") %>">
+            <td></td>
             <td>
-              <%= warehouse.id %>
+              <%= warehouse.name %>
             </td>
             <td>
-              <%= link_to warehouse.name, warehouse_path(warehouse) %>
+              <%= warehouse.manager %>
             </td>
+
             <td>
-              <%= warehouse.created_at %>
+              <%=check_box_tag :is_active,warehouse.is_active,warehouse.is_active,:disabled => true%>
             </td>
             <td class="last">
-              <%= link_to "#{t("web-app-theme.show", :default => "Show")}", warehouse_path(warehouse) %> |
-              <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_warehouse_path(warehouse) %> |
-              <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", warehouse_path(warehouse), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+              <%= link_to "修改", edit_warehouse_path(warehouse) %> 
             </td>
           </tr>          
         <% end -%>

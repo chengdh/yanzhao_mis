@@ -1,0 +1,11 @@
+<% form_for @search,:url => {:action => :index},:html => {:class => :uniForm } do |f| -%>
+  <fieldset class='blockLabels'>
+    <div class='ctrlHolder'>
+      <%=f.label :name_like,"物品名称"%>
+      <%=f.text_field :name_like,:class => "textInput" %>
+    </div>
+  </fieldset>
+  <div class="actions-bar">
+    <%=f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%>
+  </div>
+<% end -%>

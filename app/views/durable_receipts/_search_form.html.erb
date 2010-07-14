@@ -1,0 +1,24 @@
+<% form_for @search,:url => {:action => :index},:html => {:class => :uniForm } do |f| -%>
+  <fieldset class='blockLabels'>
+    <p class='red-text'>查询结果取决与你被授予的权限</p>
+    <div class='ctrlHolder'>
+      <%=f.label :warehouse_id_is,"仓库"%>
+      <%=f.select :warehouse_id_is,warehouses_for_select,:include_blank => true %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :person_name_like,"经手人"%>
+      <%=f.text_field :person_name_like,:class => "textInput" %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :created_at_gte,"入库日期"%>
+      <%=f.calendar_date_select :created_at_gte,:class => "textInput" %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :created_at_lte,"~"%>
+      <%=f.calendar_date_select :created_at_lte,:class => "textInput" %>
+    </div>
+  </fieldset>
+  <div class="actions-bar">
+    <%=f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%>
+  </div>
+<% end -%>

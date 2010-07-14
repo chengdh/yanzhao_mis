@@ -1,0 +1,5 @@
+<ul class="wat-cf">
+  <li class="first  <%=check_sub_active_tab(1)%>"><%= link_to "科室列表", departments_path(:active_sub_tab => 1)  %></li>
+  <li  class="<%=check_sub_active_tab(2)%>"><%= link_to "分理处/分公司", sub_companies_path(:active_sub_tab => 2)  %></li>
+  <li  class="<%=check_sub_active_tab(3)%>"><%= link_to "仓库信息", warehouses_path(:active_sub_tab => 3)  %></li>
+</ul>

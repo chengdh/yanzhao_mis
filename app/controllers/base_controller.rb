@@ -52,7 +52,7 @@ class BaseController < ApplicationController
     respond_to do |format|
       if the_model.save
         flash[:notice] = '@model_klazz was successfully created.'
-        format.html { redirect_to(the_model) }
+        format.html { redirect_to(:action => :index) }
         format.xml  { render :xml => the_model, :status => :created, :location => the_model }
       else
         format.html { render :action => "new" }
@@ -69,7 +69,7 @@ class BaseController < ApplicationController
     respond_to do |format|
       if the_model.update_attributes(params[@param_name])
         flash[:notice] = '@model_klazz was successfully updated.'
-        format.html { redirect_to(the_model) }
+        format.html { redirect_to(:action => :index) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
