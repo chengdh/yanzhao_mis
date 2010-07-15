@@ -1,4 +1,12 @@
 /* Override here any style definide by web-app-theme */
+#user-navigation { bottom : 0;}
+#user-navigation ul li.active{
+  background : none repeat scroll 0 0 #F0F0EE;
+  -moz-border-radius-topleft : 4px;
+  -moz-border-radius-topright : 4px;
+}
+
+#user-navigation ul li.active a:link,#user-navigation ul li.active a:visited,#user-navigation ul li.active a:hover,#user-navigation ul li.active a:active { color : #262626;}
 /* 重写block容器 */
 #select_user_wrap .block{
   -moz-border-radius : 4px;
@@ -142,3 +150,42 @@ ul.navigation li a:link,ul.navigation li a:visited {
   background:none repeat scroll 0 0 #CC0000;
   padding:2px 6px;
 }
+/*错误信息显示样式*/
+#main .block .content .fieldWithErrors {
+    padding: 2px;
+    background-color: red;
+    display: table;
+}
+
+#main .block .content  #errorExplanation {
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#main .block .content  #errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#main .block .content  #errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#main .block .content  #errorExplanation ul  { padding-left : 10px;}
+
+#main .block .content  #errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+/*未读消息样式*/
+tr.unread { font-weight : bold;font-size : 1.2em;}

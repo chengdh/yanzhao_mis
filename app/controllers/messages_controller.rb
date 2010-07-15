@@ -1,5 +1,11 @@
 #通知公告、规章制度基础controller
 class MessagesController < BaseController
+  #此处改变filter的顺序,先跳过基类的filter,然后重新声明
+  skip_before_filter :check_unread_messages
+  before_filter :before_show,:only => :show
+  before_filter :check_unread_messages
+
+
   # GET /the_models
   # GET /the_models.xml
   def index
@@ -72,7 +78,8 @@ class MessagesController < BaseController
 
     instance_variable_set("@#{@param_name}",message)
     set_message_visitor
-    #FIXME 设置发布人及发布日期
+    message.publisher = current_user
+    message.publish_date = Time.now
     respond_to do |format|
       if message.update_attributes(params[@param_name])
         flash[:notice] = '@model_klazz was successfully updated.'
@@ -90,18 +97,21 @@ class MessagesController < BaseController
     message = @model_klazz.find(params[:id])
 
     instance_variable_set("@#{@param_name}",message)
-    message.save_visit_info(current_user) if message.state == 'published'
     
     respond_to do |format|
       if message.save
         format.html
         format.xml  { head :ok }
       else
-        format.html { redirect_to :index }
+        format.html { redirect_to :back }
       end
     end
   end
   protected
+  def before_show
+    message = @model_klazz.find(params[:id])
+    message.save_visit_info(current_user) if message.state == 'published'
+  end
   def set_message_visitor
     select_user_ids = params[:select_user]
     return if select_user_ids.blank?
@@ -113,7 +123,6 @@ class MessagesController < BaseController
       message.message_visitors<< mv
     end
   end
-  protected
   #生成@search对象
   def create_search
     if current_user.is_admin
@@ -122,5 +131,4 @@ class MessagesController < BaseController
       @search = @model_klazz.my_messages(current_user).search(params[:search])
     end
   end
-
 end

@@ -1,6 +1,6 @@
 <% form_for @search,:url => {:action => :index},:html => {:class => :uniForm } do |f| -%>
-  <fieldset class='inlineLabels'>
-    <p class='formHint'>
+  <fieldset class='blockLabels'>
+    <p class='red-text'>
     查询结果取决与你被授予的权限
     </p>
     <div class='ctrlHolder'>
@@ -18,11 +18,11 @@
     </div>
     <div class='ctrlHolder'>
       <%=f.label :created_at_gte,"发信日期"%>
-      <%=f.calendar_date_select :created_at_gte,:class => "shortText" %>
+      <%=f.calendar_date_select :created_at_gte,:class => "textInput" %>
     </div>
     <div class='ctrlHolder'>
       <%=f.label "",""%>
-      <%=f.calendar_date_select :created_at_lte,:class => "shortText"  %>
+      <%=f.calendar_date_select :created_at_lte,:class => "textInput"  %>
     </div>
   </fieldset>
   <div class="actions-bar">

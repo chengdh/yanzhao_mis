@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Web App</title>
+    <title><%=Client.first.name%> - 综合信息系统-<%=current_user.username%></title>
     <%= javascript_include_tag :all%>
     <%= init_tinymce_hammer_if_required %>
     <%= calendar_date_select_includes :blue%>
@@ -26,32 +26,35 @@
           </div>      
           <div id="user-navigation">
             <ul class="wat-cf">
-              <li><%=link_to "公司信息",edit_client_path(Client.first) %></li>
-              <li><%=link_to "基础资料",departments_path %></li>
-              <li class="<%= controller.controller_path == 'user' ? 'active' : '' %>">
+              <li class="<%= check_current_controller(['clients']) %>">
+              <%=link_to "公司信息",edit_client_path(Client.first) %>
+              </li>
+              <li class="<%= check_current_controller(['departments','sub_companies','warehouses']) %>">
+              <%=link_to "基础资料",departments_path %></li>
+              <li class="<%= controller.controller_path == 'users' ? 'active' : '' %>">
               <%=link_to "用户管理",users_path%>
               </li>
             </ul>
           </div>      
           <div id="main-navigation">
             <ul class="wat-cf"> 
-              <li class="<%= controller.controller_path == 'notices' ? 'active' : '' %>">
-              <%=link_to "公共信息",notices_path%>
+              <li class="<%= check_current_controller(['notices','rules','address_books']) %>">
+              <%=link_to "公共信息#{unread_notices_rules_sign}",notices_path%>
               </li>
-              <li class="<%= controller.controller_path == 'posts' ? 'active' : '' %>">
-              <%=link_to "在线交流",posts_path%>
+              <li class="<%= check_current_controller(['posts']) %>">
+              <%=link_to "在线交流#{unread_posts_sign}",posts_path%>
               </li> 
-              <li class="<%= controller.controller_path == 'vip_infos' ? 'active' : '' %>">
+              <li class="<%= check_current_controller(['vip_infos','vip_fee_infos','vip_configs','upload_vip_files']) %>">
               <%=link_to "贵宾系统",vip_infos_path%>
               </li> 
-              <li class="<%= controller.controller_path == 'settlements' ? 'active' : '' %>">
+              <li class="<%= check_current_controller(['settlements','contracts']) %>">
               <%=link_to "分成结算",settlements_path%>
               </li> 
-              <li class="<%= controller.controller_path == 'durable_receipts' ? 'active' : '' %>">
-              <a href="<%= durable_receipts_path %>">耐用品管理</a>
+              <li class="<%= check_current_controller(['durable_materials','durable_receipts','durable_shippments']) %>">
+              <%=link_to "耐用品管理",durable_receipts_path %>
               </li>
-              <li class="<%= controller.controller_path == 'consumer_receipts' ? 'active' : '' %>">
-              <a href="<%= consumer_receipts_path %>">日用消费品管理</a>
+              <li class="<%= check_current_controller(['consumer_materials','consumer_receipts','consumer_shippments']) %>">
+              <%=link_to "易耗品管理",consumer_receipts_path %>
               </li>
             </ul>
           </div>

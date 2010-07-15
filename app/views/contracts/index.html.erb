@@ -3,40 +3,35 @@
     <%= render :partial => "settlements/caption" %>
   </div>          
   <div class="content">          
-    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Contracts</h2>
+    <h2 class="title">合同模板</h2>
     <div class="inner">
       <table class="table">
         <tr>             
-          <th class="first">ID</th>
-          <th>
-            <%= t("activerecord.attributes.contract.org_id", :default => t("activerecord.labels.org_id", :default => "Org_id")) %>
-          </th>
-          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th class="first"></th>
+          <th>分理处/分公司</th>
+          <th>合同期限</th>
+          <th>创建日期</th>
           <th class="last">&nbsp;</th>
         </tr>
         <% @contracts.each do |contract| -%>
           <tr class="<%= cycle("odd", "even") %>">
+            <td></td>
             <td>
-              <%= contract.id %>
+              <%= conntract.org.name %>
             </td>
-            <td>
-              <%= link_to contract.org_id, contract_path(contract) %>
-            </td>
-            <td>
-              <%= contract.created_at %>
-            </td>
+            <td><%="#{contract.date_from} ~ #{contract.date_to}"%></td>
+            <td><%=contract.created_at.to_date%></td>
             <td class="last">
-              <%= link_to "#{t("web-app-theme.show", :default => "Show")}", contract_path(contract) %> |
-              <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contract_path(contract) %> |
-              <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", contract_path(contract), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+              <%= link_to "修改", edit_contract_path(contract) %> |
+              <%= link_to "删除", contract, :method => :delete, :confirm => "您确定删除该信息吗？" %>
             </td>
           </tr>          
         <% end -%>
       </table>
       <div class="actions-bar wat-cf">
         <div class="actions">
+          <%=will_paginate @contracts%>
         </div>
-
       </div>
     </div>
   </div>

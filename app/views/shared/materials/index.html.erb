@@ -34,7 +34,7 @@
             </td>
 
             <td class="last">
-              <%= link_to "修改", self.send("edit_#{@param_name}_path",material) %> |
+              <%= link_to "修改", self.send("edit_#{@param_name}_path",material,:active_sub_tab => 8) %> |
               <%= link_to "删除", material, :method => :delete, :confirm => "您确定要删除该物品吗？" %>
             </td>
           </tr>          

@@ -10,7 +10,7 @@
         <%@messages_group.each do |org_name,messages| -%>
           <tr><td colspan='100'><h3><%=org_name%></h3></td></tr>
           <% messages.each do |message| -%>
-            <tr class="<%= cycle("odd", "even") %>">
+            <tr class="<%= cycle("odd", "even") %> <%= check_message_state(message)%>">
               <td>
                 <%= status_time_ago_in_words(message.created_at) %>
               </td>

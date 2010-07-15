@@ -1,17 +1,26 @@
 class BasePublicMessage < ActiveRecord::Base
+  include AASM
   #包含以下三种message
   #发送给该用户的
   #公共的
   #该用户自己建立的
   named_scope :my_messages,lambda { |user|
     {
-      :joins => "LEFT JOIN message_visitors ON message_visitors.base_public_message_id  = base_public_messages.id",
-      :select => "DISTINCT base_public_messages.*,message_visitors.state visit_state",
-      :conditions => ["(base_public_messages.is_secure = 0 OR base_public_messages.user_id=? OR message_visitors.user_id = ?) ",user,user],
+      :joins => :message_visitors,
+      :select => "DISTINCT base_public_messages.*",
+      :conditions => ["base_public_messages.user_id = ? OR base_public_messages.publisher_id = ? OR message_visitors.user_id = ?",user,user,user],
       :order => "base_public_messages.created_at DESC"
     }
   }
-  include AASM
+  #未读信息
+  named_scope :unread_messages,lambda{ |user|
+  {
+      :joins => :message_visitors ,
+      :select => "DISTINCT base_public_messages.*",
+      :conditions => ["base_public_messages.state = 'published' AND message_visitors.state='draft' AND message_visitors.user_id = ?",user], 
+      :order => "base_public_messages.created_at DESC"
+    }
+  }
   belongs_to :org
   belongs_to :user
   belongs_to :publisher,:class_name => "User"
@@ -38,16 +47,14 @@ class BasePublicMessage < ActiveRecord::Base
   end
   #保存查看信息
   def save_visit_info(user)
-    #FIXME 需要修改成按照当前用户的信息来查询查看记录 
     #先判断查看记录中是否已存在记录
-    visit_infos = self.message_visitors.all(:conditions => {:user_id => user})
+    visit_infos = self.message_visitors.all(:conditions => {:user_id => user.id})
     if visit_infos.blank?
-      mv = MessageVisitor.new(:user_id => user)
-
+      mv = MessageVisitor.new(:user => user)
       mv.visit
-      self.message_visitors<< mv
+      self.message_visitors << mv
     else
-      visit_infos.first.visited_at = Time.now
+      visit_infos.first.update_attributes(:visited_at => Time.now,:state => "visited")
     end
   end
 end

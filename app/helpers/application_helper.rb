@@ -202,10 +202,28 @@ module ApplicationHelper
   def check_sub_active_tab(index)
     active_sub_tab = params[:active_sub_tab]
     active_sub_tab = 1 if active_sub_tab.blank?
-    if active_sub_tab.to_i == index
-      "active"
-    else
-      ""
-    end
+    active_sub_tab.to_i == index ? "active" : ""
   end
+  #判断当前controller
+  def check_current_controller(controller_path_array)
+    controller_path_array.include?(controller.controller_path) ? "active" : ""
+  end
+  #设置未读消息标志
+  def unread_notices_rules_sign
+    (@unread_notices_count > 0 || @unread_rules_count>0) ? '<span class=red-text>(新)</span>' : ''
+  end
+  def unread_posts_sign
+    @unread_posts_count > 0  ? '<span class=red-text>(新)</span>' : ''
+  end
+  def unread_notices_count
+    @unread_notices_count > 0  ? "<span class='red-text'>(#{@unread_notices_count}新)</span>" : ''
+  end
+  def unread_rules_count
+    @unread_rules_count > 0  ? "<span class='red-text'>(#{@unread_rules_count}新)</span>" : ''
+  end
+  #测试信息读取状态
+  def check_message_state(msg)
+    msg.message_visitors.all(:conditions => {:state => 'draft',:user_id => current_user.id}).blank? ? '' : 'unread'
+  end
+
 end
