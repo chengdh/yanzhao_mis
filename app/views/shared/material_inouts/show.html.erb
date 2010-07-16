@@ -41,7 +41,9 @@
           </tr>
         <%end%>
         <tfoot>
-          <%#FIXME 计算合计信息%>
+            <td colspan='3'></td>
+            <td>合计</td>
+            <td><%=bill.material_inout_lines.sum(:line_amt)%></td>
         </tfoot>
       </table>
     </div>

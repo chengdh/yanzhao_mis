@@ -5,10 +5,7 @@
 <%=render "shared/messages/set_variables"%>
 <div class="block">
   <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li class="first"><%= link_to "#{@title}列表", @list_path  %></li>
-      <li class="active"><%= link_to "新建#{@title}", @new_path %></li>
-    </ul>
+    <%= render :partial => "shared/messages/caption" %>
   </div>          
   <div class="content">            
     <h2 class="title"><%="新建#{@title}"%></h2>

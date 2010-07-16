@@ -1,26 +1,48 @@
-<h1>Listing storages</h1>
-
-<table>
-  <tr>
-    <th>Warehouse</th>
-    <th>Material</th>
-    <th>Avg price</th>
-    <th>Qty</th>
-  </tr>
-
-<% @storages.each do |storage| %>
-  <tr>
-    <td><%=h storage.warehouse %></td>
-    <td><%=h storage.material %></td>
-    <td><%=h storage.avg_price %></td>
-    <td><%=h storage.qty %></td>
-    <td><%= link_to 'Show', storage %></td>
-    <td><%= link_to 'Edit', edit_storage_path(storage) %></td>
-    <td><%= link_to 'Destroy', storage, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New storage', new_storage_path %>
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render 'caption' %>
+  </div>          
+  <div class="content">        
+    <h2 class="title">库存查询</h2>
+    <div class="inner">
+      <%form_for :search,:url => {:action => :index},:html => {:method => :get} do |f|%>
+        <table class="table">
+          <tr>
+            <td><%= f.label :warehouse_id_is,"仓库:" %></td>
+            <td><%= f.select :warehouse_id_is, warehouses_for_select,:include_blank => true %></td>
+            <td><%= f.label :material_name_like,"名称:" %></td>
+            <td><%= f.text_field :material_name_like, :class => 'textInput' %></td>
+            <td><%= f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%></td>
+          </tr>
+        </div>
+      <%end%>
+      <table class='table'>
+        <tr>
+          <th class='first'></th>
+          <th>仓库</th>
+          <th>物品名称</th>
+          <th>规格</th>
+          <th>单位</th>
+          <th>当前均价</th>
+          <th>库存数量</th>
+          <th>金额</th>
+        </tr>
+        <%@m_storages.each do |m|%>
+          <tr>
+            <td><%=link_to_function("<span class='red-text'>警</span>","Modalbox.show('<h2>#{m.material.name}库存低于下限:#{m.material.min_count}</h2>',{title : false})") if m.alert%></td>
+            <td><%=m.warehouse.name%></td>
+            <td><%=m.material.name%></td>
+            <td><%=m.material.description%></td>
+            <td><%=m.material.unit%></td>
+            <td><%=m.avg_price%></td>
+            <td><%=m.qty%></td>
+            <td><%=m.qty*m.avg_price%></td>
+          </tr>
+        <%end%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <%=will_paginate @m_storages %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,7 @@
   <h3>生成新的返款结算表</h3>
   <div class="content">
       <% form_for @search,:url => {:action => :new}, :html => { :class => :uniForm } do |f| -%>
+        <%=hidden_field_tag :active_sub_tab,3%>
         <%= render "select_org_mth", :f => f %>
       <% end -%>
   </div>

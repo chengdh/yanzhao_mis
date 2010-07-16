@@ -24,5 +24,6 @@
     <li class="active"><%= link_to "修改物品资料", edit_durable_material_path(@durable_material,:active_sub_tab => 8) %></li>
   <%end%>
 
+  <li class="<%=check_sub_active_tab(10) %>"><%= link_to "库存查询", m_storages_path(:active_sub_tab => 10) %></li>
 
 </ul>

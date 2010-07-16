@@ -11,5 +11,4 @@ class ReceiptObserver < ActiveRecord::Observer
       m_storage.save
     end
   end
-
 end

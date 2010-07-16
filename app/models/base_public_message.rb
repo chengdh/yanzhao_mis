@@ -29,13 +29,13 @@ class BasePublicMessage < ActiveRecord::Base
   aasm_column :state
   aasm_initial_state :draft   #初始状态为草稿
   aasm_state :draft,:desc => "草稿"           #草稿
-  aasm_state :waitting,:desc => "等待发布"       #等待发布
+  aasm_state :waitting,:desc => "等待审核"       #等待发布
   aasm_state :published,:desc => "已发布"       #已发布
   aasm_event :require_publish do
     transitions :to => :waitting,:from => :draft
   end
   aasm_event :publish do
-    transitions :to => :published,:from => :waitting
+    transitions :to => :published,:from => [:waitting,:draft]
   end
   #得到收信人列表字符串
   def visitors_list

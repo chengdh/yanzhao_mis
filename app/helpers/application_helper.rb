@@ -210,10 +210,10 @@ module ApplicationHelper
   end
   #设置未读消息标志
   def unread_notices_rules_sign
-    (@unread_notices_count > 0 || @unread_rules_count>0) ? '<span class=red-text>(新)</span>' : ''
+    (@unread_notices_count > 0 || @unread_rules_count>0) ? image_tag('new.gif',:class => 'new_icon') : ''
   end
   def unread_posts_sign
-    @unread_posts_count > 0  ? '<span class=red-text>(新)</span>' : ''
+    @unread_posts_count > 0  ? image_tag('new.gif',:class => 'new_icon') : ''
   end
   def unread_notices_count
     @unread_notices_count > 0  ? "<span class='red-text'>(#{@unread_notices_count}新)</span>" : ''
@@ -221,9 +221,16 @@ module ApplicationHelper
   def unread_rules_count
     @unread_rules_count > 0  ? "<span class='red-text'>(#{@unread_rules_count}新)</span>" : ''
   end
+  def unread_posts_count
+    @unread_posts_count > 0  ? "<span class='red-text'>(#{@unread_posts_count}新)</span>" : ''
+  end
+
   #测试信息读取状态
   def check_message_state(msg)
+    #发送者是自己的一律不设置未读标志(因为自己肯定知道内容了)
+    #return "" if msg.user == current_user 
     msg.message_visitors.all(:conditions => {:state => 'draft',:user_id => current_user.id}).blank? ? '' : 'unread'
+    #待审核信息
   end
 
 end

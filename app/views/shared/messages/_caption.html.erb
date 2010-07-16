@@ -1,9 +1,12 @@
 <ul class="wat-cf">
   <li class="first <%=check_sub_active_tab(1)%>">
-  <%= link_to "通知公告#{unread_notices_count}", notices_path(:active_sub_tab => 1)  %>
+  <%= link_to "通告#{unread_notices_count}", notices_path(:active_sub_tab => 1,"search[state_is]" => "published")  %>
   </li> 
   <li class="first <%=check_sub_active_tab(6)%>">
-  <%= link_to "我发布的-通知公告", notices_path(:active_sub_tab => 6,"search[user_id_is]" => current_user)  %>
+  <%= link_to "我发布的-通告", notices_path(:active_sub_tab => 6,"search[user_id_is]" => current_user)  %>
+  </li> 
+  <li class="<%=check_sub_active_tab(3)%>">
+  <%= link_to "我审核的-通告", notices_path(:active_sub_tab => 3,"search[publisher_id_is]" => current_user)   %>
   </li> 
 
   <li class="<%=check_sub_active_tab(2)%>">
@@ -14,15 +17,28 @@
   </li> 
 
 
-  <li class="<%=check_sub_active_tab(3)%>">
-  <%= link_to "通知公告-待审批", notices_path(:active_sub_tab => 3,"search[publisher_id_is]" => current_user)   %>
-  </li> 
-
   <li class="<%=check_sub_active_tab(4)%>">
-  <%= link_to "规章制度-待审批", rules_path(:active_sub_tab => 4,"search[publisher_id_is]" => current_user)   %>
+  <%= link_to "我审核的-规章制度", rules_path(:active_sub_tab => 4,"search[publisher_id_is]" => current_user)   %>
   </li> 
 
   <li class="<%=check_sub_active_tab(5)%>">
   <%= link_to "通讯录", address_books_path(:active_sub_tab => 5)   %>
   </li> 
+
+  <%if params[:active_sub_tab] == '8'%>
+    <li class="active">
+    <%= link_to "新建", self.send("new_#{@param_name}_path",:active_sub_tab => 8)   %>
+    </li> 
+  <%end%>
+  <%if params[:active_sub_tab] == '9'%>
+    <li class="active">
+    <%= link_to "修改", self.send("edit_#{@param_name}_path",instance_variable_get("@#{@param_name}"),:active_sub_tab => 9)   %>
+    </li> 
+  <%end%>
+  <%if params[:active_sub_tab] == '10'%>
+    <li class="active">
+    <%= link_to "查看", self.send("#{@param_name}_path",instance_variable_get("@#{@param_name}"),:active_sub_tab => 10)   %>
+    </li> 
+  <%end%>
+
 </ul>

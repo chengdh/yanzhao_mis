@@ -189,3 +189,11 @@ ul.navigation li a:link,ul.navigation li a:visited {
 }
 /*未读消息样式*/
 tr.unread { font-weight : bold;font-size : 1.2em;}
+/*new图标*/
+.new_icon {
+width : 19px;
+display :block;
+margin-top : -45px;
+margin-left : 58px;
+position : absolute;
+}

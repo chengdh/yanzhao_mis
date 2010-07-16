@@ -39,10 +39,10 @@
           <div id="main-navigation">
             <ul class="wat-cf"> 
               <li class="<%= check_current_controller(['notices','rules','address_books']) %>">
-              <%=link_to "公共信息#{unread_notices_rules_sign}",notices_path%>
+              <%=link_to "公共信息#{unread_notices_rules_sign}",notices_path("search[state_is]" => "published")%>
               </li>
               <li class="<%= check_current_controller(['posts']) %>">
-              <%=link_to "在线交流#{unread_posts_sign}",posts_path%>
+              <%=link_to "在线交流#{unread_posts_sign}",posts_path("search[state_is]" => "published")%>
               </li> 
               <li class="<%= check_current_controller(['vip_infos','vip_fee_infos','vip_configs','upload_vip_files']) %>">
               <%=link_to "贵宾系统",vip_infos_path%>

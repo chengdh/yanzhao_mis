@@ -83,15 +83,17 @@ com.yanzhao.nestedFormHelper = {};
 com.yanzhao.nestedFormHelper.remove_fields = function(link){
   $(link).previous("input[type=hidden]").value = "1";  
   $(link).up().up(".fields").hide();   
+  //重新计算合计
+  material_selector.cal_sum();
 }
 /* 添加方法*/
 com.yanzhao.nestedFormHelper.add_fields = function(link, association, content,content_wrap){
   var new_id = new Date().getTime();  
   var regexp = new RegExp("new_" + association, "g");  
   if(content_wrap.blank())
-    $(link).up().insert({ after: content.replace(regexp, new_id)});  
+    $(link).up().insert({ bottom : content.replace(regexp, new_id)});  
   else
-    $(content_wrap).insert({ after: content.replace(regexp, new_id)});  
+    $(content_wrap).insert({ bottom : content.replace(regexp, new_id)});  
 };  
 /*结算表的Form监听器,用于自动计算*/
 com.yanzhao.settlement_form_observer  =  function(){
@@ -183,6 +185,34 @@ update_target_el : function() {
                      el_name.value = this.selected_material.material.name;
                      el_unit.value = this.selected_material.material.unit;
                      el_price.value = this.selected_material.avg_price;
-                   }
+                     //以下注册监听事件
+                     el_price.observe('change',this.cal_line_amt.bindAsEventListener(this,el_price,el_qty,el_total));
+                     el_qty.observe('change',this.cal_line_amt.bindAsEventListener(this,el_price,el_qty,el_total));
+
+                     //先计算
+                     this.cal_line_amt(null,el_price,el_qty,el_total);
+                    
+                   },
+                   //计算每行合计
+cal_line_amt : function(evt,el_price,el_qty,el_total) {
+                 var line_amt = parseFloat(el_price.value) * parseFloat(el_qty.value);
+                 el_total.value = line_amt;
+                 this.cal_sum();
+
+               },
+               //计算合计
+cal_sum : function() {
+
+            var sum = 0;
+            var line_totals = $('line_fields_wrap').select('.material_total');
+            line_totals.each(function(line_amt){
+                //判断是否是被删除的数据
+                if(line_amt.up().up().style['display'] != 'none')
+                sum += parseFloat(line_amt.value);
+                }
+                );
+            $('sum_field').value = sum;
+          }
+
 
 };

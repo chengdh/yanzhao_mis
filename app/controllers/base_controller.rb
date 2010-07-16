@@ -8,7 +8,7 @@ class BaseController < ApplicationController
 
     instance_variable_set("@#{@param_name.tableize}",the_models)
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :template => params[:template] if !params[:template].blank? }# index.html.erb
       format.xml  { render :xml => the_models }
     end
   end

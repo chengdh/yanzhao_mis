@@ -4,6 +4,7 @@
   @search.date_to = Date.today.months_since(12) 
 %>
 <%form_for @search,:url => {:action => :new},:method => :get, :html => { :class => :uniForm } do |f| -%>
+  <%=hidden_field_tag :active_sub_tab,3 %>
   
   <fieldset class='blockLabels'>
     <div class="ctrlHolder">

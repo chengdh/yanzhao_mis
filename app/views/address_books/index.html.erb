@@ -29,8 +29,8 @@
               <%=status_time_ago_in_words(address_book.updated_at) %>
             </td>
             <td class="last">
-              <%= link_to "查看",address_book %> |
-              <%= link_to "修改", edit_address_book_path(address_book) %> |
+              <%= link_to "查看",address_book_path(address_book,:active_sub_tab => 10) %> |
+              <%= link_to "修改", edit_address_book_path(address_book,:active_sub_tab => 9) %> |
               <%= link_to "删除", address_book, :method => :delete, :confirm => "确定删除吗?" %>
             </td>
           </tr>          

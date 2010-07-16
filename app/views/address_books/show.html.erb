@@ -1,10 +1,6 @@
 <div class="block">
   <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", address_books_path  %></li>
-      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_address_book_path %></li>
-      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", address_book_path %></li>
-    </ul>
+    <%= render :partial => "shared/messages/caption" %>
   </div>          
   <div class="content">
     <div class="inner">

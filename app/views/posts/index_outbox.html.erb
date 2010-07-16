@@ -3,13 +3,13 @@
     <%= render :partial => "caption" %>
   </div>          
   <div class="content">          
-    <h2 class="title">收信列表</h2>
+    <h2 class="title">发件箱</h2>
     <div class="inner">
       <table class="table">
         <%@posts.each do |post| -%>
-          <tr class="<%= cycle("odd", "even") %> <%= check_message_state(post)%>">
+          <tr class="<%= cycle("odd", "even") %>">
             <td>
-              <span class='ellipsis'> 发件人:<%= post.user == current_user ? '我' : post.user.username%></span>
+              <span class='ellipsis'> 收件人:<%= post.visitors_list%></span>
             </td>
             <td width='530'>
               <span class='ellipsis' style='width : 500px'><%= link_to post.title, post_path(post,:active_sub_tab => 4) %></span>

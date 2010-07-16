@@ -17,12 +17,12 @@
           <tr class="<%= cycle("odd", "even") %>">
             <td></td>
             <td>
-              <%= conntract.org.name %>
+              <%= contract.org.name %>
             </td>
             <td><%="#{contract.date_from} ~ #{contract.date_to}"%></td>
             <td><%=contract.created_at.to_date%></td>
             <td class="last">
-              <%= link_to "修改", edit_contract_path(contract) %> |
+              <%= link_to "修改", edit_contract_path(contract,:active_sub_tab => 4) %> |
               <%= link_to "删除", contract, :method => :delete, :confirm => "您确定删除该信息吗？" %>
             </td>
           </tr>          

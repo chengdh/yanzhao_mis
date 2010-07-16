@@ -15,6 +15,11 @@ class MessagesController < BaseController
 
     instance_variable_set("@#{@param_name.tableize}",messages)
     instance_variable_set("@#{@param_name.tableize}_group",messages_group)
+    respond_to do |format|
+      format.html { render params[:template] if !params[:template].blank? }# index.html.erb
+      format.xml  { render :xml => messages }
+    end
+
   end
   # GET /the_models/new
   # GET /the_models/new.xml
@@ -43,7 +48,7 @@ class MessagesController < BaseController
     respond_to do |format|
       if message.save
         flash[:notice] = '@model_klazz was successfully created.'
-        format.html { redirect_to :action => :index }
+        format.html { redirect_to :back }
         format.xml  { render :xml => message, :status => :created, :location => message }
       else
         format.html { render "shared/messages/new" }
@@ -62,7 +67,7 @@ class MessagesController < BaseController
     respond_to do |format|
       if message.update_attributes(params[@param_name])
         flash[:notice] = '@model_klazz was successfully updated.'
-        format.html { redirect_to :action => :index }
+        format.html { redirect_to :back }
         format.xml  { head :ok }
       else
         format.html { render "shared/messages/edit" }
@@ -83,7 +88,7 @@ class MessagesController < BaseController
     respond_to do |format|
       if message.update_attributes(params[@param_name])
         flash[:notice] = '@model_klazz was successfully updated.'
-        format.html { redirect_to :action => :index }
+        format.html { redirect_to :back }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
