@@ -1,1 +1,1 @@
-<%=render "durable_receipts/caption"%>
+<%=render (params[:search][:material_type_is].include?("Durable")) ? "durable_receipts/caption" : "consumer_receipts/caption"%>

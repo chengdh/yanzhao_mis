@@ -1,0 +1,55 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render 'durable_receipts/caption' %>
+  </div>          
+  <div class="content">          
+    <h2 class="title">耐用品列表</h2>
+    <div class="inner">
+      <%form_for :search,:url => {:action => :index},:html => {:method => :get} do |f|%>
+        <table class="table">
+          <tr>
+            <td><%= f.label :material_inout_org_id_is,"部门:" %></td>
+            <td><%= f.select :material_inout_org_id_is, orgs_for_select,:include_blank => true %></td>
+            <td><%= f.label :material_name_like,"物品名称:" %></td>
+            <td><%= f.text_field :material_name_like, :class => 'textInput' %></td>
+            <td><%= f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%></td>
+          </tr>
+        </div>
+      <%end%>
+
+      <table class="table">
+        <tr>             
+          <th class='first'>&nbsp;</th>
+          <th>物品名称</th>
+          <th>数量</th>
+          <th>金额</th>
+          <th>&nbsp;</th>
+        </tr>
+        <%@group_material_inout_lines.each do |org_name,lines| %>
+          <tr><td colspan='5'><h3><%=org_name%></h3></td></tr>
+          <% lines.each do |line| -%>
+            <tr class="<%= cycle("odd", "even") %>">
+              <td>&nbsp;</td>
+              <td>
+                <%= line.material.name %>
+              </td>
+              <td>
+                <%= line.qty %>
+              </td>
+
+              <td>
+                <%=line.amt %>
+              </td>
+              <td>
+              </td>
+            </tr>          
+          <% end -%>
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--% content_for :sidebar, render(:partial => 'sidebar') -%-->

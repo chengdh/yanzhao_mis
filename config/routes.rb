@@ -28,7 +28,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :m_storages,:collection => {:show_search => :get,:search => :get}
 
-  map.resources :material_inouts
+  map.resources :material_inout_lines,:onlu => [:index]
 
   map.resources :warehouses
 

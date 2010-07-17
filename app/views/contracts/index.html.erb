@@ -15,7 +15,7 @@
         </tr>
         <% @contracts.each do |contract| -%>
           <tr class="<%= cycle("odd", "even") %>">
-            <td></td>
+            <td><%=link_to_function("<span class='red-text'>警</span>","Modalbox.show('<h2>合同即将到期!</h2>',{title : false})") if contract.date_to <= (3.months.since.to_date)%></td>
             <td>
               <%= contract.org.name %>
             </td>

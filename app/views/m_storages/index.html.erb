@@ -6,12 +6,14 @@
     <h2 class="title">库存查询</h2>
     <div class="inner">
       <%form_for :search,:url => {:action => :index},:html => {:method => :get} do |f|%>
+        <%=hidden_field_tag "search[material_type_is]",params[:search][:material_type_is]%>
         <table class="table">
           <tr>
             <td><%= f.label :warehouse_id_is,"仓库:" %></td>
             <td><%= f.select :warehouse_id_is, warehouses_for_select,:include_blank => true %></td>
             <td><%= f.label :material_name_like,"名称:" %></td>
             <td><%= f.text_field :material_name_like, :class => 'textInput' %></td>
+            <td><%= f.check_box :qty_gte %><%=f.label :qty_gte,"不显示库存为零的物品"%></td>
             <td><%= f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%></td>
           </tr>
         </div>
@@ -28,7 +30,7 @@
           <th>金额</th>
         </tr>
         <%@m_storages.each do |m|%>
-          <tr>
+          <tr class="<%=cycle 'odd','even'%>">
             <td><%=link_to_function("<span class='red-text'>警</span>","Modalbox.show('<h2>#{m.material.name}库存低于下限:#{m.material.min_count}</h2>',{title : false})") if m.alert%></td>
             <td><%=m.warehouse.name%></td>
             <td><%=m.material.name%></td>

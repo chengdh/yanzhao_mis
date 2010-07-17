@@ -224,6 +224,10 @@ module ApplicationHelper
   def unread_posts_count
     @unread_posts_count > 0  ? "<span class='red-text'>(#{@unread_posts_count}新)</span>" : ''
   end
+  #报警标志
+  def alert(count)
+    count > 0  ? "<span class='red-text'>(#{count}警)</span>" : ''
+  end
 
   #测试信息读取状态
   def check_message_state(msg)

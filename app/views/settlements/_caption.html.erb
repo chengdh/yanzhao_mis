@@ -1,6 +1,6 @@
 <ul class="wat-cf">
   <li class="first <%=check_sub_active_tab(1)%>"><%= link_to "结算表", settlements_path(:active_sub_tab => 1)   %></li>
-  <li class="<%=check_sub_active_tab(2)%>"><%= link_to "合同模板", contracts_path(:active_sub_tab => 2)   %></li>
+  <li class="<%=check_sub_active_tab(2)%>"><%= link_to "合同模板#{alert(@contract_alert_count)}", contracts_path(:active_sub_tab => 2)   %></li>
 
   <%if params[:active_sub_tab] == '3'%>
     <li class="active"><%= link_to "新建", self.send("new_#{@param_name}_path",:active_sub_tab => 3)   %></li>

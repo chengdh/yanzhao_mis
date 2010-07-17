@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100716112643) do
+ActiveRecord::Schema.define(:version => 20100717072346) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -101,7 +101,8 @@ ActiveRecord::Schema.define(:version => 20100716112643) do
     t.string   "note"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_active",                                                :default => true, :null => false
+    t.boolean  "is_active",                                                :default => true,  :null => false
+    t.boolean  "alert",                                                    :default => false
   end
 
   create_table "m_storages", :force => true do |t|

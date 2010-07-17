@@ -7,6 +7,18 @@
 }
 
 #user-navigation ul li.active a:link,#user-navigation ul li.active a:visited,#user-navigation ul li.active a:hover,#user-navigation ul li.active a:active { color : #262626;}
+/*表格的间隔色*/
+tr.odd {
+  background-color: #ffffff;
+  color:#000000;
+  cursor:hand;
+}
+tr.even {
+  background-color: #f0f0f0;
+  color:#000000;
+  cursor:hand;
+  border-color:Purple:
+}
 /* 重写block容器 */
 #select_user_wrap .block{
   -moz-border-radius : 4px;

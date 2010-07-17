@@ -8,6 +8,8 @@ class ReceiptObserver < ActiveRecord::Observer
       m_storage.avg_price = (m_storage.qty*m_storage.avg_price + line.price * line.qty)/(m_storage.qty + line.qty)
       #更新库存
       m_storage.qty += line.qty
+      #设置库存报警
+      m_storage.alert = (line.material.min_count > 0 && m_storage.qty <= line.material.min_count) ? true : false
       m_storage.save
     end
   end
