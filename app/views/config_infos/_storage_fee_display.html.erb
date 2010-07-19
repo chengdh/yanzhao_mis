@@ -1,0 +1,16 @@
+<h4 class='group_title clearfix'>
+  仓储费费率设置
+  <% 
+    config_url = storage_fee_display.blank? ? new_config_info_path("config_info[config_key]" => ConfigInfo::KEY_STORAGE_FEE_RATE,"config_info[config_value_num]" => ConfigInfo.get_storage_fee_rate) : 
+      edit_config_info_path(storage_fee_display)
+
+    %>
+    <span class='float_right'>
+      <%=link_to "修改",config_url,:class => "red_text",
+        :onclick => "Modalbox.show(this.href,{title : '仓储费费率设置'});return false;"
+      %>
+    </span>
+  </h4>
+  <div class='tiny_box'>
+    <span><%="#{ConfigInfo.get_storage_fee_rate}&nbsp;&nbsp;元/件.天"%> </span>
+  </div>

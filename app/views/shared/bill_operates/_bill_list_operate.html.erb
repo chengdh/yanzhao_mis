@@ -1,0 +1,113 @@
+<!--在票据操作界面中显示的票据列表-->
+<table class='table'>
+  <thead>
+    <tr>
+      <th>运单号</th>
+      <th>货号</th>
+      <th>发货人</th>
+      <th>代收货款</th>
+      <th>运费</th>
+      <%if @model_klazz == TkInfo%>
+        <th>扣手续费</th>
+        <th>扣运费</th>
+        <th>实付货款</th>
+      <%end%>
+      <%if @model_klazz == Deliver%>
+        <th>仓储费</th>
+      <%end%>
+      <%if @model_klazz == ClearInfo%>
+        <th>清仓收入</th>
+      <%end%>
+      <th>删除</th>
+    </tr>
+  </thead>
+  <tbody id='list_table'>
+    <%bill_list_operate.bills.each do |the_bill|  %>
+      <input class='goods_fee' type='hidden' value="<%=the_bill.goods_fee%>" id='goods_fee_<%=the_bill.id%>' />
+      <input class='fee' type='hidden' value='<%=the_bill.fee%>' id='fee_<%=the_bill.id%>' />
+      <input class='k_hand_fee' type='hidden' value='<%=the_bill.k_hand_fee%>' id='k_hand_fee_<%=the_bill.id%>' />
+      <input class='k_carrying_fee' type='hidden' value='<%=the_bill.k_carrying_fee%>' id='k_carrying_fee_<%=the_bill.id%>' />
+      <input class='act_pay_fee' type='hidden' value='<%=the_bill.act_pay_fee%>' id='act_pay_fee_<%=the_bill.id%>' />
+      <input class='storage_fee' type='hidden' value='<%=the_bill.storage_fee%>' id='storage_fee_<%=the_bill.id%>' />
+
+      <tr id='added_bill_<%=the_bill.id%>'>
+        <%=hidden_field_tag "bills[]",the_bill.id%>
+        <td><%=the_bill.bill_no%></td>
+        <td><%=the_bill.goods_no%></td> 
+        <td><%=the_bill.sender_name%></td>
+        <td><%=the_bill.goods_fee%></td>
+        <td><%=the_bill.fee%></td>
+        <%if @model_klazz == TkInfo%>
+          <td><%=the_bill.k_hand_fee%></td>
+          <td><%=the_bill.k_carrying_fee%></td>
+          <td><%=the_bill.act_pay_fee%></td>
+        <%end%>
+        <%if @model_klazz == Deliver%>
+          <td><%=the_bill.storage_fee%></td>
+        <%end%>
+        <%if @model_klazz == ClearInfo%>
+          <td><input type='text' id='clear_fee_<%=the_bill.id%>' class='clear_fee' value='<%=the_bill.clear_fee%>' name='clear_fee[]' style='width : 50px;font-size : 1.2em;height : 25px;border : 2px solid blue;'/></td>
+        <%end%>
+        <td><a class='red_text' style='cursor:pointer;' onclick="$('added_bill_<%=the_bill.id%>').remove();cal_sum();">删除</a></td>
+      </tr>
+      <script type='text/javascript'>
+        var clear_field_id = 'clear_fee_<%=the_bill.id%>';
+if($(clear_field_id))
+{
+  //添加验证,清仓费用应为数字
+  var clear_field = new LiveValidation(clear_field_id,{validMessage : ''});
+  clear_field.add(Validate.Numericality,{notANumberMessage : 'X'});
+  //注册清仓费用变化时重新合计
+  $(clear_field_id).observe('change',billOperateUtil.cal_sum.bindAsEventListener(this));
+}
+</script>
+
+    <%end%>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='3'>合计</td>
+      <td id='sum_goods_fee'></td>
+      <td id='sum_fee'></td>
+      <%if @model_klazz == TkInfo%>
+        <td id='sum_k_hand_fee'></td>
+        <td id='sum_k_carrying_fee'></td>
+        <td id='sum_act_pay_fee'></td>
+      <%end%>
+      <%if @model_klazz == Deliver%>
+        <td id='sum_storage_fee'></td>
+      <%end%>
+      <%if @model_klazz == ClearInfo%>
+        <td id='sum_clear_fee'></td>
+      <%end%>
+      <td></td>
+    </tr>
+  </tfoot>
+</table>
+
+<div class='actions-bar text-right'>
+  <span class='red-text' id='error_span'></span>
+  <%=text_field_tag 'txt_bill_no',nil,:autocomplete => "off",:style => "font-size : 1.2em;height : 25px;border : 2px solid blue;"%>
+  <%=link_to_remote '录入票据号添加票据',
+    :url => search_carrying_bills_path,
+    :method => :get,
+    :before => "if(!before_add_bill()) return false;",
+    :update =>{:failure => :error_span },
+    :position => :bottom,
+    :with => "'search[bill_no_is]='+$('txt_bill_no').value"%>
+  </div>
+  <script type='text/javascript'>
+    //添加单据前的检查
+  before_add_bill = function(){
+    $('error_span').update('');
+    if($('txt_bill_no').value.blank()) 
+    {
+      $('error_span').update('请录入票据号查询');
+      $('txt_bill_no').focus();
+      return false;
+    }
+    return true;
+  };
+//计算票据合计
+billOperateUtil.cal_sum();
+</script>

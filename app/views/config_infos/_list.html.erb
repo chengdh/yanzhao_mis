@@ -1,0 +1,24 @@
+<div id='hand_fee_list_wrap'>
+  <%= render :partial => 'config_infos/list_hand_fee',:object =>@hand_fee_rates  %>
+</div>
+<div id='storage_fee_wrap'>
+  <%= render :partial => 'config_infos/storage_fee_display',:object => @storage_fee_rate %>
+</div>
+<div id='query_range_wrap'>
+  <%= render :partial => 'config_infos/query_range_display',:object => @force_query_range %>
+</div>
+<h4 class='group_title'>系统预设的手费比例</h4>
+<p>默认情况下,系统预设了手续费的收取比例,当您未设置手续费收费比例时,
+系统将按照默认的设置计算手续费,如果您设置的手续费比例无法计算当前的手续费时,系统也将使用默认的设置计算手续费,
+默认收费费设置如下表所示:
+</p>
+<table>
+  <tr class='border_bottom'><td> 0 ~ 1000元</td><td>1.0元</td></tr>
+  <tr class='border_bottom'><td> 1001 ~ 2000元</td><td>2.0元</td></tr>
+  <tr class='border_bottom'><td> 2001 ~ 3000元</td><td>3.0元</td></tr>
+  <tr class='border_bottom'><td> 3001 ~ 4000元</td><td>4.0元</td></tr>
+  <tr class='border_bottom'><td> 4001 ~ 5000元</td><td>5.0元</td></tr>
+  <tr class='border_bottom'><td colspan='3'> ...以此类推</td></tr>
+</table>
+
+

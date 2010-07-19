@@ -1,0 +1,27 @@
+<%remote_form_for @config_info,:html =>{:class => "uniForm",:id => "storate_fee_rate_form"} do |f|  %>
+  <%=f.error_messages%>
+  <fieldset class='blockLabels'>
+    <%=f.hidden_field :config_key%>
+    <div class='ctrlHolder'>
+      <%=f.label :config_num_from,"起始金额(元)"%>
+      <%=f.text_field :config_num_from, :size => "20",:maxlength => "20",:class=>"textInput"%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :config_num_to,"结束金额(元)"%>
+      <%=f.text_field :config_num_to, :size => "20",:maxlength => "20",:class=>"textInput"%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :config_value_num,"手续费金额(元)"%>
+      <%=f.text_field :config_value_num, :size => "20",:maxlength => "20",:class=>"textInput"%>
+    </div>
+  </fieldset>
+  <div class='tiny_box'>
+    <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexygreen'%>
+    <%if !@config_info.new_record?%>
+      <%=link_to_remote  "删除",:url => config_info_path(@config_info),:method => :delete,
+        :confirm => "确认删除吗?",
+        :html => {:class=> "sexybutton sexysimple"}%> 
+    <%end%>
+    <%=link_to_function '取消',"Modalbox.hide();return false;",:class => "sexybutton sexysimple sexyred"%>
+  </div>
+<%end%>

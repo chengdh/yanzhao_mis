@@ -1,8 +1,10 @@
 <div class="block">
-  <h3>新建合同模板</h3>
-  <div class="content">
-    <%=render "pre_new"%>
-  </div>
+  <h3>新建</h3>
+  <ul class="navigation">
+    <li><%= link_to "新建票据", self.send("new_#{@param_name}_path") %></li>
+    <li><%= link_to "", new_sub_company_path %></li>
+    <li><%= link_to "新建仓库", new_warehouse_path %></li>
+  </ul>
 </div>
 <div class="block">
   <h3>查询</h3>

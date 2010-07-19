@@ -1,0 +1,27 @@
+<%form_tag url_for(:action => :index),:method => :get ,:class => "tiny_box uniForm",:id => "query_form" do  %>
+  <!--查询结果应转回的页面-->
+  <%=hidden_field_tag "active_tab",params[:active_tab]%>
+  <%=hidden_field_tag "active_sub_tab",params[:active_sub_tab]%>
+  <%=hidden_field_tag "bill_type",params[:bill_type]%>
+  <fieldset class='inlineLabels'>
+    <div class='ctrlHolder'>
+      <%= label_tag "bill_no",'票据号' %>
+      <%= text_field_tag "bill_operate[bill_no]",nil,:size => "20",:name => "bill_operate[bill_no]",:maxlength => "20",:class=>"textInput" %>
+    </div>
+
+    <div class='ctrlHolder'>
+      <%=label_tag "user",'操作人' %>
+      <%=select "bill_operate","user",User.all.collect {|user| [user.username,user.id]},{:include_blank => true} %>
+    </div>
+
+    <div class='ctrlHolder'>
+      <%= label_tag "from_created",'操作时间' %>
+      <%= calendar_date_select_tag "bill_operate[created_from]",'',:name => "bill_operate[created_from]",:class => 'textInput',:popup => 'force' %>
+    </div>														
+    <div class='ctrlHolder'>
+      <label>&nbsp;</label>
+      <%= calendar_date_select_tag "bill_operate[created_to]",'',:name => "bill_operate[created_to]",:class => 'textInput',:popup => 'force' %>
+    </div>
+  </fieldset>
+  <%=submit_tag '查询', :class => 'sexybutton sexysimple sexyblue'%>
+<%end%>

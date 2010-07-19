@@ -1,0 +1,7 @@
+page.call "Modalbox.hide"
+page.replace_html "hand_fee_list_wrap",:partial => "list_hand_fee",:object => success_save if @config_info.config_key == ConfigInfo::KEY_HAND_FEE_RATE
+#新建仓储费费率
+page.replace_html "storage_fee_wrap",:partial => "storage_fee_display",:object => success_save if @config_info.config_key == ConfigInfo::KEY_STORAGE_FEE_RATE
+#新建查询时间区间
+page.replace_html "query_range_wrap",:partial => "query_range_display",:object => success_save  if @config_info.config_key == ConfigInfo::KEY_QUERY_DATE_RANGE
+

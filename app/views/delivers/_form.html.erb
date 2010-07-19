@@ -1,0 +1,29 @@
+<%form.deliver_date = Time.now.beginning_of_day%>
+<%remote_form_for form,:html =>{:class => "uniForm",:id => "bill_operate_form"} do |f|  %>
+  <%=flash[:notice]%>
+  <%=f.error_messages %>
+  <%= render :partial => 'shared/bill_operates/bill_list_operate',:object => form %>
+  <fieldset class='inlineLabels'>
+    <div class='ctrlHolder'>
+      <%=f.label :deliver_date,"提货日期" %>
+      <%=f.calendar_date_select :deliver_date,:popup => :force,:class=> 'shortTextInput'%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :deliver_name,"提货人姓名<span class='red_text'>(必输)</span>" %>
+      <%=f.text_field :deliver_name, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :identify_type,"证件类型" %>
+      <%=f.text_field :identify_type, :size => "30",:maxlength => "30",:class=>"textInput"%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :identify_no,"证件号码" %>
+      <%=f.text_field :identify_no, :size => "30",:maxlength => "30",:class=>"textInput"%>
+    </div>
+  </fieldset>
+
+  <div class='tiny_box'>
+    <%=f.submit '保存提货信息', :class => 'sexybutton sexysimple sexygreen'%>
+    <%=link_to_function '取消',"Modalbox.hide();return false;",:class => "sexybutton sexysimple sexyred"%>
+  </div>
+<%end%>

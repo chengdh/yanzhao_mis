@@ -1,0 +1,32 @@
+<h1>Listing config_infos</h1>
+
+<table>
+  <tr>
+    <th>Config key</th>
+    <th>Config value</th>
+    <th>Config num from</th>
+    <th>Config num to</th>
+    <th>Config date from</th>
+    <th>Config date to</th>
+    <th>Config value num</th>
+  </tr>
+
+<% @config_infos.each do |config_info| %>
+  <tr>
+    <td><%=h config_info.config_key %></td>
+    <td><%=h config_info.config_value %></td>
+    <td><%=h config_info.config_num_from %></td>
+    <td><%=h config_info.config_num_to %></td>
+    <td><%=h config_info.config_date_from %></td>
+    <td><%=h config_info.config_date_to %></td>
+    <td><%=h config_info.config_value_num %></td>
+    <td><%= link_to 'Show', config_info %></td>
+    <td><%= link_to 'Edit', edit_config_info_path(config_info) %></td>
+    <td><%= link_to 'Destroy', config_info, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New config_info', new_config_info_path %>

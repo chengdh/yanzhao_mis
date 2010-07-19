@@ -1,0 +1,22 @@
+<div class="block">
+  <h3>新建</h3>
+  <ul class="navigation">
+    <li><%= link_to "新建票据", new_carrying_bill_path(:active_sub_tab => 7) %></li>
+  </ul>
+</div>
+<div class="block">
+  <h3>操作</h3>
+  <ul class="navigation">
+    <li><%= link_to "提款操作", new_tk_info_path,:onclick => "Modalbox.show(this.href,{title : false,width : 700,height : 400});return false" %></li>
+    <li><%= link_to "票据核销", new_post_info_path,:onclick => "Modalbox.show(this.href,{title : false,width : 700,height : 400});return false" %></li>
+    <li><%= link_to "导出查询结果", carrying_bills_path(params,:format => :csv) %></li>
+  </ul>
+</div>
+
+<div class="block">
+  <h3>查询</h3>
+  <div class="content">
+    <%=render "shared/bills/search_form"%>
+  </div>
+</div>
+

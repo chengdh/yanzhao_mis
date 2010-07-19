@@ -1,0 +1,14 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render 'caption' %>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%=bill.new_record? ? "新建票据" : "修改票据"%></h2>
+  
+    <div class="inner">
+      <%=render :partial => "shared/bills/bill_form",:object => bill %>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render('sidebar') -%>

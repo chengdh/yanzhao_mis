@@ -1,0 +1,12 @@
+<h1>Editing inout_bill</h1>
+
+<% form_for(@inout_bill) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @inout_bill %> |
+<%= link_to 'Back', inout_bills_path %>

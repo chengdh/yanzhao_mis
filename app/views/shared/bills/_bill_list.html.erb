@@ -1,0 +1,106 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>操作</th>
+      <%if !bill_list[:show_select].blank? && bill_list[:show_select]%>
+        <th>选择</th>
+      <%end%>
+      <th>序号</th>
+      <th>票据月份</th>
+      <th>运单号</th>
+      <th>货号</th>
+      <th>发货人</th>
+      <th>运费</th>
+      <th>代收货款</th>
+      <%if bill_list[:bills].any?{|the_bill| the_bill.class.eql?(CarryingBill)}%>
+        <th>扣运费</th>
+        <th>扣手续费</th>
+        <th>实付货款</th>
+      <%else%>
+        <th>件数</th>
+        <th>仓储费</th>
+        <th>清仓收入</th>
+      <%end%>
+      <th>状态</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%bill_list[:bills].each_with_index do |bill,index|%>
+      <tr id='bill_<%=bill.id%>' class="cycle('odd','even')">
+        <td><%=link_to "操作",bill, :onclick =>"Modalbox.show(this.href,{title : '票据操作',width : 500});return false;"%></td>
+        <%if !bill_list[:show_select].blank? && bill_list[:show_select]%>
+          <td>
+            <%=check_box_tag "cbx_#{bill.id}","",false,:disabled => show_select_checkbox(params[:template],bill),:onclick => remote_function(:method => :get,:url => self.send("select_#{@param_name}_path",bill),:with => "'is_select='+$(this).checked") %>
+          </td>
+        <%end%>
+        <td><%=order_no(index,params[:page],params[:per_page])%></td>
+        <td><%=bill.bill_mth%></td>
+        <td><%=bill.bill_no%></td>
+        <td><%=bill.goods_no%></td>
+        <td><%=bill.sender_name%></td>
+
+        <td><%=bill.fee%></td>
+        <td><%=bill.goods_fee%></td>
+
+        <%if bill_list[:bills].any?{|the_bill| the_bill.class.eql?(CarryingBill)}%>
+          <td><%=bill.k_carrying_fee%></td>
+          <td><%=bill.k_hand_fee%></td>
+          <td><%=bill.act_pay_fee%></td>
+        <%else%>
+          <td><%=bill.goods_num%></td>
+          <td><%=bill.storage_fee%></td>
+          <td><%=bill.clear_fee%></td>
+        <%end%>
+        <td><%=bill_state_display(bill.state)%></td>
+      </tr>
+    <%end%>
+    <%if bill_list[:bills].size < 15 %>
+      <%(15 - bill_list[:bills].size).times do %>
+        <tr class="<%=cycle('odd','even') %>"><td colspan='30'>&nbsp;</td></tr>
+      <%end%>
+    <%end%>
+    <tr>
+      <%if !bill_list[:show_select].blank? && bill_list[:show_select]%>
+        <td colspan='7'>当页合计:</td>
+      <%else%>
+        <td colspan='6'>当页合计:</td>
+      <%end%>
+      <td><%=bill_list[:bills].sum {|bill| bill.fee}%></td>
+      <td><%=bill_list[:bills].sum {|bill| bill.goods_fee}%></td>
+
+      <%if bill_list[:bills].any?{|the_bill| the_bill.class.eql?(CarryingBill)}%>
+        <td><%=bill_list[:bills].sum {|bill| bill.k_carrying_fee}%></td>
+        <td><%=bill_list[:bills].sum {|bill| bill.k_hand_fee}%></td>
+        <td><%=bill_list[:bills].sum {|bill| bill.act_pay_fee}%></td>
+      <%else%>
+        <td><%=bill_list[:bills].sum {|bill| bill.goods_num}%></td>
+        <td><%=bill_list[:bills].sum {|bill| bill.storage_fee}%></td>
+        <td><%=bill_list[:bills].sum {|bill| bill.clear_fee}%></td>
+      <%end%>
+    </tr>
+  </tbody>
+</table>
+<div id='paginate_wrap' class='text-center'>
+  <%if !bill_list[:show_sum].blank? && bill_list[:show_sum]%>
+    <span>
+      <%="共有票据#{@sum_info[:count]}张,运费#{@sum_info[:sum_fee]}元,货款#{@sum_info[:sum_goods_fee]}元,货物#{@sum_info[:sum_goods_num]}件"%>
+
+      <%if bill_list[:bills].any?{|the_bill| the_bill.class.eql?(CarryingBill)}%>
+        <%="扣手续费#{@sum_info[:sum_k_hand_fee]}元,扣运费#{@sum_info[:sum_k_carrying_fee]}元,实付货款#{@sum_info[:sum_act_pay_fee]}元"%>
+      <%else%>
+        <%="仓储费#{@sum_info[:sum_storage_fee]}元,清仓收入#{@sum_info[:sum_clear_fee]}元"%>
+      <%end%>
+    </span> 
+  <%end%>
+  <%if !bill_list[:remote_paginate].blank? && bill_list[:remote_paginate]%>
+    <%=will_paginate bill_list[:bills],:renderer => 'RemoteLinkRenderer', :remote => {:update => "list_wrap"} %>
+  <%else%>
+    <%=will_paginate bill_list[:bills] %>
+  <%end%>
+</div>
+<%if bill_list[:show_select]%>
+  <script type='text/javascript'>
+    //更新页面中数据的选中状态
+  selector.update_page_selected();  
+  </script>
+<%end%>

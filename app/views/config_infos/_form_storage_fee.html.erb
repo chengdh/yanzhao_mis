@@ -1,0 +1,14 @@
+<%remote_form_for @config_info,:html =>{:class => "uniForm",:id => "storate_fee_rate_form"} do |f|  %>
+  <%=f.error_messages%>
+  <fieldset class='inlineLabels'>
+    <%=f.hidden_field :config_key%>
+    <div class='ctrlHolder'>
+      <%=f.label :config_value_num,"仓储费费率设置"%>
+      <%=f.text_field :config_value_num, :size => "20",:maxlength => "20",:class=>"shortTextInput"%>元/件.天 
+    </div>
+  </fieldset>
+  <div class='tiny_box'>
+    <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexygreen'%>
+    <%=link_to_function '取消',"Modalbox.hide();return false;",:class => "sexybutton sexysimple sexyred"%>
+  </div>
+<%end%>

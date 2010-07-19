@@ -1,0 +1,45 @@
+<% form_for @search,:url => {:action => :index},:html => {:class => :uniForm } do |f| -%>
+  <fieldset class='inlineLabels'>
+    <div class='ctrlHolder'>
+      <%=f.label :bill_no_or_goods_no_or_sender_name_or_sender_phone_or_receiver_name_or_receiver_phone_or_goods_info_like,"关键字"%>
+      <%=f.text_field :bill_no_or_goods_no_or_sender_name_or_sender_phone_or_receiver_name_or_receiver_phone_or_goods_info_like,:class => 'textInput' %>
+      <p class='formHint'>票据号/货号/姓名/电话等</p>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :bill_mth_is,"票据月份"%>
+      <%=f.select :bill_mth_is,months_for_select,:include_blank => true %>
+    </div>
+
+    <div class='ctrlHolder'>
+      <%=f.label :from_org_id_is,"发货地"%>
+      <%=f.select :from_org_id_is,sub_companies_for_select,:include_blank => true %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :to_org_id_is,"到货地"%>
+      <%=f.select :to_org_id_is,sub_companies_for_select,:include_blank => true %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :bill_type_is,"票据性质"%>
+      <%=f.select :bill_type_is,billType_for_select,:include_blank => true %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :pay_type_is,"支付方式"%>
+      <%=f.select :pay_type_is,payType_for_select,:include_blank => true %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :state_is,"票据状态"%>
+      <%=f.select :state_is,bill_state_for_select,:include_blank => true %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :created_at_gte,"录入时间"%>
+      <%=f.calendar_date_select :created_at_gte,:class => "shortText" %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :created_at_lte,"~"%>
+      <%=f.calendar_date_select :created_at_lte,:class => "shortText" %>
+    </div>
+  </fieldset>
+  <div class="actions-bar">
+    <%=f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%>
+  </div>
+<% end -%>

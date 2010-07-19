@@ -1,5 +1,283 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+//yanzhao-bill begin
+//单据选择器对象，主要用于选择单据，并将选择的单据传给服务器
+var SelectHelper = {};
+
+SelectHelper.Selector = Class.create();
+SelectHelper.Selector.prototype =
+{
+
+    cached            : new Hash(),    //缓存的全部单据id
+    cached_sumInfo    : {},         //缓存合计信息
+    selected_sumInfo  : {sum_goods_num : 0,sum_fee : 0,sum_goods_fee : 0,sum_k_hand_fee : 0 , sum_k_carrying_fee : 0, sum_act_pay_fee : 0,sum_storage_fee : 0,sum_clear_fee : 0 },
+    //构造函数
+    //bill_ids 缓存的票据数组
+    //cached_sumInfo 缓存的合计信息
+    //sum_info_span 选择信息显示的容器
+    //bill_type carrying_bill inout_bill
+    initialize        : function(bill_ids,cached_sumInfo,sum_info_span,bill_type)
+                        {
+                          this.cached_sumInfo = cached_sumInfo;
+                          this.sum_info_span = sum_info_span;
+                          this.bill_type = bill_type;
+                          bill_ids.each(function(bill)
+                              {
+                                //初始情况下所有单据都未被选中
+                                //判断json对象的属性名称,在提款票据中为carrying_bill
+                                //在提货票据中是inout_bill
+                                /*
+                                if(typeof(bill.carrying_bill) != 'undefined')
+                                  this.cached.set(bill.carrying_bill.id,false);
+                                else
+                                  this.cached.set(bill.inout_bill.id,false);
+                                  */
+
+                                  this.cached.set(bill.id,false);
+                              }
+                              ,this);
+                        },
+    //选择单张单据
+    //select_object 自服务器传输的json对象[bill,is_select]
+    //see CarryingBillController.select
+    select_bill       : function(select_object)
+                    {
+                      
+                      var bill ;
+                      /*
+                      if(typeof(select_object[0].carrying_bill) != 'undefined')
+                        bill= select_object[0].carrying_bill;
+                      else
+                        bill= select_object[0].inout_bill;
+                        */
+                      bill = select_object[0];
+                      var is_select = select_object[1] == "true" ? true : false;
+                    
+                      this.cached.set(bill.id,is_select);
+                      this.re_sum(bill,is_select)
+                      this.update_sumInfo();
+
+                    },
+                
+    select_all : function(is_select)
+             {
+                this.cached.each(function(pair)
+                    {
+                      this.cached.set(pair.key,is_select);
+                    }
+                    ,this); 
+                 //如果全选,则设置已选定的合计信息为缓存合计信息
+                if(is_select)
+                  this.selected_sumInfo = Object.clone(this.cached_sumInfo);
+                else
+                  this.selected_sumInfo = {sum_goods_num : 0,sum_fee : 0,sum_goods_fee : 0,sum_k_hand_fee : 0 , sum_k_carrying_fee : 0, sum_act_pay_fee : 0,sum_storage_fee : 0,sum_clear_fee : 0 };
+                this.update_sumInfo();
+                this.update_page_selected();        
+             },
+    //选择单据后重新计算合计
+    re_sum : function(bill,is_select)
+             {
+                if(is_select)
+                {
+
+                 this.selected_sumInfo.sum_goods_num +=bill.goods_num;  
+                 this.selected_sumInfo.sum_fee +=bill.fee;  
+                 this.selected_sumInfo.sum_goods_fee +=bill.goods_fee;  
+                 this.selected_sumInfo.sum_k_hand_fee +=bill.k_hand_fee;  
+                 this.selected_sumInfo.sum_k_carrying_fee +=bill.k_carrying_fee;  
+                 this.selected_sumInfo.sum_act_pay_fee +=bill.act_pay_fee;  
+                 this.selected_sumInfo.sum_clear_fee +=bill.clear_fee;  
+                 this.selected_sumInfo.sum_storage_fee +=bill.storage_fee;  
+                
+                }
+                else
+                {
+
+                  this.selected_sumInfo.sum_goods_num -=bill.goods_num;  
+                  this.selected_sumInfo.sum_fee -=bill.fee;  
+                  this.selected_sumInfo.sum_goods_fee -=bill.goods_fee;  
+                  this.selected_sumInfo.sum_k_hand_fee -=bill.k_hand_fee;  
+                  this.selected_sumInfo.sum_k_carrying_fee -=bill.k_carrying_fee;  
+                  this.selected_sumInfo.sum_act_pay_fee -=bill.act_pay_fee;  
+                  this.selected_sumInfo.sum_clear_fee -=bill.clear_fee;  
+                  this.selected_sumInfo.sum_storage_fee -=bill.storage_fee;  
+                }
+             },
+             //得到当前选择的单据数
+    selected_count : function()
+                     {
+                      var selected_count = 0;
+
+                      this.cached.each(function(pair){if(pair.value) selected_count++;},this);
+                      return selected_count; 
+                     },
+    //更新选择信息
+    update_sumInfo : function()
+                     {
+                       if(this.selected_count() == 0 )
+                       {
+                        $(this.sum_info_span).update("当前未选中任何票据");
+                        return;
+                       
+                       }
+                       var sum_des;
+                       if(this.bill_type == "carrying_bill")
+                        sum_des =new Template("共选中票据" + this.selected_count() +"张 "+"合计: 货物件数#{sum_goods_num} 运费#{sum_fee} 货款#{sum_goods_fee} 扣手续费#{sum_k_hand_fee}" +
+                                                 " 扣运费#{sum_k_carrying_fee} 实付货款 #{sum_act_pay_fee}"); 
+                       else
+                         sum_des =new Template("共选中票据" + this.selected_count() +"张 "+"合计: 货物件数#{sum_goods_num} 运费#{sum_fee} 货款#{sum_goods_fee} 仓储费#{sum_storage_fee}" +
+                                                 " 清仓费#{sum_clear_fee}"); 
+
+
+                      
+                      $(this.sum_info_span).update(sum_des.evaluate(this.selected_sumInfo));
+                     
+                     },
+                     //更新页面上被选中的数据
+                     //页面上的checkbox 命名规则为cbx_单据id
+    update_page_selected : function()
+                       {
+                         this.cached.each(function(pair)
+                             {
+                                try
+                              {
+                                  $("cbx_" + pair.key).checked = pair.value;
+                                }
+                                catch(ex){}
+                             }
+                             ,this); 
+                       },
+     //将选中单据转化为url参数,便于提交到服务器进行操作
+     //param_name 要转化的参数名称
+    toQueryStr : function()
+                {
+                  var  selected_array = new Array();
+                  this.cached.each(function(pair)
+                      {
+                        if(pair.value) selected_array.push(pair.key);
+                      },
+                      this);
+                  var ret = new Hash({"bills[]" : selected_array});
+                  return ret.toQueryString();
+                
+                }                  
+};
+//票据操作工具类,提供添加票据,计算票据合计等功能
+var billOperateUtil = {}; 
+//根据从服务器返回的json对象添加单张票据
+//callback_json [ bill_json 自服务器端返回的票据对象,bill_operate 票据操作类型]
+//页面上的table id = 'list_table'
+billOperateUtil.addBill = function(callback_json)
+{
+  var the_bill;
+  //操作类型
+  var operate_type = callback_json[1];
+  the_bill = callback_json[0];
+  //判断单据是否已在提款列表
+  if($('added_bill_' + the_bill.id))
+  {
+    $('error_span').update('票据' + the_bill.bill_no +'已在选择列表中' );
+    return false;
+  }
+  var tr_template = new Template
+    (
+     "<tr id='added_bill_#{id}'><td>#{bill_no}</td><td>#{goods_no}</td>" + 
+     "<input type='hidden' name='bills[]' value='#{id}'/>" +
+     "<input class='goods_fee' type='hidden' value='#{goods_fee}' id='goods_fee_#{id}' />" +
+     "<input class='fee' type='hidden' value='#{fee}' id='fee_#{id}' />" +
+     "<input class='k_hand_fee' type='hidden' value='#{k_hand_fee}' id='k_hand_fee_#{id}' />" +
+     "<input class='k_carrying_fee' type='hidden' value='#{k_carrying_fee}' id='k_carrying_fee_#{id}' />" +
+     "<input class='act_pay_fee' type='hidden' value='#{act_pay_fee}' id='act_pay_fee_#{id}' />"+
+     "<input class='storage_fee' type='hidden' value='#{storage_fee}' id='storage_fee_#{id}' />"+
+     "<td>#{sender_name}</td>" + 
+     "<td>#{goods_fee}</td>" + 
+     "<td>#{fee}</td>" + 
+     (operate_type == 'tk_info' ? "<td>#{k_hand_fee}</td><td>#{k_carrying_fee}</td><td>#{act_pay_fee}</td>" : "")+
+     (operate_type == 'deliver' ? "<td>#{storage_fee}</td>" : "")+
+     (operate_type == 'clear_info' ? "<td><input type='text' id='clear_fee_#{id}' class='clear_fee' name='clear_fee[]' value='#{clear_fee}' style='width : 50px;font-size : 1.2em;height : 25px;border : 2px solid blue;'/></td>" : "")+
+     "<td><a class='red_text' style='cursor:pointer;' onclick=$('added_bill_#{id}').remove();billOperateUtil.cal_sum();>删除</a></td></tr>"
+    );
+  var tr=tr_template.evaluate(the_bill);
+  $('list_table').insert(tr);
+
+  var clear_field_id = 'clear_fee_' + the_bill.id;
+  //添加验证,清仓费用应为数字
+  if($(clear_field_id))
+  {
+    var clear_field = new LiveValidation(clear_field_id,{validMessage : ''});
+    clear_field.add(Validate.Numericality,{notANumberMessage : 'X'});
+    //注册清仓费用变化时重新合计
+    $(clear_field_id).observe('change',billOperateUtil.cal_sum.bindAsEventListener(this));
+  }
+  billOperateUtil.cal_sum();
+};
+//添加票据后计算合计
+billOperateUtil.cal_sum = function()
+{
+  var cal_single_sum = function(fee_type)
+  {
+    var sum_fee =0;
+    var rs = $$('#list_table input.' + fee_type); 
+    rs.each(function(el){sum_fee +=parseFloat(el.value);});
+    //更新合计单元格
+    //加上try,防止出现异常
+    try
+    {
+      $('sum_' + fee_type).update(sum_fee);
+    }
+    catch(ex){alert(ex);}
+  };
+  cal_single_sum('fee');
+  cal_single_sum('goods_fee');
+  cal_single_sum('k_hand_fee');
+  cal_single_sum('k_carrying_fee');
+  cal_single_sum('act_pay_fee');
+  cal_single_sum('storage_fee');
+  cal_single_sum('clear_fee');
+};
+var util = {};
+util.getOs = function()
+{   
+  if(navigator.userAgent.indexOf("MSIE")>0)return 1;   
+  if(navigator.userAgent.indexOf("Firefox")>0)return 2;   
+  return 0;   
+};   
+ 
+util.bookmarkit = function(url){  
+  switch(util.getOs()){  
+       case 1:  
+         window.external.addFavorite(url,'票据管理系统');  
+           break;  
+       case 2:  
+         window.sidebar.addPanel('票据管理系统', url, "");  
+           break;  
+       case 0:  
+         alert("加入收藏失败，您使用的浏览器不支持这个功能");  
+         break;  
+  }  
+}; 
+//设为首页  
+util.setHome = function(obj,url)
+{  
+  obj.style.behavior='url(#default#homepage)';  
+  obj.setHomePage(url);  
+    return false;  
+} ; 
+util.translat_calendar = function()
+{
+  //  日历控件的汉化
+  _translations = 
+  {
+    "OK"    : "确定",
+    "Now"   : "现在",
+    "Today" : "当天",
+    "Clear" : "取消"
+  };
+  Date.weekdays = $w("1 2 3 4 5 6 7");
+  Date.months = $w("一月 二月 三月 四月 五月 六月 七月 八月 九月 十月 十一月 十二月" );
+};
+
+//yanzhao-bill end
 var com = {};
 com.yanzhao = {};
 //选择用户

@@ -1,0 +1,38 @@
+<p>
+  <b>Config key:</b>
+  <%=h @config_info.config_key %>
+</p>
+
+<p>
+  <b>Config value:</b>
+  <%=h @config_info.config_value %>
+</p>
+
+<p>
+  <b>Config num from:</b>
+  <%=h @config_info.config_num_from %>
+</p>
+
+<p>
+  <b>Config num to:</b>
+  <%=h @config_info.config_num_to %>
+</p>
+
+<p>
+  <b>Config date from:</b>
+  <%=h @config_info.config_date_from %>
+</p>
+
+<p>
+  <b>Config date to:</b>
+  <%=h @config_info.config_date_to %>
+</p>
+
+<p>
+  <b>Config value num:</b>
+  <%=h @config_info.config_value_num %>
+</p>
+
+
+<%= link_to 'Edit', edit_config_info_path(@config_info) %> |
+<%= link_to 'Back', config_infos_path %>

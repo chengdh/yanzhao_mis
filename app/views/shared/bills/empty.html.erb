@@ -1,0 +1,38 @@
+<div id="main_content" class='span-24  prepend-top'>
+  <h2 id='caption' class='text_center border_bottom'>
+    票据列表
+  </h2>
+  <h2 class='box highlight'>
+    您还没有创建任何票据
+    <%
+      new_url = @bill_klazz == CarryingBill ? new_carrying_bill_path(:redirect_to => params[:redirect_to],
+                                                                     :active_tab => params[:active_tab],
+                                                                     :active_sub_tab => params[:active_sub_tab]
+                                                                    ) :
+                                                                      new_inout_bill_path(:redirect_to => params[:redirect_to],
+                                                                     :active_tab => params[:active_tab],
+                                                                     :active_sub_tab => params[:active_sub_tab] )
+
+    %>
+    <span style='display : block;'><%=link_to '创建您的第一张票据',new_url ,:class => "red_text" %></span>
+    </h2>
+    <div>
+      <h3 class='box'>超期未提款票据如何创建?</h3>
+      <p class='border_bottom box'>
+      进入系统后,点击[票据管理]-[新建票据]录入新票据 
+      </p>
+      <h3 class='box'>超期未货票据如何创建?</h3>
+      <p class='border_bottom box'>
+      进入系统后,点击[入库单]-[新建入库单]录入新票据 
+      </p>
+
+      <h3 class='box'>票据录入后,如何进行后期处理?</h3>
+      <p class='border_bottom box'>
+      进入系统后,点击[未确认票据][提款处理][客户提货][清仓处理]等菜单项可进入对应的票据处理功能 
+      </p>
+      <h3 class='box'>如何添加新的分理处信息?</h3>
+      <p class='border_bottom box'>
+      如您是系统管理员,可进入[基础信息管理]功能项添加新的分理处信息,同时您也可修改分理处信息
+      </p>
+    </div>
+  </div>

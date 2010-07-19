@@ -1,0 +1,18 @@
+<h4 class='group_title'>查询时间限制</h4>
+<table>
+  <%query_range_display.each do |query_range|%>
+    <tr id='query_range_<%=query_range.id%>' class='border_bottom'>
+      <td><%=query_range.user.username%></td>
+      <td><%=query_range.config_date_from%>~<%=query_range.config_date_to%></td>
+      <td>
+        <%=link_to  "修改",edit_config_info_path(query_range) ,:class=> "red_text",:onclick => "Modalbox.show(this.href,{title : '查询时间限制'});return false;"%> 
+      </td>
+    </tr>
+  <%end%>
+  <tr>
+    <td colspan='3'>
+      <%=link_to  "添加时间限制",new_config_info_path("config_info[config_key]" => ConfigInfo::KEY_QUERY_DATE_RANGE) ,:class=> "red_text",:onclick => "Modalbox.show(this.href,{title : '查询时间限制'});return false;"%> 
+    </td> 
+  </tr>
+</table>
+

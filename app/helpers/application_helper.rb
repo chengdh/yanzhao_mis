@@ -236,5 +236,12 @@ module ApplicationHelper
     msg.message_visitors.all(:conditions => {:state => 'draft',:user_id => current_user.id}).blank? ? '' : 'unread'
     #待审核信息
   end
-
+  #根据索引生成页面上的序号
+  def order_no(index,cur_page,rows_per_page)
+    cur_page = 1 if cur_page.blank?
+    rows_per_page = 20 if rows_per_page.blank?
+    cur_page = cur_page.to_i if cur_page.kind_of?(String)
+    rows_per_page = cur_page.to_i if rows_per_page.kind_of?(String) 
+    index+1 + rows_per_page*(cur_page - 1) 
+  end
 end

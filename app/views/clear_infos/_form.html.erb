@@ -1,0 +1,14 @@
+<%form.clear_date = Time.now.beginning_of_day%>
+<%remote_form_for form,:html =>{:class => "uniForm",:id => "bill_operate_form"} do |f|  %>
+  <%=flash[:notice]%>
+  <%=f.error_messages %>
+  <%= render :partial => 'shared/bill_operates/bill_list_operate',:object => form %>
+  <fieldset class='inlineLabels'>
+    <%=f.hidden_field :clear_date%>
+  </fieldset>
+  <div class='tiny_box'>
+    <%=f.submit '保存清仓信息', :class => 'sexybutton sexysimple sexygreen'%>
+    <%=link_to_function '取消',"Modalbox.hide();return false;",:class => "sexybutton sexysimple sexyred"%>
+  </div>
+<%end%>
+<p class='highlight large red_text'>清仓后,运费及代收货款将被清零</p>

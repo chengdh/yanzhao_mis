@@ -1,0 +1,28 @@
+<%form.tk_date = Time.now.beginning_of_day %>
+<%remote_form_for form,:html =>{:class => "uniForm",:id => "bill_operate_form"} do |f|  %>
+  <%=flash[:notice]%>
+  <%=f.error_messages %>
+  <%= render :partial => 'shared/bill_operates/bill_list_operate',:object => form %>
+  <fieldset class='inlineLabels'>
+    <div class='ctrlHolder'>
+      <%=f.label :tk_date,"提款日期" %>
+      <%=f.calendar_date_select :tk_date,:popup => :force,:class=> 'shortText'%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :tker_name,"提款人姓名<span class='red_text'>(必输)</span>" %>
+      <%=f.text_field :tker_name, :size => "30",:maxlength => "30",:class=>"shortText"%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :identify_type,"证件类型" %>
+      <%=f.text_field :identify_type, :size => "30",:maxlength => "30",:class=>"textInput"%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :identify_no,"证件号码" %>
+      <%=f.text_field :identify_no, :size => "30",:maxlength => "30",:class=>"textInput"%>
+    </div>
+  </fieldset>
+  <div class='actions-bar'>
+    <%=f.submit '保存提款信息', :class => 'sexybutton sexysimple sexygreen'%>
+    <%=link_to_function '取消',"Modalbox.hide();return false;",:class => "sexybutton sexysimple sexyred"%>
+  </div>
+<%end%>

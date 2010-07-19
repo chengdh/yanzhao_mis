@@ -1,0 +1,35 @@
+<%remote_form_for @config_info,:html =>{:class => "uniForm",:id => "storate_fee_rate_form"} do |f|  %>
+  <%=f.error_messages%>
+  <fieldset class='inlineLabels'>
+    <%=f.hidden_field :config_key%>
+    <div class='ctrlHolder'>
+      <%=f.label :user_id,"用户"%>
+      <%=f.select :user_id,User.all(:conditions => {:is_active => true}).collect {|user| [user.username,user.id]} %>
+    </div>
+ 
+    <div class='ctrlHolder'>
+      <%=f.label :config_date_from,"起始日期"%>
+      <%=f.calendar_date_select :config_date_from,:popup => :force,:class=>"shortTextInput"%>
+      <p class='formHint'>
+      设定起始日期,所有此日期前的票据将查询不到
+      </p>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :config_date_to,"结束日期"%>
+      <%=f.calendar_date_select :config_date_to,:popup => :force,:class=>"shortTextInput"%>
+      <p class='formHint'>
+      设定结束日期,所有此日期后的票据将查询不到
+      </p>
+ 
+    </div>
+  </fieldset>
+  <div class='tiny_box'>
+    <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexygreen'%>
+    <%if !@config_info.new_record?%>
+      <%=link_to_remote  "删除",:url => config_info_path(@config_info),:method => :delete,
+        :confirm => "确认删除吗?",
+        :html => {:class=> "sexybutton sexysimple"}%> 
+    <%end%>
+    <%=link_to_function '取消',"Modalbox.hide();return false;",:class => "sexybutton sexysimple sexyred"%>
+  </div>
+<%end%>

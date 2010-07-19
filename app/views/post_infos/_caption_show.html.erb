@@ -1,0 +1,13 @@
+<div id='caption' class='clearfix'>
+  <h2 class='float_left'>
+    <span>票据核销明细</span>
+  </h2>
+  <ul class='tabs float_right'>
+      <li>
+      <%=link_to '<<返回',url_for(:back),:class => "sexybutton sexysimple sexyblue"%>
+      </li>
+    <li class='tab_last'>
+    <%=link_to '导出明细',post_info_bills_path(@post_info,:format => :csv),:class => "sexybutton sexysimple sexyblue"%>
+    </li>
+  </ul>
+</div>

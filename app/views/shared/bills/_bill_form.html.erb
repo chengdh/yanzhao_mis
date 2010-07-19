@@ -1,0 +1,131 @@
+<%form_for bill_form,:html =>{:class => "uniForm",:id => "bill_form"} do |f|  %>
+  <%=f.error_messages%>
+  <fieldset class='inlineLabels'>
+    <%if bill_form.kind_of?(InoutBill)%>
+      <div class='ctrlHolder'>
+        <%=f.label :inout_date,'入库时间' %>
+        <%=f.calendar_date_select :inout_date, :popup => :force,:class=>"shortTextInput"%>
+      </div>
+    <%end%>
+    <div class='ctrlHolder'>
+      <%=f.label :bill_no,'运单编号' %>
+      <%=f.text_field :bill_no, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :goods_no,'货号' %>
+      <%=f.text_field :goods_no, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :bill_mth,'票据月份' %>
+      <%=f.select :bill_mth,months_for_select%>
+    </div>
+
+    <%if bill_form.kind_of?(CarryingBill)%>
+      <div class='ctrlHolder'>
+        <%=f.label :bill_type,'票据性质' %>
+        <%=f.select :bill_type,billType_for_select%>
+      </div>
+    <%end%>
+
+    <div class='ctrlHolder'>
+      <%=f.label :sender_name,'发货人信息' %>
+      <div class='multiField' id='sender_wrap'>
+        <label class='blockLabel' style='width : 35%;'>
+          <span>姓名</span>
+          <%=f.text_field :sender_name, :size => "20",:maxlength => "20",:class=>"textInput",:id => 'sender_name',:live => false%>
+        </label>
+        <label class='blockLabel' style='width : 35%;'>
+          <span>电话(可不填)</span>
+          <%=f.text_field :sender_phone, :size => "20",:maxlength => "20",:class=>"textInput"%>
+        </label>
+      </div>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :receiver_name,'收货人信息' %>
+      <div class='multiField' id='receiver_wrap'>
+        <label class='blockLabel' style='width : 35%;'>
+          <span>姓名</span>
+          <%=f.text_field :receiver_name, :size => "20",:maxlength => "20",:class=>"textInput",:id =>'receiver_name',:live => false%>
+        </label>
+        <label class='blockLabel' style='width : 35%;'>
+          <span>电话(可不填)</span>
+          <%=f.text_field :receiver_phone, :size => "20",:maxlength => "20",:class=>"textInput"%>
+        </label>
+      </div>
+      <span id='receiver_validate'></span>
+    </div>
+    <div class='ctrlHolder'>
+      <%= f.label :from_org_id, '发货地-收货地' %>
+      <div class='multiField'>
+        <label class='blockLabel' style='width : 35%;'>
+          <span>发货地</span>
+          <%=f.select :from_org_id,orgs_for_select%>
+        </label>
+        <label class='blockLabel' style='width : 35%;'>
+          <span>收货地</span>
+          <%=f.select :to_org_id,orgs_for_select%>
+        </label>
+      </div>
+    </div>
+    <div class='ctrlHolder'>
+      <%= f.label :pay_type, '运费信息' %>
+      <div class='multiField' id='fee_wrap'>
+        <label class='blockLabel' style='width : 35%;'>
+          <span>支付方式</span>
+          <%=f.select :pay_type,payType_for_select%>
+        </label>
+        <label class='blockLabel' style='width : 35%;'>
+          <span>金额</span>
+          <%= f.text_field :fee,:size => "10",:maxlength => "10",:class=>"textInput",:id => 'fee',:live => false %>
+        </label>
+      </div>
+    </div>
+
+    <div class='ctrlHolder'>
+      <%= f.label :goods_fee, '代收货款' %>
+      <%= f.text_field :goods_fee,:size => "10",:maxlength => "10",:class=>"shortTextInput" %>
+    </div>
+
+    <div class='ctrlHolder'>
+      <%= f.label :goods_num, '货物件数' %>
+      <%= f.text_field :goods_num,:size => "10",:maxlength => "10",:class=>"shortTextInput" %>
+    </div>
+    <div class='ctrlHolder'>
+      <%= f.label :goods_info, '货物名称' %>
+      <%= f.text_field :goods_info,:size => "60",:maxlength => "60",:class=>"textInput" %>
+    </div>
+
+    <%if !bill_form.new_record?%>
+      <div class='ctrlHolder'>
+        <%= f.label :state, '票据状态' %>
+
+        <%if bill_form.kind_of?(CarryingBill)%>
+          <%=f.select :state,bill_state_for_select%>
+        <%else%>
+          <%=f.select :state,inout_bill_state_for_select%>
+        <%end%>
+        <p class='formHint highlight'>
+        修改票据状态后,可对票据进行重新处理
+        </p>
+      </div>
+    <%end%>
+
+    <div class='ctrlHolder'>
+      <%= f.label :note, '备注' %>
+      <%= f.text_area :note,:style => 'height : 5em;' %>
+    </div>
+  </fieldset>
+  <div class='tiny_box'>
+    <%=f.submit '保存票据', :class => 'sexybutton sexysimple sexygreen'%>
+    <%=link_to '&lt;&lt;返回列表',{:action => :index},:class => 'sexybutton sexysimple sexyblue' %>
+  </div>
+<%end%>
+<script type='text/javascript'>
+  //手动添加收货人及发货人验证
+var f1 = new LiveValidation('sender_name',{insertAfterWhatNode :'sender_wrap'});
+var f2 = new LiveValidation('receiver_name',{insertAfterWhatNode :'receiver_wrap'});
+var f3 = new LiveValidation('fee',{insertAfterWhatNode :'fee_wrap'});
+f1.add(Validate.Presence,{failureMessage : '发货人不可为空'});
+f2.add(Validate.Presence,{failureMessage : '收货人不可为空'});
+f3.add(Validate.Numericality,{notANumberMessage : '金额应为数字'});
+</script>

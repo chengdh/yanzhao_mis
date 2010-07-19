@@ -1,0 +1,2 @@
+class InoutBillsController < BillsController
+end

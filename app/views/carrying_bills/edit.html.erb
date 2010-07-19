@@ -1,0 +1,12 @@
+<h1>Editing carrying_bill</h1>
+
+<% form_for(@carrying_bill) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @carrying_bill %> |
+<%= link_to 'Back', carrying_bills_path %>

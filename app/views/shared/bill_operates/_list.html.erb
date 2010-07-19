@@ -1,0 +1,46 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>明细</th>
+      <th>序号</th>
+      <th>确认时间</th>
+      <th>确认人</th>
+      <th>票据数量</th>
+      <th>运费</th>
+      <th>代收货款</th>
+      <th>件数</th>
+      <th>扣运费</th>
+      <th>扣手续费</th>
+      <th>实付货款</th>
+      <th>仓储费</th>
+      <th>清仓收入</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%list.each_with_index do |operate,index|%>
+      <tr class='list_info'>
+        <td><%=link_to '明细',operate %></td>
+        <td><%=order_no(index,params[:page],params[:per_page])%></td>
+        <td><%=operate.created_at.to_date%></td>
+        <td><%=operate.user.username%></td>
+        <td><%=operate.bills.size%></td>
+        <td><%=operate.bills.sum(:fee)%></td>
+        <td><%=operate.bills.sum(:goods_fee)%></td>
+        <td><%=operate.bills.sum(:goods_num)%></td>
+        <td><%=operate.bills.sum(:k_hand_fee)%></td>
+        <td><%=operate.bills.sum(:k_carrying_fee)%></td>
+        <td><%=operate.bills.sum(:act_pay_fee)%></td>
+        <td><%=operate.bills.sum(:storage_fee)%></td>
+        <td><%=operate.bills.sum(:clear_fee)%></td>
+      </tr>
+    <%end%>
+    <%if list.size < 15 %>
+      <%(15 - list.size).times do %>
+        <tr><td colspan='30'>&nbsp;</td></tr>
+      <%end%>
+    <%end%>
+  </tbody>
+</table>
+<div class='actions-bar'>
+  <%=will_paginate list %>
+</div>

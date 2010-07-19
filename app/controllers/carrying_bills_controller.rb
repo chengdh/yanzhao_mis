@@ -1,0 +1,2 @@
+class CarryingBillsController < BillsController
+end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100717072346) do
+ActiveRecord::Schema.define(:version => 20100719032035) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -53,6 +53,43 @@ ActiveRecord::Schema.define(:version => 20100717072346) do
     t.integer "org_id"
   end
 
+  create_table "bills", :force => true do |t|
+    t.string   "bill_no",        :limit => 30,                                                   :null => false
+    t.string   "goods_no",       :limit => 30
+    t.string   "bill_mth",       :limit => 6,                                                    :null => false
+    t.string   "sender_name",    :limit => 20,                                                   :null => false
+    t.string   "sender_phone"
+    t.string   "receiver_name"
+    t.string   "receiver_phone"
+    t.integer  "from_org_id",                                                                    :null => false
+    t.integer  "to_org_id",                                                                      :null => false
+    t.decimal  "fee",                           :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "goods_fee",                     :precision => 10, :scale => 2, :default => 0.0
+    t.integer  "goods_num",                                                    :default => 0
+    t.string   "goods_info",     :limit => 200
+    t.date     "bill_date"
+    t.string   "pay_type",       :limit => 2,                                                    :null => false
+    t.boolean  "is_active",                                                    :default => true
+    t.string   "state",          :limit => 2,                                  :default => "DR", :null => false
+    t.integer  "tk_info_id"
+    t.integer  "post_info_id"
+    t.decimal  "k_hand_fee",                    :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "k_carrying_fee",                :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "act_pay_fee",                   :precision => 10, :scale => 2, :default => 0.0
+    t.string   "bill_type",      :limit => 2
+    t.date     "inout_date"
+    t.string   "type",           :limit => 60
+    t.decimal  "storage_fee",                   :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "clear_fee",                     :precision => 10, :scale => 2, :default => 0.0
+    t.integer  "user_id"
+    t.integer  "clear_info_id"
+    t.integer  "deliver_id"
+    t.integer  "confirm_id"
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "clients", :force => true do |t|
     t.string   "name",              :limit => 60, :null => false
     t.string   "logo_file_name"
@@ -68,6 +105,24 @@ ActiveRecord::Schema.define(:version => 20100717072346) do
     t.string   "body",       :limit => 600,                   :null => false
     t.integer  "user_id",                                     :null => false
     t.boolean  "is_active",                 :default => true, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "config_infos", :force => true do |t|
+    t.string   "config_key",       :limit => 60,                                                 :null => false
+    t.string   "config_value",     :limit => 60
+    t.decimal  "config_num_from",                :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "config_num_to",                  :precision => 10, :scale => 2, :default => 0.0
+    t.date     "config_date_from"
+    t.date     "config_date_to"
+    t.decimal  "config_value_num",               :precision => 10, :scale => 2, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "confirms", :force => true do |t|
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -103,6 +158,16 @@ ActiveRecord::Schema.define(:version => 20100717072346) do
     t.datetime "updated_at"
     t.boolean  "is_active",                                                :default => true,  :null => false
     t.boolean  "alert",                                                    :default => false
+  end
+
+  create_table "delivers", :force => true do |t|
+    t.date     "deliver_date"
+    t.string   "deliver_name",  :limit => 30, :null => false
+    t.string   "identify_type", :limit => 30
+    t.string   "identify_no",   :limit => 30
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "m_storages", :force => true do |t|
@@ -168,6 +233,12 @@ ActiveRecord::Schema.define(:version => 20100717072346) do
     t.string   "type",       :limit => 20
   end
 
+  create_table "post_infos", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "settlement_lines", :force => true do |t|
     t.integer  "settlement_id",                                                               :null => false
     t.string   "type",          :limit => 50,                                                 :null => false
@@ -196,6 +267,17 @@ ActiveRecord::Schema.define(:version => 20100717072346) do
     t.decimal  "total_subsidy",                   :precision => 15, :scale => 2, :default => 0.0
     t.decimal  "total_deduction",                 :precision => 15, :scale => 2, :default => 0.0
     t.decimal  "act_push_money",                  :precision => 15, :scale => 2, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tk_infos", :force => true do |t|
+    t.string   "tker_name",     :limit => 30,  :null => false
+    t.date     "tk_date",                      :null => false
+    t.string   "identify_type", :limit => 30
+    t.string   "identify_no",   :limit => 30
+    t.string   "note",          :limit => 300
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

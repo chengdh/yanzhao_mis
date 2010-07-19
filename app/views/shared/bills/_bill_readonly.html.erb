@@ -1,0 +1,161 @@
+<div id="carrying_bill_view_wrap">
+  <h1>
+    <%="#{bill_readonly.from_org.name}(#{bill_readonly.sender_name})&nbsp;-&nbsp;#{bill_readonly.to_org.name}(#{bill_readonly.receiver_name})"%>
+  </h1>
+  <span class='notice border_1px' id='bill_state'>
+    <i><%=bill_state_display(bill_readonly.state)%></i>
+  </span>
+  <h2 class='text_center'>
+    <%=bill_readonly.bill_no%>&nbsp;&nbsp;|&nbsp;&nbsp;<%=bill_readonly.goods_no%>
+  </h2>
+  <table>
+    <tr>
+      <td>发货人</td>
+      <td><%=bill_readonly.sender_name%></td>
+      <td>电话</td>
+      <td><%=bill_readonly.sender_phone%></td>
+    </tr>
+    <tr>
+      <td>收货人</td>
+      <td><%=bill_readonly.receiver_name%></td>
+      <td>电话</td>
+      <td><%=bill_readonly.receiver_phone%></td>
+    </tr>
+
+    <tr>
+      <td>付款方式</td>
+      <td><%=payType_display(bill_readonly.pay_type)%></td>
+      <td>金额</td>
+      <td><%=bill_readonly.fee%></td>
+    </tr>
+    <tr>
+      <td>代收货款</td>
+      <td><%=bill_readonly.goods_fee%></td>
+      <td>货物件数</td>
+      <td><%=bill_readonly.goods_num%></td>
+    </tr>
+    <tr>
+      <td>货物信息</td>
+      <td colspan='3'><%=bill_readonly.goods_info%></td>
+    </tr>
+    <tr>
+      <td>录入时间</td>
+      <td><%=bill_readonly.created_at%></td>
+      <td>录入人</td>
+      <td><%=bill_readonly.user.username%></td>
+    </tr>
+    <%if !bill_readonly.confirm.blank?  %>
+      <tr>
+        <td>确认时间</td>
+        <td><%=bill_readonly.confirm.created_at%></td>
+        <td>确认人</td>
+        <td><%=bill_readonly.confirm.user.username%></td>
+
+      </tr>
+    <%end%>
+    <%if bill_readonly.kind_of?(CarryingBill) && !bill_readonly.tk_info.blank? %>
+      <tr>
+        <td>提款时间</td>
+        <td><%=bill_readonly.tk_info.tk_date%></td>
+        <td>提款人</td>
+        <td><%=bill_readonly.tk_info.tker_name%></td>
+      </tr>
+      <tr>
+        <td>扣手续费</td>
+        <td ><%=bill_readonly.k_hand_fee%></td>
+        <td>扣运费</td>
+        <td ><%=bill_readonly.k_carrying_fee%></td>
+      </tr>
+      <tr>
+        <td>实付货款</td>
+        <td colspan='3'><%=bill_readonly.act_pay_fee%></td>
+      </tr>
+    <%end%>
+
+    <%if bill_readonly.kind_of?(InoutBill) && !bill_readonly.deliver.blank? %>
+      <tr>
+        <td>提货时间</td>
+        <td><%=bill_readonly.deliver.deliver_date %></td>
+        <td>提货人</td>
+        <td><%=bill_readonly.deliver.deliver_name %></td>
+      </tr>
+      <tr>
+        <td>仓储费</td>
+        <td colspan='3'><%=bill_readonly.storage_fee %></td>
+      </tr>
+
+    <%end%>
+    <%if bill_readonly.kind_of?(InoutBill) && !bill_readonly.clear_info.blank? %>
+      <tr>
+        <td>清仓时间</td>
+        <td><%=bill_readonly.clear_info.clear_date%></td>
+        <td>清仓人</td>
+        <td><%=bill_readonly.clear_info.user.username%></td>
+      </tr>
+      <tr>
+        <td>清仓收入</td>
+        <td colspan='3'><%=bill_readonly.clear_fee%></td>
+      </tr>
+    <%end%>
+
+    <%if !bill_readonly.post_info.blank?  %>
+      <tr>
+        <td>核销时间</td>
+        <td><%=bill_readonly.post_info.created_at%></td>
+        <td>核销人</td>
+        <td colspan='3'><%=bill_readonly.post_info.user.username%></td>
+      </tr>
+    <%end%>
+  </table>
+</div>
+<div class='tiny_box text_center'>
+
+  <%if bill_readonly.kind_of?(CarryingBill)%>
+
+    <%if (current_user.is_admin || current_user.can_confirm_1) && bill_readonly.state == Bill::STATE_DRAFT %>
+      <%=link_to '确认',confirms_path("bills[]" => bill_readonly),:method => :post,:class => 'sexybutton sexysimple'%>
+    <%end%>
+
+    <%if bill_readonly.state == Bill::STATE_DRAFT || ((current_user.is_admin || current_user.can_modify_1) && !bill_readonly.state.eql?(Bill::STATE_POST))%>
+      <%=link_to '修改', edit_carrying_bill_path(bill_readonly,params),:class => 'sexybutton sexysimple'%>
+    <%end%>
+
+    <%if (current_user.is_admin || current_user.can_delete_1) && !bill_readonly.state.eql?(Bill::STATE_POST) %>
+      <%=link_to '删除',bill_readonly,:method => 'delete',:class => 'sexybutton sexysimple',:confirm => "确认删除此票据吗?"%>
+    <%end%>
+
+    <%if (current_user.is_admin || current_user.can_tk) && bill_readonly.state == Bill::STATE_CONFIRM %>
+      <%=link_to '提款',new_tk_info_path(:bill_id => bill_readonly),:class => 'sexybutton sexysimple',:onclick => "Modalbox.show(this.href,{title : false,width: 700,height : 550});return false;"%>
+    <%end%>
+
+    <%if (current_user.is_admin || current_user.can_post_1) && bill_readonly.state == CarryingBill::STATE_TK %>
+      <%=link_to '核销',post_infos_path("bills[]" => bill_readonly),:method => :post,:class => 'sexybutton sexysimple'%>
+    <%end%> <%end%>
+
+  <%if bill_readonly.kind_of?(InoutBill)%>
+    <%if (current_user.is_admin || current_user.can_confirm_2) && bill_readonly.state == Bill::STATE_DRAFT  %>
+      <%=link_to '确认',confirms_path("bills[]" => bill_readonly),:method => :post,:class => 'sexybutton sexysimple'%>
+    <%end%>
+
+
+    <%if bill_readonly.state == Bill::STATE_DRAFT || ((current_user.is_admin || current_user.can_modify_2) && !bill_readonly.state.eql?(Bill::STATE_POST))%>
+      <%=link_to '修改', edit_inout_bill_path(bill_readonly,params),:class => 'sexybutton sexysimple'%>
+    <%end%>
+
+
+    <%if (current_user.is_admin || current_user.can_delete_2) && !bill_readonly.state.eql?(Bill::STATE_POST) %>
+      <%=link_to '删除',bill_readonly,:method => 'delete',:class => 'sexybutton sexysimple',:confirm => "确认删除此票据吗?"%>
+    <%end%>
+
+    <%if (current_user.is_admin || current_user.can_deliver) && bill_readonly.state == Bill::STATE_CONFIRM %>
+      <%=link_to '提货',new_deliver_path(:bill_id => bill_readonly),:class => 'sexybutton sexysimple',:onclick => "Modalbox.show(this.href,{title : false,width: 700,height : 550});return false;"%>
+    <%end%>
+    <%if (current_user.is_admin || current_user.can_clear) && bill_readonly.state == Bill::STATE_CONFIRM%>
+      <%=link_to '清仓',new_clear_info_path(:bill_id => bill_readonly),:class => 'sexybutton sexysimple',:onclick => "Modalbox.show(this.href,{title : false,width: 700,height : 550});return false;"%>
+    <%end%>
+    <%if (current_user.is_admin || current_user.can_post_2) && (bill_readonly.state == InoutBill::STATE_DELIVER || bill_readonly.state == InoutBill::STATE_CLEAR)%>
+      <%=link_to '核销',post_infos_path("bills[]" => bill_readonly),:method => :post,:class => 'sexybutton sexysimple'%>
+    <%end%>
+  <%end%>
+  <%=link_to_function '关闭窗口',"Modalbox.hide();return false;",:class => "sexybutton sexysimple sexyred"%>
+</div>

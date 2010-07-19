@@ -1,4 +1,20 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :clear_infos,:except => [:update,:destroy]
+
+  map.resources :delivers,:except => [:update,:destroy]
+
+  map.resources :post_infos,:except => [:update,:destroy]
+
+  map.resources :config_infos
+
+  map.resources :tk_infos,:except => [:update,:destroy]
+
+  map.resources :confirms,:except => [:update,:destroy]
+
+  map.resources :inout_bills,:member => {:select => :get }
+
+  map.resources :carrying_bills,:member => {:select => :get },:collection => {:search => :get}
+
   map.resources :clients,:except => [:index]
 
   map.devise_for :users
@@ -10,7 +26,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :vip_infos,:only => [:index]
 
   map.resources :vip_fee_infos,:only => [:index]
-
 
   map.resources :upload_vip_files,:only => [:new],:collection => {:import => :post}
 

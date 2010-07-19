@@ -1,0 +1,2 @@
+module ClearInfosHelper
+end

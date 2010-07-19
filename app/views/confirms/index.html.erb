@@ -1,0 +1,13 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <%=render "carrying_bills/caption"%>
+  </div>          
+  <div class="content">          
+    <h2 class="title">确认信息列表</h2>
+    <div class="inner">
+      <%=render "shared/bill_operates/list",:object => @bill_operates %>
+    </div>
+  </div>
+</div>
+
+<!--%=render :partial => "shared/bill_operates/side_bar"%-->

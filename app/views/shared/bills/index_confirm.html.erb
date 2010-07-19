@@ -1,0 +1,32 @@
+<script type='text/javascript'>
+  var selector = new SelectHelper.Selector(<%=@bill_ids.to_json%>,<%=@sum_info.to_json%>,'select_des','<%=@param_name%>');
+</script>
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render "caption" %>
+  </div>          
+  <div class="content">          
+    <h2 class="title">待确认票据</h2>
+    <div class="inner">
+      <div class='flash'>
+        <div class='message notice'><p id='select_des'>请选择票据进行确认操作</p></div>
+      </div>
+      <div id='select_indicator' class='actions-bar wat-cf'>
+        <span id='selector_wrap' class='float_left'>
+          选择:
+          <%=link_to_function '全部',"selector.select_all(true);"%>
+          <span>|</span>
+          <%=link_to_function '不选',"selector.select_all(false);"%>
+        </span>
+        <%=link_to_remote("确认选中票据",:method => :post,
+                          :url => confirms_path,:with => "selector.toQueryStr()",
+                          :before => "if(selector.selected_count() == 0) {$('select_des').update('当前未选中任何票据');return false;}",
+                          :html => {:class => 'float-right sexybutton sexysimple sexygreen'}) %>
+      </div>
+      <div id='list_wrap'>
+        <%=render :partial => "shared/bills/bill_list",:object =>{:show_sum => true,:bills => @bills,:show_select => true,:remote_paginate => true}%>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render('sidebar') -%>

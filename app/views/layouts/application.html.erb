@@ -56,6 +56,12 @@
               <li class="<%= check_current_controller(['consumer_materials','consumer_receipts','consumer_shippments']) %>">
               <%=link_to "易耗品管理#{alert(@storage_alert_count)}",consumer_receipts_path %>
               </li>
+              <li class="<%= check_current_controller(['carrying_bills']) %>">
+              <%=link_to "票据管理",carrying_bills_path %>
+              </li>
+              <li class="<%= check_current_controller(['inout_bills']) %>">
+              <%=link_to "提货单管理",inout_bills_path %>
+              </li>
             </ul>
           </div>
         </div>    
