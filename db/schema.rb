@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100719032035) do
+ActiveRecord::Schema.define(:version => 20100719112815) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -90,6 +90,14 @@ ActiveRecord::Schema.define(:version => 20100719032035) do
     t.datetime "updated_at"
   end
 
+  create_table "clear_infos", :force => true do |t|
+    t.date     "clear_date"
+    t.integer  "user_id"
+    t.text     "clear_note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "clients", :force => true do |t|
     t.string   "name",              :limit => 60, :null => false
     t.string   "logo_file_name"
@@ -119,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20100719032035) do
     t.decimal  "config_value_num",               :precision => 10, :scale => 2, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "confirms", :force => true do |t|

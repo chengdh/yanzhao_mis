@@ -17,5 +17,5 @@
     <li class="active"><%= link_to "修改物品资料", edit_consumer_material_path(@consumer_material,:active_sub_tab => 8) %></li>
   <%end%>
 
-  <li class="<%=check_sub_active_tab(10) %>"><%= link_to "易耗品库存查询#{alert(@storage_alert_count)}", m_storages_path("search[material_type_is]" => "ConsumerMaterial","search[material_is_active]" => true,:active_sub_tab => 10) %></li>
+  <li class="<%=check_sub_active_tab(10) %>"><%= link_to "易耗品库存查询#{alert(@storage_alert_count)}", m_storages_path(:in_what => 'consumer_receipts',"search[material_type_is]" => "ConsumerMaterial","search[material_is_active]" => true,:active_sub_tab => 10) %></li>
 </ul>

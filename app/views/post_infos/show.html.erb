@@ -1,11 +1,19 @@
-<div id="main_content" class='span-18  prepend-top'>
-  <%=render :partial => "caption_show"%>
-  <div class='tiny_box clearfix'>
-    <p class='float_left'>核销人:<%=@post_info.user.username%></p>
-    <p class='float_right'>核销日期:<%=@post_info.created_at.to_date%></p>
+<div class="block">
+  <div class="secondary-navigation">
+    <%=render "carrying_bills/caption"%>
+  </div>          
+  <div class="content">          
+    <h2 class="title">确认清单</h2>
+    <div class="inner">
+      <table class='table'>
+        <tr>
+          <td>核销人:<%=@post_info.user.username%></td>
+          <td>核销日期:<%=@post_info.created_at.to_date%></td>
+          <td class='text-right'><%=link_to '导出明细',post_info_bills_path(@post_info,:format => :csv),:class => "sexybutton sexysimple sexyblue"%></td>
+        </tr>
+      </table>
+      <%=render :partial => "shared/bills/bill_list",:object =>{:show_sum => false,:bills => (@post_info.bills.paginate :page => 1,:per_page => 1000)} %>
+    </div>
   </div>
-  <%=render :partial => "share/bill_list",:object =>{:show_sum => false,:bills => (@post_info.bills.paginate :page => 1,:per_page => 1000)} %>
 </div>
-<%=render :partial => "share_operate/side_bar"%>
-
-
+<!--%=render :partial => "share_operate/side_bar"%-->

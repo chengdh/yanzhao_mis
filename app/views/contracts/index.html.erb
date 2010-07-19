@@ -15,13 +15,14 @@
         </tr>
         <% @contracts.each do |contract| -%>
           <tr class="<%= cycle("odd", "even") %>">
-            <td><%=link_to_function("<span class='red-text'>警</span>","Modalbox.show('<h2>合同即将到期!</h2>',{title : false})") if contract.date_to <= (3.months.since.to_date)%></td>
+            <td><%=link_to_function("<span class='red-text'>警</span>","Modalbox.show('<h2>合同即将到期!</h2>',{title : false})") if contract.date_to <= (3.months.since.to_date) && !contract.alert%></td>
             <td>
               <%= contract.org.name %>
             </td>
             <td><%="#{contract.date_from} ~ #{contract.date_to}"%></td>
             <td><%=contract.created_at.to_date%></td>
             <td class="last">
+              <%=link_to("取消报警",disable_alert_contract_path(contract),:method => :put ) if contract.date_to <= (3.months.since.to_date) && !contract.alert%>
               <%= link_to "修改", edit_contract_path(contract,:active_sub_tab => 4) %> |
               <%= link_to "删除", contract, :method => :delete, :confirm => "您确定删除该信息吗？" %>
             </td>

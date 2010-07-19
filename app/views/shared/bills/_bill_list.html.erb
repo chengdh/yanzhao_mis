@@ -26,7 +26,7 @@
   </thead>
   <tbody>
     <%bill_list[:bills].each_with_index do |bill,index|%>
-      <tr id='bill_<%=bill.id%>' class="cycle('odd','even')">
+      <tr id='bill_<%=bill.id%>' class="<%=cycle('odd','even')%>">
         <td><%=link_to "操作",bill, :onclick =>"Modalbox.show(this.href,{title : '票据操作',width : 500});return false;"%></td>
         <%if !bill_list[:show_select].blank? && bill_list[:show_select]%>
           <td>

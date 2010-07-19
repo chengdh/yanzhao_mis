@@ -1,0 +1,25 @@
+<% form_for @search,:url => {:action => :index},:html => {:class => :uniForm } do |f| -%>
+  <%=hidden_field_tag :in_what,params[:in_what]%>
+  <fieldset class='blockLabels'>
+    <div class='ctrlHolder'>
+      <%=f.label :bills_bill_no_or_bills_goods_no_like,"票据号/货号"%>
+      <%=f.text_field :bills_bill_no_or_bills_goods_no_like,:class => 'textInput' %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :user_id_is,"操作人"%>
+      <%=f.select :user_id_is,users_for_select,:include_blank => true %>
+    </div>
+
+    <div class='ctrlHolder'>
+      <%=f.label :created_at_gte,"操作时间"%>
+      <%=f.calendar_date_select :created_at_gte,:class => "textInput" %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :created_at_lte,"~"%>
+      <%=f.calendar_date_select :created_at_lte,:class => "textInput" %>
+    </div>
+  </fieldset>
+  <div class="actions-bar">
+    <%=f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%>
+  </div>
+<% end -%>

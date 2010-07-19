@@ -1,25 +1,31 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<% form_for resource_name, resource, :url => registration_path(resource_name), :html => { :method => :put } do |f| -%>
-  <%= f.error_messages %>
-
-  <p><%= f.label :email %></p>
-  <p><%= f.text_field :email %></p>
-
-  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i></p>
-  <p><%= f.password_field :password %></p>
-
-  <p><%= f.label :password_confirmation %></p>
-  <p><%= f.password_field :password_confirmation %></p>
-
-  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i></p>
-  <p><%= f.password_field :current_password %></p>
-
-  <p><%= f.submit "Update" %></p>
-<% end -%>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
-
-<%= render :partial => "shared/devise_links" %>
+<% remote_form_for resource_name, resource, :url => registration_path(resource_name), 
+  :success => "Modalbox.hide();$('flash').update('<div class=success>用户信息更新成功.</div>');",
+  :failure => "Modalbox.hide();$('flash').update('<div class=error>用户信息更新失败.</div>');",
+  :html => { :class => "uniForm",:method => :put } do |f| -%>
+    <%= f.error_messages %>
+    <fieldset class='blockLabels'>
+      <div class='ctrlHolder'>
+        <%=f.label :username,'用户名' %>
+        <%=f.text_field :username, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
+      </div>
+      <div class='ctrlHolder'>
+        <%=f.label :password,'设置新密码' %>
+        <%=f.text_field :password, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
+        <i>不修改原密码请留空</i>
+      </div>
+      <div class='ctrlHolder'>
+        <%=f.label :password_confirmation,'确认新密码' %>
+        <%=f.text_field :password_confirmation, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
+        <i>请再次确认新密码,不修改原密码请留空</i>
+      </div>
+      <div class='ctrlHolder'>
+        <%=f.label :current_password,'请录入旧密码' %>
+        <%=f.text_field :current_password, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
+        <i>录入之前的旧密码,不修改原密码请留空</i>
+      </div>
+    </fieldset>
+    <div class='actions-bar'>
+      <%=f.submit '更新个人信息', :class => 'sexybutton sexysimple sexygreen'%>
+      <%=link_to_function '取消',"Modalbox.hide();return false;",:class => "sexybutton sexysimple sexyred"%>
+    </div>
+  <% end -%>

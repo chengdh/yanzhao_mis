@@ -1,6 +1,13 @@
-<div id="main_content" class='span-18  prepend-top'>
-  <%=render :partial => "#{params[:bill_type]}/caption_post"%>
-  <%=render :partial => "share_operate/list",:object => @bill_operates %>
+<div class="block">
+  <div class="secondary-navigation">
+    <%=render "#{params[:in_what]}/caption"%>
+  </div>          
+  <div class="content">          
+    <h2 class="title">核销列表</h2>
+    <div class="inner">
+      <%=render "shared/bill_operates/list",:object => @bill_operates %>
+    </div>
+  </div>
 </div>
-<%=render :partial => "share_operate/side_bar"%>
 
+<% content_for :sidebar, render('sidebar') -%>

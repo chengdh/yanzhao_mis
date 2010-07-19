@@ -6,7 +6,7 @@
     <%= render "caption" %>
   </div>          
   <div class="content">          
-    <h2 class="title">待确认票据</h2>
+    <h2 class="title">待核销票据</h2>
     <div class="inner">
       <div class='flash'>
         <div class='message notice'><p id='select_des'>请选择票据进行核销操作</p></div>
@@ -18,7 +18,7 @@
           <span>|</span>
           <%=link_to_function '不选',"selector.select_all(false);"%>
         </span>
-        <%=link_to_remote("确认选中票据",:method => :post,
+        <%=link_to_remote("核销选中票据",:method => :post,
                           :url => post_infos_path,:with => "selector.toQueryStr()",
                           :before => "if(selector.selected_count() == 0) {$('select_des').update('当前未选中任何票据');return false;}",
                           :html => {:class => 'float-right sexybutton sexysimple sexygreen'}) %>

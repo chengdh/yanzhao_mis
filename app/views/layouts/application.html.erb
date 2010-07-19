@@ -20,7 +20,7 @@
           </h1>
           <div id="util-navigation">
             <ul class="wat-cf">
-              <li><%=link_to current_user.try(:username),edit_user_path(current_user)%></li>
+              <li><%=link_to current_user.try(:username),edit_user_registration_path,:onclick => "Modalbox.show(this.href,{title : '修改登录用户信息'});return false;"%></li>
               <li><%=link_to "退出系统",destroy_user_session_path,:class => "logout" %></li>
             </ul>
           </div>      
@@ -50,16 +50,16 @@
               <li class="<%= check_current_controller(['settlements','contracts']) %>">
               <%=link_to "分成结算#{alert(@contract_alert_count)}",settlements_path%>
               </li> 
-              <li class="<%= check_current_controller(['durable_materials','durable_receipts','durable_shippments','material_inout_lines','m_storages']) %>">
+              <li class="<%= check_current_controller(['durable_materials','durable_receipts','durable_shippments','material_inout_lines'],'durable_receipts') %>">
               <%=link_to "耐用品管理",durable_receipts_path %>
               </li>
-              <li class="<%= check_current_controller(['consumer_materials','consumer_receipts','consumer_shippments']) %>">
+              <li class="<%= check_current_controller(['consumer_materials','consumer_receipts','consumer_shippments'],'consumer_receipts') %>">
               <%=link_to "易耗品管理#{alert(@storage_alert_count)}",consumer_receipts_path %>
               </li>
-              <li class="<%= check_current_controller(['carrying_bills']) %>">
+              <li class="<%= check_current_controller(['carrying_bills'],'carrying_bills') %>">
               <%=link_to "票据管理",carrying_bills_path %>
               </li>
-              <li class="<%= check_current_controller(['inout_bills']) %>">
+              <li class="<%= check_current_controller(['inout_bills'],'inout_bills') %>">
               <%=link_to "提货单管理",inout_bills_path %>
               </li>
             </ul>

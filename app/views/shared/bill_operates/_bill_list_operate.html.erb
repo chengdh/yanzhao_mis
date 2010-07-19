@@ -89,7 +89,7 @@ if($(clear_field_id))
   <span class='red-text' id='error_span'></span>
   <%=text_field_tag 'txt_bill_no',nil,:autocomplete => "off",:style => "font-size : 1.2em;height : 25px;border : 2px solid blue;"%>
   <%=link_to_remote '录入票据号添加票据',
-    :url => search_carrying_bills_path,
+    :url => search_bills_path(:operate => operate,"search[type_is]" => type_is,"search[state_is]" => state_is),
     :method => :get,
     :before => "if(!before_add_bill()) return false;",
     :update =>{:failure => :error_span },

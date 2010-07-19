@@ -1,18 +1,21 @@
-<h4 class='group_title'>手续费比例设置</h4>
-<table>
-  <%list_hand_fee.each do |fee_rate|%>
-    <tr id='hand_fee_<%=fee_rate.id%>' class='border_bottom'>
-      <td><%=fee_rate.config_num_from%>~<%=fee_rate.config_num_to%></td>
-      <td><%=fee_rate.config_value_num%></td>
-      <td>
-        <%=link_to  "修改",edit_config_info_path(fee_rate) ,:class=> "red_text",:onclick => "Modalbox.show(this.href,{title : '手续费比例设置'});return false;"%> 
-      </td>
-    </tr>
-  <%end%>
-  <tr>
-    <td colspan='3'>
-      <%=link_to  "添加手续费比例",new_config_info_path("config_info[config_key]" => ConfigInfo::KEY_HAND_FEE_RATE) ,:class=> "red_text",:onclick => "Modalbox.show(this.href,{title : '手续费比例设置'});return false;"%> 
-    </td> 
-  </tr>
-</table>
-
+<div class="block">
+  <h3>手续费比例设置</h3>
+  <div class="content">
+    <table class='table'>
+      <%list_hand_fee.each do |fee_rate|%>
+        <tr id='hand_fee_<%=fee_rate.id%>'>
+          <td><%=fee_rate.config_num_from%>~<%=fee_rate.config_num_to%></td>
+          <td><%=fee_rate.config_value_num%></td>
+          <td>
+            <%=link_to  "修改",edit_config_info_path(fee_rate) ,:class=> "red_text",:onclick => "Modalbox.show(this.href,{title : '手续费比例设置'});return false;"%> 
+          </td>
+        </tr>
+      <%end%>
+      <tr>
+        <td colspan='3'>
+          <%=link_to  "添加手续费比例",new_config_info_path("config_info[config_key]" => ConfigInfo::KEY_HAND_FEE_RATE) ,:class=> "red_text",:onclick => "Modalbox.show(this.href,{title : '手续费比例设置'});return false;"%> 
+        </td> 
+      </tr>
+    </table>
+  </div>
+</div>

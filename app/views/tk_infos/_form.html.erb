@@ -2,7 +2,7 @@
 <%remote_form_for form,:html =>{:class => "uniForm",:id => "bill_operate_form"} do |f|  %>
   <%=flash[:notice]%>
   <%=f.error_messages %>
-  <%= render :partial => 'shared/bill_operates/bill_list_operate',:object => form %>
+  <%= render :partial => 'shared/bill_operates/bill_list_operate',:object => form,:locals => {:operate => 'tk_info',:type_is => "CarryingBill",:state_is => Bill::STATE_CONFIRM} %>
   <fieldset class='inlineLabels'>
     <div class='ctrlHolder'>
       <%=f.label :tk_date,"提款日期" %>

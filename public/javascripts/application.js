@@ -225,7 +225,7 @@ billOperateUtil.cal_sum = function()
     {
       $('sum_' + fee_type).update(sum_fee);
     }
-    catch(ex){alert(ex);}
+    catch(ex){;}
   };
   cal_single_sum('fee');
   cal_single_sum('goods_fee');

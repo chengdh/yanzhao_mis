@@ -17,6 +17,15 @@ class ContractsController < BaseController
     5.times {@contract.unfixed_subsidies.build}
     10.times {@contract.other_deductions.build}
   end
+  #取消报警标志
+  #PUT contracts/:id/disable_alert
+  def disable_alert
+    @contract = Contract.find(params[:id])
+    #FIXME 将alert标志设置为true说明已知道报警了
+    flash[:notice] = "报警标志已取消!"
+    @contract.update_attributes(:alert => true)
+    redirect_to :back
+  end
   def edit
     prepare_data
   end

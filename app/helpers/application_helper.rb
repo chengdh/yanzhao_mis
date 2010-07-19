@@ -205,8 +205,13 @@ module ApplicationHelper
     active_sub_tab.to_i == index ? "active" : ""
   end
   #判断当前controller
-  def check_current_controller(controller_path_array)
-    controller_path_array.include?(controller.controller_path) ? "active" : ""
+  def check_current_controller(controller_path_array,extra_param = nil)
+    ret = controller_path_array.include?(controller.controller_path) ? "active" : ""
+    #如果为空,再判断params[:in_what]
+    if ret.blank? && !extra_param.blank? && extra_param == params[:in_what]
+      ret = "active"
+    end
+    ret
   end
   #设置未读消息标志
   def unread_notices_rules_sign

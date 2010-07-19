@@ -101,7 +101,7 @@ class BillsController < BaseController
         format.html { redirect_to :action => :index }
         format.xml  { render :xml => bill, :status => :created, :location => bill }
       else
-        flash[:notice] = "<div class='error'>票据保存失败.</div>"
+        flash[:error] = "票据保存失败."
         format.html { render :template => 'shared/bills/new',:bill => bill} 
         format.xml  { render :xml => bill.errors, :status => :unprocessable_entity }
       end
@@ -118,7 +118,7 @@ class BillsController < BaseController
         flash[:notice] = "票据信息更新成功."
         format.html { redirect_to :action => :index }
       else
-        flash[:notice] = "<div class='error'>票据更新失败.</div>"
+        flash[:error] = "票据更新失败."
         format.html { render :template => 'shared/bills/new',:bill => bill} 
         format.xml  { render :xml => bill.errors, :status => :unprocessable_entity }
       end
@@ -150,7 +150,7 @@ class BillsController < BaseController
   end
 
   #根据票号查询单张票据,并进行一些处理
-  #GET /bills/search_single_bill.js
+  #GET /bills/search.js
   def search
     bills = @search.all
     respond_to do |format|
@@ -159,16 +159,14 @@ class BillsController < BaseController
           #callback 指向页面的处理逻辑
           #计算相关费用
           #只在提款或提货时计算费用
-          bills.first.cal_fee! if [CarryingBill::STATE_TK,InoutBill::STATE_DELIVER].include?(params[:after_state])
+          bills.first.cal_fee! if ['tk_info','deliver'].include?(params[:operate])
           #清仓处理,运费及代收货款被清零
-          bills.first.fee,bills.first.goods_fee = 0,0 if [InoutBill::STATE_CLEAR].include?(params[:after_state])
-          #FIXME 此处传递给callback json的数据有错误,需要修正
-          render :json => [bills.first,@param_name],:callback => 'billOperateUtil.addBill' 
+          bills.first.fee,bills.first.goods_fee = 0,0 if ['clear_info'].include?(params[:operate])
+          render :json => [bills.first,params[:operate]],:callback => 'billOperateUtil.addBill' 
         else
-          render :text => "未查询到票据",:status => :bad_request 
+          render :text => "未查询到指定票据(或者票据未确认?)",:status => :bad_request 
         end
       end
     end
   end
 end
-

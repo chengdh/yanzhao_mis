@@ -1,19 +1,21 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :clear_infos,:except => [:update,:destroy]
+  map.resources :clear_infos,:has_many => [:bills],:except => [:update,:destroy]
 
-  map.resources :delivers,:except => [:update,:destroy]
+  map.resources :delivers,:has_many => [:bills],:except => [:update,:destroy]
 
-  map.resources :post_infos,:except => [:update,:destroy]
+  map.resources :post_infos,:has_many => [:bills],:except => [:update,:destroy]
 
   map.resources :config_infos
 
-  map.resources :tk_infos,:except => [:update,:destroy]
+  map.resources :tk_infos,:has_many => [:bills],:except => [:update,:destroy]
 
-  map.resources :confirms,:except => [:update,:destroy]
+  map.resources :confirms,:has_many => [:bills],:except => [:update,:destroy]
 
   map.resources :inout_bills,:member => {:select => :get }
 
-  map.resources :carrying_bills,:member => {:select => :get },:collection => {:search => :get}
+  map.resources :carrying_bills,:member => {:select => :get }
+
+  map.resources :bills,:collection => {:search => :get}
 
   map.resources :clients,:except => [:index]
 
@@ -65,7 +67,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :departments
 
-  map.resources :contracts
+  map.resources :contracts,:member => {:disable_alert => :put}
 
   # The priority is based upon order of creation: first created -> highest priority.
 

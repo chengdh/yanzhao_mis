@@ -8,7 +8,8 @@
       <table class='table'>
         <tr>
           <td>确认人:<%=@confirm.user.username%></td>
-          <td>确认人:<%=@confirm.created_at.to_date%></td>
+          <td>确认日期:<%=@confirm.created_at.to_date%></td>
+          <td class='text-right'><%=link_to '导出明细',confirm_bills_path(@confirm,:format => :csv),:class => "sexybutton sexysimple sexyblue"%></td>
         </tr>
       </table>
       <%=render :partial => "shared/bills/bill_list",:object =>{:show_sum => false,:bills => (@confirm.bills.paginate :page => 1,:per_page => 1000)} %>
