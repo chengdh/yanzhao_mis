@@ -5,7 +5,8 @@
   -moz-border-radius-topleft : 4px;
   -moz-border-radius-topright : 4px;
 }
-
+/*时间选择控件应置于所有控件之上*/
+.calendar_date_select {z-index : 10001;}
 #user-navigation ul li.active a:link,#user-navigation ul li.active a:visited,#user-navigation ul li.active a:hover,#user-navigation ul li.active a:active { color : #262626;}
 /*表格的间隔色*/
 tr.odd {
@@ -209,3 +210,10 @@ margin-top : -45px;
 margin-left : 58px;
 position : absolute;
 }
+/*用户修改界面中的权限管理*/
+#user_power fieldset {
+  padding : 10px;
+  border : 1px solid #DFDFDF;
+}
+#user_power fieldset legend {padding : 10px; }
+#user_power label {display : inline;cursor : pointer;margin-right : 10px;}

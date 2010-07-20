@@ -169,4 +169,13 @@ class BillsController < BaseController
       end
     end
   end
+  #生成@search对象
+  def create_search
+    if current_user.is_admin
+      @search = @model_klazz.search(params[:search])
+    else
+      @search = @model_klazz.all_bills(current_user).search(params[:search])
+    end
+  end
+
 end

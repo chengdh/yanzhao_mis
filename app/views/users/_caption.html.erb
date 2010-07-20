@@ -1,3 +1,11 @@
 <ul class="wat-cf">
-  <li class="first active"><%= link_to "用户信息列表", users_path %></li>
+  <li class="first  <%=check_sub_active_tab(1)%>"><%= link_to "用户信息列表", users_path %></li>
+
+  <%if params[:active_sub_tab] == '2'%>
+    <li class="active"><%= link_to "新建", self.send("new_#{@param_name}_path",:active_sub_tab => 2)   %></li>
+  <%end%>
+  <%if params[:active_sub_tab] == '3'%>
+    <li class="active"><%= link_to "修改", edit_user_path(@user,:active_sub_tab => 3)   %></li>
+  <%end%>
+
 </ul>

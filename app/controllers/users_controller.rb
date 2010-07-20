@@ -1,4 +1,24 @@
 class UsersController < BaseController
+  #GET /users
+  def index
+    @users = User.all(:order => "org_id")
+    @group_users = @users.group_by {|user| user.org.name}
+  end
+  #GET /users/new
+  def new
+    @user = User.new
+    SystemFunction.all(:conditions => {:is_active => true},:order => "group_name").each do |func|
+      @user.powers.build(:system_function => func)
+    end
+    #对user.powers进行分组
+    @group_powers = @user.powers.group_by {|p| p.system_function.group_name}
+  end
+  #GET users/:id/edit
+  def edit
+    @user = User.find(params[:id])
+    @group_powers = @user.powers.group_by {|p| p.system_function.group_name}
+
+  end
   #GET /users/show_org_users
   #显示按照机构进行分组的用户列表
   def show_org_users
@@ -14,6 +34,7 @@ class UsersController < BaseController
   def create_ex
     @user = User.new(params[:user])
 
+    @group_powers = @user.powers.group_by {|p| p.system_function.group_name}
     respond_to do |format|
       if @user.save
         flash[:notice] = 'User was successfully created.'
@@ -29,6 +50,7 @@ class UsersController < BaseController
   def update_ex
     @user = User.find(params[:id])
 
+    @group_powers = @user.powers.group_by {|p| p.system_function.group_name}
     respond_to do |format|
       if @user.update_with_password(params[:user])
         flash[:notice] = '用户信息修改成功.'

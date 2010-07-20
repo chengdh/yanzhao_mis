@@ -23,31 +23,6 @@ class CarryingBill < Bill
     }
   end
 
-  #提款日期区间查询
-  named_scope :tk_bills,lambda { |*args|
-    if !args.blank? && (!args.first.blank? || !args.second.blank?)
-      tmp_from = !args.first.blank? ? args.first.to_datetime : 10.years.ago.beginning_of_day
-      tmp_to = !args.second.blank? ? args.second.to_datetime : 10.years.since.beginning_of_day
-      {:conditions => ["tk_infos.tk_date >= ? AND tk_infos.tk_date <= ?"] + [tmp_from.beginning_of_day,tmp_to.end_of_day],:joins => :tk_info }
-    else
-      {:conditions => {}}
-    end
-  }
-  #票据类型查询
-  named_scope :type_bills, lambda { |type| type.blank? ? {:conditions => {}}:{:conditions => {:bill_type => type }}}
-  #综合查询
-  def self.query(user_id,*arg)
-    if !arg.blank? && !arg.first.blank?
-      params = arg.first
-      self.all_bills(user_id,params[:from_created],params[:to_created]).mth_bills(params[:bill_mth])\
-        .from_org_bills(params[:from_org_id]).to_org_bills(params[:to_org_id]) \
-        .keyword_bills(params[:keyword]).state_bills(params[:state]).paytype_bills(params[:pay_type])\
-        .tk_bills(params[:from_tk_date],params[:to_tk_date]) \
-        .post_bills(params[:from_post_date],params[:to_post_date]).type_bills(params[:bill_type])
-    else
-      self.all_bills(user_id)
-    end
-  end
   #计算费用,/扣手续费/扣运费/实付货款
   def cal_fee!
     #判断票据当前状态,如果

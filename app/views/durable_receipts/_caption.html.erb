@@ -23,8 +23,12 @@
   <%if params[:active_sub_tab] == '8'%>
     <li class="active"><%= link_to "修改物品资料", edit_durable_material_path(@durable_material,:active_sub_tab => 8) %></li>
   <%end%>
+  <%if check_power('m_storages')%>
+    <li class="<%=check_sub_active_tab(10) %>"><%= link_to "库存查询", m_storages_path(:in_what => 'durable_receipts',"search[material_type_is]" => "DurableMaterial","search[material_is_active]" => true,:active_sub_tab => 10) %></li>
+  <%end%>
 
-  <li class="<%=check_sub_active_tab(10) %>"><%= link_to "库存查询", m_storages_path(:in_what => 'durable_receipts',"search[material_type_is]" => "DurableMaterial","search[material_is_active]" => true,:active_sub_tab => 10) %></li>
-  <li class="<%=check_sub_active_tab(11) %>"><%= link_to "部门耐用品汇总", material_inout_lines_path(:active_sub_tab => 11) %></li>
+  <%if check_power('material_inout_lines')%>
+    <li class="<%=check_sub_active_tab(11) %>"><%= link_to "部门耐用品汇总", material_inout_lines_path(:active_sub_tab => 11) %></li>
+  <%end%>
 
 </ul>

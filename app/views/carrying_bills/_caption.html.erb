@@ -2,24 +2,29 @@
   <li class="first <%=check_sub_active_tab(1)%>">
   <%= link_to "全部票据", carrying_bills_path(:active_sub_tab => 1)  %>
   </li> 
-  <li class="first <%=check_sub_active_tab(2)%>">
-  <%= link_to "待确认票据",carrying_bills_path(:active_sub_tab => 2,:template =>"shared/bills/index_confirm","search[state_is]" => Bill::STATE_DRAFT)  %>
-  </li> 
-  <li class="first <%=check_sub_active_tab(3)%>">
-  <%= link_to "确认清单列表",confirms_path(:active_sub_tab => 3,:in_what => :carrying_bills)  %>
-  </li> 
+  <%if check_power('new_confirm')%>
+    <li class="first <%=check_sub_active_tab(2)%>">
+    <%= link_to "待确认票据",carrying_bills_path(:active_sub_tab => 2,:template =>"shared/bills/index_confirm","search[state_is]" => Bill::STATE_DRAFT)  %>
+    </li> 
+    <li class="first <%=check_sub_active_tab(3)%>">
+    <%= link_to "确认清单列表",confirms_path(:active_sub_tab => 3,:in_what => :carrying_bills)  %>
+    </li> 
+  <%end%>
 
-  <li class="<%=check_sub_active_tab(4)%>">
-  <%= link_to "待提款", carrying_bills_path(:active_sub_tab => 4,"search[state_is]" => Bill::STATE_CONFIRM)  %>
-  </li> 
+  <%if check_power('new_tk_info')%>
+    <li class="<%=check_sub_active_tab(4)%>">
+    <%= link_to "待提款", carrying_bills_path(:active_sub_tab => 4,"search[state_is]" => Bill::STATE_CONFIRM)  %>
+    </li> 
+  <%end%>
 
-  <li class="<%=check_sub_active_tab(5)%>">
-  <%= link_to "待核销", carrying_bills_path(:active_sub_tab => 5,:template =>"shared/bills/index_post","search[state_is]" => CarryingBill::STATE_TK)  %>
-  </li> 
-  <li class="<%=check_sub_active_tab(6)%>">
-  <%= link_to "核销清单", post_infos_path(:active_sub_tab => 6,:in_what => :carrying_bills)  %>
-  </li> 
-
+  <%if check_power('new_post_info_carrying_bill')%>
+    <li class="<%=check_sub_active_tab(5)%>">
+    <%= link_to "待核销", carrying_bills_path(:active_sub_tab => 5,:template =>"shared/bills/index_post","search[state_is]" => CarryingBill::STATE_TK)  %>
+    </li> 
+    <li class="<%=check_sub_active_tab(6)%>">
+    <%= link_to "核销清单", post_infos_path(:active_sub_tab => 6,:in_what => :carrying_bills)  %>
+    </li> 
+  <%end%>
   <%if params[:active_sub_tab] == '7'%>
     <li class="active">
     <%= link_to "新建", self.send("new_#{@param_name}_path",:active_sub_tab => 7)   %>

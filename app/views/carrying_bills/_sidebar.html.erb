@@ -1,13 +1,17 @@
-<div class="block">
-  <h3>新建</h3>
-  <ul class="navigation">
-    <li><%= link_to "新建票据", new_carrying_bill_path(:active_sub_tab => 7) %></li>
-  </ul>
-</div>
+<%if check_power('new_carrying_bill')%>
+  <div class="block">
+    <h3>新建</h3>
+    <ul class="navigation">
+      <li><%= link_to "新建票据", new_carrying_bill_path(:active_sub_tab => 7) %></li>
+    </ul>
+  </div>
+<%end%>
 <div class="block">
   <h3>操作</h3>
   <ul class="navigation">
-    <li><%= link_to "提款操作", new_tk_info_path,:onclick => "Modalbox.show(this.href,{title : false,width : 700,height : 400});return false" %></li>
+    <%if check_power('new_tk_info')%>
+      <li><%= link_to "提款操作", new_tk_info_path,:onclick => "Modalbox.show(this.href,{title : false,width : 700,height : 400});return false" %></li>
+    <%end%>
     <li><%= link_to "导出查询结果", carrying_bills_path(params,:format => :csv) %></li>
   </ul>
 </div>

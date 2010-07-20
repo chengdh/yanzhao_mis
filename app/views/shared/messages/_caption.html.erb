@@ -5,10 +5,11 @@
   <li class="first <%=check_sub_active_tab(6)%>">
   <%= link_to "我发布的-通告", notices_path(:active_sub_tab => 6,"search[user_id_is]" => current_user)  %>
   </li> 
-  <li class="<%=check_sub_active_tab(3)%>">
-  <%= link_to "我审核的-通告", notices_path(:active_sub_tab => 3,"search[publisher_id_is]" => current_user)   %>
-  </li> 
-
+  <%if check_power('publish_notice')%>
+    <li class="<%=check_sub_active_tab(3)%>">
+    <%= link_to "我审核的-通告", notices_path(:active_sub_tab => 3,"search[publisher_id_is]" => current_user)   %>
+    </li> 
+  <%end%>
   <li class="<%=check_sub_active_tab(2)%>">
   <%= link_to "规章制度#{unread_rules_count}", rules_path(:active_sub_tab => 2)   %>
   </li> 
@@ -16,10 +17,12 @@
   <%= link_to "我发布的-规章制度", rules_path(:active_sub_tab => 7,"search[user_id_is]" => current_user)  %>
   </li> 
 
+  <%if check_power('publish_rule')%>
 
-  <li class="<%=check_sub_active_tab(4)%>">
-  <%= link_to "我审核的-规章制度", rules_path(:active_sub_tab => 4,"search[publisher_id_is]" => current_user)   %>
-  </li> 
+    <li class="<%=check_sub_active_tab(4)%>">
+    <%= link_to "我审核的-规章制度", rules_path(:active_sub_tab => 4,"search[publisher_id_is]" => current_user)   %>
+    </li> 
+  <%end%>
 
   <li class="<%=check_sub_active_tab(5)%>">
   <%= link_to "通讯录", address_books_path(:active_sub_tab => 5)   %>

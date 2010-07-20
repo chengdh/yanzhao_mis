@@ -1,6 +1,14 @@
 <ul class="wat-cf">
-  <li class="first  <%=check_sub_active_tab(1) %>"><%= link_to "VIP列表", vip_infos_path(:active_sub_tab => 1)  %></li>
+  <%if check_power('vip_infos')%>
+    <li class="first  <%=check_sub_active_tab(1) %>"><%= link_to "VIP列表", vip_infos_path(:active_sub_tab => 1)  %></li>
+  <%end%>
   <li class="<%=check_sub_active_tab(2) %>"><%= link_to "VIP导入信息列表", vip_fee_infos_path(:active_sub_tab => 2)  %></li>
-  <li class="<%=check_sub_active_tab(3) %>"><%= link_to "VIP级别设置", vip_configs_path(:active_sub_tab => 3)  %></li>
-  <li class="<%=check_sub_active_tab(4) %>"><%= link_to "VIP数据导入", new_upload_vip_file_path(:active_sub_tab => 4)  %></li>
+
+  <%if check_power('vip_config')%>
+    <li class="<%=check_sub_active_tab(3) %>"><%= link_to "VIP级别设置", vip_configs_path(:active_sub_tab => 3)  %></li>
+  <%end%>
+
+  <%if check_power('upload_vip_files')%>
+    <li class="<%=check_sub_active_tab(4) %>"><%= link_to "VIP数据导入", new_upload_vip_file_path(:active_sub_tab => 4)  %></li>
+  <%end%>
 </ul>

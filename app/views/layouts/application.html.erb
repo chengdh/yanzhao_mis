@@ -25,16 +25,18 @@
             </ul>
           </div>      
           <div id="user-navigation">
-            <ul class="wat-cf">
-              <li class="<%= check_current_controller(['clients']) %>">
-              <%=link_to "公司信息",edit_client_path(Client.first) %>
-              </li>
-              <li class="<%= check_current_controller(['departments','sub_companies','warehouses']) %>">
-              <%=link_to "基础资料",departments_path %></li>
-              <li class="<%= controller.controller_path == 'users' ? 'active' : '' %>">
-              <%=link_to "用户管理",users_path%>
-              </li>
-            </ul>
+            <%if current_user.is_admin%>
+              <ul class="wat-cf">
+                <li class="<%= check_current_controller(['clients']) %>">
+                <%=link_to "公司信息",edit_client_path(Client.first) %>
+                </li>
+                <li class="<%= check_current_controller(['departments','sub_companies','warehouses']) %>">
+                <%=link_to "基础资料",departments_path %></li>
+                <li class="<%= controller.controller_path == 'users' ? 'active' : '' %>">
+                <%=link_to "用户管理",users_path%>
+                </li>
+              </ul>
+            <%end%>
           </div>      
           <div id="main-navigation">
             <ul class="wat-cf"> 
@@ -44,24 +46,41 @@
               <li class="<%= check_current_controller(['posts']) %>">
               <%=link_to "在线交流#{unread_posts_sign}",posts_path("search[user_id_does_not_equal]" => current_user)%>
               </li> 
-              <li class="<%= check_current_controller(['vip_infos','vip_fee_infos','vip_configs','upload_vip_files']) %>">
-              <%=link_to "贵宾系统",vip_infos_path%>
-              </li> 
-              <li class="<%= check_current_controller(['settlements','contracts']) %>">
-              <%=link_to "分成结算#{alert(@contract_alert_count)}",settlements_path%>
-              </li> 
-              <li class="<%= check_current_controller(['durable_materials','durable_receipts','durable_shippments','material_inout_lines'],'durable_receipts') %>">
-              <%=link_to "耐用品管理",durable_receipts_path %>
-              </li>
-              <li class="<%= check_current_controller(['consumer_materials','consumer_receipts','consumer_shippments'],'consumer_receipts') %>">
-              <%=link_to "易耗品管理#{alert(@storage_alert_count)}",consumer_receipts_path %>
-              </li>
-              <li class="<%= check_current_controller(['carrying_bills'],'carrying_bills') %>">
-              <%=link_to "票据管理",carrying_bills_path %>
-              </li>
-              <li class="<%= check_current_controller(['inout_bills'],'inout_bills') %>">
-              <%=link_to "提货单管理",inout_bills_path %>
-              </li>
+              <%if check_power_group('贵宾系统')%>
+                <li class="<%= check_current_controller(['vip_infos','vip_fee_infos','vip_configs','upload_vip_files']) %>">
+                <%=link_to "贵宾系统",vip_infos_path%>
+                </li> 
+              <%end%>
+
+              <%if check_power_group('分成结算')%>
+                <li class="<%= check_current_controller(['settlements','contracts']) %>">
+                <%=link_to "分成结算#{alert(@contract_alert_count)}",settlements_path%>
+                </li> 
+              <%end%>
+
+              <%if check_power_group('耐用品管理')%>
+                <li class="<%= check_current_controller(['durable_materials','durable_receipts','durable_shippments','material_inout_lines'],'durable_receipts') %>">
+                <%=link_to "耐用品管理",durable_receipts_path %>
+                </li>
+              <%end%>
+
+              <%if check_power_group('易耗品管理')%>
+                <li class="<%= check_current_controller(['consumer_materials','consumer_receipts','consumer_shippments'],'consumer_receipts') %>">
+                <%=link_to "易耗品管理#{alert(@storage_alert_count)}",consumer_receipts_path %>
+                </li>
+              <%end%>
+
+              <%if check_power_group('票据管理')%>
+                <li class="<%= check_current_controller(['carrying_bills'],'carrying_bills') %>">
+                <%=link_to "票据管理",carrying_bills_path %>
+                </li>
+              <%end%>
+
+              <%if check_power_group('提货单管理')%>
+                <li class="<%= check_current_controller(['inout_bills'],'inout_bills') %>">
+                <%=link_to "提货单管理",inout_bills_path %>
+                </li>
+              <%end%>
             </ul>
           </div>
         </div>    

@@ -29,8 +29,13 @@
               <td><%= settlement.total_push_money %></td>
               <td class="last">
                 <%= link_to "查看/打印", settlement,:popup => ['分部返款结算表','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes']%> |
-                <%= link_to "修改", edit_settlement_path(settlement,:active_sub_tab => 4) %> |
-                <%= link_to "删除", settlement, :method => :delete, :confirm => "确认要删除吗?" %>
+                <%if check_power('edit_settlement')%>
+                  <%= link_to "修改", edit_settlement_path(settlement,:active_sub_tab => 4) %> |
+                <%end%>
+
+                <%if check_power('destroy_settlement')%>
+                  <%= link_to "删除", settlement, :method => :delete, :confirm => "确认要删除吗?" %>
+                <%end%>
               </td>
             </tr>          
           <%end%>

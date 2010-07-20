@@ -6,8 +6,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     post = Post.find(params[:post_id])
     @comment.post = post 
-    #FIXME 设置comment的user_id为当前用户
-    @comment.user = User.first
+    @comment.user = current_user
 
     respond_to do |format|
       if @comment.save

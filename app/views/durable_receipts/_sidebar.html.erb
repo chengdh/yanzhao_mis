@@ -1,9 +1,16 @@
 <div class="block">
   <h3>新建</h3>
   <ul class="navigation">
-    <li><%=link_to "新建入库单",new_durable_receipt_path(:active_sub_tab => 6)%></li>
-    <li><%=link_to "新建领用单",new_durable_shippment_path(:active_sub_tab => 9)%></li>
-    <li><%=link_to "新建物品资料",new_durable_material_path(:active_sub_tab => 7)%></li>
+    <%if check_power('new_durable_receipt')%>
+      <li><%=link_to "新建入库单",new_durable_receipt_path(:active_sub_tab => 6)%></li>
+    <%end%>
+
+    <%if check_power('new_durable_shippment')%>
+      <li><%=link_to "新建领用单",new_durable_shippment_path(:active_sub_tab => 9)%></li>
+    <%end%>
+    <%if check_power('new_durable_material')%>
+      <li><%=link_to "新建物品资料",new_durable_material_path(:active_sub_tab => 7)%></li>
+    <%end%>
   </ul>
 </div>
 <div class="block">

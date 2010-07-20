@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  group: MyString
+  func_name: MyString
+  func_key: MyString
+  is_active: false
+
+two:
+  group: MyString
+  func_name: MyString
+  func_key: MyString
+  is_active: false

@@ -55,6 +55,18 @@
         <%=f.check_box :is_active %>
       </div>
     </fieldset>
+    <div id='user_power'>
+      <%@group_powers.each do |group,powers|%>
+        <fieldset>
+          <legend><%=group%></legend>
+          <%f.fields_for :powers,powers do |power|%>
+            <%=power.hidden_field :user_id%>
+            <%=power.hidden_field :system_function_id%>
+            <%=power.check_box :is_select %><%=power.label :is_select,power.object.system_function.func_name%>
+          <%end%>
+        </fieldset>
+      <%end%>
+    </div>
   </div>
   <div class='actions-bar wat-cf'>
     <%=f.submit '保存用户信息', :class => 'sexybutton sexysimple sexygreen'%>

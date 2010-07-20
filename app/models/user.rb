@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   #:confirmable, :recoverable,:registerable,:rememberable, :trackable, :validatable
 
   belongs_to :org
+  has_many :powers
+  has_many :system_functions,:through => :powers
+
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :password, :password_confirmation,:is_admin,:is_active,:org_id,:remember_me
+  attr_accessible :username, :password, :password_confirmation,:is_admin,:is_active,:org_id,:remember_me,:powers_attributes
+  accepts_nested_attributes_for :powers
 end

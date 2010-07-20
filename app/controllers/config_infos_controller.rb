@@ -37,7 +37,7 @@ class ConfigInfosController < BaseController
 
     respond_to do |format|
       if @config_info.save
-        flash[:notice] = "<div class='success'>配置信息创建成功.</div>"
+        flash[:notice] = "配置信息创建成功."
         format.html { render :partial => "list_hand_fee",:object => hand_fee_rates }
         format.xml  { render :xml => @config_info, :status => :created, :location => @config_info }
         format.js   do 
@@ -63,7 +63,7 @@ class ConfigInfosController < BaseController
     hand_fee_rates = ConfigInfo.hand_fee_rates
     respond_to do |format|
       if @config_info.update_attributes(params[:config_info])
-        flash[:notice] = "<div class='success'>配置信息更新成功.</div>"
+        flash[:notice] = "配置信息更新成功."
         format.html { redirect_to(@config_info) }
         format.xml  { head :ok }
         format.js   do 

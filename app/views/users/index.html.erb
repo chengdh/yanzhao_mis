@@ -5,9 +5,12 @@
   <div class="content">          
     <h2 class="title">用户信息</h2>
     <div class="inner wat-cf">
-      <table class='table'>
-        <%=render @users%>
-      </table>
+      <%@group_users.each do |org_name,users| %>
+        <h3><%=org_name%></h3>
+        <table class='table'>
+          <%=render users%>
+        </table>
+      <%end%>
     </div>
   </div>
 </div>
