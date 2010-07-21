@@ -17,6 +17,7 @@ class ContractsController < BaseController
     5.times {@contract.unfixed_subsidies.build}
     10.times {@contract.other_deductions.build}
   end
+
   #取消报警标志
   #PUT contracts/:id/disable_alert
   def disable_alert
@@ -35,8 +36,13 @@ class ContractsController < BaseController
   private 
   def prepare_data
     @contract = Contract.find(params[:id])
+    months = months_range(@contract.date_from,@contract.date_to)
+    #每月至少创建1条应补或应扣项目，防止其为空
+    months.keys.each { |mth|  @contract.fixed_subsidies.build(:mth => mth )}
+    months.keys.each { |mth|  @contract.fixed_deductions.build(:mth => mth )}
     @group_fixed_subsidies = @contract.fixed_subsidies.group_by {|item| item.mth}
     @group_fixed_deductions = @contract.fixed_deductions.group_by {|item| item.mth}
+
   end
   #根据起始和结束日期得到日期月份列表
   protected 

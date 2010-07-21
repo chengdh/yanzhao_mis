@@ -361,8 +361,10 @@ com.yanzhao.nestedFormHelper = {};
 com.yanzhao.nestedFormHelper.remove_fields = function(link){
   $(link).previous("input[type=hidden]").value = "1";  
   $(link).up().up(".fields").hide();   
+
   //重新计算合计
-  material_selector.cal_sum();
+  if (typeof(material_selector) != 'undefined' && material_selector)
+    material_selector.cal_sum();
 }
 /* 添加方法*/
 com.yanzhao.nestedFormHelper.add_fields = function(link, association, content,content_wrap){

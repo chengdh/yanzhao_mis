@@ -1,0 +1,50 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render 'durable_receipts/caption' %>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      <table class='table'>
+        <tr>
+          <td>报废日期:</td>
+          <td><%=@scrapped_info.inout_date%></td>
+        </tr>
+        <tr>
+          <td>部门:</td>
+          <td><%=@scrapped_info.org.try(:name)%></td>
+          <td>经办人:</td>
+          <td><%=@scrapped_info.person_name%></td>
+        </tr>
+        <tr>
+          <td>备注:</td>
+          <td colspan='3'><%=@scrapped_info.note%></td>
+        </tr>
+      </table>
+      <table class='table'>
+        <tr>
+          <th>物品名称</th>
+          <th>单位</th>
+          <th>价格</th>
+          <th>数量</th>
+          <th>金额</th>
+        </tr>
+        <%@scrapped_info.material_inout_lines.each do |line|%>
+          <tr>
+            <td><%=line.material.name%></td>
+            <td><%=line.material.unit%></td>
+            <td><%=line.price%></td>
+            <td><%=line.qty%></td>
+            <td><%=line.line_amt%></td>
+          </tr>
+        <%end%>
+        <tfoot>
+            <td colspan='3'></td>
+            <td>合计</td>
+            <td><%=@scrapped_info.material_inout_lines.sum(:line_amt)%></td>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

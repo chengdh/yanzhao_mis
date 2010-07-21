@@ -35,7 +35,7 @@ class AddressBooksController < BaseController
 
     respond_to do |format|
       if @address_book.save
-        flash[:notice] = 'AddressBook was successfully created.'
+        flash[:notice] = "#{@model_klazz.human_name}保存成功." 
         format.html { redirect_to(@address_book) }
         format.xml  { render :xml => @address_book, :status => :created, :location => @address_book }
       else
@@ -52,7 +52,8 @@ class AddressBooksController < BaseController
 
     respond_to do |format|
       if @address_book.update_attributes(params[:address_book])
-        flash[:notice] = 'AddressBook was successfully updated.'
+
+        flash[:notice] = "#{@model_klazz.human_name}更新成功." 
         format.html { redirect_to(@address_book) }
         format.xml  { head :ok }
       else

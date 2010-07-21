@@ -1,0 +1,78 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+cn:
+  activerecord:
+    models:
+      address_book: 通讯录
+      carrying_bill: 提款票据
+      inout_bill:  提货票据
+      client:  注册资料
+      comment: 回复
+      config_info:  系统设置信息
+      clear_info: 清仓信息
+      confirm: 确认信息
+      consumer_material: 易耗品
+      consumer_receipt: 入库单
+      consumer_shippment: 领用单
+      contract: 合同模板
+      deliver: 提货信息
+      deparetment: 科室/部门
+      durable_material: 耐用品
+      durable_receipt: 耐用品入库单
+      durable_shippment: 耐用品领用单
+      m_storage: 库存信息
+      notice: 通知公告
+      post: 公共信息
+      rule: 规章制度
+      sub_company: 分理处/分公司
+      system_function: 系统功能
+      tk_info: 提款信息
+      user: 用户信息
+      vip_config: VIP设置信息
+      vip_fee_info: VIP导入信息
+      vip_info: VIP信息
+      warehouse: 仓库信息
+    errors:
+      template:
+        header:
+          one:   "保存{{model}} 时发生了一个错误."
+          other: "保存{{model}} 发生了{{count}}个错误."
+        body:    "以下字段发生了错误:"
+#ed in distance_of_time_in_words(), distance_of_time_in_words_to_now(), time_ago_in_words()
+  datetime:
+    distance_in_words:
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        one:   "less than 1 second"
+        other: "less than {{count}} seconds"
+      x_seconds:
+        one:   "1 second"
+        other: "{{count}} seconds"
+      less_than_x_minutes:
+        one:   "less than a minute"
+        other: "less than {{count}} minutes"
+      x_minutes:
+        one:   "1 minute"
+        other: "{{count}} minutes"
+      about_x_hours:
+        one:   "about 1 hour"
+        other: "about {{count}} hours"
+      x_days:
+        one:   "1 day"
+        other: "{{count}} days"
+      about_x_months:
+        one:   "about 1 month"
+        other: "about {{count}} months"
+      x_months:
+        one:   "1 month"
+        other: "{{count}} months"
+      about_x_years:
+        one:   "about 1 year"
+        other: "about {{count}} years"
+      over_x_years:
+        one:   "over 1 year"
+        other: "over {{count}} years"
+      almost_x_years:
+        one:   "almost 1 year"
+        other: "almost {{count}} years"

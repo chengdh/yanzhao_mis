@@ -37,7 +37,7 @@ class UsersController < BaseController
     @group_powers = @user.powers.group_by {|p| p.system_function.group_name}
     respond_to do |format|
       if @user.save
-        flash[:notice] = 'User was successfully created.'
+        flash[:notice] = '用户信息保存成功.'
         format.html { redirect_to users_url }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else

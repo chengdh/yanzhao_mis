@@ -47,7 +47,7 @@ class MessagesController < BaseController
 
     respond_to do |format|
       if message.save
-        flash[:notice] = '@model_klazz was successfully created.'
+        flash[:notice] = "#{@model_klazz.human_name}创建成功."
         format.html { redirect_to :back }
         format.xml  { render :xml => message, :status => :created, :location => message }
       else
@@ -66,7 +66,7 @@ class MessagesController < BaseController
 
     respond_to do |format|
       if message.update_attributes(params[@param_name])
-        flash[:notice] = '@model_klazz was successfully updated.'
+        flash[:notice] = "#{@model_klazz.human_name}更新成功."
         format.html { redirect_to :back }
         format.xml  { head :ok }
       else
@@ -87,7 +87,8 @@ class MessagesController < BaseController
     message.publish_date = Time.now
     respond_to do |format|
       if message.update_attributes(params[@param_name])
-        flash[:notice] = '@model_klazz was successfully updated.'
+
+        flash[:notice] = "#{@model_klazz.human_name}发布成功."
         format.html { redirect_to :back }
         format.xml  { head :ok }
       else

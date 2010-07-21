@@ -1,4 +1,5 @@
 class Client < ActiveRecord::Base
+  validates_presence_of :name,:message => "注册名称不可为空."
   has_attached_file :logo, :styles => { :medium => "300x300>", :thumb => "50x50>" }
   #机构和用户
   def admin

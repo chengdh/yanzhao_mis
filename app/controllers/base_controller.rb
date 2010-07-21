@@ -51,7 +51,7 @@ class BaseController < ApplicationController
     instance_variable_set("@#{@param_name}",the_model)
     respond_to do |format|
       if the_model.save
-        flash[:notice] = '@model_klazz was successfully created.'
+        flash[:notice] = "#{@model_klazz.human_name} 保存成功."
         format.html { redirect_to(:action => :index) }
         format.xml  { render :xml => the_model, :status => :created, :location => the_model }
       else
@@ -68,7 +68,7 @@ class BaseController < ApplicationController
     instance_variable_set("@#{@param_name}",the_model)
     respond_to do |format|
       if the_model.update_attributes(params[@param_name])
-        flash[:notice] = '@model_klazz was successfully updated.'
+        flash[:notice] = "#{@model_klazz.human_name} 更新成功."
         format.html { redirect_to(:action => :index) }
         format.xml  { head :ok }
       else
@@ -84,6 +84,7 @@ class BaseController < ApplicationController
     the_model = @model_klazz.find(params[:id])
     the_model.destroy
 
+    flash[:notice] = "#{@model_klazz.human_name} 已被删除."
     respond_to do |format|
       format.html { redirect_to :back }
       format.xml  { head :ok }

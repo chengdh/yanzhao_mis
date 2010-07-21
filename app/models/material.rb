@@ -1,4 +1,7 @@
 class Material < ActiveRecord::Base
+  validates_presence_of :name,:message => "物品名称不可为空"
+  validates_presence_of :unit,:message => "计量单位不可为空"
+  validates_numericality_of :min_count,  :message => "最低库存应为数字"
   #定义物品信息的after_create
   #向storage(库存表)中插入相应的物品信息
   def after_save

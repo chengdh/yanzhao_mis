@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100719112815) do
+ActiveRecord::Schema.define(:version => 20100721095812) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -202,7 +202,7 @@ ActiveRecord::Schema.define(:version => 20100719112815) do
   create_table "material_inouts", :force => true do |t|
     t.date     "inout_date",                  :null => false
     t.integer  "org_id"
-    t.integer  "warehouse_id",                :null => false
+    t.integer  "warehouse_id"
     t.string   "person_name",  :limit => 30
     t.string   "note",         :limit => 200
     t.string   "type",         :limit => 30,  :null => false
@@ -248,6 +248,14 @@ ActiveRecord::Schema.define(:version => 20100719112815) do
     t.datetime "updated_at"
   end
 
+  create_table "powers", :force => true do |t|
+    t.integer  "user_id",                               :null => false
+    t.integer  "system_function_id",                    :null => false
+    t.boolean  "is_select",          :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "settlement_lines", :force => true do |t|
     t.integer  "settlement_id",                                                               :null => false
     t.string   "type",          :limit => 50,                                                 :null => false
@@ -276,6 +284,15 @@ ActiveRecord::Schema.define(:version => 20100719112815) do
     t.decimal  "total_subsidy",                   :precision => 15, :scale => 2, :default => 0.0
     t.decimal  "total_deduction",                 :precision => 15, :scale => 2, :default => 0.0
     t.decimal  "act_push_money",                  :precision => 15, :scale => 2, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "system_functions", :force => true do |t|
+    t.string   "group_name", :limit => 60,                   :null => false
+    t.string   "func_name",  :limit => 60,                   :null => false
+    t.string   "func_key",   :limit => 60,                   :null => false
+    t.boolean  "is_active",                :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

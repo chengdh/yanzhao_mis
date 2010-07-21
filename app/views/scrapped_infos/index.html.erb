@@ -1,0 +1,40 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render :partial => 'durable_receipts/caption' %>
+  </div>          
+  <div class="content">          
+    <h2 class="title">报废单据列表</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th>单据日期</th>
+          <th>部门</th>
+          <th>经办人</th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <%bills = instance_variable_get("@#{@param_name.tableize}") %>
+        <% bills.each do |bill| -%>
+          <tr class="<%= cycle("odd", "even") %>">
+            <td>
+              <%= bill.inout_date %>
+            </td>
+            <td>
+              <%= bill.org.try(:name) %>
+            </td>
+            <td>
+              <%= bill.person_name %>
+            </td>
+            <td class="last">
+              <%= link_to "查看/打印",scrapped_info_path(bill,:active_sub_tab => 14) %> 
+              <!--%= link_to "删除", bill, :method => :delete, :confirm => "您确定要删除该信息吗？" %-->
+            </td>
+          </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <%= will_paginate bills  %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

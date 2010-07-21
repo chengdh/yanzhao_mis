@@ -110,5 +110,53 @@
   </table>
 </div>
 <div class='actions-bar text-center'>
+  <%if bill_readonly.kind_of?(CarryingBill)%>
+
+    <%if check_power('new_confirm') && bill_readonly.state == Bill::STATE_DRAFT %>
+      <%=link_to '确认',confirms_path("bills[]" => bill_readonly),:method => :post,:class => 'sexybutton sexysimple'%>
+    <%end%>
+
+    <%if bill_readonly.state == Bill::STATE_DRAFT || (check_power('edit_carrying_bill') && !bill_readonly.state.eql?(Bill::STATE_POST))%>
+      <%=link_to '修改', edit_carrying_bill_path(bill_readonly,params),:class => 'sexybutton sexysimple'%>
+    <%end%>
+
+    <%if check_power('destroy_carrying_bill') && !bill_readonly.state.eql?(Bill::STATE_POST) %>
+      <%=link_to '删除',bill_readonly,:method => 'delete',:class => 'sexybutton sexysimple',:confirm => "确认删除此票据吗?"%>
+    <%end%>
+
+    <%if check_power('new_tk_info') && bill_readonly.state == Bill::STATE_CONFIRM %>
+      <%=link_to '提款',new_tk_info_path(:bill_id => bill_readonly),:class => 'sexybutton sexysimple',:onclick => "Modalbox.show(this.href,{title : false,width: 700,height : 550});return false;"%>
+    <%end%>
+
+    <%if check_power('new_post_info_carrying_bill') && bill_readonly.state == CarryingBill::STATE_TK %>
+      <%=link_to '核销',post_infos_path("bills[]" => bill_readonly),:method => :post,:class => 'sexybutton sexysimple'%>
+    <%end%> 
+  <%end%>
+
+  <%if bill_readonly.kind_of?(InoutBill)%>
+    <%if check_power('new_confirm_inout_bill') && bill_readonly.state == Bill::STATE_DRAFT  %>
+      <%=link_to '确认',confirms_path("bills[]" => bill_readonly),:method => :post,:class => 'sexybutton sexysimple'%>
+    <%end%>
+
+
+    <%if bill_readonly.state == Bill::STATE_DRAFT || (check_power('edit_inout_bill') && !bill_readonly.state.eql?(Bill::STATE_POST))%>
+      <%=link_to '修改', edit_inout_bill_path(bill_readonly,params),:class => 'sexybutton sexysimple'%>
+    <%end%>
+
+
+    <%if check_power('destroy_inout_bill') && !bill_readonly.state.eql?(Bill::STATE_POST) %>
+      <%=link_to '删除',bill_readonly,:method => 'delete',:class => 'sexybutton sexysimple',:confirm => "确认删除此票据吗?"%>
+    <%end%>
+
+    <%if check_power('new_deliver') && bill_readonly.state == Bill::STATE_CONFIRM %>
+      <%=link_to '提货',new_deliver_path(:bill_id => bill_readonly),:class => 'sexybutton sexysimple',:onclick => "Modalbox.show(this.href,{title : false,width: 700,height : 550});return false;"%>
+    <%end%>
+    <%if check_power('new_clear_info') && bill_readonly.state == Bill::STATE_CONFIRM%>
+      <%=link_to '清仓',new_clear_info_path(:bill_id => bill_readonly),:class => 'sexybutton sexysimple',:onclick => "Modalbox.show(this.href,{title : false,width: 700,height : 550});return false;"%>
+    <%end%>
+    <%if check_power('new_post_info_inout_bill') && (bill_readonly.state == InoutBill::STATE_DELIVER || bill_readonly.state == InoutBill::STATE_CLEAR)%>
+      <%=link_to '核销',post_infos_path("bills[]" => bill_readonly),:method => :post,:class => 'sexybutton sexysimple'%>
+    <%end%>
+  <%end%>
   <%=link_to_function '关闭窗口',"Modalbox.hide();return false;",:class => "sexybutton sexysimple sexyred"%>
 </div>

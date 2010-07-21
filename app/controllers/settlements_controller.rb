@@ -60,7 +60,7 @@ class SettlementsController < BaseController
 
     respond_to do |format|
       if @settlement.save
-        flash[:notice] = 'Settlement was successfully created.'
+        flash[:notice] = '结算表保存成功.'
         format.html { redirect_to :action => :index }
         format.xml  { render :xml => @settlement, :status => :created, :location => @settlement }
       else
@@ -77,7 +77,7 @@ class SettlementsController < BaseController
 
     respond_to do |format|
       if @settlement.update_attributes(params[:settlement])
-        flash[:notice] = 'Settlement was successfully updated.'
+        flash[:notice] = '结算表更新成功.'
         format.html { redirect_to :action => :index }
         format.xml  { head :ok }
       else

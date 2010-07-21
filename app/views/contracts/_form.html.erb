@@ -52,7 +52,7 @@
       </tbody>
     </table>
     <div class="actions-bar text-right">
-      <%=link_to_add_fields "添加固定应补项目",f,:fixed_subsidies,"fixed_subsidy_fields_wrap_#{mth}" %>
+      <%=link_to_add_fields "添加固定应补项目",f,:fixed_subsidies,"fixed_subsidy_fields_wrap_#{mth}",:mth => mth %>
     </div>
   </div>
 <%end%>
@@ -68,7 +68,7 @@
       </tbody>
     </table>
     <div class="actions-bar text-right">
-      <%=link_to_add_fields "添加固定应扣项目",f,:fixed_deductions,"fixed_deduction_fields_wrap_#{mth}" %>
+      <%=link_to_add_fields "添加固定应扣项目",f,:fixed_deductions,"fixed_deduction_fields_wrap_#{mth}",:mth => mth %>
     </div>
   </div>
 <%end%>

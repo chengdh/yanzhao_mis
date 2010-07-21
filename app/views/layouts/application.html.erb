@@ -59,7 +59,7 @@
               <%end%>
 
               <%if check_power_group('耐用品管理')%>
-                <li class="<%= check_current_controller(['durable_materials','durable_receipts','durable_shippments','material_inout_lines'],'durable_receipts') %>">
+                <li class="<%= check_current_controller(['scrapped_infos','durable_materials','durable_receipts','durable_shippments','material_inout_lines'],'durable_receipts') %>">
                 <%=link_to "耐用品管理",durable_receipts_path %>
                 </li>
               <%end%>
@@ -86,7 +86,7 @@
         </div>    
         <div id="wrapper" class="wat-cf">
           <div id="main">
-            <div class="flash">
+            <div id='flash' class="flash">
               <% flash.each do |type, message| -%>
                 <div class="message <%= type %>">
                   <p><%= message %></p>

@@ -1,4 +1,5 @@
 class VipInfo < ActiveRecord::Base
+  validates_presence_of :name,:message => "名称不可为空"
   belongs_to :org
   #以下定义状态
   STATE_NORMAL = 'normal'           #正常状态,没有下降

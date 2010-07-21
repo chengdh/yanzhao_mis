@@ -1,4 +1,5 @@
 class BasePublicMessage < ActiveRecord::Base
+  validates_presence_of :title,:message => "标题不可为空."
   include AASM
   #包含以下三种message
   #发送给该用户的

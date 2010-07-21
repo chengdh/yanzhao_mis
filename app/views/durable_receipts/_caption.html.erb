@@ -31,4 +31,12 @@
     <li class="<%=check_sub_active_tab(11) %>"><%= link_to "部门耐用品汇总", material_inout_lines_path(:active_sub_tab => 11) %></li>
   <%end%>
 
+  <li class="<%=check_sub_active_tab(12) %>"><%= link_to "报废单", scrapped_infos_path(:active_sub_tab => 12) %></li>
+  <%if params[:active_sub_tab] == '13'%>
+    <li class="active"><%= link_to "新建报废单", new_scrapped_info_path(:active_sub_tab => 13) %></li>
+  <%end%>
+  <%if params[:active_sub_tab] == '14'%>
+    <li class="active"><%= link_to "查看报废单", scrapped_info_path(@scrapped_info,:active_sub_tab => 14) %></li>
+  <%end%>
+
 </ul>

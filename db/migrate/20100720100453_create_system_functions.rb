@@ -42,6 +42,7 @@ class CreateSystemFunctions < ActiveRecord::Migration
     SystemFunction.create :group_name => "耐用品管理",:func_name => "新建领用单",:func_key => "new_durable_shippment"
     SystemFunction.create :group_name => "耐用品管理",:func_name => "耐用物品定义",:func_key => "new_durable_material"
     SystemFunction.create :group_name => "耐用品管理",:func_name => "库存查询",:func_key => "m_storages"
+    SystemFunction.create :group_name => "耐用品管理",:func_name => "耐用品报废",:func_key => "new_scrapped_info"
     SystemFunction.create :group_name => "耐用品管理",:func_name => "部门耐用品汇总",:func_key => "material_inout_lines"
     #
     #
@@ -55,12 +56,18 @@ class CreateSystemFunctions < ActiveRecord::Migration
     #票据管理
 
     SystemFunction.create :group_name => "票据管理",:func_name => "新建票据",:func_key => "new_carrying_bill"
+    SystemFunction.create :group_name => "票据管理",:func_name => "修改票据",:func_key => "edit_carrying_bill"
+    SystemFunction.create :group_name => "票据管理",:func_name => "删除票据",:func_key => "destroy_carrying_bill"
     SystemFunction.create :group_name => "票据管理",:func_name => "票据确认",:func_key => "new_confirm"
     SystemFunction.create :group_name => "票据管理",:func_name => "提款处理",:func_key => "new_tk_info"
     SystemFunction.create :group_name => "票据管理",:func_name => "票据核销",:func_key => "new_post_info_carrying_bill"
     #
     #提货单管理
     SystemFunction.create :group_name => "提货单管理",:func_name => "新建票据",:func_key => "new_inout_bill"
+
+    SystemFunction.create :group_name => "票据管理",:func_name => "修改票据",:func_key => "edit_inout_bill"
+
+    SystemFunction.create :group_name => "票据管理",:func_name => "删除票据",:func_key => "destroy_inout_bill"
     SystemFunction.create :group_name => "提货单管理",:func_name => "票据确认",:func_key => "new_confirm_inout_bill"
     SystemFunction.create :group_name => "提货单管理",:func_name => "提货处理",:func_key => "new_deliver"
     SystemFunction.create :group_name => "提货单管理",:func_name => "清仓处理",:func_key => "new_clear_info"

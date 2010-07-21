@@ -1,6 +1,6 @@
 <% remote_form_for resource_name, resource, :url => registration_path(resource_name), 
-  :success => "Modalbox.hide();$('flash').update('<div class=success>用户信息更新成功.</div>');",
-  :failure => "Modalbox.hide();$('flash').update('<div class=error>用户信息更新失败.</div>');",
+  :success => "Modalbox.hide();$('flash').update('<div class=message error>用户信息更新成功.</div>');",
+  :failure => "Modalbox.hide();$('flash').update('<div class=message error>用户信息更新失败.</div>');",
   :html => { :class => "uniForm",:method => :put } do |f| -%>
     <%= f.error_messages %>
     <fieldset class='blockLabels'>

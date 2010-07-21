@@ -1,0 +1,19 @@
+<tr class='fields'>
+
+  <%=f.hidden_field :material_id%>
+  <td>
+    <%=text_field_tag "",f.object.material.name, :class => 'material_name',:style => "width : 150px;",:readonly => true %>
+  </td>
+  <td>
+    <%=text_field_tag "",f.object.material.unit, :class => 'material_unit',:style => "width : 50px;",:readonly => true %>
+  </td>
+  <td>
+    <%=f.text_field :price,:style => "width : 50px;",:class => "material_price" %>
+  </td>
+  <td>
+    <%=f.text_field :qty,:style => "width : 50px;",:class => "material_qty"%>
+  </td>
+  <td>
+    <%=f.text_field :line_amt,:style => "width : 50px;",:class => 'material_total',:style => "width : 50px;",:readonly => true %>
+  </td>
+</tr>

@@ -84,8 +84,8 @@ module ApplicationHelper
     f.hidden_field(:_destroy) + link_to_function(name, "com.yanzhao.nestedFormHelper.remove_fields(this)")  
   end  
   #nested form 中的添加按钮
-  def link_to_add_fields(name, f, association,content_wrap="")  
-    new_object = f.object.class.reflect_on_association(association).klass.new  
+  def link_to_add_fields(name, f, association,content_wrap="",ini_attr ={})  
+    new_object = f.object.class.reflect_on_association(association).klass.new(ini_attr)  
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|  
       render(association.to_s.singularize + "_fields", :f => builder)  
     end  
