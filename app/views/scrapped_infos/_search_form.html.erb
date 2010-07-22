@@ -1,6 +1,6 @@
 <% form_for @search,:url => {:action => :index},:html => {:class => :uniForm } do |f| -%>
-  <%=hidden_field_tag :active_sub_tab,params[:active_sub_tab]%>
   <fieldset class='blockLabels'>
+    <%=hidden_field_tag :active_sub_tab,params[:active_sub_tab]%>
     <div class='ctrlHolder'>
       <%=f.label :person_name_like,"经手人"%>
       <%=f.text_field :person_name_like,:class => "textInput" %>

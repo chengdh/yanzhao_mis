@@ -17,7 +17,7 @@
             <td><%= f.select :name_like, settlement_items_for_select,:include_blank => true %></td>
             <td><%= f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%></td>
           </tr>
-        </div>
+        </table>
       <%end%>
       <table class='table'>
         <tr>
@@ -27,7 +27,7 @@
           <th>金额</th>
         </tr>
         <%@group_settlement_lines.each do |org_name,lines|%>
-          <tr><td colspan='20'><h3><%=org_name%></td></h3></tr>
+          <tr><td colspan='20'><h3><%=org_name%></h3></td></tr>
           <%lines.each do |line|%>
             <tr class="<%=cycle 'odd','even'%>">
               <td>&nbsp;</td>
@@ -43,14 +43,12 @@
             <td><%=lines.sum(&:value)%></td>
           </tr>
         <%end%>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>总计</td>
-            <td><%=@sum%></td>
-          </tr>
-        </tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>总计</td>
+          <td><%=@sum%></td>
+        </tr>
       </table>
       <div class="actions-bar wat-cf">
         <%=will_paginate @group_settlement_lines %>

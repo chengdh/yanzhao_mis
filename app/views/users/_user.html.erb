@@ -1,6 +1,6 @@
 <tr class="<%=cycle 'oadd','even'%>">
   <td><%=user.username%></td>
-  <td><%=check_box_tag "is_admin",user.is_admin,user.is_admin,:disabled => true %>管理员</td>
+  <td><%=check_box_tag "is_admin_#{user.id}",user.is_admin,user.is_admin,:disabled => true %>管理员</td>
   <td></td>
   <td>
     <%=link_to "修改",edit_user_path(user,:active_sub_tab => 3) %>

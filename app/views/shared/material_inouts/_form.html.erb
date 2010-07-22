@@ -25,6 +25,7 @@
     <%= f.label :note, "备注" %>
     <%= f.text_field :note, :class => 'textInput' %>
   </div>
+
 </fieldset>
 <div class='radius-box doc-info'>
   <h3 class='border-bottom'>单据明细</h3>
@@ -45,16 +46,19 @@
       <%end%>
     </tbody>
     <tfoot>
-      <td colspan='3'>&nbsp;</td>
-      <td>合计</td>
-      <td><%=text_field_tag :sum_field,"",:style => "width : 50px;",:readonly => true %></td>
-      <td>&nbsp;</td>
+      <tr>
+        <td colspan='3'>&nbsp;</td>
+        <td>合计</td>
+        <td><%=text_field_tag :sum_field,"",:style => "width : 50px;",:readonly => true %></td>
+        <td>&nbsp;</td>
+      </tr>
     </tfoot>
   </table>
   <div class="actions-bar text-right">
     <%=link_to_add_fields "添加明细",f,:material_inout_lines,"line_fields_wrap" %>
   </div>
 </div>
+
 <div class="actions-bar">
   <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexyblue'%>
   <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>

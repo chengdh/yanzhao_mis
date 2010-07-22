@@ -3,7 +3,7 @@
   <%= link_to "收信箱#{unread_posts_count}",posts_path(:active_sub_tab => 1,"search[user_id_does_not_equal]" => current_user)   %>
   </li>
   <li class="<%=check_sub_active_tab(2)%>"><%= link_to "发信箱",posts_path(:template => "index_outbox",:active_sub_tab => 2,"search[user_id_is]" => current_user)   %></li>
-  <li class="<%=check_sub_active_tab(3)%>"><%= link_to "写信", new_post_path(:active_sub_tab => 3)  %>
+  <li class="<%=check_sub_active_tab(3)%>"><%= link_to "写信", new_post_path(:active_sub_tab => 3)  %></li>
 
   <%if params[:active_sub_tab] == '4'%>
     <li class="active"><%= link_to "查看", @post %></li>

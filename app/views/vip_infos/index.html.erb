@@ -7,10 +7,22 @@
     <div class="inner">
       <table class="table">
         <tr>             
-          <td style='background : blue'>正常</td>
-          <td style='background : yellow'>下降</td>
-          <td style='background : red'>2个月-下降</td>
-          <td style='background : black'>3个月-下降</td>
+          <td class='text-center'>
+            <div style='width : 20px;height : 20px;background : blue;margin-left : auto;margin-right : auto;'></div>
+            正常
+          </td>
+          <td class='text-center'>
+            <div style='width : 20px;height : 20px;background : yellow;margin-left : auto;margin-right : auto;'></div>
+            下降 
+          </td>
+          <td class='text-center'>
+            <div style='width : 20px;height : 20px;background : red;margin-left : auto;margin-right : auto;'></div>
+            2个月下降 
+          </td>
+          <td class='text-center'>
+            <div style='width : 20px;height : 20px;background : black;margin-left : auto;margin-right : auto;'></div>
+            3个月下降 
+          </td>
           <td>&nbsp;</td>
         </tr>
 
@@ -30,7 +42,9 @@
               <td><%= info.phone %></td>
               <td><%= info.cur_fee %></td>
               <td><%= info.last_import_mth %></td>
-              <td style='width : 2px;background : <%=vip_color(info.state)%>;'>&nbsp;</td>
+              <td>
+                <div style='width : 20px;height : 20px;background : <%=vip_color(info.state)%>;margin-left : auto;margin-right : auto;'></div>
+              </td>
             </tr>          
           <%end%>
           <tr>

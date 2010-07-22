@@ -1,6 +1,6 @@
 <% form_for @search,:url => {:action => :index},:html => {:class => :uniForm } do |f| -%>
-  <%=hidden_field_tag :active_sub_tab,params[:active_sub_tab]%>
   <fieldset class='blockLabels'>
+    <%=hidden_field_tag :active_sub_tab,params[:active_sub_tab]%>
     <p class='red-text'>查询结果取决与你被授予的权限</p>
     <div class='ctrlHolder'>
       <%=f.label :warehouse_id_is,"仓库"%>
