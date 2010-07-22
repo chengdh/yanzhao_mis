@@ -29,14 +29,11 @@ class BillsController < BaseController
       #ajax翻页时的处理
       format.js { render :partial => "shared/bills/bill_list",:bills =>  @bills,:show_select => true,:remote_paginate => true  }
       format.csv do 
-        #参考http://blog.enjoyrails.com/2008/12/12/rails-导入导出csv数据时的中文编码问题/
-        #BOM头信息
-        bom = "FFFE".gsub(/\s/,'').to_a.pack("H*")
         if !params[:confirm_id].blank? 
-          send_data bom + @model_klazz.all(:conditions => ["confirm_id = ?",params[:confirm_id]]).export_csv + 
+          send_data @model_klazz.all(:conditions => ["confirm_id = ?",params[:confirm_id]]).export_csv(Bill.export_options) + 
             @model_klazz.calculate_sum(:conditions => ["confirm_id = ?",params[:confirm_id]]).export_line_csv
         elsif !params[:post_info_id].blank?
-          send_data bom + @model_klazz.all(:conditions => ["post_info_id = ?",params[:post_info_id]]).export_csv + 
+          send_data @model_klazz.all(:conditions => ["post_info_id = ?",params[:post_info_id]]).export_csv(Bill.export_options) + 
             @model_klazz.calculate_sum(:conditions => ["post_info_id = ?",params[:post_info_id]]).export_line_csv
         else
           sum = [@sum_info[:sum_fee],@sum_info[:sum_goods_fee],@sum_info[:sum_goods_num],
@@ -47,7 +44,7 @@ class BillsController < BaseController
             empty_col += [""]
           end
           sum = empty_col + sum
-          send_data bom + @model_klazz.query(current_user.id,params[:bill]).all.export_csv + sum.export_line_csv
+          send_data @search.all.export_csv + sum.export_line_csv
         end
       end 
       #else

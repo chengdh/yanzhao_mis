@@ -27,6 +27,13 @@ class Bill < ActiveRecord::Base
     }
 
   end
+  #导出选项
+  def export_options
+    {:methods => [:from_org_name,:to_org_name,:pay_type_des,:state_des],
+      :only => [:bill_no,:goods_no,:sender_name,:sender_phone,:receiver_name,:receiver_phone,
+        :bill_mth,:fee,:goods_fee,:goods_num,:k_hand_fee,:k_carrying_fee,
+        :act_pay_fee,:storage_fee,:clear_fee,:goods_info,:note,:created_at]}
+  end
   def self.add_validate
     validates_presence_of :bill_no,:message => "不可为空"
     validates_presence_of :goods_no,:message => "不可为空"

@@ -16,15 +16,18 @@ class VipInfo < ActiveRecord::Base
     end
   end
   #设置level描述
- def self.states
-   ordered_hash = ActiveSupport::OrderedHash.new
-   ordered_hash[STATE_NORMAL] = "正常"
-   ordered_hash[STATE_1_MTH_DOWN] = "下降-1个月"
-   ordered_hash[STATE_2_MTH_DOWN] = "下降-2个月"
-   ordered_hash[STATE_3_MTH_DOWN] = "下降-3个月"
-   ordered_hash[STATE_4_MTH_DOWN] = "下降-4个月"
-   ordered_hash
- end
+  def self.states
+    ordered_hash = ActiveSupport::OrderedHash.new
+    ordered_hash[STATE_NORMAL] = "正常"
+    ordered_hash[STATE_1_MTH_DOWN] = "下降-1个月"
+    ordered_hash[STATE_2_MTH_DOWN] = "下降-2个月"
+    ordered_hash[STATE_3_MTH_DOWN] = "下降-3个月"
+    ordered_hash[STATE_4_MTH_DOWN] = "下降-4个月"
+    ordered_hash
+  end
+  #导出选项
+  def self.export_options
+  end
 
   #根据vip_info的当前信息计算其状态
   #贵宾客户分三个级别：钻石、金卡、银卡、普通

@@ -53,7 +53,7 @@
               <%end%>
 
               <%if check_power_group('分成结算')%>
-                <li class="<%= check_current_controller(['settlements','contracts']) %>">
+                <li class="<%= check_current_controller(['settlement_lines','settlements','contracts']) %>">
                 <%=link_to "分成结算#{alert(@contract_alert_count)}",settlements_path%>
                 </li> 
               <%end%>

@@ -33,6 +33,30 @@ cn:
       vip_fee_info: VIP导入信息
       vip_info: VIP信息
       warehouse: 仓库信息
+    attributes:
+      bill:
+        bill_no: "票据号"
+        goods_no: "货号"
+        bill_mth: "票据月份"
+        from_org_name: "发货地"
+        to_org_name: "到货地"
+        sender_name: "发货人"
+        sender_phone: "发货人电话"
+        receiver_name: "收货人"
+        receiver_phone: "收货人电话"
+        pay_type_des: "运费付款方式"
+        fee: "运费金额"
+        goods_fee: "代收货款"
+        goods_num: "货物件数"
+        created_at: "录入日期"
+        goods_info: "货物信息"
+        k_hand_fee: "扣手续费"
+        k_carrying_fee: "扣运费"
+        act_pay_fee: "实付货款"
+        storage_fee: "仓储费"
+        clear_fee: "清仓费"
+        state_des: "票据状态"
+        note: "备注"
     errors:
       template:
         header:

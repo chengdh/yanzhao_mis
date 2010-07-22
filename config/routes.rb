@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+
+  map.resources :settlement_lines,:only => [:index]
+
   map.resources :scrapped_infos
 
   map.resources :clear_infos,:has_many => [:bills],:except => [:update,:destroy]

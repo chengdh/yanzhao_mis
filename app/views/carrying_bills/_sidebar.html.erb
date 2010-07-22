@@ -12,7 +12,7 @@
     <%if check_power('new_tk_info')%>
       <li><%= link_to "提款操作", new_tk_info_path,:onclick => "Modalbox.show(this.href,{title : false,width : 700,height : 400});return false" %></li>
     <%end%>
-    <li><%= link_to "导出查询结果", carrying_bills_path(params,:format => :csv) %></li>
+    <li><%= link_to "导出查询结果", carrying_bills_path(:search => params[:search],:format => :csv) %></li>
   </ul>
 </div>
 

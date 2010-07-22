@@ -12,6 +12,7 @@ class VipInfosController < BaseController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @vip_infos }
+      format.csv  { send_data @search.all.export_csv(VipInfo.export_options)}
     end
   end
 end
