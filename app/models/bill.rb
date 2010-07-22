@@ -28,7 +28,7 @@ class Bill < ActiveRecord::Base
 
   end
   #导出选项
-  def export_options
+  def self.export_options
     {:methods => [:from_org_name,:to_org_name,:pay_type_des,:state_des],
       :only => [:bill_no,:goods_no,:sender_name,:sender_phone,:receiver_name,:receiver_phone,
         :bill_mth,:fee,:goods_fee,:goods_num,:k_hand_fee,:k_carrying_fee,
