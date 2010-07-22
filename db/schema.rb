@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100721095812) do
+ActiveRecord::Schema.define(:version => 20100722035548) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20100721095812) do
 
   create_table "base_public_messages", :force => true do |t|
     t.string   "title",        :limit => 200,                    :null => false
-    t.string   "body",         :limit => 500
+    t.text     "body"
     t.string   "type",         :limit => 20
     t.boolean  "is_secure",                   :default => false, :null => false
     t.string   "state",        :limit => 20,                     :null => false

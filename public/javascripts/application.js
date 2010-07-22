@@ -274,7 +274,7 @@ util.translat_calendar = function()
     "Clear" : "取消"
   };
   Date.weekdays = $w("1 2 3 4 5 6 7");
-  Date.months = $w("一月 二月 三月 四月 五月 六月 七月 八月 九月 十月 十一月 十二月" );
+  Date.months = $w("一月 二月 三月 四月 五月 六月 七月 八月 九月 十月 十一 十二" );
 };
 
 //yanzhao-bill end
@@ -496,3 +496,5 @@ cal_sum : function() {
 
 
 };
+//将calendar_select翻译为汉语
+document.observe("dom:loaded",util.translat_calendar);

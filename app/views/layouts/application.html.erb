@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><%=Client.first.name%> - 综合信息系统-<%=current_user.username%></title>
     <%= javascript_include_tag :all%>
-    <%= init_tinymce_hammer_if_required %>
     <%= calendar_date_select_includes :blue%>
+    <%= init_tinymce_hammer_if_required %>
     <%= stylesheet_link_tag "web_app_theme", "themes/blue/style","live_validation","uni-form",
       "modalbox","/sexybuttons/sexybuttons","web_app_theme_override", :cache => true %>
     </head>

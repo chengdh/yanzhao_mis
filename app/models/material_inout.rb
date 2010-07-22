@@ -4,6 +4,7 @@ class MaterialInout < ActiveRecord::Base
   has_many :material_inout_lines,:dependent => :destroy
   accepts_nested_attributes_for :material_inout_lines,:allow_destroy => true ,:reject_if => lambda{|attributes| attributes['material_id'].blank?}
   validates_presence_of :person_name,:message => "经办人不可为空!"
+  validates_presence_of :inout_date,:message => "日期不可为空"
   #检查库存是否足够,在出库时使用
   protected
   def check_storage
