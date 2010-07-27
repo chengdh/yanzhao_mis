@@ -3,7 +3,7 @@ class Client < ActiveRecord::Base
   has_attached_file :logo, :styles => { :medium => "300x300>", :thumb => "50x50>" }
   #机构和用户
   def admin
-    User.new(:is_admin => true)
+    User.new(:is_admin => true,:org_id => 1)
   end
   
   def orgs

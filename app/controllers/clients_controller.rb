@@ -30,7 +30,7 @@ class ClientsController < BaseController
     respond_to do |format|
       if @client.save
         flash[:notice] = '注册信息创建成功.'
-        format.html { redirect_to(@client) }
+        format.html { redirect_to :root }
         format.xml  { render :xml => @client, :status => :created, :location => @client }
       else
         format.html { render :action => "new" }

@@ -28,6 +28,7 @@
           <legend>2.管理员信息</legend>
           <%client.fields_for :admin do |user|%>
             <%=user.hidden_field :is_admin%>
+            <%=user.hidden_field :org_id %>
             <div class='ctrlHolder'>
               <%=user.label :username,'用户名称' %>
               <%=user.text_field :username, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
