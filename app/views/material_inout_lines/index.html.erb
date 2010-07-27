@@ -42,7 +42,7 @@
               </td>
               <td>
                 <%if check_power('new_scarpped_info')%>
-                  <%=link_to "报废",new_scrapped_info_path(:org_id => line.org_id,:material_id => line.material.id,:active_sub_tab => 13)%>
+                  <%=link_to "报废",new_scrapped_info_path(:org_id => line.org_id,:price => (line.amt.to_f/line.qty),:material_id => line.material.id,:active_sub_tab => 13)%>
                 <%end%>
               </td>
             </tr>          

@@ -3,7 +3,7 @@
   <td>
     <%=text_field_tag "","", :class => 'material_name',:style => "width : 150px;",:readonly => true %>
     <%=link_to "选择物品",show_search_m_storages_path("search[material_type_is]" => material_type),
-      :onclick => "material_selector.set_target_el(this.up().up());Modalbox.show(this.href+'&search[warehouse_id_is]='+$('warehouse_id').value,{title : false,width : 600});return false;"%>
+      :onclick => "material_selector.set_target_el($(this).up('tr'));Modalbox.show(this.href+'&search[warehouse_id_is]='+$('warehouse_id').value,{title : false,width : 600});return false;"%>
   </td>
   <td>
     <%=text_field_tag "","", :class => 'material_unit',:style => "width : 50px;",:readonly => true %>

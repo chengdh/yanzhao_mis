@@ -8,12 +8,22 @@
     <%=text_field_tag "",f.object.material.unit, :class => 'material_unit',:style => "width : 50px;",:readonly => true %>
   </td>
   <td>
-    <%=f.text_field :price,:style => "width : 50px;",:class => "material_price" %>
+    <%=f.text_field :price,:style => "width : 50px;",:id => 'price',:class => "material_price",:readonly => true %>
   </td>
   <td>
-    <%=f.text_field :qty,:style => "width : 50px;",:class => "material_qty"%>
+    <%=f.text_field :qty,:style => "width : 50px;",:id => 'qty',:class => "material_qty"%>
   </td>
   <td>
-    <%=f.text_field :line_amt,:style => "width : 50px;",:class => 'material_total',:style => "width : 50px;",:readonly => true %>
+    <%=f.text_field :line_amt,:style => "width : 50px;",:id => 'line_amt',:class => 'material_total',:style => "width : 50px;",:readonly => true %>
   </td>
 </tr>
+<script type='text/javascript'>
+  //注册监听事件
+  cal_line_amt = function(){
+    var price = $('price').value;
+    var qty = $('qty').value;
+    var line_amt = parseFloat(price) * parseFloat(qty);
+    $('line_amt').value = line_amt;
+  };
+$('qty').observe('change',cal_line_amt);
+</script>

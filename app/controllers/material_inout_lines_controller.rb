@@ -5,7 +5,9 @@ class MaterialInoutLinesController < BaseController
       :select => "material_inouts.org_id,material_inout_lines.material_id,sum(material_inout_lines.qty) qty,
                   sum(material_inout_lines.line_amt) amt ",
       :order => "material_inouts.org_id,material_inout_lines.material_id",
-      :group => "material_inouts.org_id,material_inout_lines.material_id")
+      :group => "material_inouts.org_id,material_inout_lines.material_id",
+      :having => "qty > 0"
+    )
    # .paginate :page => params[:page],:order => "created_at DESC"
     @group_material_inout_lines = @material_inout_lines.group_by {|line| Org.find(line.org_id).name}
   end

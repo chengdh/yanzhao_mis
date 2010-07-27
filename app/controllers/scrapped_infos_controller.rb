@@ -15,8 +15,8 @@ class ScrappedInfosController < BaseController
   # GET /scrapped_infos/new.xml
   def new
     @scrapped_info = ScrappedInfo.new(:org_id => params[:org_id],:inout_date => Date.today)
-    @scrapped_info.material_inout_lines.build(:material_id => params[:material_id],:qty => 1,:price => 0,:line_amt => 0)
-
+    @scrapped_info.material_inout_lines.build(:material_id => params[:material_id],:qty => 1,
+                                              :price => params[:price],:line_amt => params[:price].to_f * 1)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @scrapped_info }
