@@ -17,7 +17,7 @@ cn:
       consumer_shippment: 领用单
       contract: 合同模板
       deliver: 提货信息
-      deparetment: 科室/部门
+      department: 科室/部门
       durable_material: 耐用品
       durable_receipt: 耐用品入库单
       durable_shippment: 耐用品领用单

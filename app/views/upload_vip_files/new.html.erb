@@ -22,7 +22,7 @@
         <fieldset class='inlineLabels'>
           <legend>请选择各个分理处/分公司的导入文件</legend>
 
-          <%Org.all(:conditions => {:is_active => true},:order => "name ASC").each do |org|%>
+          <%SubCompany.all(:conditions => {:is_active => true},:order => "name ASC").each do |org|%>
             <div class='ctrlHolder'>
               <%=hidden_field_tag 'org_ids[]',org.id%>
               <%=label_tag "file_#{org.id}",org.name%>

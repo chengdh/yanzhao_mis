@@ -35,13 +35,13 @@ class VipConfig < ActiveRecord::Base
       gold_range = VipConfig.org_id_is(org_id).name_is(VIP_GOLD).first
       sliver_range = VipConfig.org_id_is(org_id).name_is(VIP_SLIVER).first
       normal_range = VipConfig.org_id_is(org_id).name_is(VIP_NORMAL).first
-      if diamond_range.include?(fee)
+      if (diamond_range.fee_from..diamond_range.fee_to).include?(fee)
         VIP_DIAMOND
-      elsif gold_range.include?(fee)
+      elsif (gold_range.fee_from..gold_range.fee_to).include?(fee)
         VIP_GOLD
-      elsif sliver_range.include?(fee)
+      elsif (sliver_range.fee_from..sliver_range.fee_to).include?(fee)
         VIP_SLIVER
-      elsif normal_range.include?(fee)
+      elsif (normal_range.fee_from..normal_range.fee_to).include?(fee)
         VIP_NORMAL 
       end
     else

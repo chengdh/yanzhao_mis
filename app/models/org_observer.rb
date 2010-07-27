@@ -1,5 +1,6 @@
 #监听org的创建,为每个新创建的org设置默认的vip config
 class OrgObserver < ActiveRecord::Observer
+  observe :sub_company
   def after_save(org)
     configs = VipConfig.org_id_is(org)
     if configs.blank?

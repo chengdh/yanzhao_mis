@@ -36,16 +36,18 @@
     </div>
     <hr />
     <div class='radius-box doc-info'>
-      <h3 class='border-bottom'>文档信息(<%=@post.message_visitors.size%>条)</h3>
-      <ul>
-        <li>最后修改于<%=status_time_ago_in_words(@post.updated_at)%></li>
-        <%@post.message_visitors.each do |visit_info|%>
-          <li>
-          <%=visit_info.user.try(:username)%> |
-          <%=visit_info.visited_at.blank? ? "<span class='red-text'>还未查看</span>" : status_time_ago_in_words(visit_info.visited_at)%>
-          </li>
-        <%end%>
-      </ul>
+      <h3 class='border-bottom'><%=link_to_function "点击查看-文档信息(#{@post.message_visitors.size}条)","$('doc_info').toggle();"%></h3>
+      <div id='doc_info' style='display : none;'>
+        <ul>
+          <li>最后修改于<%=status_time_ago_in_words(@post.updated_at)%></li>
+          <%@post.message_visitors.each do |visit_info|%>
+            <li>
+            <%=visit_info.user.try(:username)%> |
+            <%=visit_info.visited_at.blank? ? "<span class='red-text'>还未查看</span>" : status_time_ago_in_words(visit_info.visited_at)%>
+            </li>
+          <%end%>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

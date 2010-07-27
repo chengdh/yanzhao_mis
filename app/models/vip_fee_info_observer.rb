@@ -5,7 +5,6 @@ class VipFeeInfoObserver < ActiveRecord::Observer
   end
   private
   def observe_func(record)
-    #只有在导入当月(其实是上个月的数据)时才更新vip_info表中的数据
     #以下创建或更新vip_info信息
     vips = VipInfo.org_id_is(record.org_id).name_is(record.name)
     if vips.blank?

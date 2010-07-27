@@ -7,7 +7,7 @@ class Client < ActiveRecord::Base
   end
   
   def orgs
-    [Org.new,Org.new]
+    [SubCompany.new,SubCompany.new]
   end
 
   def admin_attributes=(attributes)
@@ -15,7 +15,7 @@ class Client < ActiveRecord::Base
   end
   def orgs_attributes=(attributes)
     attributes.values.each do |attrs|
-      Org.create(attrs)
+      SubCompany.create(attrs)
     end
   end
 
