@@ -23,9 +23,9 @@
         <%if @posts.blank?%>
           <tr><td colspan='20'></td></tr>
           <%5.times do |index|%>
-            <%if index == 3%>
+            <%if index == 2%>
               <tr class="<%= cycle("odd", "even") %>">
-                <td colspan='20' class='text-center'>没有信件&nbsp;&nbsp;<%=link_to "写信",new_post_path%></td>
+                <td colspan='20' class='text-center'>当前没有信件&nbsp;&nbsp;<%=link_to "写信",new_post_path%></td>
               </tr>
             <%else%>
               <tr class="<%= cycle("odd", "even") %>"><td colspan='20'>&nbsp;</td></tr>

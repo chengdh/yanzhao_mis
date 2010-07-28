@@ -215,10 +215,10 @@ module ApplicationHelper
   end
   #设置未读消息标志
   def unread_notices_rules_sign
-    (@unread_notices_count > 0 || @unread_rules_count>0) ? image_tag('new.gif',:class => 'new_icon') : ''
+    (@unread_notices_count > 0 || @unread_rules_count>0) ? "<span class='red-text'>(新!)</span>" : ''
   end
   def unread_posts_sign
-    @unread_posts_count > 0  ? image_tag('new.gif',:class => 'new_icon') : ''
+    @unread_posts_count > 0  ? "<span class='red-text'>(新!)</span>" : ''
   end
   def unread_notices_count
     @unread_notices_count > 0  ? "<span class='red-text'>(#{@unread_notices_count}新)</span>" : ''
