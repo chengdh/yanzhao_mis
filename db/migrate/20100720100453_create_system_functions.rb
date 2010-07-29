@@ -20,6 +20,7 @@ class CreateSystemFunctions < ActiveRecord::Migration
 
     SystemFunction.create :group_name => "公共信息",:func_name => "新建通讯录",:func_key => "new_address_book"
     SystemFunction.create :group_name => "公共信息",:func_name => "修改通讯录",:func_key => "edit_address_book"
+    SystemFunction.create :group_name => "公共信息",:func_name => "删除通讯录",:func_key => "destroy_address_book"
 
     #贵宾系统
 

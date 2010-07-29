@@ -3,32 +3,15 @@
     <%= render 'shared/messages/caption' %>
   </div>          
   <div class="content">          
-    <h2 class="title">通讯录列表</h2>
+    <h2 class="title">通讯录</h2>
     <div class="inner">
       <table class="table">
-        <tr>             
-          <th>所属部门</th>
-          <th>通讯录名称</th>
-          <th>联系人数量</th>
-          <th>修改时间</th>
-          <th class="last">&nbsp;</th>
-        </tr>
-        <% @address_books.each do |address_book| -%>
+        <% @group_address_book_lines.each do |address_book,lines| -%>
           <tr class="<%= cycle("odd", "even") %>">
             <td>
               <%= address_book.org.name %>
             </td>
-            <td>
-              <%= link_to address_book.name, address_book_path(address_book) %>
-            </td>
-            <td>
-              <%= address_book.address_book_lines.size %>
-            </td>
-
-            <td>
-              <%=status_time_ago_in_words(address_book.updated_at) %>
-            </td>
-            <td class="last">
+            <td colspan='3' class="last">
               <%= link_to "查看",address_book_path(address_book,:active_sub_tab => 10) %> |
               <%if check_power('edit_address_book')%>
                 <%= link_to "修改", edit_address_book_path(address_book,:active_sub_tab => 9) %> |
@@ -39,13 +22,30 @@
               <%end%>
             </td>
           </tr>          
+          <%lines.each do |line|%>
+            <tr class='fields'>
+              <td>
+                <%=line.name%>
+              </td>
+              <td>
+                <%=line.phone%>
+              </td>
+              <td>
+                <%=line.mobile%>
+              </td>
+              <td>
+                <%=line.location%>
+              </td>
+            </tr>
+
+          <%end%>
         <% end -%>
       </table>
       <div class="actions-bar wat-cf">
-        <%= will_paginate @address_books  %>
+        <%= will_paginate @address_book_lines  %>
       </div>
     </div>
   </div>
 </div>
 
-<% content_for :sidebar, render(:partial => 'sidebar') -%>
+<% content_for :sidebar, render(:partial => 'address_books/sidebar') -%>

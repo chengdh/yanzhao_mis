@@ -1,4 +1,4 @@
-<%if [check_power('new_notice'),check_power('new_rule'),check_power('new_address_book')].all? {|ret| ret}%>
+<%if [check_power('new_notice'),check_power('new_rule'),check_power('new_address_book')].any? {|ret| ret}%>
   <div class="block">
     <h3>新建</h3>
     <ul class="navigation">

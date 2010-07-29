@@ -1,6 +1,8 @@
 class AddressBookLinesController < BaseController
   def index
-    @address_book_lines = @search.all(:order => "created_at DESC")
+    @address_book_lines = @search.paginate :page => params[:page],:order => "created_at DESC"
+    @group_address_book_lines=@address_book_lines.group_by {|line| line.address_book}
+
 
     respond_to do |format|
       format.html # index.html.erb

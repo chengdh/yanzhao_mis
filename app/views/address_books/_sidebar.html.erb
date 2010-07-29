@@ -1,12 +1,8 @@
-<div class="block">
-  <h3>新建</h3>
-  <ul class="navigation">
-    <li><%=link_to "新建通讯录",new_address_book_path%></li>
-  </ul>
-</div>
-<div class="block">
-  <h3>查询</h3>
-  <div class="content">
-    <%=render "address_book_lines/search_form"%>
+<%if check_power('new_address_book')%>
+  <div class="block">
+    <h3>新建</h3>
+    <ul class="navigation">
+      <li><%=link_to "新建通讯录",new_address_book_path%></li>
+    </ul>
   </div>
-</div>
+<%end%>

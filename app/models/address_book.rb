@@ -3,5 +3,4 @@ class AddressBook < ActiveRecord::Base
   belongs_to :user
   has_many :address_book_lines,:dependent => :destroy
   accepts_nested_attributes_for :address_book_lines,:reject_if => lambda{|attributes| attributes['name'].blank?},:allow_destroy => true
-  validates_presence_of :name,:message => "通讯录名称不可为空"
 end

@@ -9,7 +9,8 @@ class SettlementsController < BaseController
       :total_push_money=> @search.sum(:total_push_money),
       :total_subsidy=> @search.sum(:total_subsidy),
       :total_deduction=> @search.sum(:total_deduction),
-      :total_push_money=> @search.sum(:total_push_money)
+      :total_push_money=> @search.sum(:total_push_money),
+      :act_push_money=> @search.sum(:act_push_money)
     }
     respond_to do |format|
       format.html # index.html.erb

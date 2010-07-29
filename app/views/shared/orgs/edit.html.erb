@@ -6,9 +6,9 @@
     <h2 class="title">修改</h2>
     <div class="inner">
       <% org = instance_variable_get("@#{@param_name}")%>
-      <% form_for org, :html => { :class => :uniForm } do |f| -%>
-        <%= render :partial => "form", :locals => {:f => f} %>
-      <% end -%>
+      <% form_for org, :html => { :class => :uniForm } do |f| %>
+        <%= render "shared/orgs/form", :f => f %>
+      <% end %>
     </div>
   </div>
 </div>

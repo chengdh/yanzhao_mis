@@ -26,7 +26,7 @@
               <td><%= settlement.total_push_money %></td>
               <td><%= settlement.total_subsidy %></td>
               <td><%= settlement.total_deduction %></td>
-              <td><%= settlement.total_push_money %></td>
+              <td><%= settlement.act_push_money %></td>
               <td class="last">
                 <%= link_to "查看/打印", settlement,:popup => ['分部返款结算表','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes']%> |
                 <%if check_power('edit_settlement')%>
@@ -46,7 +46,7 @@
             <td><%= settlements.sum(&:total_push_money) %></td>
             <td><%= settlements.sum(&:total_subsidy) %></td>
             <td><%= settlements.sum(&:total_deduction) %></td>
-            <td><%= settlements.sum(&:total_push_money) %></td>
+            <td><%= settlements.sum(&:act_push_money) %></td>
           </tr>
           <tr>
             <td colspan='8'>&nbsp;</td>
@@ -58,7 +58,7 @@
             <td><%= @sum_info[:total_push_money] %></td>
             <td><%= @sum_info[:total_subsidy] %></td>
             <td><%= @sum_info[:total_deduction] %></td>
-            <td><%= @sum_info[:total_push_money] %></td>
+            <td><%= @sum_info[:act_push_money] %></td>
           </tr>
         <% end -%>
       </table>
