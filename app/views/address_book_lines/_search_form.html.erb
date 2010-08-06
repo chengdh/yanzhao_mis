@@ -1,4 +1,4 @@
-<% remote_form_for :search,@search,:url => {:controller =>:address_book_lines,:action => :index},
+<% remote_form_for :search,@search,:url => {:action => :index},
   :method => :get,
   :before => "Modalbox.show('',{title : '查询联系人',height : 300});",
   :update => "MB_content",:html => {:class => :uniForm } do |f| -%>

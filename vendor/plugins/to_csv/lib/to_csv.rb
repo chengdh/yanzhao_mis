@@ -15,7 +15,7 @@ class Array
 
     return '' if columns.empty?
 
-    output = FasterCSV.generate do |csv|
+    output = FasterCSV.generate(:col_sep => "\t", :row_sep => "\r\n") do |csv|
       csv << columns.map { |column| klass.human_attribute_name(column) } unless options[:headers] == false
       self.each do |item|
         csv << columns.collect { |column| item.send(column) }

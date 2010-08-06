@@ -27,6 +27,7 @@ class VipInfo < ActiveRecord::Base
   end
   #导出选项
   def self.export_options
+    {}
   end
 
   #根据vip_info的当前信息计算其状态

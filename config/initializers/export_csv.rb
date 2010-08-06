@@ -13,5 +13,4 @@ class Array
     end
     output.utf8_to_utf16
   end
-
 end

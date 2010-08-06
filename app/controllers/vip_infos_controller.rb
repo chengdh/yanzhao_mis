@@ -15,4 +15,12 @@ class VipInfosController < BaseController
       format.csv  { send_data @search.all.export_csv(VipInfo.export_options)}
     end
   end
+  #生成@search对象
+  def create_search
+    if current_user.is_admin
+      @search = @model_klazz.search(params[:search])
+    else
+      @search = @model_klazz.org_id_is(current_user.org_id).search(params[:search])
+    end
+  end
 end

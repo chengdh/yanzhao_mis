@@ -52,7 +52,7 @@ class UsersController < BaseController
 
     @group_powers = @user.powers.group_by {|p| p.system_function.group_name}
     respond_to do |format|
-      if @user.update_with_password(params[:user])
+      if @user.update_attributes(params[:user])
         flash[:notice] = '用户信息修改成功.'
         format.html { redirect_to users_url }
         format.xml  { head :ok }
