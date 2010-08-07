@@ -57,6 +57,16 @@ cn:
         clear_fee: "清仓费"
         state_des: "票据状态"
         note: "备注"
+      vip_info:
+        org_name: "所属分理处/分公司"
+        name: "姓名"
+        phone: "联系电话"
+        cur_fee: "最近运费合计"
+        level: "级别"
+        state: "当前状态"
+        level_des: "级别"
+        state_des: "当前状态"
+        last_import_mth: "最近导入月份"
     errors:
       template:
         header:

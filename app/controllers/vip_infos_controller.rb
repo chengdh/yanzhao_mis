@@ -15,6 +15,15 @@ class VipInfosController < BaseController
       format.csv  { send_data @search.all.export_csv(VipInfo.export_options)}
     end
   end
+  # DELETE /vip_infos/remove
+  # 按月份删除vip信息
+  def remove
+    conditions = {:last_import_mth => params[:mth],:org_id => params[:org_id] }
+    conditions[:org_id] = params[:org_id] if !params[:org_id].blank?
+    count = VipInfo.destroy_all(conditions).size
+    flash[:notice] = "共删除了#{count}条VIP信息."
+    redirect_to :action => :index
+  end
   #生成@search对象
   def create_search
     if current_user.is_admin

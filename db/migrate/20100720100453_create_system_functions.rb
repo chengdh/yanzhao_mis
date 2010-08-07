@@ -27,6 +27,7 @@ class CreateSystemFunctions < ActiveRecord::Migration
     SystemFunction.create :group_name => "贵宾系统",:func_name => "VIP信息导入",:func_key => "upload_vip_files"
     SystemFunction.create :group_name => "贵宾系统",:func_name => "VIP信息列表",:func_key => "vip_infos"
     SystemFunction.create :group_name => "贵宾系统",:func_name => "VIP级别设置",:func_key => "vip_config"
+    SystemFunction.create :group_name => "贵宾系统",:func_name => "删除VIP信息",:func_key => "remove_vip_infos"
     #分成结算
     
     SystemFunction.create :group_name => "分成结算",:func_name => "新建合同模板",:func_key => "new_contract"

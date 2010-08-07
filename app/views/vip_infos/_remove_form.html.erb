@@ -1,0 +1,20 @@
+<% form_tag remove_vip_infos_path,:method => :delete,:class => :uniForm do |f| -%>
+  <fieldset class='inlineLabels'>
+    <div class='ctrlHolder'>
+      <%=label_tag :mth,"月份" %>
+      <%=select_tag :mth,options_for_select(months_ago_for_select) %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=label_tag :org_id,"分理处/分公司" %>
+      <%=select_tag :org_id,options_for_select([['选择分理处','']] + sub_companies_for_select) %>
+      <p class='formHint'>不选择将删除全部</p>
+    </div>
+
+  </fieldset>
+
+  <%if check_power('remove_vip_infos')%>
+    <div class="actions-bar">
+      <%=submit_tag '删除',:confirm =>'确认要删除VIP信息吗?', :class => 'sexybutton sexysimple sexyred'%>
+    </div>
+  <%end%>
+<% end -%>

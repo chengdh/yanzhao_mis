@@ -10,3 +10,12 @@
     <li><%=link_to "导出查询结果",vip_infos_path(:search => params[:search],:format => :csv)%></li>
   </ul>
 </div>
+
+<%if check_power('remove_vip_infos')%>
+  <div class="block">
+    <h3>删除</h3>
+    <div class="content">
+      <%= render "remove_form" %>
+    </div>
+  </div>
+<% end %>

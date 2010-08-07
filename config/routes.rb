@@ -31,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :vip_configs
 
-  map.resources :vip_infos,:only => [:index]
+  map.resources :vip_infos,:only => [:index],:collection => {:remove => :delete}
 
   map.resources :vip_fee_infos,:only => [:index]
 

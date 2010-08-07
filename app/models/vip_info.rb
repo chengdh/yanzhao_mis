@@ -25,10 +25,7 @@ class VipInfo < ActiveRecord::Base
     ordered_hash[STATE_4_MTH_DOWN] = "下降-4个月"
     ordered_hash
   end
-  #导出选项
-  def self.export_options
-    {}
-  end
+  
 
   #根据vip_info的当前信息计算其状态
   #贵宾客户分三个级别：钻石、金卡、银卡、普通
@@ -65,5 +62,23 @@ class VipInfo < ActiveRecord::Base
         self.level = the_level
       end
     end
+  end
+
+  #定义导出属性
+  #导出选项
+  def self.export_options
+    {
+      :methods => [:org_name,:level_des,:state_des],
+      :only => [:name,:phone,:cur_fee,:las_import_mth]
+    }
+  end
+  def org_name
+    self.org.name
+  end
+  def level_des
+    VipConfig.levels[self.level]
+  end
+  def state_des
+    VipInfo.states[self.state]
   end
 end
