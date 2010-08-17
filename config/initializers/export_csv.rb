@@ -20,9 +20,10 @@ module ActiveRecord
     def self.export2csv(dir)
       require 'fastercsv'
       records = self.find(:all)
-      csv_string = FasterCSV.generate(:headers => false) do |csv|
+      csv_string = FasterCSV.generate() do |csv|
         records.each do |r|
-          csv << [r.id]  + r.attributes.values
+          attr = r.attributes.delete_if { |key,value| key == 'id'}
+          csv << ([r.id]  + attr.values)
         end
       end
       file_name = File.join(dir,"#{self.table_name}.csv")
@@ -33,15 +34,19 @@ module ActiveRecord
     end
     #导入数据到数据表中,包括id
     def self.import_csv(dir)
-      require 'csv'
+      require 'fastercsv'
       file_name = File.join(dir,"#{self.table_name}.csv")
-      rows = CSV::parse(File.open(file_name) {|f| f.read})
+      rows = FasterCSV::read(file_name)
       rows.each do |row|
         m = self.new
         #给各个字段赋值
         col_index = 0
-        m.attributes.keys.each do |attr|
-          col_index = col_index.next
+
+        attr = m.attributes.delete_if { |key,value| key == 'id'}
+        (attr.keys).each do |attr|
+          col_index = col_index + 1
+          puts "#{col_index}"
+          puts "#{attr}=#{row[col_index]}"
           m.send("#{attr}=",row[col_index])
         end
         m.id = row[0]
