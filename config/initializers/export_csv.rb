@@ -14,3 +14,39 @@ class Array
     output.utf8_to_utf16
   end
 end
+#为active_record 添加导入导出方法
+module ActiveRecord
+  class Base
+    def self.export2csv(dir)
+      require 'fastercsv'
+      records = self.find(:all)
+      csv_string = FasterCSV.generate(:headers => false) do |csv|
+        records.each do |r|
+          csv << [r.id]  + r.attributes.values
+        end
+      end
+      file_name = File.join(dir,"#{self.table_name}.csv")
+      File.delete(file_name) if File.exist? file_name
+      File.open(file_name,"w") do |file|
+        file.syswrite csv_string
+      end 
+    end
+    #导入数据到数据表中,包括id
+    def self.import_csv(dir)
+      require 'csv'
+      file_name = File.join(dir,"#{self.table_name}.csv")
+      rows = CSV::parse(File.open(file_name) {|f| f.read})
+      rows.each do |row|
+        m = self.new
+        #给各个字段赋值
+        col_index = 0
+        m.attributes.keys.each do |attr|
+          col_index = col_index.next
+          m.send("#{attr}=",row[col_index])
+        end
+        m.id = row[0]
+        m.save
+      end
+    end
+  end
+end
