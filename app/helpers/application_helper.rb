@@ -2,7 +2,7 @@
 module ApplicationHelper
   #所有部门/分理处/分公司选择
   def orgs_for_select
-    Org.all(:conditions => {:is_active => true},:order => "name ASC").collect { |org| [org.name, org.id] }
+    Org.all(:conditions => {:is_active => true},:order => "type,name").collect { |org| [org.name, org.id] }
   end
   #按照机构分组选择用户
   def option_groups_orgs_users_for_select(search_param ={})

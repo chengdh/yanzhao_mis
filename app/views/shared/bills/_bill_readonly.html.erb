@@ -48,7 +48,7 @@
     <%if !bill_readonly.confirm.blank?  %>
       <tr class='odd'>
         <td>确认时间</td>
-        <td><%=bill_readonly.confirm.created_at..strftime("%Y-%m-%d %I:%S") %></td>
+        <td><%=bill_readonly.confirm.created_at.strftime("%Y-%m-%d %I:%S") %></td>
         <td>确认人</td>
         <td><%=bill_readonly.confirm.user.username%></td>
 
@@ -57,7 +57,7 @@
     <%if bill_readonly.kind_of?(CarryingBill) && !bill_readonly.tk_info.blank? %>
       <tr class='even'>
         <td>提款时间</td>
-        <td><%=bill_readonly.tk_info.tk_date..strftime("%Y-%m-%d %I:%S")%></td>
+        <td><%=bill_readonly.tk_info.tk_date.strftime("%Y-%m-%d %I:%S")%></td>
         <td>提款人</td>
         <td><%=bill_readonly.tk_info.tker_name%></td>
       </tr>
@@ -76,7 +76,7 @@
     <%if bill_readonly.kind_of?(InoutBill) && !bill_readonly.deliver.blank? %>
       <tr class='odd'>
         <td>提货时间</td>
-        <td><%=bill_readonly.deliver.deliver_date..strftime("%Y-%m-%d %I:%S") %></td>
+        <td><%=bill_readonly.deliver.deliver_date.strftime("%Y-%m-%d %I:%S") %></td>
         <td>提货人</td>
         <td><%=bill_readonly.deliver.deliver_name %></td>
       </tr>
@@ -89,7 +89,7 @@
     <%if bill_readonly.kind_of?(InoutBill) && !bill_readonly.clear_info.blank? %>
       <tr class='odd'>
         <td>清仓时间</td>
-        <td><%=bill_readonly.clear_info.clear_date..strftime("%Y-%m-%d %I:%S")%></td>
+        <td><%=bill_readonly.clear_info.clear_date.strftime("%Y-%m-%d %I:%S")%></td>
         <td>清仓人</td>
         <td><%=bill_readonly.clear_info.user.username%></td>
       </tr>

@@ -10,8 +10,8 @@ class BillsController < BaseController
     @sum_info = { 
       :count =>@search.count,
       :sum_fee => @search.sum(:fee),
-      :sum_goods_fee => @search.sum(:fee),
-      :sum_goods_num => @search.sum(:goods_fee),
+      :sum_goods_fee => @search.sum(:goods_fee),
+      :sum_goods_num => @search.sum(:goods_num),
       :sum_k_hand_fee => @search.sum(:k_hand_fee),
       :sum_k_carrying_fee => @search.sum(:k_carrying_fee),
       :sum_act_pay_fee => @search.sum(:act_pay_fee),
@@ -27,7 +27,7 @@ class BillsController < BaseController
       end
       format.xml  { render :xml => @bills }
       #ajax翻页时的处理
-      format.js { render :partial => "shared/bills/bill_list",:bills =>  @bills,:show_select => true,:remote_paginate => true  }
+      format.js { render :partial => "shared/bills/bill_list",:object => {:bills =>  @bills,:show_select => true,:remote_paginate => true,:show_sum => true }}
       format.csv do 
         if !params[:confirm_id].blank? 
           send_data @model_klazz.all(:conditions => ["confirm_id = ?",params[:confirm_id]]).export_csv(Bill.export_options) + 

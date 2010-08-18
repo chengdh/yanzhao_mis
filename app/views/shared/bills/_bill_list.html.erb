@@ -61,9 +61,9 @@
     <%end%>
     <tr>
       <%if !bill_list[:show_select].blank? && bill_list[:show_select]%>
-        <td colspan='7'>当页合计:</td>
+        <td colspan='7'>小计:</td>
       <%else%>
-        <td colspan='6'>当页合计:</td>
+        <td colspan='6'>小计:</td>
       <%end%>
       <td><%=bill_list[:bills].sum {|bill| bill.fee}%></td>
       <td><%=bill_list[:bills].sum {|bill| bill.goods_fee}%></td>
@@ -78,20 +78,24 @@
         <td><%=bill_list[:bills].sum {|bill| bill.clear_fee}%></td>
       <%end%>
     </tr>
+    <%if !bill_list[:show_sum].blank? && bill_list[:show_sum]%>
+      <tr>
+        <td colspan='2'>总计:</td>
+        <td colspan='50' class='text-center'>
+          <%="共有票据#{@sum_info[:count]}张,运费#{@sum_info[:sum_fee]}元,货款#{@sum_info[:sum_goods_fee]}元,货物#{@sum_info[:sum_goods_num]}件"%>
+
+          <%if bill_list[:bills].any?{|the_bill| the_bill.class.eql?(CarryingBill)}%>
+            <%="扣手续费#{@sum_info[:sum_k_hand_fee]}元,扣运费#{@sum_info[:sum_k_carrying_fee]}元,实付货款#{@sum_info[:sum_act_pay_fee]}元"%>
+          <%else%>
+            <%="仓储费#{@sum_info[:sum_storage_fee]}元,清仓收入#{@sum_info[:sum_clear_fee]}元"%>
+          <%end%>
+        </td>
+      </tr> 
+    <%end%>
+
   </tbody>
 </table>
-<div id='paginate_wrap' class='text-center'>
-  <%if !bill_list[:show_sum].blank? && bill_list[:show_sum]%>
-    <span>
-      <%="共有票据#{@sum_info[:count]}张,运费#{@sum_info[:sum_fee]}元,货款#{@sum_info[:sum_goods_fee]}元,货物#{@sum_info[:sum_goods_num]}件"%>
-
-      <%if bill_list[:bills].any?{|the_bill| the_bill.class.eql?(CarryingBill)}%>
-        <%="扣手续费#{@sum_info[:sum_k_hand_fee]}元,扣运费#{@sum_info[:sum_k_carrying_fee]}元,实付货款#{@sum_info[:sum_act_pay_fee]}元"%>
-      <%else%>
-        <%="仓储费#{@sum_info[:sum_storage_fee]}元,清仓收入#{@sum_info[:sum_clear_fee]}元"%>
-      <%end%>
-    </span> 
-  <%end%>
+<div id='paginate_wrap' class='actions-bar wat-cf'>
   <%if !bill_list[:remote_paginate].blank? && bill_list[:remote_paginate]%>
     <%=will_paginate bill_list[:bills],:renderer => 'RemoteLinkRenderer', :remote => {:update => "list_wrap"} %>
   <%else%>
