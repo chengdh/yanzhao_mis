@@ -1,5 +1,13 @@
 /* Override here any style definide by web-app-theme */
-#user-navigation { bottom : 0;}
+#header {
+  position : relative;
+  zoom : 1;   /*解决ie6下的bug*/
+}
+#user-navigation { 
+  bottom : 0;
+  right : 20px;
+  width : 250px;
+}
 #user-navigation ul li.active{
   background : none repeat scroll 0 0 #F0F0EE;
   -moz-border-radius-topleft : 4px;
@@ -147,6 +155,7 @@ ul.navigation li a:link,ul.navigation li a:visited {
     position : absolute;
     right : 20px;
     top : 0;
+    width : 150px;
 }
 #util-navigation ul li {
   float : left;
