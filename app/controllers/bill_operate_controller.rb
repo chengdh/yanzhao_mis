@@ -1,6 +1,7 @@
 class BillOperateController < BaseController
   def index
-    @bill_operates = @search.paginate :page => params[:page],:order => "created_at DESC"
+    #加入DISTINCT为了消除重复数据
+    @bill_operates = @search.paginate :select =>"DISTINCT #{@param_name.tableize}.*",:page => params[:page],:order => "created_at DESC"
     instance_variable_set("@#{@param_name.tableize}",@bill_operate)
   end
 

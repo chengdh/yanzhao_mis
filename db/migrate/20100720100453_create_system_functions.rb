@@ -69,7 +69,7 @@ class CreateSystemFunctions < ActiveRecord::Migration
 
     SystemFunction.create :group_name => "票据管理",:func_name => "修改票据",:func_key => "edit_inout_bill"
 
-    SystemFunction.create :group_name => "票据管理",:func_name => "删除票据",:func_key => "destroy_inout_bill"
+    SystemFunction.create :group_name => "提货单管理",:func_name => "删除票据",:func_key => "destroy_inout_bill"
     SystemFunction.create :group_name => "提货单管理",:func_name => "票据确认",:func_key => "new_confirm_inout_bill"
     SystemFunction.create :group_name => "提货单管理",:func_name => "提货处理",:func_key => "new_deliver"
     SystemFunction.create :group_name => "提货单管理",:func_name => "清仓处理",:func_key => "new_clear_info"

@@ -7,7 +7,7 @@
     <%= link_to "待确认票据",inout_bills_path(:active_sub_tab => 2,:template =>"shared/bills/index_confirm","search[state_is]" => Bill::STATE_DRAFT)  %>
     </li> 
     <li class="first <%=check_sub_active_tab(3)%>">
-    <%= link_to "确认清单列表",confirms_path(:active_sub_tab => 3,:in_what => :inout_bills)  %>
+      <%= link_to "确认清单列表",confirms_path(:active_sub_tab => 3,:in_what => :inout_bills,"search[bills_type_is]" => "InoutBill")  %>
     </li> 
   <%end%>
   <%if check_power('new_deliver') || check_power('new_clear_info')%>
@@ -28,7 +28,7 @@
     <%= link_to "待核销", inout_bills_path(:active_sub_tab => 7,:template =>"shared/bills/index_post","search[state_is]" => InoutBill::STATE_DELIVER)  %>
     </li> 
     <li class="<%=check_sub_active_tab(8)%>">
-    <%= link_to "核销清单", post_infos_path(:active_sub_tab => 8,:in_what => :inout_bills)  %>
+    <%= link_to "核销清单", post_infos_path(:active_sub_tab => 8,:in_what => :inout_bills,"search[bills_type_is]" => "InoutBill")  %>
     </li> 
   <%end%>
 
