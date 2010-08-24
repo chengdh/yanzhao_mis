@@ -181,7 +181,7 @@ billOperateUtil.addBill = function(callback_json)
   }
   var tr_template = new Template
     (
-     "<tr id='added_bill_#{id}'><td>#{bill_no}</td><td>#{goods_no}</td>" + 
+     "<tr class='added_bill' id='added_bill_#{id}'>" + 
      "<input type='hidden' name='bills[]' value='#{id}'/>" +
      "<input class='goods_fee' type='hidden' value='#{goods_fee}' id='goods_fee_#{id}' />" +
      "<input class='fee' type='hidden' value='#{fee}' id='fee_#{id}' />" +
@@ -189,6 +189,9 @@ billOperateUtil.addBill = function(callback_json)
      "<input class='k_carrying_fee' type='hidden' value='#{k_carrying_fee}' id='k_carrying_fee_#{id}' />" +
      "<input class='act_pay_fee' type='hidden' value='#{act_pay_fee}' id='act_pay_fee_#{id}' />"+
      "<input class='storage_fee' type='hidden' value='#{storage_fee}' id='storage_fee_#{id}' />"+
+     "<td>#{index}</td>"+
+     "<td>#{bill_no}</td>"+
+     "<td>#{goods_no}</td>" + 
      "<td>#{sender_name}</td>" + 
      "<td>#{goods_fee}</td>" + 
      "<td>#{fee}</td>" + 
@@ -197,6 +200,9 @@ billOperateUtil.addBill = function(callback_json)
      (operate_type == 'clear_info' ? "<td><input type='text' id='clear_fee_#{id}' class='clear_fee' name='clear_fee[]' value='#{clear_fee}' style='width : 50px;font-size : 1.2em;height : 25px;border : 2px solid blue;'/></td>" : "")+
      "<td><a class='red_text' style='cursor:pointer;' onclick=$('added_bill_#{id}').remove();billOperateUtil.cal_sum();>删除</a></td></tr>"
     );
+//计算原有单据,便于计算序号
+  var index = $$('#list_table tr.added_bill').size() + 1;
+  the_bill.index = index;
   var tr=tr_template.evaluate(the_bill);
   $('list_table').insert(tr);
 

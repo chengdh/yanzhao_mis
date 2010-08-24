@@ -2,6 +2,7 @@
 <table class='table'>
   <thead>
     <tr>
+      <th>序号</th>
       <th>运单号</th>
       <th>货号</th>
       <th>发货人</th>
@@ -22,16 +23,16 @@
     </tr>
   </thead>
   <tbody id='list_table'>
-    <%bill_list_operate.bills.each do |the_bill|  %>
-      <input class='goods_fee' type='hidden' value="<%=the_bill.goods_fee%>" id='goods_fee_<%=the_bill.id%>' />
-      <input class='fee' type='hidden' value='<%=the_bill.fee%>' id='fee_<%=the_bill.id%>' />
-      <input class='k_hand_fee' type='hidden' value='<%=the_bill.k_hand_fee%>' id='k_hand_fee_<%=the_bill.id%>' />
-      <input class='k_carrying_fee' type='hidden' value='<%=the_bill.k_carrying_fee%>' id='k_carrying_fee_<%=the_bill.id%>' />
-      <input class='act_pay_fee' type='hidden' value='<%=the_bill.act_pay_fee%>' id='act_pay_fee_<%=the_bill.id%>' />
-      <input class='storage_fee' type='hidden' value='<%=the_bill.storage_fee%>' id='storage_fee_<%=the_bill.id%>' />
-
-      <tr id='added_bill_<%=the_bill.id%>'>
+    <%bill_list_operate.bills.each_with_index do |the_bill,index|  %>
+      <tr class='added_bill' id='added_bill_<%=the_bill.id%>'>
+        <input class='goods_fee' type='hidden' value="<%=the_bill.goods_fee%>" id='goods_fee_<%=the_bill.id%>' />
+        <input class='fee' type='hidden' value='<%=the_bill.fee%>' id='fee_<%=the_bill.id%>' />
+        <input class='k_hand_fee' type='hidden' value='<%=the_bill.k_hand_fee%>' id='k_hand_fee_<%=the_bill.id%>' />
+        <input class='k_carrying_fee' type='hidden' value='<%=the_bill.k_carrying_fee%>' id='k_carrying_fee_<%=the_bill.id%>' />
+        <input class='act_pay_fee' type='hidden' value='<%=the_bill.act_pay_fee%>' id='act_pay_fee_<%=the_bill.id%>' />
+        <input class='storage_fee' type='hidden' value='<%=the_bill.storage_fee%>' id='storage_fee_<%=the_bill.id%>' />
         <%=hidden_field_tag "bills[]",the_bill.id%>
+        <td><%= index %></td>
         <td><%=the_bill.bill_no%></td>
         <td><%=the_bill.goods_no%></td> 
         <td><%=the_bill.sender_name%></td>
@@ -66,7 +67,7 @@ if($(clear_field_id))
   </tbody>
   <tfoot>
     <tr>
-      <td colspan='3'>合计</td>
+      <td colspan='4'>合计</td>
       <td id='sum_goods_fee'></td>
       <td id='sum_fee'></td>
       <%if @model_klazz == TkInfo%>
@@ -95,19 +96,19 @@ if($(clear_field_id))
     :update =>{:failure => :error_span },
     :position => :bottom,
     :with => "'search[bill_no_is]='+$('txt_bill_no').value"%>
-  </div>
-  <script type='text/javascript'>
-    //添加单据前的检查
-  before_add_bill = function(){
-    $('error_span').update('');
-    if($('txt_bill_no').value.blank()) 
-    {
-      $('error_span').update('请录入票据号查询');
-      $('txt_bill_no').focus();
-      return false;
-    }
-    return true;
-  };
+</div>
+<script type='text/javascript'>
+  //添加单据前的检查
+before_add_bill = function(){
+  $('error_span').update('');
+  if($('txt_bill_no').value.blank()) 
+  {
+    $('error_span').update('请录入票据号查询');
+    $('txt_bill_no').focus();
+    return false;
+  }
+  return true;
+};
 //计算票据合计
 billOperateUtil.cal_sum();
 </script>
