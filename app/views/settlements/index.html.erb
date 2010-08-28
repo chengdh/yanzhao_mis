@@ -7,6 +7,7 @@
     <div class="inner">
       <table class="table">
         <tr>             
+          <th>单位</th>
           <th>月份</th>
           <th>始发货提成</th>
           <th>返程货提成</th>
@@ -16,51 +17,41 @@
           <th>分部实提金额</th>
           <th>&nbsp;</th>
         </tr>
-        <% @group_settlements.each do |org,settlements| -%>
-          <tr><td colspan='8'><h3><%=org.name%></h3></td></tr>
-          <%settlements.each do |settlement|%>
-            <tr class="<%= cycle("odd", "even") %>">
-              <td><%= settlement.mth %></td>
-              <td><%= settlement.start_push_money %></td>
-              <td><%= settlement.back_push_money %></td>
-              <td><%= settlement.total_push_money %></td>
-              <td><%= settlement.total_subsidy %></td>
-              <td><%= settlement.total_deduction %></td>
-              <td><%= settlement.act_push_money %></td>
-              <td class="last">
-                <%= link_to "查看/打印", settlement,:popup => ['分部返款结算表','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes']%> |
-                <%if check_power('edit_settlement')%>
-                  <%= link_to "修改", edit_settlement_path(settlement,:active_sub_tab => 4) %> |
-                <%end%>
+        <% @settlements.each do |settlement| -%>
+          <tr class="<%= cycle("odd", "even") %>">
+            <td><%= settlement.org.name %></td>
+            <td><%= settlement.mth %></td>
+            <td><%= settlement.start_push_money %></td>
+            <td><%= settlement.back_push_money %></td>
+            <td><%= settlement.total_push_money %></td>
+            <td><%= settlement.total_subsidy %></td>
+            <td><%= settlement.total_deduction %></td>
+            <td><%= settlement.act_push_money %></td>
+            <td class="last">
+              <%= link_to "查看/打印", settlement,:popup => ['分部返款结算表','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes']%> |
+              <%if check_power('edit_settlement')%>
+                <%= link_to "修改", edit_settlement_path(settlement,:active_sub_tab => 4) %> |
+              <%end%>
 
-                <%if check_power('destroy_settlement')%>
-                  <%= link_to "删除", settlement, :method => :delete, :confirm => "确认要删除吗?" %>
-                <%end%>
-              </td>
-            </tr>          
-          <%end%>
-          <tr>
-            <td>小计:</td>
-            <td><%= settlements.sum(&:start_push_money) %></td>
-            <td><%= settlements.sum(&:back_push_money) %></td>
-            <td><%= settlements.sum(&:total_push_money) %></td>
-            <td><%= settlements.sum(&:total_subsidy) %></td>
-            <td><%= settlements.sum(&:total_deduction) %></td>
-            <td><%= settlements.sum(&:act_push_money) %></td>
-          </tr>
-          <tr>
-            <td colspan='8'>&nbsp;</td>
-          </tr>
-          <tr>
-            <td>总计:</td>
-            <td><%= @sum_info[:start_push_money]%></td>
-            <td><%= @sum_info[:back_push_money] %></td>
-            <td><%= @sum_info[:total_push_money] %></td>
-            <td><%= @sum_info[:total_subsidy] %></td>
-            <td><%= @sum_info[:total_deduction] %></td>
-            <td><%= @sum_info[:act_push_money] %></td>
-          </tr>
+              <%if check_power('destroy_settlement')%>
+                <%= link_to "删除", settlement, :method => :delete, :confirm => "确认要删除吗?" %>
+              <%end%>
+            </td>
+          </tr>          
         <% end -%>
+        <tr>
+          <td colspan='8'>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>总计:</td>
+          <td>&nbsp;</td>
+          <td><%= @sum_info[:start_push_money]%></td>
+          <td><%= @sum_info[:back_push_money] %></td>
+          <td><%= @sum_info[:total_push_money] %></td>
+          <td><%= @sum_info[:total_subsidy] %></td>
+          <td><%= @sum_info[:total_deduction] %></td>
+          <td><%= @sum_info[:act_push_money] %></td>
+        </tr>
       </table>
       <div class="actions-bar wat-cf">
         <%= will_paginate @settlements  %>

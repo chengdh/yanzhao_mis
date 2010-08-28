@@ -19,4 +19,16 @@ class Settlement < ActiveRecord::Base
     temp.unfixed_subsidies.each{ |item| self.unfixed_settlement_line_subsidies.build(:name => item.name,:value => item.value)}
     temp.other_deductions.each{ |item| self.other_settlement_line_deductions.build(:name => item.name,:value => item.value)}
   end
+  #导出选项
+  def self.export_options
+    {
+      :methods => [:exp_org_name],
+      :only => [:mth,:start_push_money,:back_push_money,:total_push_money,
+        :total_subsidy,:total_deduction,:act_push_money]
+    }
+  end
+  def exp_org_name
+    self.org.name
+  end
+
 end

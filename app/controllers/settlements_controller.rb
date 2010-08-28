@@ -2,7 +2,7 @@ class SettlementsController < BaseController
   # GET /settlements
   def index
     @settlements = @search.paginate :page => params[:page],:order => "created_at DESC,org_id,mth DESC"
-    @group_settlements = @settlements.group_by(&:org)
+    #@group_settlements = @settlements.group_by(&:org)
     @sum_info = {
       :start_push_money => @search.sum(:start_push_money),
       :back_push_money=> @search.sum(:back_push_money),
@@ -15,8 +15,21 @@ class SettlementsController < BaseController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @settlements }
-    end
+      format.csv do 
+        sum = 
+          [
+            "总计:",
+            @sum_info[:start_push_money],
+            @sum_info[:back_push_money],
+            @sum_info[:total_push_money],
+            @sum_info[:total_subsidy],
+            @sum_info[:total_deduction],
+            @sum_info[:act_push_money]
+        ]
 
+        send_data @search.all.export_csv(Settlement.export_options) + sum.export_line_csv
+      end
+    end
   end
 
   # GET /settlements/new.xml

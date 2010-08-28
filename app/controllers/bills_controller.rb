@@ -44,7 +44,7 @@ class BillsController < BaseController
             empty_col += [""]
           end
           sum = empty_col + sum
-          send_data @search.all.export_csv + sum.export_line_csv
+          send_data @search.all.export_csv(Bill.export_options) + sum.export_line_csv
         end
       end 
       #else

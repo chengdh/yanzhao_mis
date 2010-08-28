@@ -20,6 +20,6 @@
   <h3>操作</h3>
   <ul class="navigation">
     <%#FIXME 处理导出操作%>
-    <li><%=link_to "导出到EXCEL",""%></li>
+    <li><%= link_to "导出到EXCEL", settlements_path(:search => params[:search],:format => :csv) %></li>
   </ul>
 </div>

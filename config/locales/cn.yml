@@ -32,6 +32,7 @@ cn:
       vip_config: VIP设置信息
       vip_fee_info: VIP导入信息
       vip_info: VIP信息
+      settlement: 结算表
       warehouse: 仓库信息
     attributes:
       bill:
@@ -57,6 +58,7 @@ cn:
         clear_fee: "清仓费"
         state_des: "票据状态"
         note: "备注"
+        created_date: "录入日期"
       vip_info:
         org_name: "所属分理处/分公司"
         name: "姓名"
@@ -67,6 +69,15 @@ cn:
         level_des: "级别"
         state_des: "当前状态"
         last_import_mth: "最近导入月份"
+      settlement:
+        exp_org_name: "结算单位"
+        mth: "结算月份"
+        start_push_money: "始发货提成"
+        back_push_money: "返程货提成"
+        total_push_money: "合计提成"
+        total_subsidy: "应补合计"
+        total_deduction: "应扣合计"
+        act_push_money: "分部实提金额"
     errors:
       template:
         header:
