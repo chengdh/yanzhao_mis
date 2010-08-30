@@ -43,33 +43,53 @@
 
 <%@group_fixed_subsidies.each do |mth,susidies|%>
   <div class='radius-box doc-info'>
-    <h3 class='border-bottom'><span class='red-text'><%=mth%></span>-固定应补项目</h3>
+    <h3 class='border-bottom'>
+      <span class='red-text'><%=mth%></span>-固定应补项目
+      <%= can_edit_item?(f.object.org_id,mth) ? '' : "<span class='red-text'>结算表已存在,不可修改</span>" %>
+    </h3>
     <table class='table'>
       <tbody id='fixed_subsidy_fields_wrap_<%=mth%>'>
         <%f.fields_for :fixed_subsidies,susidies do |item|%>
-          <%= render 'fixed_subsidy_fields',:f => item %>
-        <%end%>
+          <% if can_edit_item?(f.object.org_id,mth) %>
+            <%= render 'fixed_subsidy_fields',:f => item %>
+          <% else%>
+            <%= render 'fixed_subsidy_fields_readonly',:f => item %>
+          <% end %>
+        <% end %>
       </tbody>
     </table>
-    <div class="actions-bar text-right">
-      <%=link_to_add_fields "添加固定应补项目",f,:fixed_subsidies,"fixed_subsidy_fields_wrap_#{mth}",:mth => mth %>
-    </div>
+
+    <% if can_edit_item?(f.object.org_id,mth) %>
+      <div class="actions-bar text-right">
+        <%=link_to_add_fields "添加固定应补项目",f,:fixed_subsidies,"fixed_subsidy_fields_wrap_#{mth}",:mth => mth %>
+      </div>
+    <% end %>
   </div>
 <%end%>
 
 <%@group_fixed_deductions.each do |mth,deductions|%>
   <div class='radius-box doc-info'>
-    <h3 class='border-bottom'><%=mth%>-固定应扣项目</h3>
+    <h3 class='border-bottom'>
+      <%=mth%>-固定应扣项目
+      <%= can_edit_item?(f.object.org_id,mth) ? '' : "<span class='red-text'>结算表已存在,不可修改</span>" %>
+    </h3>
     <table class='table'>
       <tbody id='fixed_deduction_fields_wrap_<%=mth%>'>
         <%f.fields_for :fixed_deductions,deductions do |item|%>
-          <%= render 'fixed_deduction_fields',:f => item %>
+          <% if can_edit_item?(f.object.org_id,mth) %>
+            <%= render 'fixed_deduction_fields',:f => item %>
+          <% else%>
+            <%= render 'fixed_deduction_fields_readonly',:f => item %>
+          <% end %>
         <%end%>
       </tbody>
     </table>
-    <div class="actions-bar text-right">
-      <%=link_to_add_fields "添加固定应扣项目",f,:fixed_deductions,"fixed_deduction_fields_wrap_#{mth}",:mth => mth %>
-    </div>
+
+    <% if can_edit_item?(f.object.org_id,mth) %>
+      <div class="actions-bar text-right">
+        <%=link_to_add_fields "添加固定应扣项目",f,:fixed_deductions,"fixed_deduction_fields_wrap_#{mth}",:mth => mth %>
+      </div>
+    <% end %>
   </div>
 <%end%>
 <div class='radius-box doc-info'>

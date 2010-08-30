@@ -28,7 +28,12 @@
               <%end%>
 
               <%if check_power('destroy_contract')%>
-                <%= link_to "删除", contract, :method => :delete, :confirm => "您确定删除该信息吗？" %>
+
+                <%if !contract_can_delete?(contract) %>
+                  <span class='red-text'>结算表已存在,不可删除</span>
+                <%else%>
+                  <%= link_to "删除", contract, :method => :delete, :confirm => "您确定删除该信息吗？" %>
+                <%end%>
               <%end%>
             </td>
           </tr>          
