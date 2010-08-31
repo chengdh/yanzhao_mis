@@ -22,28 +22,22 @@
       <table class='table'>
         <tr>
           <th class='first'></th>
+          <th>结算单位</th>
           <th>月份</th>
           <th>项目名称</th>
           <th>金额</th>
         </tr>
-        <%@group_settlement_lines.each do |org_name,lines|%>
-          <tr><td colspan='20'><h3><%=org_name%></h3></td></tr>
-          <%lines.each do |line|%>
-            <tr class="<%=cycle 'odd','even'%>">
-              <td>&nbsp;</td>
-              <td><%=line.settlement.mth%></td>
-              <td><%=line.name%></td>
-              <td><%=line.value%></td>
-            </tr>
-          <%end%>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>小计</td>
-            <td><%=lines.sum(&:value)%></td>
+        <%@settlement_lines.each do |line|%>
+          <tr class="<%=cycle 'odd','even'%>">
+            <td>&nbsp;</td>
+            <td><%=line.settlement.org.name%></td>
+            <td><%=line.settlement.mth%></td>
+            <td><%=line.name%></td>
+            <td><%=line.value%></td>
           </tr>
         <%end%>
         <tr>
+          <td></td>
           <td></td>
           <td></td>
           <td>总计</td>
@@ -51,7 +45,7 @@
         </tr>
       </table>
       <div class="actions-bar wat-cf">
-        <%=will_paginate @group_settlement_lines %>
+        <%=will_paginate @settlement_lines %>
       </div>
     </div>
   </div>

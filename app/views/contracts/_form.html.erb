@@ -35,9 +35,13 @@
 <div class='radius-box doc-info'>
   <h3 class='border-bottom'>各月份结算比例</h3>
   <table class='table'>
-    <%f.fields_for :contract_radios do |radio|%>
-      <%= render 'contract_radio_fields',:f => radio %>
-    <%end%>
+    <% f.fields_for :contract_radios do |radio|%>
+      <% if can_edit_item?(f.object.org_id,radio.object.mth) %>
+        <%= render 'contract_radio_fields',:f => radio %>
+      <%else%>
+        <%= render 'contract_radio_fields_readonly',:f => radio %>
+      <%end%>
+    <% end%>
   </table>
 </div>
 

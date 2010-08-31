@@ -33,7 +33,7 @@
       </tr>
       <tr>
         <td class='text-center'>分部:</td>
-        <td colspan='3'><%=@settlement.org.name%></td>
+        <td colspan='3' class='text-center'><%=@settlement.org.name%></td>
         <td class='text-center'>单位:元</td>
         <td></td>
         <td></td>
@@ -54,8 +54,8 @@
         <td colspan='2' style='vertical-align : top;'>
           <table id='base_fee'>
             <colgroup>
-              <col class='col_60' />
-              <col class='col_40' />
+              <col class='col_15' />
+              <col class='col_10' />
             </colgroup>
             <tr>
               <td>营业收入</td>
@@ -98,8 +98,8 @@
         <td colspan='2' style='vertical-align : top;'>
           <table id='subsidy_fee'>
             <colgroup>
-              <col class='col_60' />
-              <col class='col_40' />
+              <col class='col_15' />
+              <col class='col_10' />
             </colgroup>
             <%@settlement.fixed_settlement_line_subsidies.each do |item|%>
               <tr>
@@ -122,8 +122,8 @@
         <td colspan='2' style='vertical-align : top;'>
           <table id='deductions_fee'>
             <colgroup>
-              <col class='col_60' />
-              <col class='col_40' />
+              <col class='col_15' />
+              <col class='col_10' />
             </colgroup>
 
             <%@settlement.fixed_settlement_line_deductions.each do |item|%>
@@ -146,8 +146,8 @@
         <td colspan='2'>
           <table id='others_fee'>
             <colgroup>
-              <col class='col_60' />
-              <col class='col_40' />
+              <col class='col_15' />
+              <col class='col_10' />
             </colgroup>
 
             <%@settlement.other_settlement_line_deductions.each do |item|%>
@@ -163,7 +163,7 @@
           </table>
         </td>
       </tr>
-      <tr>
+      <tr id='sum_fee'>
         <td>合计:</td>
         <td class='text-center'><%=@settlement.start_push_money + @settlement.back_push_money%></td>
         <td></td>
@@ -173,7 +173,7 @@
         <td></td>
         <td class='text-center'><%=@settlement.other_settlement_line_deductions.sum(:value) %></td>
       </tr>
-      <tr>
+      <tr id='sum_rmb'>
         <%sum_fee = @settlement.start_push_money + @settlement.back_push_money + 
           @settlement.fixed_settlement_line_subsidies.sum(:value) + @settlement.unfixed_settlement_line_subsidies.sum(:value) -
         @settlement.fixed_settlement_line_deductions.sum(:value) - @settlement.unfixed_settlement_line_deductions.sum(:value) -
@@ -182,7 +182,7 @@
         <td colspan='6'>分部实提金额人民币(大写):<%=ConvertNumToChinese(sum_fee)%></td>
         <td colspan='2'>&yen;:<%=sum_fee%></td>
       </tr>
-      <tr>
+      <tr id='sign_area'>
         <td colspan='2'>核准:</td>
         <td colspan='2'>审核:</td>
         <td colspan='2'>核算:</td>
