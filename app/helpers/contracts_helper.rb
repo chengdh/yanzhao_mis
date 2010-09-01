@@ -9,7 +9,6 @@ module ContractsHelper
     #根据合同起始及结束日期得到起始及结束月份
     from_mth = contract.date_from.strftime('%Y%m')
     to_mth = contract.date_to.strftime('%Y%m')
-    !Settlement.exists?(["mth >= ? AND mth <= ?",from_mth,to_mth])
-
+    !Settlement.exists?(["org_id = ? AND mth >= ? AND mth <= ?",contract.org_id,from_mth,to_mth])
   end
 end
