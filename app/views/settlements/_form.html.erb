@@ -21,15 +21,15 @@
     </div>
     <div class="ctrlHolder">
       <%= f.label :start_net_income,"净收入" %>
-      <%= f.text_field :start_net_income, :readonly => true,:class => "shortText" %>
+      <%= f.text_field :start_net_income, :readonly => true,:class => "shortText readonly" %>
     </div>
     <div class="ctrlHolder">
       <%= f.label :start_radio,"结算比例" %>
-      <%= f.text_field :start_radio, :readonly => true,:class => "shortText" %>%
+      <%= f.text_field :start_radio, :readonly => true,:class => "shortText readonly" %>%
     </div>
     <div class="ctrlHolder">
       <%= f.label :start_push_money,"结算金额" %>
-      <%= f.text_field :start_push_money, :readonly => true,:class => "shortText" %>
+      <%= f.text_field :start_push_money, :readonly => true,:class => "shortText readonly" %>
     </div>
   </div>
   <div class='radius-box doc-info'>
@@ -44,20 +44,20 @@
     </div>
     <div class="ctrlHolder">
       <%= f.label :back_net_income,"净收入" %>
-      <%= f.text_field :back_net_income, :readonly => true,:class => "shortText" %>
+      <%= f.text_field :back_net_income, :readonly => true,:class => "shortText readonly" %>
     </div>
     <div class="ctrlHolder">
       <%= f.label :back_radio,"结算比例" %>
-      <%= f.text_field :back_radio, :readonly => true,:class => "shortText" %>%
+      <%= f.text_field :back_radio, :readonly => true,:class => "shortText readonly" %>%
     </div>
     <div class="ctrlHolder">
       <%= f.label :back_push_money,"结算金额" %>
-      <%= f.text_field :back_push_money, :readonly => true,:class => "shortText" %>
+      <%= f.text_field :back_push_money, :readonly => true,:class => "shortText readonly" %>
     </div>
   </div>
   <div class="ctrlHolder">
-      <%= f.label :total_push_money,"合计" %>
-      <%= f.text_field :total_push_money, :readonly => true,:class => "shortText" %>
+      合计:
+      <%= f.text_field :total_push_money, :readonly => true,:class => "shortText readonly" %>
     </div>
 
   <div class='radius-box doc-info'>
@@ -106,8 +106,8 @@
     -->
   </div>
   <div class="ctrlHolder">
-    <%= f.label :total_subsidy,"应补合计" %>
-    <%= f.text_field :total_subsidy, :readonly => true,:class => "shortText" %>
+    应补合计:
+    <%= f.text_field :total_subsidy, :readonly => true,:class => "shortText readonly" %>
   </div>
 
   <div class='radius-box doc-info'>
@@ -134,6 +134,11 @@
         <%end%>
       </tbody>
     </table>
+    <div class="ctrlHolder">
+      其他应扣合计:
+      <%= f.text_field :total_other_deduction, :readonly => true,:class => "shortText readonly" %>
+    </div>
+
     <!--
     <div class="actions-bar text-right">
       <%=link_to_add_fields "添加其他应扣项目",f,:other_settlement_line_deductions,"other_settlement_line_deduction_fields_wrap" %>
@@ -141,12 +146,12 @@
     -->
   </div>
   <div class="ctrlHolder">
-    <%= f.label :total_deduction,"应扣合计" %>
-    <%= f.text_field :total_deduction, :readonly => true,:class => "shortText" %>
+    应扣合计:
+    <%= f.text_field :total_deduction, :readonly => true,:class => "shortText readonly" %>
   </div>
   <div class="ctrlHolder">
-    <%= f.label :act_push_money,"分部实提金额" %>
-    <%= f.text_field :act_push_money, :readonly => true,:class => "shortText" %>
+    分部实提金额:
+    <%= f.text_field :act_push_money, :readonly => true,:class => "shortText readonly" %>
   </div>
 
 </fieldset>

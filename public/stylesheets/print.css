@@ -4,6 +4,7 @@
 #settlement_show{ width : 200mm; }
 #title,#sub_title { text-align : center;}
 #settlement_show,#settlement_show table {
+  table-layout : fixed;
   border-collapse : collapse;
   width : 100%;
 }
@@ -19,4 +20,8 @@
 #settlement_show .col_10 { width : 20mm;}
 #settlement_show td.number { text-align : center;}
 #base_fee,#subsidy_fee,#deductions_fee,#others_fee { border : none;}
-#base_fee td,#subsidy_fee td,#deductions_fee td,#other_fee td,#sum_fee td,#sum_rmb td,#sign_area td { padding : 4px;}
+#base_fee_wrap,#subsidy_fee_wrap,#deductions_fee_wrap,#others_fee_wrap { vertical-align : top;}
+#base_fee td,#subsidy_fee td,#deductions_fee td,#other_fee td,#sum_fee td,#sum_rmb td,#sign_area td { 
+  overflow :hidden;
+  white-space : pre;
+  padding : 4px;}

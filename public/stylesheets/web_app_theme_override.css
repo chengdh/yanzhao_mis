@@ -226,3 +226,6 @@ position : absolute;
 }
 #user_power fieldset legend {padding : 10px; }
 #user_power label {display : inline;cursor : pointer;margin-right : 10px;}
+
+/*只读文本框*/
+input.readonly { border : none;font-size : 1.2em;font-weight : bold;color : blue;}

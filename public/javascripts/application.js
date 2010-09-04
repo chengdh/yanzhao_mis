@@ -410,6 +410,16 @@ com.yanzhao.settlement_form_observer  =  function(){
       });
 
   $('settlement_total_subsidy').value = sum_subsidy;
+  //计算其他应扣合计
+  var sum_other_deduction = 0;
+  var other_deductions = $$("input[name*='other_settlement_line_deductions']");
+  other_deductions.each(function(el){ 
+      if(el.id.include('value'))
+      sum_other_deduction += parseFloat(el.value);
+      });
+
+  $('settlement_total_other_deduction').value = sum_other_deduction;
+
   //计算应扣合计
   var deductions = $$("input[name*='deductions']");
   var sum_deduction = 0;

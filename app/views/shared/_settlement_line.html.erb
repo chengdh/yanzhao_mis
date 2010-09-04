@@ -1,11 +1,17 @@
 <tr class='fields'>
   <td width='50' class='text-right'>名称:</td>
   <td>
-    <%=f.text_field :name,:readonly => true,:style => "width : 100px;"%>
+    <%=f.object.name%> 
+    <%=f.hidden_field :name %> 
   </td>
   <td width='50' class='text-right'>金额:</td>
   <td>
-    <%=f.text_field :value,:readonly => value_readonly %>
+    <% if value_readonly%>
+      <%=f.hidden_field :value %> 
+      <%=f.object.value%>
+    <% else%>
+      <%=f.text_field :value %>
+    <% end%>
   </td>
   <!--
   <td>
