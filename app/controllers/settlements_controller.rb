@@ -36,9 +36,9 @@ class SettlementsController < BaseController
   def new
     #先判断是否已存在结算信息
     if @search.count > 0
-      flash[:notice] = "结算表已存在,转向修改界面."
       @settlement = @search.first 
-      render :edit
+      flash[:error] = "结算表已存在&nbsp;&nbsp;<a href=#{edit_settlement_path(@settlement)}>修改</a>."
+      redirect_to :back
     else
       @settlement = Settlement.new(:org_id => params[:search][:org_id_is],:mth => params[:search][:mth_is])
       #查找有无对应的合同模板
