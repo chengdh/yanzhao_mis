@@ -12,7 +12,7 @@
     <fieldset class='blockLabels'>
       <div class='ctrlHolder'>
         <%=f.label :username,'用户名' %>
-        <%=f.text_field :username, :size => "20",:maxlength => "20",:class=>"shortTextInput",:readonly => !@user.new_record? %>
+        <%=f.text_field :username, :size => "20",:maxlength => "20",:class=>"shortTextInput" %>
         <p class='formHint'>
         20个数字或字母,中文最长10个汉字
         </p>
