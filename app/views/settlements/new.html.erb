@@ -34,6 +34,7 @@
       while(next_el.hasClassName('readonly')) 
         next_el = get_form_next_input(next_el);
       next_el.focus();
+      next_el.select();
     }
   };
   $('settlement_form').observe('keydown',enter_listener.bindAsEventListener(window));
