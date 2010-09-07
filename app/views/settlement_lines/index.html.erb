@@ -13,8 +13,8 @@
             <td><%= f.label :settlement_mth_is,"月份:" %></td>
             <td><%= f.select :settlement_mth_is, months_for_select,:include_blank => true %></td>
 
-            <td><%= f.label :name_like,"项目名称:" %></td>
-            <td><%= f.select :name_like, settlement_items_for_select,:include_blank => true %></td>
+            <td><%= f.label :name_is,"项目名称:" %></td>
+            <td><%= f.select :name_is, settlement_items_for_select,:include_blank => true %></td>
             <td><%= f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%></td>
           </tr>
         </table>

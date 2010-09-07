@@ -112,14 +112,14 @@ module ApplicationHelper
   end
 
   #金额转中文大写
-  def ConvertNumToChinese(num)
+  def convertNumToChinese(num)
     chineseNumArr=['零','壹','贰','叁','肆','伍','陆','柒','捌','玖']
     chinesePosArr=['万','仟','佰','拾','亿','仟','佰','拾','万','仟','佰','拾','元','角','分']
     chineseNum=''
     chinesePos=''
     strChinese=''
     nzero=0
-    strNum=(num*100).to_i.to_s
+    strNum=(num*100).abs.to_i.to_s
     i=0
     length=strNum.length
     posValue=0
@@ -174,6 +174,7 @@ module ApplicationHelper
       end
       i+=1
     end 
+    strChinese ='负' + strChinese if num < 0
     strChinese 
   end
   #根据起始和结束日期得到日期月份列表

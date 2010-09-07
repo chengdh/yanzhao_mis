@@ -16,5 +16,26 @@
   //计算各种合计费用
   new Form.Observer($('settlement_form'), 0.3, com.yanzhao.settlement_form_observer);
   com.yanzhao.settlement_form_observer.apply();
-
+  //在form中监听enter事件
+  var get_form_next_input = function(field){
+                   var form = $('settlement_form');
+                   var inputs = form.getInputs('text');
+                   for (var e = 0; e < inputs.size(); e++) { 
+                     if (field == inputs[e])
+                         break;
+                    }
+                   return inputs[++e % inputs.size()];
+  };
+  var enter_listener = function(evt) {
+    var el = Event.element(evt);
+    if(el.type == 'text' && evt.keyCode == 13) 
+    {
+      var next_el = get_form_next_input(el);
+      while(next_el.hasClassName('readonly')) 
+        next_el = get_form_next_input(next_el);
+      next_el.focus();
+      next_el.select();
+    }
+  };
+  $('settlement_form').observe('keydown',enter_listener.bindAsEventListener(window));
 </script>
