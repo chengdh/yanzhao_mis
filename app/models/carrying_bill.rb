@@ -38,8 +38,7 @@ class CarryingBill < Bill
     CarryingBill.states[state]
   end
   #2010-6-15 客户要求保存时计算扣手续费/扣运费/实付货款
-  #TODO 暂时注释
-  #def before_save
-  #  self.cal_fee!
-  #end
+  def before_save
+    self.cal_fee!
+  end
 end

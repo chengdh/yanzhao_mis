@@ -22,8 +22,8 @@ module ActiveRecord
       records = self.find(:all)
       csv_string = FasterCSV.generate() do |csv|
         records.each do |r|
-          attr = r.attributes.delete_if { |key,value| key == 'id'}
-          csv << ([r.id]  + attr.values)
+          attr = r.attributes.delete_if { |key,value| self.primary_key == key }
+          csv << ([r.id]  + attr.keys.sort.collect {|key| r[key]})
         end
       end
       file_name = File.join(dir,"#{self.table_name}.csv")
@@ -35,6 +35,7 @@ module ActiveRecord
     #导入数据到数据表中,包括id
     def self.import_csv(dir)
       require 'fastercsv'
+      self.destroy_all
       file_name = File.join(dir,"#{self.table_name}.csv")
       rows = FasterCSV::read(file_name)
       rows.each do |row|
@@ -42,11 +43,10 @@ module ActiveRecord
         #给各个字段赋值
         col_index = 0
 
-        attr = m.attributes.delete_if { |key,value| key == 'id'}
-        (attr.keys).each do |attr|
+        attr = m.attributes.delete_if { |key,value| self.primary_key == key }
+
+        (attr.keys.sort).each do |attr|
           col_index = col_index + 1
-          puts "#{col_index}"
-          puts "#{attr}=#{row[col_index]}"
           m.send("#{attr}=",row[col_index])
         end
         m.id = row[0]
