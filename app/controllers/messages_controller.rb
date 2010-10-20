@@ -25,6 +25,8 @@ class MessagesController < BaseController
   # GET /the_models/new.xml
   def new
     message = @model_klazz.new
+    #机构设置为当前登录用户所在机构
+    message.org = current_user.org
     instance_variable_set("@#{@param_name}",message)
   end
 

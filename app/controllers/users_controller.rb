@@ -1,7 +1,9 @@
 class UsersController < BaseController
   #GET /users
   def index
-    @users = User.all(:order => "org_id")
+
+    the_models = @search.paginate :page => params[:page],:order => "created_at DESC"
+    @users = User.paginate :page => params[:page],:order => "org_id"
     @group_users = @users.group_by {|user| user.org.name}
   end
   #GET /users/new
