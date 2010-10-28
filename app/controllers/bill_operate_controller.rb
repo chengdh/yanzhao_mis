@@ -12,9 +12,9 @@ class BillOperateController < BaseController
     instance_variable_set("@#{@param_name}",bill_operate)
     #当传入运单id创建提款信息时
     if !params[:bill_id].blank?
-      lines = bill_operate.send(@bill_type)
+      lines = bill_operate.bills
 
-      the_bill =Object.const_get(@bill_type.classify).find(params[:bill_id])
+      the_bill =Bill.find(params[:bill_id])
       #只在提款或提货时计算费用
       the_bill.cal_fee! if [CarryingBill::STATE_TK,InoutBill::STATE_DELIVER].include?(after_state)
       lines<<the_bill

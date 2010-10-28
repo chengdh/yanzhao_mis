@@ -28,7 +28,11 @@
     </div>
     <div class='ctrlHolder'>
       <%=f.label :state_is,"票据状态"%>
-      <%=f.select :state_is,bill_state_for_select,:include_blank => true %>
+      <%if defined? bill_type && bill_type == :inout_bill%>
+        <%=f.select :state_is,inout_bill_state_for_select,:include_blank => true %>
+      <%else%>
+        <%=f.select :state_is,bill_state_for_select,:include_blank => true %>
+      <%end%>
     </div>
     <div class='ctrlHolder'>
       <%=f.label :created_at_gte,"录入时间"%>
@@ -38,6 +42,36 @@
       <%=f.label :created_at_lte,"~"%>
       <%=f.calendar_date_select :created_at_lte,:class => "shortText" %>
     </div>
+
+    <%if defined? bill_type && bill_type == :inout_bill%>
+      <div class='ctrlHolder'>
+        <%=f.label :deliver_deliver_date_gte,"提货时间"%>
+        <%=f.calendar_date_select :deliver_deliver_date_gte,:class => "shortText" %>
+      </div>
+      <div class='ctrlHolder'>
+        <%=f.label :deliver_deliver_date_lte,"~"%>
+        <%=f.calendar_date_select :deliver_deliver_date_lte,:class => "shortText" %>
+      </div>
+      <div class='ctrlHolder'>
+        <%=f.label :clear_info_clear_date_gte,"清仓时间"%>
+        <%=f.calendar_date_select :clear_info_clear_date_gte,:class => "shortText" %>
+      </div>
+      <div class='ctrlHolder'>
+        <%=f.label :clear_info_clear_date_lte,"~"%>
+        <%=f.calendar_date_select :clear_info_clear_date_lte,:class => "shortText" %>
+      </div>
+
+    <%else%>
+      <div class='ctrlHolder'>
+        <%=f.label :tk_info_tk_date_gte,"提款时间"%>
+        <%=f.calendar_date_select :tk_info_tk_date_gte,:class => "shortText" %>
+      </div>
+      <div class='ctrlHolder'>
+        <%=f.label :tk_info_tk_date_lte,"~"%>
+        <%=f.calendar_date_select :tk_info_tk_date_lte,:class => "shortText" %>
+      </div>
+    <%end%>
+
   </fieldset>
   <div class="actions-bar">
     <%=f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%>
