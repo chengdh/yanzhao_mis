@@ -1,6 +1,10 @@
 <ul class="wat-cf">
   <li class="first <%=check_sub_active_tab(1) %>"><%= link_to "入库单", consumer_receipts_path(:active_sub_tab => 1) %></li>
+
+  <li class="first <%=check_sub_active_tab(15) %>"><%= link_to "待确认入库单", consumer_receipts_path(:active_sub_tab => 15,"search[state]" => MaterialInout::STATE_DRAFT,"search[auditor_id]" => current_user) %></li>
   <li class="<%=check_sub_active_tab(2) %>"><%= link_to "领用单", consumer_shippments_path(:active_sub_tab => 2) %></li>
+
+  <li class="first <%=check_sub_active_tab(16) %>"><%= link_to "待确认领用单", consumer_shippments_path(:active_sub_tab => 16,"search[state]" => MaterialInout::STATE_DRAFT,"search[auditor_id]" => current_user) %></li>
   <li class="<%=check_sub_active_tab(3) %>"><%= link_to "物品定义", consumer_materials_path(:active_sub_tab => 3) %></li>
   <%if params[:active_sub_tab] == '6'%>
     <li class="active"><%= link_to "新建入库单", new_durable_receipt_path(:active_sub_tab => 6) %></li>

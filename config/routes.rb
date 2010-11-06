@@ -37,13 +37,13 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :upload_vip_files,:only => [:new],:collection => {:import => :post}
 
-  map.resources :consumer_shippments
+  map.resources :consumer_shippments,:member => {:confirm => :put}
 
-  map.resources :durable_shippments
+  map.resources :durable_shippments,:member => {:confirm => :put}
 
-  map.resources :consumer_receipts
+  map.resources :consumer_receipts,:member => {:confirm => :put}
 
-  map.resources :durable_receipts
+  map.resources :durable_receipts,:member => {:confirm => :put}
 
   map.resources :consumer_materials
 
@@ -51,7 +51,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :m_storages,:collection => {:show_search => :get,:search => :get}
 
-  map.resources :material_inout_lines,:onlu => [:index]
+  map.resources :material_inout_lines,:only => [:index]
 
   map.resources :warehouses
 

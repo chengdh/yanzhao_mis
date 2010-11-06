@@ -9,10 +9,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100904090508) do
+ActiveRecord::Schema.define(:version => 20101106054120) do
 
   create_table "address_book_lines", :force => true do |t|
-    t.string   "name",            :limit => 60,  :default => "",   :null => false
+    t.string   "name",            :limit => 60,                    :null => false
     t.string   "phone",           :limit => 30
     t.string   "mobile",          :limit => 30
     t.boolean  "is_active",                      :default => true, :null => false
@@ -32,11 +32,11 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
   end
 
   create_table "base_public_messages", :force => true do |t|
-    t.string   "title",        :limit => 200, :default => "",    :null => false
+    t.string   "title",        :limit => 200,                    :null => false
     t.text     "body"
     t.string   "type",         :limit => 20
     t.boolean  "is_secure",                   :default => false, :null => false
-    t.string   "state",        :limit => 20,  :default => "",    :null => false
+    t.string   "state",        :limit => 20,                     :null => false
     t.integer  "org_id"
     t.boolean  "is_active",                   :default => true
     t.integer  "user_id"
@@ -53,10 +53,10 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
   end
 
   create_table "bills", :force => true do |t|
-    t.string   "bill_no",        :limit => 30,                                 :default => "",   :null => false
+    t.string   "bill_no",        :limit => 30,                                                   :null => false
     t.string   "goods_no",       :limit => 30
-    t.string   "bill_mth",       :limit => 6,                                  :default => "",   :null => false
-    t.string   "sender_name",    :limit => 20,                                 :default => "",   :null => false
+    t.string   "bill_mth",       :limit => 6,                                                    :null => false
+    t.string   "sender_name",    :limit => 20,                                                   :null => false
     t.string   "sender_phone"
     t.string   "receiver_name"
     t.string   "receiver_phone"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
     t.integer  "goods_num",                                                    :default => 0
     t.string   "goods_info",     :limit => 200
     t.date     "bill_date"
-    t.string   "pay_type",       :limit => 2,                                  :default => "",   :null => false
+    t.string   "pay_type",       :limit => 2,                                                    :null => false
     t.boolean  "is_active",                                                    :default => true
     t.string   "state",          :limit => 2,                                  :default => "DR", :null => false
     t.integer  "tk_info_id"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
   end
 
   create_table "clients", :force => true do |t|
-    t.string   "name",              :limit => 60, :default => "", :null => false
+    t.string   "name",              :limit => 60, :null => false
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
-    t.string   "body",       :limit => 600, :default => "",   :null => false
+    t.string   "body",       :limit => 600,                   :null => false
     t.integer  "user_id",                                     :null => false
     t.boolean  "is_active",                 :default => true, :null => false
     t.datetime "created_at"
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
   end
 
   create_table "config_infos", :force => true do |t|
-    t.string   "config_key",       :limit => 60,                                :default => "",  :null => false
+    t.string   "config_key",       :limit => 60,                                                 :null => false
     t.string   "config_value",     :limit => 60
     t.decimal  "config_num_from",                :precision => 10, :scale => 2, :default => 0.0
     t.decimal  "config_num_to",                  :precision => 10, :scale => 2, :default => 0.0
@@ -136,9 +136,9 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
   end
 
   create_table "contract_items", :force => true do |t|
-    t.string   "name",        :limit => 60,                                :default => "",   :null => false
+    t.string   "name",        :limit => 60,                                                  :null => false
     t.boolean  "is_active",                                                :default => true, :null => false
-    t.string   "type",        :limit => 20,                                :default => "",   :null => false
+    t.string   "type",        :limit => 20,                                                  :null => false
     t.decimal  "value",                     :precision => 10, :scale => 2, :default => 0.0
     t.integer  "contract_id",                                                                :null => false
     t.datetime "created_at"
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
 
   create_table "contract_radios", :force => true do |t|
     t.integer  "contract_id",                                                  :null => false
-    t.string   "mth",                                        :default => "",   :null => false
+    t.string   "mth",                                                          :null => false
     t.decimal  "start_radio", :precision => 10, :scale => 2, :default => 50.0
     t.decimal  "back_radio",  :precision => 10, :scale => 2, :default => 50.0
     t.datetime "created_at"
@@ -170,7 +170,7 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
 
   create_table "delivers", :force => true do |t|
     t.date     "deliver_date"
-    t.string   "deliver_name",  :limit => 30, :default => "", :null => false
+    t.string   "deliver_name",  :limit => 30, :null => false
     t.string   "identify_type", :limit => 30
     t.string   "identify_no",   :limit => 30
     t.integer  "user_id"
@@ -199,18 +199,21 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
   end
 
   create_table "material_inouts", :force => true do |t|
-    t.date     "inout_date",                                  :null => false
+    t.date     "inout_date",                                    :null => false
     t.integer  "org_id"
     t.integer  "warehouse_id"
     t.string   "person_name",  :limit => 30
     t.string   "note",         :limit => 200
-    t.string   "type",         :limit => 30,  :default => "", :null => false
+    t.string   "type",         :limit => 30,                    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "state",        :limit => 10,  :default => "DR"
+    t.integer  "auditor_id"
+    t.integer  "confirm_id"
   end
 
   create_table "materials", :force => true do |t|
-    t.string   "name",        :limit => 60, :default => "",         :null => false
+    t.string   "name",        :limit => 60,                         :null => false
     t.boolean  "is_active",                 :default => true,       :null => false
     t.string   "description", :limit => 60
     t.string   "type",        :limit => 30, :default => "Material", :null => false
@@ -231,7 +234,7 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
   end
 
   create_table "orgs", :force => true do |t|
-    t.string   "name",       :limit => 60,  :default => "",   :null => false
+    t.string   "name",       :limit => 60,                    :null => false
     t.integer  "user_id"
     t.boolean  "is_active",                 :default => true, :null => false
     t.string   "address",    :limit => 100
@@ -257,8 +260,8 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
 
   create_table "settlement_lines", :force => true do |t|
     t.integer  "settlement_id",                                                               :null => false
-    t.string   "type",          :limit => 50,                                :default => "",  :null => false
-    t.string   "name",          :limit => 60,                                :default => "",  :null => false
+    t.string   "type",          :limit => 50,                                                 :null => false
+    t.string   "name",          :limit => 60,                                                 :null => false
     t.decimal  "value",                       :precision => 15, :scale => 2, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -267,7 +270,7 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
   create_table "settlements", :force => true do |t|
     t.integer  "org_id",                                                                              :null => false
     t.integer  "user_id"
-    t.string   "mth",                   :limit => 6,                                :default => "",   :null => false
+    t.string   "mth",                   :limit => 6,                                                  :null => false
     t.boolean  "is_active",                                                         :default => true, :null => false
     t.decimal  "start_fee",                          :precision => 15, :scale => 2, :default => 0.0
     t.decimal  "start_carrying_fee",                 :precision => 15, :scale => 2, :default => 0.0
@@ -289,17 +292,17 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
   end
 
   create_table "system_functions", :force => true do |t|
-    t.string   "group_name", :limit => 60, :default => "",   :null => false
-    t.string   "func_name",  :limit => 60, :default => "",   :null => false
-    t.string   "func_key",   :limit => 60, :default => "",   :null => false
+    t.string   "group_name", :limit => 60,                   :null => false
+    t.string   "func_name",  :limit => 60,                   :null => false
+    t.string   "func_key",   :limit => 60,                   :null => false
     t.boolean  "is_active",                :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "tk_infos", :force => true do |t|
-    t.string   "tker_name",     :limit => 30,  :default => "", :null => false
-    t.date     "tk_date",                                      :null => false
+    t.string   "tker_name",     :limit => 30,  :null => false
+    t.date     "tk_date",                      :null => false
     t.string   "identify_type", :limit => 30
     t.string   "identify_no",   :limit => 30
     t.string   "note",          :limit => 300
@@ -315,7 +318,7 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
     t.string   "remember_token"
     t.datetime "remember_created_at"
     t.boolean  "is_active",                          :default => true,  :null => false
-    t.string   "username",            :limit => 30,  :default => "",    :null => false
+    t.string   "username",            :limit => 30,                     :null => false
     t.integer  "org_id"
     t.boolean  "is_admin",                           :default => false, :null => false
     t.datetime "created_at"
@@ -324,7 +327,7 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
 
   create_table "vip_configs", :force => true do |t|
     t.integer  "org_id",                                                                   :null => false
-    t.string   "name",       :limit => 60,                                :default => "",  :null => false
+    t.string   "name",       :limit => 60,                                                 :null => false
     t.decimal  "fee_from",                 :precision => 15, :scale => 2, :default => 0.0
     t.decimal  "fee_to",                   :precision => 15, :scale => 2, :default => 0.0
     t.datetime "created_at"
@@ -332,10 +335,10 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
   end
 
   create_table "vip_fee_infos", :force => true do |t|
-    t.integer  "org_id",                                                                  :null => false
-    t.string   "name",       :limit => 60,                                :default => "", :null => false
+    t.integer  "org_id",                                                  :null => false
+    t.string   "name",       :limit => 60,                                :null => false
     t.string   "phone",      :limit => 30
-    t.string   "mth",        :limit => 6,                                 :default => "", :null => false
+    t.string   "mth",        :limit => 6,                                 :null => false
     t.decimal  "fee",                      :precision => 15, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -343,18 +346,18 @@ ActiveRecord::Schema.define(:version => 20100904090508) do
 
   create_table "vip_infos", :force => true do |t|
     t.integer  "org_id",                                                                             :null => false
-    t.string   "name",            :limit => 60,                                :default => "",       :null => false
+    t.string   "name",            :limit => 60,                                                      :null => false
     t.string   "phone",           :limit => 30
     t.decimal  "cur_fee",                       :precision => 15, :scale => 2, :default => 0.0
     t.string   "level",           :limit => 20,                                :default => "normal", :null => false
     t.string   "state",           :limit => 20,                                :default => "normal", :null => false
-    t.string   "last_import_mth", :limit => 6,                                 :default => "",       :null => false
+    t.string   "last_import_mth", :limit => 6,                                                       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "warehouses", :force => true do |t|
-    t.string   "name",       :limit => 60,  :default => "",   :null => false
+    t.string   "name",       :limit => 60,                    :null => false
     t.boolean  "is_active",                 :default => true, :null => false
     t.string   "note",       :limit => 200
     t.string   "manager",    :limit => 30

@@ -11,6 +11,8 @@
           <th>仓库</th>
           <th>部门</th>
           <th>经办人</th>
+          <th>状态</th>
+          <th class="last">&nbsp;</th>
           <th class="last">&nbsp;</th>
         </tr>
         <%bills = instance_variable_get("@#{@param_name.tableize}") %>
@@ -28,6 +30,13 @@
             <td>
               <%= bill.person_name %>
             </td>
+            <td>
+              <%= MaterialInout.states[bill.state] %>
+            </td>
+            <td>
+              <%= audit_link(bill) %>
+            </td>
+
             <td class="last">
               <%= link_to "查看/打印",bill %> 
               <!--%= link_to "删除", bill, :method => :delete, :confirm => "您确定要删除该信息吗？" %-->

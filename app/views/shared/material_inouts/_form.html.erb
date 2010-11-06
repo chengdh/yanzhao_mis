@@ -22,6 +22,12 @@
     <%= f.text_field :person_name, :class => 'shortText' %>
   </div>
   <div class="ctrlHolder">
+    <%= f.label :auditor_id, "审核人" %>
+    <%=f.select :auditor_id,option_groups_departments_users_for_select,:multiple => true%>
+    <p class="formHint">选择审核此信息的人员</p>
+  </div>
+
+  <div class="ctrlHolder">
     <%= f.label :note, "备注" %>
     <%= f.text_field :note, :class => 'textInput' %>
   </div>
