@@ -23,7 +23,12 @@ class BillsController < BaseController
       #if @model_klazz.count > 0
       format.html do
         #以下根据页面标志确定输出页面
-        render params[:template].blank? ? "shared/bills/index" :  params[:template]
+        params[:template] = params[:template].blank? ? "shared/bills/index" :  params[:template]
+        #根据查询条件动态的指向输出的界面
+        params[:template] = 'shared/bills/index_confirm' if !params[:search].blank? && !params[:search][:state_is].blank? && params[:search][:state_is] == Bill::STATE_DRAFT  
+        params[:template] = 'shared/bills/index_post' if !params[:search].blank? && !params[:search][:state_is].blank? && (params[:search][:state_is] == CarryingBill::STATE_TK || params[:search][:state_is] ==  InoutBill::STATE_DELIVER || params[:search][:state_is] == InoutBill::STATE_CLEAR)
+        
+        render params[:template]
       end
       format.xml  { render :xml => @bills }
       #ajax翻页时的处理
