@@ -9,10 +9,10 @@ class AddStorageFunction < ActiveRecord::Migration
 
     #将新增加的功能添加到各个用户
     User.all.each do |u| 
-      u.powers.build(:system_function => func_1)
-      u.powers.build(:system_function => func_2)
-      u.powers.build(:system_function => func_3)
-      u.powers.build(:system_function => func_4)
+      u.powers.create(:system_function => func_1)
+      u.powers.create(:system_function => func_2)
+      u.powers.create(:system_function => func_3)
+      u.powers.create(:system_function => func_4)
     end
 
   end
