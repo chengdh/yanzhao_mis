@@ -23,7 +23,13 @@
   </div>
   <div class="ctrlHolder">
     <%= f.label :auditor_id, "审核人" %>
-    <%=f.select :auditor_id,option_groups_departments_users_for_select,:multiple => true%>
+    <% 
+      func_key = 'durable_receipt_audit' if f.object.class == DurableReceipt
+      func_key = 'durable_shippment_audit' if f.object.class == DurableShippment
+      func_key = 'consumer_receipt_audit' if f.object.class == ConsumerReceipt
+      func_key = 'consumer_shippment_audit' if f.object.class == ConsumerShippment
+    %>
+    <%=f.select :auditor_id,option_groups_departments_users_for_select_with_power(func_key),:multiple => true%>
     <p class="formHint">选择审核此信息的人员</p>
   </div>
 

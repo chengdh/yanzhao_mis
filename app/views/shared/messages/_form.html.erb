@@ -20,7 +20,7 @@
 
   <div class="ctrlHolder">
     <%= f.label :publisher_id, "审核人" %>
-    <%=f.select :publisher_id,option_groups_departments_users_for_select,:multiple => true%>
+    <%=f.select :publisher_id,option_groups_departments_users_for_select_with_power(f.object.class == Notice ? 'publish_notice' : 'publish_rule'),:multiple => true%>
     <p class="formHint">选择审核此信息的人员</p>
   </div>
   <div class='ctrlHolder'>

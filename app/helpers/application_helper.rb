@@ -10,7 +10,7 @@ module ApplicationHelper
     search = Org.is_active_is(true).search(search_param)
     option_groups_from_collection_for_select(search.all,:users,:name,:id,:username)
   end
-  #选择仓库
+    #选择仓库
   def warehouses_for_select
     Warehouse.all(:conditions => {:is_active => true},:order => "name ASC").collect { |warehouse| [warehouse.name, warehouse.id] }
   end
@@ -21,6 +21,13 @@ module ApplicationHelper
     search = Department.is_active_is(true).search(search_param)
     option_groups_from_collection_for_select(search.all,:users,:name,:id,:username)
   end
+  #按照机构分组选择用户,只显示有对应权限的用户
+  def option_groups_departments_users_for_select_with_power(func_key)
+    #没有用户及无效的机构被剔除
+    search = Department.is_active_is(true)
+    option_groups_from_collection_for_select(search.all,"users_by_power('#{func_key}')",:name,:id,:username)
+  end
+
 
   #科室选择
   def departments_for_select

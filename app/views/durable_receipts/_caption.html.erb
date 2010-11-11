@@ -1,8 +1,14 @@
 <ul class="wat-cf">
   <li class="first <%=check_sub_active_tab(1) %>"><%= link_to "入库单", durable_receipts_path(:active_sub_tab => 1) %></li>
-  <li class="first <%=check_sub_active_tab(15) %>"><%= link_to "待确认入库单", durable_receipts_path(:active_sub_tab => 15,"search[state]" => MaterialInout::STATE_DRAFT,"search[auditor_id]" => current_user) %></li>
+
+  <%if check_power('durable_receipt_audit')%>
+    <li class="<%=check_sub_active_tab(15) %>"><%= link_to "待确认入库单", durable_receipts_path(:active_sub_tab => 15,"search[state]" => MaterialInout::STATE_DRAFT,"search[auditor_id]" => current_user) %></li>
+  <% end %>
   <li class="<%=check_sub_active_tab(2) %>"><%= link_to "领用单", durable_shippments_path(:active_sub_tab => 2) %></li>
-  <li class="first <%=check_sub_active_tab(16) %>"><%= link_to "待确认领用单", durable_shippments_path(:active_sub_tab => 16,"search[state]" => MaterialInout::STATE_DRAFT,"search[auditor_id]" => current_user) %></li>
+
+  <%if check_power('durable_shippment_audit')%>
+    <li class="<%=check_sub_active_tab(16) %>"><%= link_to "待确认领用单", durable_shippments_path(:active_sub_tab => 16,"search[state]" => MaterialInout::STATE_DRAFT,"search[auditor_id]" => current_user) %></li>
+  <%end %>
   <li class="<%=check_sub_active_tab(3) %>"><%= link_to "物品定义", durable_materials_path(:active_sub_tab => 3) %></li>
   <%if params[:active_sub_tab] == '4'%>
     <li class="<%=check_sub_active_tab(4) %>"><%= link_to "查看入库单", durable_receipt_path(@durable_receipt,:active_sub_tab => 4) %></li>
