@@ -11,7 +11,7 @@
     </li> 
   <%end%>
   <li class="<%=check_sub_active_tab(2)%>">
-  <%= link_to "规章制度#{unread_rules_count}", rules_path(:active_sub_tab => 2)   %>
+  <%= link_to "规章制度#{unread_rules_count}", rules_path(:active_sub_tab => 2,"search[state_is]" => "published")   %>
   </li> 
   <li class="first <%=check_sub_active_tab(7)%>">
   <%= link_to "我发布的-规章制度", rules_path(:active_sub_tab => 7,"search[user_id_is]" => current_user)  %>
