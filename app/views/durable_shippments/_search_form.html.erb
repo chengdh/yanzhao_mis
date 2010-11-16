@@ -9,7 +9,7 @@
 
     <div class='ctrlHolder'>
       <%=f.label :warehouse_id_is,"仓库"%>
-      <%=f.select :warehouse_id_is,warehouses_for_select,:include_blank => true %>
+      <%=f.select :warehouse_id_is,warehouses_for_select("DurableWarehouse"),:include_blank => true %>
     </div>
     <div class='ctrlHolder'>
       <%=f.label :person_name_like,"经手人"%>

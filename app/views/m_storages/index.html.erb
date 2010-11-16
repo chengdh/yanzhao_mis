@@ -8,13 +8,16 @@
       <%form_for :search,:url => {:action => :index},:html => {:method => :get} do |f|%>
         <fieldset>
           <%=hidden_field_tag "search[material_type_is]",params[:search][:material_type_is]%>
+          <%=hidden_field_tag "search[qty_gt]",0%>
           <table class="table">
             <tr>
               <td><%= f.label :warehouse_id_is,"仓库:" %></td>
-              <td><%= f.select :warehouse_id_is, warehouses_for_select,:include_blank => true %></td>
+              <%
+                warehouse_type = params[:search][:material_type_is]  == 'DurableMaterial' ? 'DurableWarehouse' : 'ConsumerWarehouse'
+              %>
+              <td><%= f.select :warehouse_id_is, warehouses_for_select(warehouse_type),:include_blank => true %></td>
               <td><%= f.label :material_name_like,"名称:" %></td>
               <td><%= f.text_field :material_name_like, :class => 'textInput' %></td>
-              <td><%= f.check_box :qty_gte %><%=f.label :qty_gte,"不显示库存为零的物品"%></td>
               <td><%= f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%></td>
             </tr>
           </table>

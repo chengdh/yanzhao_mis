@@ -9,6 +9,12 @@
     <%= f.text_field :manager, :class => 'shortText' %>
   </div>
   <div class="ctrlHolder">
+    <%= f.label :warehouse_type, "仓库类型" %>
+    <%= f.select :warehouse_type, warehouse_types_for_select %>
+  </div>
+
+
+  <div class="ctrlHolder">
     <%= f.label :is_active, "有效标志" %>
     <%= f.check_box :is_active %>
   </div>

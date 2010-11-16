@@ -12,8 +12,14 @@
   <%end%>
 
   <div class="ctrlHolder">
+    <% 
+      warehouse_type = 'DurableWarehouse' if f.object.class == DurableReceipt || f.object.class == DurableShippment
+      warehouse_type = 'ConsumerWarehouse' if f.object.class == ConsumerReceipt || f.object.class == ConsumerShippment
+    %>
+
     <%= f.label :warehouse_id, "仓库"%>
-    <%= f.select :warehouse_id, warehouses_for_select,{},:id => 'warehouse_id' %>
+    <%= f.select :warehouse_id, warehouses_for_select(warehouse_type),{},:id => 'warehouse_id' %>
+
     <p class="formHint">选择出入物品的仓库</p>
   </div>
 

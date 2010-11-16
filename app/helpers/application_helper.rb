@@ -10,10 +10,6 @@ module ApplicationHelper
     search = Org.is_active_is(true).search(search_param)
     option_groups_from_collection_for_select(search.all,:users,:name,:id,:username)
   end
-    #选择仓库
-  def warehouses_for_select
-    Warehouse.all(:conditions => {:is_active => true},:order => "name ASC").collect { |warehouse| [warehouse.name, warehouse.id] }
-  end
 
   #按照机构分组选择用户
   def option_groups_departments_users_for_select(search_param ={})
