@@ -1,6 +1,9 @@
 <%remote_form_for :search,:method => :get,:url => {:action => :search},:update => "storages_list" do |f|%>
   <%=hidden_field_tag "search[material_type_is]",params[:search][:material_type_is]%>
   <%=hidden_field_tag "search[warehouse_id_is]",params[:search][:warehouse_id_is]%>
+  <% if !params[:search][:qty_gt].blank?%>
+    <%=hidden_field_tag "search[qty_gt]",0 %>
+  <% end%>
   <div class="radius-box">
     <%= f.label :material_name_like,"名称:" %>
     <%= f.text_field :material_name_like, :class => 'textInput' %>

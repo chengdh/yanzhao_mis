@@ -1,4 +1,9 @@
 class MStoragesController < BaseController
+  def index 
+    @m_storages = @search.paginate :page => params[:page],:per_page => 8,:order => "created_at DESC"
+    @sum_info = @search.sum('qty*avg_price')
+  end
+
   #GET /materials/show_search
   #显示查询物品界面
   def show_search

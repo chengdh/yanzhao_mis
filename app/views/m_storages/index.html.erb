@@ -46,6 +46,15 @@
             <td><%=m.qty*m.avg_price%></td>
           </tr>
         <%end%>
+        <tr>
+          <td colspan='7'>小计:</td>
+          <td><%=@m_storages.sum {|m| m.qty*m.avg_price}%></td>
+        </tr>
+        <tr>
+          <td colspan='7'>合计:</td>
+          <td><%=@sum_info%></td>
+        </tr>
+
       </table>
       <div class="actions-bar wat-cf">
         <%=will_paginate @m_storages %>
