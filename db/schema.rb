@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101116015552) do
+ActiveRecord::Schema.define(:version => 20101122075517) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -179,13 +179,13 @@ ActiveRecord::Schema.define(:version => 20101116015552) do
   end
 
   create_table "m_storages", :force => true do |t|
-    t.integer  "warehouse_id",                                                                 :null => false
-    t.integer  "material_id",                                                                  :null => false
-    t.integer  "avg_price",    :limit => 10, :precision => 10, :scale => 0, :default => 0
-    t.integer  "qty",                                                       :default => 0
+    t.integer  "warehouse_id",                                                   :null => false
+    t.integer  "material_id",                                                    :null => false
+    t.decimal  "avg_price",    :precision => 10, :scale => 2, :default => 0.0
+    t.integer  "qty",                                         :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "alert",                                                     :default => false
+    t.boolean  "alert",                                       :default => false
   end
 
   create_table "material_inout_lines", :force => true do |t|
