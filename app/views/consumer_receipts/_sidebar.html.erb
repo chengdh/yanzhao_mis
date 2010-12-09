@@ -11,6 +11,10 @@
     <%if check_power('new_consumer_material')%>
       <li><%=link_to "新建物品资料",new_consumer_material_path(:active_sub_tab => 7)%></li>
     <%end%>
+    <%if params[:action] == 'show'%>
+      <li><%=link_to "导出",self.send("#{@param_name}_path",instance_variable_get("@#{@param_name}"),{:format => :csv})%></li>
+    <%end%>
+
   </ul>
 </div>
 
