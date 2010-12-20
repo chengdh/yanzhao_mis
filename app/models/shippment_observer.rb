@@ -4,7 +4,10 @@ class ShippmentObserver < ActiveRecord::Observer
   #出货处理完毕后,物品的库存
   def after_save(shippment)
 
-    return if receipt.state == MaterialInout::STATE_DRAFT
+    return if shippment.state == MaterialInout::STATE_DRAFT
+:q
+
+
     shippment.material_inout_lines.each do |line|
       m_storage = MStorage.warehouse_id_is(shippment.warehouse).material_id_is(line.material).first
       #更新库存

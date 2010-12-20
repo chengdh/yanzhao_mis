@@ -44,7 +44,6 @@ class CreateSystemFunctions < ActiveRecord::Migration
     SystemFunction.create :group_name => "耐用品管理",:func_name => "新建领用单",:func_key => "new_durable_shippment"
     SystemFunction.create :group_name => "耐用品管理",:func_name => "耐用物品定义",:func_key => "new_durable_material"
     SystemFunction.create :group_name => "耐用品管理",:func_name => "库存查询",:func_key => "m_storages"
-    SystemFunction.create :group_name => "耐用品管理",:func_name => "耐用品报废",:func_key => "new_scrapped_info"
     SystemFunction.create :group_name => "耐用品管理",:func_name => "部门耐用品汇总",:func_key => "material_inout_lines"
     #
     #

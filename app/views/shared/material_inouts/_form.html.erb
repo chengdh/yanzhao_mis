@@ -7,7 +7,12 @@
   <% if @param_name.include?('shippment') %>
     <div class="ctrlHolder">
       <%= f.label :org_id, "部门"%>
-      <%= f.select :org_id, orgs_for_select  %>
+      <%if current_user.is_admin%>
+        <%= f.select :org_id, orgs_for_select  %>
+      <%else%>
+        <%=f.object.org.name%>
+        <%=f.hidden_field :org_id%>
+      <%end%>
     </div>
   <%end%>
 
@@ -17,26 +22,26 @@
       warehouse_type = 'ConsumerWarehouse' if f.object.class == ConsumerReceipt || f.object.class == ConsumerShippment
     %>
 
-    <%= f.label :warehouse_id, "仓库"%>
-    <%= f.select :warehouse_id, warehouses_for_select(warehouse_type),{},:id => 'warehouse_id' %>
+  <%= f.label :warehouse_id, "仓库"%>
+  <%= f.select :warehouse_id, warehouses_for_select(warehouse_type),{},:id => 'warehouse_id' %>
 
-    <p class="formHint">选择出入物品的仓库</p>
-  </div>
+  <p class="formHint">选择出入物品的仓库</p>
+</div>
 
-  <div class="ctrlHolder">
-    <%= f.label :person_name, "经办人" %>
-    <%= f.text_field :person_name, :class => 'shortText' %>
-  </div>
-  <div class="ctrlHolder">
-    <%= f.label :auditor_id, "审核人" %>
-    <% 
-      func_key = 'durable_receipt_audit' if f.object.class == DurableReceipt
-      func_key = 'durable_shippment_audit' if f.object.class == DurableShippment
-      func_key = 'consumer_receipt_audit' if f.object.class == ConsumerReceipt
-      func_key = 'consumer_shippment_audit' if f.object.class == ConsumerShippment
-    %>
-    <%=f.select :auditor_id,option_groups_departments_users_for_select_with_power(func_key),:multiple => true%>
-    <p class="formHint">选择审核此信息的人员</p>
+<div class="ctrlHolder">
+  <%= f.label :person_name, "经办人" %>
+  <%= f.text_field :person_name, :class => 'shortText' %>
+</div>
+<div class="ctrlHolder">
+  <%= f.label :auditor_id, "审核人" %>
+  <% 
+    func_key = 'durable_receipt_audit' if f.object.class == DurableReceipt
+    func_key = 'durable_shippment_audit' if f.object.class == DurableShippment
+    func_key = 'consumer_receipt_audit' if f.object.class == ConsumerReceipt
+    func_key = 'consumer_shippment_audit' if f.object.class == ConsumerShippment
+  %>
+<%=f.select :auditor_id,option_groups_departments_users_for_select_with_power(func_key),:multiple => true%>
+<p class="formHint">选择审核此信息的人员</p>
   </div>
 
   <div class="ctrlHolder">
