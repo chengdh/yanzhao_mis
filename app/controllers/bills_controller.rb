@@ -104,7 +104,7 @@ class BillsController < BaseController
         format.xml  { render :xml => bill, :status => :created, :location => bill }
       else
         flash[:error] = "票据保存失败."
-        format.html { render :template => 'shared/bills/new',:bill => bill} 
+        format.html { render :template => 'shared/bills/new',:locals =>{:bill => bill}} 
         format.xml  { render :xml => bill.errors, :status => :unprocessable_entity }
       end
     end

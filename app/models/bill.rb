@@ -4,6 +4,7 @@ class Bill < ActiveRecord::Base
   belongs_to :user
   belongs_to :from_org,:class_name => "SubCompany"
   belongs_to :to_org,:class_name => "SubCompany"
+  before_save :gen_bill_date  #根据货号声称票据日期
 
 
   #单据状态常数,不包括提款票据与提货票据特有的状态
@@ -46,6 +47,9 @@ class Bill < ActiveRecord::Base
     validates_numericality_of :goods_fee,  :message => "应为数字"
     validates_numericality_of :goods_num, :only_integer => true,:greater_than => 0, :message => "应大于0"
     validates_presence_of :bill_mth,:message => "不可为空"
+    validates_format_of :goods_no, 
+      :with =>/(\d{6})((?:\xe4[\xb8-\xbf][\x80-\xbf]|[\xe5-\xe8][\x80-\xbf][\x80-\xbf]|\xe9[\x80-\xbd][\x80-\xbf]|\xe9\xbe[\x80-\xa5]){2})(\w\d{1,10})-(\d{1,10})/, 
+      :message => "货号格式不正确"
   end
   #以下定义named_scope
   named_scope :all_bills,lambda { |user_id|
@@ -84,5 +88,9 @@ class Bill < ActiveRecord::Base
       empty_col += [""]
     end
     empty_col + sum
+  end
+  private
+  def gen_bill_date
+    self.bill_date = ('20' + self.goods_no.scan(/\A\d{6}/).first).to_date 
   end
 end

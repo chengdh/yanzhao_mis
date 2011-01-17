@@ -30,6 +30,8 @@ class CarryingBill < Bill
     #计算扣运费及实际付款
     if self[:pay_type] == PAYTYPE_KP
       self[:k_carrying_fee]= self[:fee]
+    else
+      self[:k_carrying_fee] = 0
     end
     self[:act_pay_fee]= self[:goods_fee] - self[:k_hand_fee] - self[:k_carrying_fee]
   end

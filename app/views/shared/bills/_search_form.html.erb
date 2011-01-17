@@ -35,6 +35,16 @@
       <%end%>
     </div>
     <div class='ctrlHolder'>
+      <%=f.label :bill_date_gte,"开票时间"%>
+      <%=f.calendar_date_select :bill_date_gte,:class => "shortText" %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :bill_date_lte,"~"%>
+      <%=f.calendar_date_select :bill_date_lte,:class => "shortText" %>
+    </div>
+
+
+    <div class='ctrlHolder'>
       <%=f.label :created_at_gte,"录入时间"%>
       <%=f.calendar_date_select :created_at_gte,:class => "shortText" %>
     </div>
@@ -42,6 +52,15 @@
       <%=f.label :created_at_lte,"~"%>
       <%=f.calendar_date_select :created_at_lte,:class => "shortText" %>
     </div>
+    <div class='ctrlHolder'>
+      <%=f.label :bill_date_gte,"开票时间"%>
+      <%=f.calendar_date_select :bill_date_gte,:class => "shortText" %>
+    </div>
+    <div class='ctrlHolder'>
+      <%=f.label :bill_date_lte,"~"%>
+      <%=f.calendar_date_select :bill_date_lte,:class => "shortText" %>
+    </div>
+
 
     <%if defined? bill_type && bill_type == :inout_bill%>
       <div class='ctrlHolder'>

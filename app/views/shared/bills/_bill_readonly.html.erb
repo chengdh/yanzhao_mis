@@ -117,7 +117,7 @@
     <%end%>
 
     <%if bill_readonly.state == Bill::STATE_DRAFT || (check_power('edit_carrying_bill') && !bill_readonly.state.eql?(Bill::STATE_POST))%>
-      <%=link_to '修改', edit_carrying_bill_path(bill_readonly,params),:class => 'sexybutton sexysimple'%>
+      <%=link_to '修改', edit_carrying_bill_path(bill_readonly),:class => 'sexybutton sexysimple'%>
     <%end%>
 
     <%if check_power('destroy_carrying_bill') && !bill_readonly.state.eql?(Bill::STATE_POST) %>
