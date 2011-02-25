@@ -1,0 +1,29 @@
+<!--违规记录查询-->
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render :partial => "shared/messages/caption" %>
+  </div>          
+  <div class="content">            
+    <h2 class="title">超期查询</h2>
+    <div class="inner">
+      <% form_for @search,:url => {:action => :overdue_search},:html => {:method => :get,:class => :uniForm,:id => "overdue_search_form" } do |f| -%>
+        <%= f.hidden_field :violation_generated_eq,:value => 0 %>
+        <fieldset class='blockLabels'>
+          <div class="ctrlHolder">
+            <%= f.label :org_id_eq, "发布机构" %>
+            <%= f.select :org_id_eq,departments_for_select,:include_blank => true %>
+          </div>
+          <div class="ctrlHolder">
+            <%= label_tag :overdue_days, "超期天数" %>
+            <%= text_field_tag :overdue_days,5%>
+          </div>
+        </fieldset>
+        <div class="actions-bar">
+          <%=f.submit '查询', :class => 'sexybutton sexysimple sexyblue'%>
+        </div>
+      <% end -%>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

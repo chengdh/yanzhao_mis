@@ -1,46 +1,46 @@
 <ul class="wat-cf">
   <li class="first <%=check_sub_active_tab(1)%>">
-  <%= link_to "通告#{unread_notices_count}", notices_path(:active_sub_tab => 1,"search[state_is]" => "published")  %>
+    <%= link_to "通告#{unread_notices_count}", notices_path(:active_sub_tab => 1,"search[state_is]" => "published")  %>
   </li> 
   <li class="first <%=check_sub_active_tab(6)%>">
-  <%= link_to "我发布的-通告", notices_path(:active_sub_tab => 6,"search[user_id_is]" => current_user)  %>
+    <%= link_to "我发布的-通告", notices_path(:active_sub_tab => 6,"search[user_id_is]" => current_user)  %>
   </li> 
   <%if check_power('publish_notice')%>
     <li class="<%=check_sub_active_tab(3)%>">
-    <%= link_to "我审核的-通告", notices_path(:active_sub_tab => 3,"search[publisher_id_is]" => current_user)   %>
+      <%= link_to "我审核的-通告", notices_path(:active_sub_tab => 3,"search[publisher_id_is]" => current_user)   %>
     </li> 
   <%end%>
-  <li class="<%=check_sub_active_tab(2)%>">
-  <%= link_to "规章制度#{unread_rules_count}", rules_path(:active_sub_tab => 2,"search[state_is]" => "published")   %>
-  </li> 
-  <li class="first <%=check_sub_active_tab(7)%>">
-  <%= link_to "我发布的-规章制度", rules_path(:active_sub_tab => 7,"search[user_id_is]" => current_user)  %>
-  </li> 
-
-  <%if check_power('publish_rule')%>
-
-    <li class="<%=check_sub_active_tab(4)%>">
-    <%= link_to "我审核的-规章制度", rules_path(:active_sub_tab => 4,"search[publisher_id_is]" => current_user)   %>
+  <%if current_user.org.class == Department%>
+    <li class="<%=check_sub_active_tab(2)%>">
+      <%= link_to "规章制度#{unread_rules_count}", rules_path(:active_sub_tab => 2,"search[state_is]" => "published")   %>
     </li> 
+    <li class="first <%=check_sub_active_tab(7)%>">
+      <%= link_to "我发布的-规章制度", rules_path(:active_sub_tab => 7,"search[user_id_is]" => current_user)  %>
+    </li> 
+    <%if check_power('publish_rule')%>
+      <li class="<%=check_sub_active_tab(4)%>">
+        <%= link_to "我审核的-规章制度", rules_path(:active_sub_tab => 4,"search[publisher_id_is]" => current_user)   %>
+      </li> 
+    <%end%>
   <%end%>
 
   <li class="<%=check_sub_active_tab(5)%>">
-  <%= link_to "通讯录", address_book_lines_path(:active_sub_tab => 5)   %>
+    <%= link_to "通讯录", address_book_lines_path(:active_sub_tab => 5)   %>
   </li> 
 
   <%if params[:active_sub_tab] == '8'%>
     <li class="active">
-    <%= link_to "新建", self.send("new_#{@param_name}_path",:active_sub_tab => 8)   %>
+      <%= link_to "新建", self.send("new_#{@param_name}_path",:active_sub_tab => 8)   %>
     </li> 
   <%end%>
   <%if params[:active_sub_tab] == '9'%>
     <li class="active">
-    <%= link_to "修改", self.send("edit_#{@param_name}_path",instance_variable_get("@#{@param_name}"),:active_sub_tab => 9)   %>
+      <%= link_to "修改", self.send("edit_#{@param_name}_path",instance_variable_get("@#{@param_name}"),:active_sub_tab => 9)   %>
     </li> 
   <%end%>
   <%if params[:active_sub_tab] == '10'%>
     <li class="active">
-    <%= link_to "查看", self.send("#{@param_name}_path",instance_variable_get("@#{@param_name}"),:active_sub_tab => 10)   %>
+      <%= link_to "查看", self.send("#{@param_name}_path",instance_variable_get("@#{@param_name}"),:active_sub_tab => 10)   %>
     </li> 
   <%end%>
 

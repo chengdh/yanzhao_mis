@@ -5,7 +5,7 @@
       <%=f.label :org_id,'所属机构/部门' %>
       <%=f.select :org_id, orgs_for_select %>
       <p class='formHint'>
-      用户所属的部门或分理处
+        用户所属的部门或分理处
       </p>
     </div>
 
@@ -14,7 +14,7 @@
         <%=f.label :username,'用户名' %>
         <%=f.text_field :username, :size => "20",:maxlength => "20",:class=>"shortTextInput" %>
         <p class='formHint'>
-        20个数字或字母,中文最长10个汉字
+          20个数字或字母,中文最长10个汉字
         </p>
       </div>
 
@@ -22,21 +22,21 @@
         <%=f.label :password_confirmation,'密码' %>
         <%=f.password_field :password_confirmation, :size => "30",:maxlength => "30",:class=>"shortTextInput"%>
         <p class='formHint highlight'>
-        <%=!@user.new_record? ? "<i>不修改原密码请留空</i>" : "密码最长20位,建议数字与字母混合" %>
+          <%=!@user.new_record? ? "<i>不修改原密码请留空</i>" : "密码最长20位,建议数字与字母混合" %>
         </p>
       </div>
       <div class='ctrlHolder'>
         <%=f.label :password,'验证密码' %>
         <%=f.password_field :password, :size => "30",:maxlength => "30",:class=>"shortTextInput",:live => false%>
         <p class='formHint highlight'>
-        <%=!@user.new_record? ? "<i>不修改原密码请留空</i>" : "再次输入密码,验证其正确性" %>
+          <%=!@user.new_record? ? "<i>不修改原密码请留空</i>" : "再次输入密码,验证其正确性" %>
         </p>
       </div>
       <div class='ctrlHolder'>
         <%=f.label :is_admin,"管理员"%>
         <%=f.check_box :is_admin %>
         <p class='formHint highlight'>
-        <i>系统管理员可操作所有数据</i>
+          <i>系统管理员可操作所有数据</i>
         </p>
       </div>
 
@@ -50,9 +50,11 @@
         <fieldset>
           <legend><%=group%></legend>
           <%f.fields_for :powers,powers do |power|%>
-            <%=power.hidden_field :user_id%>
-            <%=power.hidden_field :system_function_id%>
-            <%=power.check_box :is_select %><%=power.label :is_select,power.object.system_function.func_name%>
+            <p>
+              <%=power.hidden_field :user_id%>
+              <%=power.hidden_field :system_function_id%>
+              <%=power.check_box :is_select %><%=power.label :is_select,power.object.system_function.func_name%>
+            </p>
           <%end%>
         </fieldset>
       <%end%>

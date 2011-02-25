@@ -1,0 +1,39 @@
+<% form_for @violation, :html => { :class => :uniForm} do |f| -%>
+  <fieldset class='blockLabels'>
+    <%=f.error_messages%>
+    <div class="ctrlHolder">
+      <%= f.label :title, "标题" %>
+      <%= f.text_field :title, :size => "30",:maxlength => "30",:class => 'textInput title' %>
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label :target, "违规人员" %>
+      <%= f.text_area :target,:style => "height : 50px;"%>
+    </div>
+
+    <% if f.object.base_public_message.present?%>
+      <div class="ctrlHolder">
+        <%= label_tag "相关通告/规章制度"%>
+        <%=f.hidden_field :base_public_message_id %>
+        <%= link_to f.object.base_public_message.title,f.object.base_public_message %>
+      </div>
+    <% end%>
+    <div class="ctrlHolder">
+      <%= f.label :target_id,"违规分理处/分公司" %>
+      <%=f.select :target_org_id,sub_companies_for_select,:include_blank => true %>
+    </div>
+
+    <div class="ctrlHolder">
+      <%= f.label :content, "违规内容(最长3000个汉字)" %>
+      <%= f.tinymce :content %>
+    </div>
+    <div class="ctrlHolder">
+      <%= f.label :user_id, "录入人" %>
+      <%= f.hidden_field :user_id %>
+      <p><%= f.object.user.blank? ? current_user.username : f.object.user.username %></p>
+    </div>
+
+    <div class="actions-bar">
+      <%=f.submit '保存违规记录', :class => 'sexybutton sexysimple sexyblue'%>
+    </div>
+  </fieldset>
+<% end %>

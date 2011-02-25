@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :punishments
+
+  map.resources :violations
+
 
 
   map.resources :settlement_lines,:only => [:index]
@@ -65,9 +69,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :posts,:member => {:publish => :put},:has_many => :comments
 
-  map.resources :rules,:member => {:publish => :put}
+  map.resources :rules,:member => {:publish => :put},:collection => {:show_overdue_search => :get,:overdue_search => :get}
 
-  map.resources :notices,:member => {:publish => :put}
+  map.resources :notices,:member => {:publish => :put},:collection => {:show_overdue_search => :get,:overdue_search => :get}
 
   map.resources :sub_companies
 

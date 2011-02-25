@@ -3,9 +3,17 @@
   <legend>所有项目都为必填项目</legend>
   <div class="ctrlHolder">
     <%= f.label :org_id, "所属部门/分公司" %>
-    <%= f.select :org_id, orgs_for_select %>
-    <p class="formHint">该信息所属的部门或分公司</p>
+    <%= f.hidden_field :org_id %>
+    <p><%= f.object.org.name %></p>
   </div>
+  <% if f.object.type == 'Rule'%>
+    <div class="ctrlHolder">
+      <%= f.label :doc_no, "文件号" %>
+      <%= f.text_field :doc_no %>
+      <p class="formHint">可以自定义文件号,但不可重复</p>
+    </div>
+  <%end%>
+
 
   <div class="ctrlHolder">
     <%= f.label :title, "标题" %>
@@ -39,7 +47,7 @@
 
   <div class="actions-bar">
     <%=f.submit '保存信息', :class => 'sexybutton sexysimple sexyblue'%>
-    <%if !@message.new_record? && @message.publisher == current_user%>
+    <%if !@message.new_record? && (@message.publisher == current_user or current_user.is_admin?) %>
       <%=link_to_function '审核并发布信息',"$('message_form').action='#{@publish_path}';$('message_form').submit();return false;", :class => 'sexybutton sexysimple sexyblue'%>
     <%end%>
     <%=link_to '取消',:back,:class => 'sexybutton sexysimple sexyred' %>

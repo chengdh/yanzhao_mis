@@ -22,6 +22,15 @@ class BasePublicMessage < ActiveRecord::Base
       :order => "base_public_messages.created_at DESC"
     }
   }
+  #超期未读信息
+  named_scope :overdue_messages,lambda{|overdue_days|
+    {
+      :joins => :message_visitors,
+      :select => "DISTINCT base_public_messages.*",
+      :conditions => ["base_public_messages.state = 'published' AND base_public_messages.publish_date <= ? AND message_visitors.state = 'draft'",overdue_days.days.ago.beginning_of_day],
+      :order => "base_public_messages.created_at DESC"
+    }
+  }
   belongs_to :org
   belongs_to :user
   belongs_to :publisher,:class_name => "User"

@@ -19,7 +19,6 @@ class MessagesController < BaseController
       format.html { render params[:template] if !params[:template].blank? }# index.html.erb
       format.xml  { render :xml => messages }
     end
-
   end
   # GET /the_models/new
   # GET /the_models/new.xml
@@ -114,6 +113,25 @@ class MessagesController < BaseController
         format.html { redirect_to :back }
       end
     end
+  end
+  #GET overdue_search 超期信息查询
+  def show_overdue_search
+  end
+  #超期查询
+  #GET messages/overdue_search
+  def overdue_search
+    overdue_days = params[:overdue_days].blank? ? 5 : params[:overdue_days].to_i
+    messages = @search.overdue_messages(overdue_days).paginate :page => params[:page],:order => "created_at DESC,org_id"
+    #对通知公告信息按照发布部门进行分组
+    messages_group = messages.group_by {|message| message.org.name }
+    instance_variable_set("@#{@param_name.tableize}",messages)
+    instance_variable_set("@#{@param_name.tableize}_group",messages_group)
+
+    respond_to do |format|
+      format.html { render :index }
+      format.xml  { render :xml => messages }
+    end
+
   end
   protected
   def before_show

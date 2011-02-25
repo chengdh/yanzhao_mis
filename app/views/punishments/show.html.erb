@@ -1,0 +1,31 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render :partial => "violations/caption" %>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      <h2 class='text-center'><%= @punishment.title%></h2>
+      <table class='table'>
+        <tr>
+          <td>处罚时间</td>
+          <td><%= status_time_ago_in_words @punishment.punish_date %></td>
+          <td>经手人</td>
+          <td><%= @punishment.handled%></td>
+        </tr>
+        <tr>
+          <td>人员</td>
+          <td colspan='3'><%= @punishment.target %></td>
+        </tr>
+        <tr>
+          <td>分理处/分公司</td>
+          <td colspan='3'><%= @punishment.target_org.try(:name) %></td>
+        </tr>
+        <tr>
+          <td>处罚内容</td>
+          <td><%= @punishment.content %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'violations/sidebar') -%>

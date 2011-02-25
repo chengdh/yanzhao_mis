@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  base_message: 
+  target: MyString
+  user: 
+  target_org_id: 1
+  content: MyText
+
+two:
+  title: MyString
+  base_message: 
+  target: MyString
+  user: 
+  target_org_id: 1
+  content: MyText

@@ -81,6 +81,10 @@
                 <%=link_to "提货单管理",inout_bills_path %>
                 </li>
               <%end%>
+                <li class="<%= check_current_controller(['violations'],'violations') %>">
+                <%=link_to "违规记录",violations_path %>
+                </li>
+
             </ul>
           </div>
         </div>    

@@ -17,6 +17,9 @@
               <td>
                 <%=  message.user == current_user ? '我' : message.user.username %>
               </td>
+              <td>
+                <%= message.doc_no if message.type.eql? 'Rule' %>
+              </td>
 
               <td>
                 <%= link_to message.title, message,:class => "ellipsis'" %>
@@ -35,6 +38,10 @@
                   | <%= link_to "修改/审核", self.send("edit_#{@param_name}_path",message,:active_sub_tab => 9)%> |
                   <%= link_to "删除", message, :method => :delete, :confirm => "确定删除吗?" %>
                 <%end%>
+                <%if ['published'].include?(message.state) && check_power("edit_rule_after_published")%>
+                  <%= link_to "修改", self.send("edit_#{@param_name}_path",message,:active_sub_tab => 9)%> 
+                <%end%>
+
               </td>
             </tr>          
           <% end -%>

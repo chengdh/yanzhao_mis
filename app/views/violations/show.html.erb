@@ -1,0 +1,36 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render :partial => "caption" %>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      <h2 class='text-center'><%= @violation.title%></h2>
+      <table class='table'>
+        <tr>
+          <td>录入时间</td>
+          <td><%= status_time_ago_in_words @violation.created_at %></td>
+          <td>录入人</td>
+          <td><%= @violation.user.try(:username) %></td>
+        </tr>
+        <tr>
+          <td>违规人员</td>
+          <td colspan='3'><%= @violation.target %></td>
+        </tr>
+        <tr>
+          <td>违规分理处/分公司</td>
+          <td colspan='3'><%= @violation.target_org.try(:name) %></td>
+        </tr>
+        <tr>
+          <td>违规内容</td>
+          <td><%= @violation.content %></td>
+        </tr>
+      </table>
+      <div class='actions-bar'>
+        <% if @violation.punishment.blank? %>
+          <%= link_to "生成处罚记录", new_punishment_path(:violation_id => @violation),:class => 'sexybutton sexysimple sexyblue' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

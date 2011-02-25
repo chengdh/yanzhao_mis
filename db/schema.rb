@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101122075517) do
+ActiveRecord::Schema.define(:version => 20110225094257) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -32,19 +32,20 @@ ActiveRecord::Schema.define(:version => 20101122075517) do
   end
 
   create_table "base_public_messages", :force => true do |t|
-    t.string   "title",        :limit => 200,                    :null => false
+    t.string   "title",               :limit => 200,                    :null => false
     t.text     "body"
-    t.string   "type",         :limit => 20
-    t.boolean  "is_secure",                   :default => false, :null => false
-    t.string   "state",        :limit => 20,                     :null => false
+    t.string   "type",                :limit => 20
+    t.boolean  "is_secure",                          :default => false, :null => false
+    t.string   "state",               :limit => 20,                     :null => false
     t.integer  "org_id"
-    t.boolean  "is_active",                   :default => true
+    t.boolean  "is_active",                          :default => true
     t.integer  "user_id"
     t.datetime "publish_date"
     t.integer  "publisher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "doc_no",       :limit => 20
+    t.string   "doc_no",              :limit => 20
+    t.boolean  "violation_generated",                :default => false
   end
 
   create_table "base_public_messages_orgs", :id => false, :force => true do |t|
@@ -258,6 +259,19 @@ ActiveRecord::Schema.define(:version => 20101122075517) do
     t.datetime "updated_at"
   end
 
+  create_table "punishments", :force => true do |t|
+    t.string   "title",         :limit => 60, :null => false
+    t.integer  "violation_id"
+    t.date     "punish_date",                 :null => false
+    t.text     "content",                     :null => false
+    t.string   "handled",       :limit => 20, :null => false
+    t.integer  "user_id"
+    t.integer  "target_org_id"
+    t.string   "target"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "settlement_lines", :force => true do |t|
     t.integer  "settlement_id",                                                               :null => false
     t.string   "type",          :limit => 50,                                                 :null => false
@@ -321,6 +335,17 @@ ActiveRecord::Schema.define(:version => 20101122075517) do
     t.string   "username",            :limit => 30,                     :null => false
     t.integer  "org_id"
     t.boolean  "is_admin",                           :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "violations", :force => true do |t|
+    t.string   "title",                  :limit => 60,  :null => false
+    t.integer  "base_public_message_id"
+    t.string   "target",                 :limit => 500
+    t.integer  "user_id"
+    t.integer  "target_org_id"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

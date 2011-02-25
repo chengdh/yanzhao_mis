@@ -5,6 +5,8 @@ class Bill < ActiveRecord::Base
   belongs_to :from_org,:class_name => "SubCompany"
   belongs_to :to_org,:class_name => "SubCompany"
   before_save :gen_bill_date  #根据货号声称票据日期
+  validates_uniqueness_of :bill_no,:scope => :type,:message => "运单编号不可重复"
+  validates_uniqueness_of :goods_no,:scope => :type,:message => "运单货号不可重复"
 
 
   #单据状态常数,不包括提款票据与提货票据特有的状态

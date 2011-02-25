@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  violation: 
+  punish_date: 2011-02-25
+  content: MyText
+  handled: MyString
+  user: 
+  target_org_id: 1
+  target: MyString
+
+two:
+  title: MyString
+  violation: 
+  punish_date: 2011-02-25
+  content: MyText
+  handled: MyString
+  user: 
+  target_org_id: 1
+  target: MyString

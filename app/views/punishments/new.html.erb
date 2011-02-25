@@ -1,0 +1,13 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render "violations/caption" %>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%="新建处罚记录"%></h2>
+    <div class="inner">
+        <%= render "form" %>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'violations/sidebar') -%>
