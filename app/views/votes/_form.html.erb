@@ -1,0 +1,18 @@
+<% form_for @vote do |f| %>
+  <table class='table'>
+    <% f.fields_for :vote_lines,@vote.vote_lines do |f_vl| %>
+      <tr>
+        <td>
+          <%= f_vl.hidden_field :org_id %>
+          <%= f_vl.object.org.name %>
+        </td>
+        <td>
+          <%= f_vl.radio_button :vote_value, -1 %>差 <%= "(#{Vote.cal_vote(@vote.mth,f_vl.object.org,-1).join('/')})" %>
+          <%= f_vl.radio_button :vote_value, 0 %>一般 <%= "(#{Vote.cal_vote(@vote.mth,f_vl.object.org,0).join('/')})" %>
+          <%= f_vl.radio_button :vote_value, 1 %>优 <%= "(#{Vote.cal_vote(@vote.mth,f_vl.object.org,1).join('/')})" %>
+
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

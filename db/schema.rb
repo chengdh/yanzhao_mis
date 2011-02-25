@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110225094257) do
+ActiveRecord::Schema.define(:version => 20110225130144) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -380,6 +380,24 @@ ActiveRecord::Schema.define(:version => 20110225094257) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "vote_lines", :force => true do |t|
+    t.integer  "vote_id",                   :null => false
+    t.integer  "org_id",                    :null => false
+    t.integer  "vote_value", :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "org_id",     :null => false
+    t.integer  "user_id"
+    t.string   "mth",        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["org_id", "mth"], :name => "index_votes_on_org_id_and_mth", :unique => true
 
   create_table "warehouses", :force => true do |t|
     t.string   "name",           :limit => 60,                    :null => false

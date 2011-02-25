@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :votes
+
   map.resources :punishments
 
   map.resources :violations
