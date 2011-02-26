@@ -21,6 +21,7 @@ class Vote < ActiveRecord::Base
   def self.cal_vote(mth,org,vote_value)
     spec_votes = VoteLine.search(:vote_mth_eq => mth,:vote_org_id_eq => org,:vote_value_eq => vote_value).sum(1)
     all_votes = VoteLine.search(:vote_mth_eq => mth,:vote_org_id_eq => org).sum(1)
+    #pecent_votes = "#{(spec_votes/all_votes)*100}&#37;"
     [spec_votes,all_votes]
   end
   

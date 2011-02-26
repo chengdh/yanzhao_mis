@@ -1,5 +1,19 @@
-<% form_for @vote do |f| %>
+<% form_for @vote,:html => {:id => "vote_form"} do |f| %>
+  <%= f.hidden_field :org_id %>
   <table class='table'>
+    <tr>
+      <td>月份</td>
+      <td>
+        <%= f.hidden_field :mth %>
+        <%= @vote.mth %>
+      </td>
+      <td>操作员</td>
+      <td>
+        <%= f.hidden_field :user_id %>
+        <%= @vote.user.try(:username)%>
+      </td>
+
+    </tr>
     <% f.fields_for :vote_lines,@vote.vote_lines do |f_vl| %>
       <tr>
         <td>
@@ -7,12 +21,20 @@
           <%= f_vl.object.org.name %>
         </td>
         <td>
-          <%= f_vl.radio_button :vote_value, -1 %>差 <%= "(#{Vote.cal_vote(@vote.mth,f_vl.object.org,-1).join('/')})" %>
-          <%= f_vl.radio_button :vote_value, 0 %>一般 <%= "(#{Vote.cal_vote(@vote.mth,f_vl.object.org,0).join('/')})" %>
-          <%= f_vl.radio_button :vote_value, 1 %>优 <%= "(#{Vote.cal_vote(@vote.mth,f_vl.object.org,1).join('/')})" %>
-
+          <%= image_tag "vote-ok.png",:size => "16x16" %>
+          <%= f_vl.radio_button :vote_value, 1 %><%= f_vl.label :vote_value,"优" %> <%= "(#{Vote.cal_vote(@vote.mth,f_vl.object.org,1).join('/')})" %>
         </td>
-      </tr>
-    <% end %>
-  </table>
-<% end %>
+        <td>
+          <%= image_tag "vote-normal.png",:size => "16x16" %>
+          <%= f_vl.radio_button :vote_value, 0 %><%= f_vl.label :vote_value,"一般" %><%= "(#{Vote.cal_vote(@vote.mth,f_vl.object.org,0).join('/')})" %>
+        </td>
+        <td>
+          <%= image_tag "vote-contra.png",:size => "16x16" %>
+          <%= f_vl.radio_button :vote_value, -1 %><%= f_vl.label :vote_value,"差" %> <%= "(#{Vote.cal_vote(@vote.mth,f_vl.object.org,-1).join('/')})" %>
+        </td>
+      <% end %>
+    </table>
+    <div class='actions-bar'>
+      <%= f.submit "保存投票信息",:class => "sexybutton sexysimple sexyblue",:id => 'btn_save_vote' %>
+    </div>
+  <% end %>
