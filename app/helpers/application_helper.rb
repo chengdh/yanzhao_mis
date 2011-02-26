@@ -4,6 +4,12 @@ module ApplicationHelper
   def orgs_for_select
     Org.all(:conditions => {:is_active => true},:order => "type,name").collect { |org| [org.name, org.id] }
   end
+  #当前用户可选择的机构
+  def current_orgs_for_select
+    ret = [current_user.org.name,current_user.org.id]
+    ret = Org.all(:conditions => {:is_active => true},:order => "type,name").collect { |org| [org.name, org.id] } if current_user.is_admin
+    ret
+  end
   #按照机构分组选择用户
   def option_groups_orgs_users_for_select(search_param ={})
     #没有用户及无效的机构被剔除
@@ -31,8 +37,21 @@ module ApplicationHelper
   end
   #分公司选择
   def sub_companies_for_select
+    ret = [current_user.org.name,current_user.org.id]
+    ret = SubCompany.all(:conditions => {:is_active => true},:order => "name ASC").collect { |org| [org.name, org.id] }
+    ret
+  end
+  #科室选择
+  def current_departments_for_select
+    ret = [current_user.org.name,current_user.org.id]
+    ret = Department.all(:conditions => {:is_active => true},:order => "name ASC").collect { |org| [org.name, org.id] }
+    ret
+  end
+  #分公司选择
+  def current_sub_companies_for_select
     SubCompany.all(:conditions => {:is_active => true},:order => "name ASC").collect { |org| [org.name, org.id] }
   end
+
   def users_for_select
     User.all(:conditions => {:is_active => true},:order => "org_id,username").collect { |user| [user.username, user.id] }
   end

@@ -1,8 +1,13 @@
 <ul class="wat-cf">
-  <li class="first <%=check_sub_active_tab(1)%>">
-    <%= link_to "违规记录", violations_path(:active_sub_tab => 1)  %>
-  </li> 
-  <li class="first <%=check_sub_active_tab(2)%>">
-    <%= link_to "处罚记录", punishments_path(:active_sub_tab => 2)  %>
-  </li> 
+  <%if check_power('new_violation')%>
+    <li class="first <%=check_sub_active_tab(1)%>">
+      <%= link_to "违规记录", violations_path(:active_sub_tab => 1)  %>
+    </li> 
+  <% end %>
+
+  <%if check_power('new_punishment')%>
+    <li class="<%=check_sub_active_tab(2)%>">
+      <%= link_to "处罚记录", punishments_path(:active_sub_tab => 2)  %>
+    </li> 
+  <% end %>
 </ul>

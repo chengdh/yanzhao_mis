@@ -10,7 +10,7 @@
       <p><%=status_time_ago_in_words(@message.created_at)%> </p>
       <hr />
       <p>
-      <%= @message.body %>
+        <%= @message.body %>
       </p>
       <div class='radius-box doc-info'>
         <h3 class='border-bottom'><%=link_to_function "点击查看文档信息","$('doc_info').toggle();" %></h3>
@@ -21,13 +21,15 @@
           </ul>
           <h3 class='border-bottom'>
             查看记录(<%=@message.message_visitors.size%>条)
-            <%= link_to "生成违规记录", new_violation_path(:message_id => @message.id) %>
+            <% if check_power("new_violation") %>
+              <%= link_to "生成违规记录", new_violation_path(:message_id => @message.id) %>
+            <% end %>
           </h3>
           <ul>
             <%@message.message_visitors.each do |visit_info|%>
               <li>
-              <%=visit_info.user.try(:username)%> |
-              <%=visit_info.visited_at.blank? ? "<span class='red-text'>还未查看</span>" : status_time_ago_in_words(visit_info.visited_at)%>
+                <%=visit_info.user.try(:username)%> |
+                <%=visit_info.visited_at.blank? ? "<span class='red-text'>还未查看</span>" : status_time_ago_in_words(visit_info.visited_at)%>
               </li>
             <%end%>
           </ul>

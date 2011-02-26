@@ -2,11 +2,11 @@
   <fieldset class='inlineLabels'>
     <div class='ctrlHolder'>
       <%=f.label :mth_eq,"月份"%>
-      <%=f.select :mth_eq,months_for_select%>
+      <%=f.select :mth_eq,months_for_select,:include_blank => true %>
     </div>
     <div class='ctrlHolder'>
       <%=f.label :org_id_eq,"投票机构"%>
-      <%=f.select :org_id_eq,orgs_for_select,:class => "textInput"%>
+      <%=f.select :org_id_eq,current_orgs_for_select,:class => "textInput" %>
     </div>
   </fieldset>
   <div class="actions-bar">

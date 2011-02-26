@@ -1,24 +1,38 @@
-<h1>Listing votes</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render :partial => 'caption' %>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%="投票信息列表"%></h2>
+    <div class="inner">
+      <table class="table">
+        <%@votes.each do |vote| -%>
+          <tr class="<%= cycle("odd", "even") %>">
+            <td>
+              <%= vote.mth %>
+            </td>
+            <td>
+              <%= vote.created_at.strftime('%Y-%m -%d')%>
+            </td>
+            <td>
+              <%= vote.org.name %>
+            </td>
+            <td>
+              <%= vote.user.try(:username) %>
+            </td>
+            <td>
+              <%= link_to "查看",vote %>
+            </td>
 
-<table>
-  <tr>
-    <th>Org</th>
-    <th>User</th>
-    <th>Mth</th>
-  </tr>
-
-<% @votes.each do |vote| %>
-  <tr>
-    <td><%=h vote.org %></td>
-    <td><%=h vote.user %></td>
-    <td><%=h vote.mth %></td>
-    <td><%= link_to 'Show', vote %></td>
-    <td><%= link_to 'Edit', edit_vote_path(vote) %></td>
-    <td><%= link_to 'Destroy', vote, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New vote', new_vote_path %>
+          </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+          <%=will_paginate @votes %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
