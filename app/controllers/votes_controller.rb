@@ -14,4 +14,11 @@ class VotesController < BaseController
       @vote.user = current_user
     end
   end
+  def show
+    @vote = Vote.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.csv {send_data @vote.to_csv}
+    end
+  end
 end

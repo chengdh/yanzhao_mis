@@ -13,11 +13,16 @@ class Array
     ret
   end
   #将数组中的数据导出为一行
-  def export_line_csv
+  def export_line_csv(with_bom = false)
     output = FasterCSV.generate(:col_sep => "\t", :row_sep => "\r\n")do |csv|
       csv << self
     end
-    output.utf8_to_utf16
+    ret =output.utf8_to_utf16 
+    if with_bom
+      BOM_HEADER + ret 
+    else
+      ret  
+    end
   end
 end
 #为active_record 添加导入导出方法
