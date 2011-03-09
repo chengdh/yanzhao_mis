@@ -1,6 +1,6 @@
 <ul class="wat-cf">
-  <li class="first <%=check_sub_active_tab(1)%>"><%= link_to "结算表", settlements_path(:active_sub_tab => 1)   %></li>
-  <li class="<%=check_sub_active_tab(2)%>"><%= link_to "合同模板#{alert(@contract_alert_count)}", contracts_path(:active_sub_tab => 2)   %></li>
+  <li class="first <%=check_sub_active_tab(1)%>"><%= link_to "结算表", settlements_path(:active_sub_tab => 1,'search[created_at_gte]' => 2.months.ago.beginning_of_day)   %></li>
+  <li class="<%=check_sub_active_tab(2)%>"><%= link_to "合同模板#{alert(@contract_alert_count)}", contracts_path(:active_sub_tab => 2,"search[date_to_gte]" => 2.months.ago.to_date)   %></li>
 
   <li class="<%=check_sub_active_tab(5)%>"><%= link_to "项目费用统计", settlement_lines_path(:active_sub_tab => 5)   %></li>
 
