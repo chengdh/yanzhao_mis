@@ -18,6 +18,7 @@ class MessagesController < BaseController
     respond_to do |format|
       format.html { render params[:template] if !params[:template].blank? }# index.html.erb
       format.xml  { render :xml => messages }
+      
     end
   end
   # GET /the_models/new
@@ -108,6 +109,7 @@ class MessagesController < BaseController
     respond_to do |format|
       if message.save
         format.html
+        format.csv {send_data message.to_csv}
         format.xml  { head :ok }
       else
         format.html { redirect_to :back }

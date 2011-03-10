@@ -67,4 +67,11 @@ class BasePublicMessage < ActiveRecord::Base
       visit_infos.first.update_attributes(:visited_at => Time.now,:state => "visited")
     end
   end
+  #导出到csv
+  def to_csv
+    ret = [self.title].export_line_csv(true)
+    ret += ["发布日期:",self.publish_date,"文件号:",self.doc_no].export_line_csv
+    ret += [self.body].export_line_csv
+    ret
+  end
 end

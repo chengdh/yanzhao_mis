@@ -22,5 +22,13 @@
   <div class="content">
     <%=render "shared/messages/search_form"%>
   </div>
+  <% if params[:action] == 'show' %>
+    <h3>导出</h3>
+    <ul class="navigation">
+      <li><%= link_to "导出", self.send("#{@param_name.singularize}_path",instance_variable_get("@#{@param_name.singularize}"),:format => :csv)
+%>
+    </ul>
+  <% end %>
+
 </div>
 

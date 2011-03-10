@@ -7,5 +7,4 @@ class Rule < BasePublicMessage
     doc_no = "#{Date.today.year}#{Org.find(org_id).name.first}(#{doc_sequence})"
     doc_no
   end
-
 end
