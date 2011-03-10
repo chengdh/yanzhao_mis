@@ -7,7 +7,8 @@ class Suggestion < BasePublicMessage
   end
   #自动上发,超过3天未查看,自动上发到上级
   def self.up_send(expire_days=3)
-    Suggestion.search(:message_visitors_state_eq => 'draft',:publish_date_lte => expire_days.days.ago.to_date,:up_state => false).all.each do |old_suggest|
+    #Suggestion.search(:message_visitors_state_eq => 'draft',:publish_date_lte => expire_days.days.ago.to_date,:up_state => false).all.each do |old_suggest|
+    Suggestion.search(:message_visitors_state_eq => 'draft').all.each do |old_suggest|
       old_receiver = old_suggest.message_visitors.first.user
       unless old_receiver.level == 0  #如果是董事长级别,则不上发
         new_suggest = Suggestion.new
