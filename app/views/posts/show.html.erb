@@ -9,7 +9,7 @@
       <p><%=status_time_ago_in_words(@post.created_at)%> </p>
       <hr />
       <p>
-      <%= @post.body %>
+        <%= @post.body %>
       </p>
       <%if !@post.comments.blank?%>
         <div class='radius-box doc-info'>
@@ -17,8 +17,8 @@
           <ul>
             <%@post.comments(:order => "created_at DESC").each do |comment|%>
               <li class='border-bottom'>
-              <p class='bold-font big-font'><%=comment.user.try(:username)%> &nbsp;&nbsp;说:<span class='small-font float-right'><%=status_time_ago_in_words(comment.created_at)%></span></p>
-              <p><%=comment.body%></span></p>
+                <p class='bold-font big-font'><%=comment.user.try(:username)%> &nbsp;&nbsp;说:<span class='small-font float-right'><%=status_time_ago_in_words(comment.created_at)%></span></p>
+                <p><%=comment.body%></span></p>
             </li>
           <%end%>
         </ul>
@@ -42,8 +42,8 @@
           <li>最后修改于<%=status_time_ago_in_words(@post.updated_at)%></li>
           <%@post.message_visitors.each do |visit_info|%>
             <li>
-            <%=visit_info.user.try(:username)%> |
-            <%=visit_info.visited_at.blank? ? "<span class='red-text'>还未查看</span>" : status_time_ago_in_words(visit_info.visited_at)%>
+              <%=visit_info.user.try(:username)%> |
+              <%=visit_info.visited_at.blank? ? "<span class='red-text'>还未查看</span>" : status_time_ago_in_words(visit_info.visited_at)%>
             </li>
           <%end%>
         </ul>

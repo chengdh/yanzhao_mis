@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :suggestions,:has_many => :comments
+
   map.resources :votes
 
   map.resources :punishments

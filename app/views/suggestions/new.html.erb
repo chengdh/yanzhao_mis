@@ -1,0 +1,17 @@
+<%=render "shared/messages/set_variables"%>
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render :partial => "posts/caption" %>
+  </div>          
+  <div class="content">            
+    <h2 class="title">写信</h2>
+    <div class="inner">
+      <% form_for @suggestion, :html => { :class => :uniForm } do |f| -%>
+        <%= render :partial => "form", :locals => {:f => f} %>
+      <% end -%>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'posts/sidebar') -%>
+

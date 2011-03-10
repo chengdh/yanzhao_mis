@@ -25,6 +25,8 @@ class ApplicationController < ActionController::Base
       @unread_notices_count = Notice.unread_messages(current_user).count 
       @unread_rules_count = Rule.unread_messages(current_user).count 
       @unread_posts_count = Post.unread_messages(current_user).count
+      @unread_suggestions_count = Suggestion.unread_messages(current_user).count
+
     end
   end
   #检查警报信息,包括库存报警,合同到期报警

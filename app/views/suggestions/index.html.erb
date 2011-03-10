@@ -1,0 +1,32 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render :partial => "posts/caption" %>
+  </div>          
+  <div class="content">          
+    <h2 class="title">意见箱</h2>
+    <div class="inner">
+      <table class="table">
+        <%@suggestions.each do |suggestion| -%>
+          <tr class="<%= cycle("odd", "even") %> <%= check_message_state(suggestion)%>">
+            <td>
+              <span class='ellipsis'> 发件人:<%= suggestion.user == current_user ? '我' : suggestion.user.username%></span>
+            </td>
+            <td>
+              <span class='ellipsis' style='width : 500px'><%= link_to suggestion.title, suggestion_path(suggestion,:active_sub_tab => 4) %></span>
+            </td>
+
+            <td>
+              <%= status_time_ago_in_words(suggestion.created_at) %>
+            </td>
+          </tr>          
+        <%end%>
+      </table>
+    </div>
+    <div class="actions-bar wat-cf">
+      <div class="actions">
+        <%=will_paginate @suggestions %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'posts/sidebar') -%>

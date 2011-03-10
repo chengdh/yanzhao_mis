@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110226081041) do
+ActiveRecord::Schema.define(:version => 20110310143321) do
 
   create_table "address_book_lines", :force => true do |t|
     t.string   "name",            :limit => 60,                    :null => false
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20110226081041) do
     t.datetime "updated_at"
     t.string   "doc_no",              :limit => 20
     t.boolean  "violation_generated",                :default => false
+    t.boolean  "up_state",                           :default => false
   end
 
   create_table "base_public_messages_orgs", :id => false, :force => true do |t|
@@ -109,12 +110,14 @@ ActiveRecord::Schema.define(:version => 20110226081041) do
   end
 
   create_table "comments", :force => true do |t|
-    t.integer  "post_id"
-    t.string   "body",       :limit => 600,                   :null => false
-    t.integer  "user_id",                                     :null => false
-    t.boolean  "is_active",                 :default => true, :null => false
+    t.string   "body",             :limit => 600,                   :null => false
+    t.integer  "user_id",                                           :null => false
+    t.boolean  "is_active",                       :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "commentable_id",                                    :null => false
+    t.string   "commentable_type",                                  :null => false
+    t.string   "state"
   end
 
   create_table "config_infos", :force => true do |t|
@@ -337,6 +340,7 @@ ActiveRecord::Schema.define(:version => 20110226081041) do
     t.boolean  "is_admin",                           :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "level",                              :default => 4
   end
 
   create_table "violations", :force => true do |t|

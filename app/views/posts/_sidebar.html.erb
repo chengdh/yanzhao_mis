@@ -1,6 +1,14 @@
 <div class="block">
   <h3>查询</h3>
   <div class="content">
-    <%= render :partial => "search_form" %>
+    <%= render :partial => "posts/search_form" %>
   </div>
 </div>
+
+<div class="block">
+  <h3>填写意见或建议</h3>
+  <ul class='navigation'>
+    <li><%= link_to "写信", new_suggestion_path %></li>
+  </ul>
+</div>
+

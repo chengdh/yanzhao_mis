@@ -4,14 +4,15 @@ class CommentsController < ApplicationController
   # POST /comments.xml
   def create
     @comment = Comment.new(params[:comment])
-    post = Post.find(params[:post_id])
-    @comment.post = post 
+    commentable = Post.find(params[:post_id]) if params[:post_id].present?
+    commentable = Suggestion.find(params[:suggestion_id]) if params[:suggestion_id].present?
+    @comment.commentable = commentable
     @comment.user = current_user
 
     respond_to do |format|
       if @comment.save
         flash[:notice] = '回复信息创建成功.'
-        format.html { redirect_to(post) }
+        format.html { redirect_to(commentable) }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
         format.html { render :action => "new" }
@@ -28,7 +29,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
         flash[:notice] = '回复信息更新成功.'
-        format.html { redirect_to(@comment) }
+        format.html { redirect_to(@comment.commentable) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -26,4 +26,12 @@ module UsersHelper
     end
 
   end
+  #用户级别选择
+  def user_levels
+    [["员工",3],['部门经理',2],['总经理',1],['董事长',0]]
+  end
+  #管理人员选择,用于意见箱
+  def select_for_managers
+    User.all(:conditions => {:level => [0,1,2]},:order => 'level ASC').collect {|user| [user.username,user.id]}
+  end
 end

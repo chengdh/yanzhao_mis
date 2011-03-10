@@ -39,6 +39,11 @@
           <i>系统管理员可操作所有数据</i>
         </p>
       </div>
+      <div class='ctrlHolder'>
+        <%=f.label :level,"职务"%>
+        <%=f.select :level,user_levels %>
+      </div>
+
 
       <div class='ctrlHolder'>
         <%=f.label :is_active,"有效标记"%>
