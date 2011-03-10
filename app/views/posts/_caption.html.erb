@@ -8,9 +8,11 @@
   <%if params[:active_sub_tab] == '4'%>
     <li class="active"><%= link_to "查看", @post %></li>
   <%end%>
+  <% if is_manager? %>
   <li class="<%=check_sub_active_tab(5)%>">
     <%= link_to "意见箱#{unread_suggestions_count}",suggestions_path(:active_sub_tab => 5,"search[user_id_does_not_equal]" => current_user)   %>
   </li>
+<% end %>
   <li class="<%=check_sub_active_tab(6)%>">
     <%= link_to "我提的意见",suggestions_path(:active_sub_tab => 6,"search[user_id_is]" => current_user)   %>
   </li>

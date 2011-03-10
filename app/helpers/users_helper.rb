@@ -34,4 +34,8 @@ module UsersHelper
   def select_for_managers
     User.all(:conditions => {:level => [0,1,2]},:order => 'level ASC').collect {|user| [user.username,user.id]}
   end
+  #判断当前用户是否管理人员
+  def is_manager?
+    [0,1,2].include? current_user.level
+  end
 end
