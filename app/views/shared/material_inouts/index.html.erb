@@ -11,6 +11,7 @@
           <th>仓库</th>
           <th>部门</th>
           <th>经办人</th>
+          <th>确认人</th>
           <th>状态</th>
           <th class="last">&nbsp;</th>
           <th class="last">&nbsp;</th>
@@ -31,6 +32,10 @@
               <%= bill.person_name %>
             </td>
             <td>
+              <%= bill.auditor.username %>
+            </td>
+
+            <td>
               <%= MaterialInout.states[bill.state] %>
             </td>
             <td>
@@ -39,7 +44,7 @@
 
             <td class="last">
               <%= link_to "查看/打印",bill %> 
-              <!--%= link_to "删除", bill, :method => :delete, :confirm => "您确定要删除该信息吗？" %-->
+              <%= link_to "删除", bill, :method => :delete, :confirm => "您确定要删除该信息吗？" if bill.state.eq? 'DR' %>
             </td>
           </tr>          
         <% end -%>

@@ -1,1 +1,10 @@
 <%= render "shared/messages/sidebar" %>
+<div class="block">
+  <% if params[:action] == 'show' %>
+    <h3>导出到word</h3>
+    <ul class="navigation">
+      <li><%= link_to_remote "导出word",:url => rule_path(@rule,:format => :js),:method => :get%>
+    </ul>
+  <% end %>
+</div>
+

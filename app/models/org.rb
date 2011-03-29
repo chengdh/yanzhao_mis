@@ -7,5 +7,4 @@ class Org < ActiveRecord::Base
     ret_users = self.users.is_active_is(true).powers_is_select_is(true).powers_system_function_func_key_is(func_key)
     ret_users
   end
-
 end

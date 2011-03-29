@@ -7,7 +7,7 @@ class Vote < ActiveRecord::Base
   def self.new_with_mth_org(mth,cur_org)
     vote = Vote.new(:mth => mth,:org => cur_org)
     #循环构造vote_lines
-    Org.is_active_eq(true).id_ne(cur_org).ascend_by_type.each do |org|
+    SubCompany.is_active_eq(true).id_ne(cur_org).is_sub_company_ne(cur_org.is_sub_company?).ascend_by_type.each do |org|
       vote_line = VoteLine.new(:org => org,:vote => vote,:vote_value => 0)
       vote.vote_lines << vote_line
     end
@@ -27,7 +27,6 @@ class Vote < ActiveRecord::Base
   #导出投票结果
   def to_csv
     ret = ["月份:",self.mth].export_line_csv(true)
-
     Org.is_active_eq(true).ascend_by_type.each do |org|
       vote_ok = Vote.cal_vote(self.mth,org,1)
       vote_normal = Vote.cal_vote(self.mth,org,0)

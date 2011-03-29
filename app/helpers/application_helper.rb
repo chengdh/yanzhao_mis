@@ -37,15 +37,15 @@ module ApplicationHelper
   end
   #分公司选择
   def sub_companies_for_select
-    ret = [current_user.org.name,current_user.org.id]
-    ret = SubCompany.all(:conditions => {:is_active => true},:order => "name ASC").collect { |org| [org.name, org.id] }
+    ret = [[current_user.org.name,current_user.org.id]]
+    if current_user.is_admin?
+      ret = SubCompany.all(:conditions => {:is_active => true},:order => "name ASC").collect { |org| [org.name, org.id] }
+    end
     ret
   end
   #科室选择
   def current_departments_for_select
-    ret = [current_user.org.name,current_user.org.id]
     ret = Department.all(:conditions => {:is_active => true},:order => "name ASC").collect { |org| [org.name, org.id] }
-    ret
   end
   #分公司选择
   def current_sub_companies_for_select

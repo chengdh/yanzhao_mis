@@ -6,39 +6,30 @@
     <h2 class="title">通讯录</h2>
     <div class="inner">
       <table class="table">
-        <% @group_address_book_lines.each do |address_book,lines| -%>
-          <tr class="<%= cycle("odd", "even") %>">
+        <% @address_book_lines.each do |line| -%>
+          <tr class='fields'>
             <td>
-              <%= address_book.org.name %>
+              <%=line.name%>
             </td>
-            <td colspan='3' class="last">
-              <%= link_to "查看",address_book_path(address_book,:active_sub_tab => 10) %> |
+            <td>
+              <%=line.phone%>
+            </td>
+            <td>
+              <%=line.mobile%>
+            </td>
+            <td>
+              <%=line.location%>
+            </td>
+            <td>
               <%if check_power('edit_address_book')%>
-                <%= link_to "修改", edit_address_book_path(address_book,:active_sub_tab => 9) %> |
+                <%= link_to "修改", edit_address_book_path(line.address_book,:active_sub_tab => 9) %> |
               <%end%>
-
+              &nbsp;&nbsp;
               <%if check_power('destroy_address_book')%>
-                <%= link_to "删除", address_book, :method => :delete, :confirm => "确定删除吗?" %>
+                <%= link_to "删除", line.address_book, :method => :delete, :confirm => "确定删除吗?" %>
               <%end%>
             </td>
-          </tr>          
-          <%lines.each do |line|%>
-            <tr class='fields'>
-              <td>
-                <%=line.name%>
-              </td>
-              <td>
-                <%=line.phone%>
-              </td>
-              <td>
-                <%=line.mobile%>
-              </td>
-              <td>
-                <%=line.location%>
-              </td>
-            </tr>
-
-          <%end%>
+          </tr>
         <% end -%>
       </table>
       <div class="actions-bar wat-cf">

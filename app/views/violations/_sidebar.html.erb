@@ -1,26 +1,24 @@
 <div class="block">
   <h3>新建</h3>
   <ul class="navigation">
-    <li><%=link_to "录入违规记录",new_violation_path if check_power('new_violation') %></li>
-    <li><%=link_to "录入处罚记录",new_punishment_path if check_power('new_punishment')%></li>
+    <% if check_power('new_violation') %>
+      <li><%=link_to "录入违规记录",new_violation_path if check_power('new_violation') %></li>
+    <% end %>
+    <% if check_power('new_punishment') %>
+      <li><%=link_to "录入处罚记录",new_punishment_path if check_power('new_punishment')%></li>
+    <% end %>
   </ul>
 </div>
-<% if check_power('new_violation') %>
-  <div class="block">
-    <h3>查询违规记录</h3>
-    <div class="content">
-      <%=render "violations/search_form"%>
-    </div>
+<div class="block">
+  <h3>查询违规记录</h3>
+  <div class="content">
+    <%=render "violations/search_form"%>
   </div>
-<% end %>
+</div>
 
-<% if check_power('new_punishment') %>
-  <div class="block">
-    <h3>查询处罚记录</h3>
-    <div class="content">
-      <%=render "punishments/search_form"%>
-    </div>
+<div class="block">
+  <h3>查询处罚记录</h3>
+  <div class="content">
+    <%=render "punishments/search_form"%>
   </div>
-<% end %>
-
-
+</div>

@@ -28,7 +28,6 @@ class Bill < ActiveRecord::Base
       PAYTYPE_KP => '自货款扣',     #自货款扣除
       PAYTYPE_MP => '月结'     #月结
     }
-
   end
   #导出选项
   def self.export_options

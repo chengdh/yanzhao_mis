@@ -6,6 +6,7 @@
     <h2 class="title">意见箱</h2>
     <div class="inner">
       <table class="table">
+        <tr><td colspan='3' class='text-right'><%= link_to "写信", new_suggestion_path %></td></tr>
         <%@suggestions.each do |suggestion| -%>
           <tr class="<%= cycle("odd", "even") %> <%= check_message_state(suggestion)%>">
             <td>

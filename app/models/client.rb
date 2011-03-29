@@ -18,5 +18,4 @@ class Client < ActiveRecord::Base
       SubCompany.create(attrs)
     end
   end
-
 end

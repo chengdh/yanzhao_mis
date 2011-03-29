@@ -111,6 +111,7 @@ class MessagesController < BaseController
         format.html
         format.csv {send_data message.to_csv}
         format.xml  { head :ok }
+        format.js {render :partial => "export_word"}
       else
         format.html { redirect_to :back }
       end

@@ -24,6 +24,7 @@ cn:
       m_storage: 库存信息
       notice: 通知公告
       post: 公共信息
+      suggestion: 建议信息
       rule: 规章制度
       sub_company: 分理处/分公司
       system_function: 系统功能

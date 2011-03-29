@@ -13,6 +13,11 @@
     <%= f.text_field :phone, :class => 'textInput' %>
   </div>
   <div class="ctrlHolder">
+    <%= f.label :is_sub_company, "是否分公司" %>
+    <%= f.check_box :is_sub_company %>
+  </div>
+
+  <div class="ctrlHolder">
     <%= f.label :is_active, "有效标志" %>
     <%= f.check_box :is_active %>
     <p class='formHint'>对于不再使用的机构,可将其设置为无效</p>

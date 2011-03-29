@@ -8,115 +8,112 @@
     <%= init_tinymce_hammer_if_required %>
     <%= stylesheet_link_tag "web_app_theme", "themes/blue/style","live_validation","uni-form",
       "modalbox","/sexybuttons/sexybuttons","web_app_theme_override", :cache => true %>
-    </head>
-    <body>
-      <div id="container">
-        <div id="header">
-          <h1>
-            <%if Client.count > 0 && !Client.first.logo_file_name.blank?%>
-              <%=image_tag Client.first.logo.url(:thumb)%>
-            <%end%>
-            <%=link_to Client.first.name, :root %>
-          </h1>
-          <div id="util-navigation">
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1>
+          <%if Client.count > 0 && !Client.first.logo_file_name.blank?%>
+            <%=image_tag Client.first.logo.url(:thumb)%>
+          <%end%>
+          <%=link_to Client.first.name, :root %>
+        </h1>
+        <div id="util-navigation">
+          <ul class="wat-cf">
+            <li><%=link_to current_user.try(:username),edit_user_registration_path,:onclick => "Modalbox.show(this.href,{title : '修改登录用户信息'});return false;"%></li>
+            <li><%=link_to "退出系统",destroy_user_session_path,:class => "logout" %></li>
+          </ul>
+        </div>      
+        <div id="user-navigation">
+          <%if current_user.is_admin%>
             <ul class="wat-cf">
-              <li><%=link_to current_user.try(:username),edit_user_registration_path,:onclick => "Modalbox.show(this.href,{title : '修改登录用户信息'});return false;"%></li>
-              <li><%=link_to "退出系统",destroy_user_session_path,:class => "logout" %></li>
-            </ul>
-          </div>      
-          <div id="user-navigation">
-            <%if current_user.is_admin%>
-              <ul class="wat-cf">
-                <li class="<%= check_current_controller(['clients']) %>">
+              <li class="<%= check_current_controller(['clients']) %>">
                 <%=link_to "公司信息",edit_client_path(Client.first) %>
-                </li>
-                <li class="<%= check_current_controller(['departments','sub_companies','warehouses']) %>">
-                <%=link_to "基础资料",departments_path %></li>
-                <li class="<%= controller.controller_path == 'users' ? 'active' : '' %>">
-                <%=link_to "用户管理",users_path%>
-                </li>
-              </ul>
-            <%end%>
-          </div>      
-          <div id="main-navigation">
-            <ul class="wat-cf"> 
-              <li class="<%= check_current_controller(['notices','rules','address_books']) %>">
-              <%=link_to "公共信息#{unread_notices_rules_sign}",notices_path("search[state_is]" => "published")%>
               </li>
-              <li class="<%= check_current_controller(['posts']) %>">
-              <%=link_to "在线交流#{unread_posts_sign}",posts_path("search[user_id_does_not_equal]" => current_user)%>
-              </li> 
-              <!--
-              <%if check_power_group('贵宾系统')%>
-                <li class="<%= check_current_controller(['vip_infos','vip_fee_infos','vip_configs','upload_vip_files']) %>">
-                <%=link_to "贵宾系统",vip_infos_path%>
-                </li> 
-              <%end%>
-              -->
-
-              <%if check_power_group('分成结算')%>
-                <li class="<%= check_current_controller(['settlement_lines','settlements','contracts']) %>">
-                  <%= link_to "分成结算#{alert(@contract_alert_count)}", settlements_path('search[created_at_gte]' => 2.months.ago.beginning_of_day)   %>
-                </li> 
-              <%end%>
-
-              <%if check_power_group('耐用品管理')%>
-                <li class="<%= check_current_controller(['scrapped_infos','durable_materials','durable_receipts','durable_shippments','material_inout_lines'],'durable_receipts') %>">
-                <%=link_to "耐用品管理",durable_receipts_path %>
-                </li>
-              <%end%>
-
-              <%if check_power_group('易耗品管理')%>
-                <li class="<%= check_current_controller(['consumer_materials','consumer_receipts','consumer_shippments'],'consumer_receipts') %>">
-                <%=link_to "易耗品管理#{alert(@storage_alert_count)}",consumer_receipts_path %>
-                </li>
-              <%end%>
-
-              <%if check_power_group('票据管理')%>
-                <li class="<%= check_current_controller(['carrying_bills'],'carrying_ bills') %>">
-                <%=link_to "票据管理",carrying_bills_path %>
-                </li>
-              <%end%>
-
-              <%if check_power_group('提货单管理')%>
-                <li class="<%= check_current_controller(['inout_bills'],'inout_bills') %>">
-                <%=link_to "提货单管理",inout_bills_path %>
-                </li>
-              <%end%>
-              <%if check_power_group('违规处罚')%>
-                <li class="<%= check_current_controller(['violations','punishments']) %>">
-                <%=link_to "违规处罚",violations_path %>
-                </li>
-              <% end %>
-
-              <%if check_power_group('投票系统')%>
-                <li class="<%= check_current_controller(['votes'],'votes') %>">
-                  <%=link_to "投票系统",votes_path("search[org_id_eq]" => current_user.org) %>
-                </li>
-              <% end %>
-
+              <li class="<%= check_current_controller(['departments','sub_companies','warehouses']) %>">
+                <%=link_to "基础资料",departments_path %></li>
+              <li class="<%= controller.controller_path == 'users' ? 'active' : '' %>">
+                <%=link_to "用户管理",users_path%>
+              </li>
             </ul>
-          </div>
-        </div>    
-        <div id="wrapper" class="wat-cf">
-          <div id="main">
-            <div id='flash' class="flash">
-              <% flash.each do |type, message| -%>
-                <div class="message <%= type %>">
-                  <p><%= message %></p>
-                </div>
-              <% end -%>
-            </div>
+          <%end%>
+        </div>      
+        <div id="main-navigation">
+          <ul class="wat-cf"> 
+            <li class="<%= check_current_controller(['notices','rules','address_books']) %>">
+              <%=link_to "公共信息#{unread_notices_rules_sign}",notices_path("search[state_is]" => "published")%>
+            </li>
+            <li class="<%= check_current_controller(['posts']) %>">
+              <%=link_to "在线交流#{unread_posts_sign}",posts_path("search[user_id_does_not_equal]" => current_user)%>
+            </li> 
+            <!--
+            <%if check_power_group('贵宾系统')%>
+              <li class="<%= check_current_controller(['vip_infos','vip_fee_infos','vip_configs','upload_vip_files']) %>">
+                <%=link_to "贵宾系统",vip_infos_path%>
+              </li> 
+            <%end%>
+            -->
 
-            <%= yield %>
-            <div id="footer">
-              <%= render :partial => 'shared/footer' %>
-            </div>
+            <%if check_power_group('分成结算')%>
+              <li class="<%= check_current_controller(['settlement_lines','settlements','contracts']) %>">
+                <%= link_to "分成结算#{alert(@contract_alert_count)}", settlements_path('search[created_at_gte]' => 2.months.ago.beginning_of_day)   %>
+              </li> 
+            <%end%>
+
+            <%if check_power_group('耐用品管理')%>
+              <li class="<%= check_current_controller(['scrapped_infos','durable_materials','durable_receipts','durable_shippments','material_inout_lines'],'durable_receipts') %>">
+                <%=link_to "耐用品管理",durable_receipts_path %>
+              </li>
+            <%end%>
+
+            <%if check_power_group('易耗品管理')%>
+              <li class="<%= check_current_controller(['consumer_materials','consumer_receipts','consumer_shippments'],'consumer_receipts') %>">
+                <%=link_to "易耗品管理#{alert(@storage_alert_count)}",consumer_receipts_path %>
+              </li>
+            <%end%>
+
+            <%if check_power_group('票据管理')%>
+              <li class="<%= check_current_controller(['carrying_bills'],'carrying_ bills') %>">
+                <%=link_to "票据管理",carrying_bills_path %>
+              </li>
+            <%end%>
+
+            <%if check_power_group('提货单管理')%>
+              <li class="<%= check_current_controller(['inout_bills'],'inout_bills') %>">
+                <%=link_to "提货单管理",inout_bills_path %>
+              </li>
+            <%end%>
+            <li class="<%= check_current_controller(['violations','punishments']) %>">
+              <%=link_to "违规处罚",violations_path %>
+            </li>
+            <%if check_power_group('投票系统')%>
+              <li class="<%= check_current_controller(['votes'],'votes') %>">
+                <%=link_to "投票系统",votes_path("search[org_id_eq]" => current_user.org) %>
+              </li>
+            <% end %>
+
+          </ul>
+        </div>
+      </div>    
+      <div id="wrapper" class="wat-cf">
+        <div id="main">
+          <div id='flash' class="flash">
+            <% flash.each do |type, message| -%>
+              <div class="message <%= type %>">
+                <p><%= message %></p>
+              </div>
+            <% end -%>
           </div>
-          <div id="sidebar">
-            <%= yield :sidebar %>
+
+          <%= yield %>
+          <div id="footer">
+            <%= render :partial => 'shared/footer' %>
           </div>
-        </div>    
-      </div>
-    </body>
-  </html>
+        </div>
+        <div id="sidebar">
+          <%= yield :sidebar %>
+        </div>
+      </div>    
+    </div>
+  </body>
+</html>
