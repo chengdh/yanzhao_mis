@@ -25,9 +25,9 @@ Rails::Initializer.run do |config|
   config.gem "calendar_date_select"
   config.gem "warden"      
   config.gem "devise",:version => '1.0.6'
-  config.gem 'paperclip', :source => 'http://gemcutter.org'                                                                                              
+  config.gem 'paperclip',:version => '2.3.4'                                                                                             
   config.gem 'fastercsv'   
-  config.gem 'searchlogic'   
+  config.gem 'searchlogic',:version => '2.4.0'   
   config.gem "rubyist-aasm", :source => "http://gems.github.com", :lib => 'aasm'     
   config.gem 'rufus-scheduler', :source => "http://gemcutter.org"
 

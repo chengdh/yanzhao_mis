@@ -23,7 +23,7 @@
             <li><%=link_to current_user.try(:username),edit_user_registration_path,:onclick => "Modalbox.show(this.href,{title : '修改登录用户信息'});return false;"%></li>
             <li><%=link_to "退出系统",destroy_user_session_path,:class => "logout" %></li>
           </ul>
-        </div>      
+        </div>
         <div id="user-navigation">
           <%if current_user.is_admin%>
             <ul class="wat-cf">
@@ -37,27 +37,27 @@
               </li>
             </ul>
           <%end%>
-        </div>      
+        </div>
         <div id="main-navigation">
-          <ul class="wat-cf"> 
+          <ul class="wat-cf">
             <li class="<%= check_current_controller(['notices','rules','address_books']) %>">
               <%=link_to "公共信息#{unread_notices_rules_sign}",notices_path("search[state_is]" => "published")%>
             </li>
             <li class="<%= check_current_controller(['posts']) %>">
               <%=link_to "在线交流#{unread_posts_sign}",posts_path("search[user_id_does_not_equal]" => current_user)%>
-            </li> 
+            </li>
             <!--
             <%if check_power_group('贵宾系统')%>
               <li class="<%= check_current_controller(['vip_infos','vip_fee_infos','vip_configs','upload_vip_files']) %>">
                 <%=link_to "贵宾系统",vip_infos_path%>
-              </li> 
+              </li>
             <%end%>
             -->
 
             <%if check_power_group('分成结算')%>
               <li class="<%= check_current_controller(['settlement_lines','settlements','contracts']) %>">
                 <%= link_to "分成结算#{alert(@contract_alert_count)}", settlements_path('search[created_at_gte]' => 2.months.ago.beginning_of_day)   %>
-              </li> 
+              </li>
             <%end%>
 
             <%if check_power_group('耐用品管理')%>
@@ -84,7 +84,7 @@
               </li>
             <%end%>
             <li class="<%= check_current_controller(['violations','punishments']) %>">
-              <%=link_to "违规处罚",violations_path %>
+              <%= link_to "违规处罚", violations_path(:active_sub_tab => 1,"search[target_org_id_eq]" => current_user.org_id)  %>
             </li>
             <%if check_power_group('投票系统')%>
               <li class="<%= check_current_controller(['votes'],'votes') %>">
@@ -94,7 +94,7 @@
 
           </ul>
         </div>
-      </div>    
+      </div>
       <div id="wrapper" class="wat-cf">
         <div id="main">
           <div id='flash' class="flash">
@@ -113,7 +113,7 @@
         <div id="sidebar">
           <%= yield :sidebar %>
         </div>
-      </div>    
+      </div>
     </div>
   </body>
 </html>

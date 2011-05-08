@@ -1,15 +1,15 @@
 <div class="block">
   <div class="secondary-navigation">
     <%= render :partial => 'violations/caption' %>
-  </div>          
-  <div class="content">          
+  </div>
+  <div class="content">
     <h2 class="title"><%="处罚信息列表"%></h2>
     <div class="inner">
       <table class="table">
         <%@punishments.each do |p| -%>
           <tr class="<%= cycle("odd", "even") %>">
             <td>
-              <%= status_time_ago_in_words(p.punish_date) %>
+              <%= p.punish_date.strftime("%Y-%m-%d") %>
             </td>
             <td>
               <%= link_to p.title, p,:class => "ellipsis'" %>
@@ -17,7 +17,12 @@
             <td>
               <%= "#{p.target_org.try(:name)},#{p.target}" %>
             </td>
-          </tr>          
+            <td>
+              <%if check_power("destroy_violation") or current_user.is_admin%>
+                <%= link_to "删除", p, :method => :delete, :confirm => "确定删除吗?" %>
+              <%end%>
+            </td>
+          </tr>
         <% end -%>
       </table>
       <div class="actions-bar wat-cf">

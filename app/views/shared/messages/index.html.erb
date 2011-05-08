@@ -2,11 +2,11 @@
 <div class="block">
   <div class="secondary-navigation">
     <%= render :partial => 'shared/messages/caption' %>
-  </div>          
-  <div class="content">          
+  </div>
+  <div class="content">
     <h2 class="title"><%="#{@title}列表"%></h2>
     <div class="inner">
-      <table class="table">
+      <table class="table" style='font-size : 12px;'>
         <%@messages_group.each do |org_name,messages| -%>
           <tr><td colspan='100'><h3><%=org_name%></h3></td></tr>
           <% messages.each do |message| -%>
@@ -33,17 +33,17 @@
               </td>
 
               <td>
-                <%= link_to "查看", self.send("#{@param_name}_path",message,:active_sub_tab => 10) %> 
+                <%= link_to "查看", self.send("#{@param_name}_path",message,:active_sub_tab => 10) %>
                 <%if ['draft','waitting'].include?(message.state) && (message.user == current_user || message.publisher == current_user)%>
                   | <%= link_to "修改/审核", self.send("edit_#{@param_name}_path",message,:active_sub_tab => 9)%> |
                   <%= link_to "删除", message, :method => :delete, :confirm => "确定删除吗?" %>
                 <%end%>
                 <%if ['published'].include?(message.state) && check_power("edit_rule_after_published")%>
-                  <%= link_to "修改", self.send("edit_#{@param_name}_path",message,:active_sub_tab => 9)%> 
+                  <%= link_to "修改", self.send("edit_#{@param_name}_path",message,:active_sub_tab => 9)%>
                 <%end%>
 
               </td>
-            </tr>          
+            </tr>
           <% end -%>
         <% end -%>
       </table>

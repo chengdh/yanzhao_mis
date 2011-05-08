@@ -28,8 +28,8 @@
     </div>
     <div class="ctrlHolder">
       <%= f.label :user_id, "录入人" %>
-      <%= f.hidden_field :user_id %>
-      <p><%= f.object.user.blank? ? current_user.username : f.object.user.username %></p>
+      <%= f.hidden_field :user_id,:value => current_user.id %>
+      <p><%= f.object.new_record? ? current_user.username : f.object.user.username %></p>
     </div>
 
     <div class="actions-bar">
