@@ -1,14 +1,14 @@
 <div class="block">
   <div class="secondary-navigation">
     <%= render :partial => "caption" %>
-  </div>          
+  </div>
   <div class="content">
     <div class="inner">
       <h2 class='text-center'><%= @violation.title%></h2>
       <table class='table'>
         <tr>
           <td>录入时间</td>
-          <td><%= status_time_ago_in_words @violation.created_at %></td>
+          <td><%= @violation.created_at.strftime("%Y-%m-%d") %></td>
           <td>录入人</td>
           <td><%= @violation.user.try(:username) %></td>
         </tr>
